@@ -10,7 +10,6 @@ public class NetworkDebugUI : MonoBehaviour
     private void Awake()
     {
         Debug.LogWarning("Button connected");
-
         ConnectHostButton.onClick.AddListener(ConnectHost);
     }
 

@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 	    MyInput();
-	    rb.drag	= groundDrag;
+	    rb.linearDamping	= groundDrag;
     }
 
     void FixedUpdate()
