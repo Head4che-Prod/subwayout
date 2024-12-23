@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Unity.Netcode;
-using Unity.Netcode.Transports.UTP;
+using System.Data;
 
 public class NetworkDebugUI : MonoBehaviour
 {
@@ -14,20 +14,35 @@ public class NetworkDebugUI : MonoBehaviour
         connectHostButton.onClick.AddListener(ConnectHost);
 
         Button connectClientButton = ConnectClientButton.GetComponent<Button>();
-        connectClientButton.interactable = false;
         connectClientButton.onClick.AddListener(ConnectClient);
+
+        NetworkManager.Singleton.OnClientDisconnectCallback += ResetButtons;   // Resets button on disconnect
     }
 
     public void ConnectHost()
     {
         NetworkManager.Singleton.StartHost();
-        ConnectHostButton.GetComponent<Button>().interactable = false;
+        DisactivateButtons();
         Debug.Log("Host connected successfully");
     }
 
     public void ConnectClient()
     {
         NetworkManager.Singleton.StartClient();
+        DisactivateButtons();
         Debug.Log("Client connected successfully");
+    }
+
+    private void DisactivateButtons()
+    {
+        ConnectHostButton.GetComponent<Button>().interactable = false;
+        ConnectClientButton.GetComponent<Button>().interactable = false;
+    }
+
+    // Will need to be changed once the UI is player-specific
+    private void ResetButtons(ulong ClientID)
+    {
+        ConnectHostButton.GetComponent<Button>().interactable = true;
+        ConnectClientButton.GetComponent<Button>().interactable = true;
     }
 }
