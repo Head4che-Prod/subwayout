@@ -2,52 +2,67 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Unity.Netcode;
+using UnityEngine.Serialization;
 
 public class NetworkDebugUI : NetworkBehaviour
 {
-    [SerializeField] Button ConnectClientButton;
-    [SerializeField] Button ConnectHostButton;
+    // Connect buttons
+    [SerializeField] Button connectClientButton;
+    [SerializeField] Button connectHostButton;
 
-    private NetworkVariable<bool> buttonsActive = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Owner, NetworkVariableWritePermission.Owner);
+    // Should buttons be active? (per client)
+    private NetworkVariable<bool> _buttonsActive = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Owner, NetworkVariableWritePermission.Owner); // initialization -> buttonsOn
 
 
     public override void OnNetworkSpawn()
     {
-        buttonsActive.OnValueChanged += (bool _, bool _) => ManageButtons();
-        NetworkManager.Singleton.OnConnectionEvent += (NetworkManager _, ConnectionEventData eventData) => buttonsActive.Value = eventData.ClientId == NetworkObjectId;
+        // Every time _buttonActive changes, activate of deactivate the buttons accordingly
+        _buttonsActive.OnValueChanged += (bool _, bool _) => ManageButtons();
+        
+        // On global disconnect, reactivate buttons
+        NetworkManager.Singleton.OnServerStopped += (bool _) => _buttonsActive.Value = true; // serverStop -> buttonsOn
+        
+        NetworkManager.Singleton.OnConnectionEvent += (NetworkManager _, ConnectionEventData eventData) => HandleClientDisconnect(eventData);
     }
 
-
+    private void HandleClientDisconnect(ConnectionEventData eventData)
+    {
+        if (eventData.EventType == ConnectionEvent.ClientDisconnected)
+        {
+            Debug.Log($"Client disconnected with ID {eventData.ClientId}. Current id is: {OwnerClientId}");
+        }
+    }
+    
     private void Start()
     {
-        Button connectHostButton = ConnectHostButton.GetComponent<Button>();
-        connectHostButton.onClick.AddListener(ConnectHost);
-
-        Button connectClientButton = ConnectClientButton.GetComponent<Button>();
-        connectClientButton.onClick.AddListener(ConnectClient);
-
-        buttonsActive.Value = true;
+        connectHostButton.GetComponent<Button>().onClick.AddListener(ConnectHost);
+        connectClientButton.GetComponent<Button>().onClick.AddListener(ConnectClient);
     }
 
-    public void ConnectHost()
+    private void ConnectHost()
     {
         NetworkManager.Singleton.StartHost();
-        buttonsActive.Value = false;
-        ManageButtons();
+        
+        // Must be called here because network has not spawned in yet
+        ManageButtons(false); // serverStart -> buttonsOff
+        
         Debug.Log("Host connected successfully");
     }
 
-    public void ConnectClient()
+    private void ConnectClient()
     {
         NetworkManager.Singleton.StartClient();
-        buttonsActive.Value = false;
-        ManageButtons();
+        
+        // Must be called here because network has not spawned in yet
+        ManageButtons(false); // clientStart -> buttonsOff
+        
         Debug.Log("Client connected successfully");
     }
 
-    private void ManageButtons()
+    private void ManageButtons(bool? manualSetter = null)
     {
-        ConnectHostButton.GetComponent<Button>().interactable = buttonsActive.Value;
-        ConnectClientButton.GetComponent<Button>().interactable = buttonsActive.Value;
+        // Sets buttons active to _buttonsActive.Value, except if manualSetter is defined
+        connectHostButton.GetComponent<Button>().interactable = manualSetter ?? _buttonsActive.Value;
+        connectClientButton.GetComponent<Button>().interactable = manualSetter ?? _buttonsActive.Value;
     }
 }
