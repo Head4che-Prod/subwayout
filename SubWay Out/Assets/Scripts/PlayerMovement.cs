@@ -3,11 +3,16 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 	[Header("Movement")]
-	public float moveSpeed;
+	private float moveSpeed;
+	public float walkSpeed;
+	public float sprintSpeed;
 
 	public float groundDrag;
 
 	public float airMultiplier;
+
+	[Header("Keybindings")] 
+	public KeyCode sprintKey = KeyCode.LeftShift;
 	
 	[Header("Ground Check")] 
 	public float playerHeight;
@@ -22,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
 	private Vector3 moveDirection;
 	
 	Rigidbody rb;
+	public MovementState state;
 	
     void Start()
     {
@@ -31,10 +37,11 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()
     {
-	    grounded = Physics.Raycast(transform.position, -Vector3.up, playerHeight * 0.5f + 6.5f);
+	    grounded = Physics.Raycast(transform.position, -Vector3.up, playerHeight * 0.5f + 6.5f, whatIsGround);
 	    
 	    KeyboardInput();
 	    SpeedCtrl();
+	    StateHandler();
 	    
 	    if (grounded)
 		    rb.linearDamping = groundDrag;
@@ -57,9 +64,9 @@ public class PlayerMovement : MonoBehaviour
     {
 	    moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 	    if (grounded)
-			rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+			rb.AddForce(moveDirection.normalized * (moveSpeed * 10f), ForceMode.Force);
 	    else if (!grounded)
-		    rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+		    rb.AddForce(moveDirection.normalized * (moveSpeed * 10f * airMultiplier), ForceMode.Force);
 	    
     }
 
@@ -72,5 +79,33 @@ public class PlayerMovement : MonoBehaviour
 		    Vector3 limitedVelocity = flatVelocity.normalized * moveSpeed;
 		    rb.linearVelocity = new Vector3(limitedVelocity.x, rb.linearVelocity.y, limitedVelocity.z);
 	    }
+    }
+
+    private void StateHandler()
+    {
+	    // Sprint
+	    if (grounded && Input.GetKey(sprintKey))
+	    {
+		    state = MovementState.Sprinting;
+		    moveSpeed = sprintSpeed;
+	    }
+	    // Walk
+	    else if (grounded)
+	    {
+		    state = MovementState.Walking;
+		    moveSpeed = walkSpeed;
+	    }
+	    // Air
+	    else
+	    {
+		    state = MovementState.Air;
+	    }
+    }
+    
+    public enum MovementState
+    {
+	    Walking,
+	    Sprinting,
+	    Air
     }
 }
