@@ -10,6 +10,10 @@ public class PlayerMovement : MonoBehaviour
 	public float groundDrag;
 
 	public float airMultiplier;
+	
+	public Transform orientation;
+	
+	public MovementState state;
 
 	[Header("Keybindings")] 
 	public KeyCode sprintKey = KeyCode.LeftShift;
@@ -19,15 +23,17 @@ public class PlayerMovement : MonoBehaviour
 	public LayerMask whatIsGround;
 	private bool grounded;
 
-	public Transform orientation;
+	[Header("Slope Handling")] 
+	public float maxSlopeAngle;
+	private RaycastHit slopeHit;
 
+	
 	float horizontalInput;
 	float verticalInput;
 
 	private Vector3 moveDirection;
 	
 	Rigidbody rb;
-	public MovementState state;
 	
     void Start()
     {
@@ -63,22 +69,59 @@ public class PlayerMovement : MonoBehaviour
     private void MovePlayer()
     {
 	    moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+	    // Slope
+	    if (OnSlope())
+	    {
+		    rb.AddForce(GetSlopeMoveDirection() * (moveSpeed * 20f), ForceMode.Force);
+		    if (rb.linearVelocity.y > 0)
+			    rb.AddForce(Vector3.down * 80f, ForceMode.Force);
+	    }
+	    
+	    // Ground
 	    if (grounded)
 			rb.AddForce(moveDirection.normalized * (moveSpeed * 10f), ForceMode.Force);
+	    // Air
 	    else if (!grounded)
 		    rb.AddForce(moveDirection.normalized * (moveSpeed * 10f * airMultiplier), ForceMode.Force);
-	    
+
+	    rb.useGravity = !OnSlope();
     }
 
     private void SpeedCtrl()
     {
-	    Vector3 flatVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-
-	    if (flatVelocity.magnitude > moveSpeed)
+	    // Speed limit on slope
+	    if (OnSlope())
 	    {
-		    Vector3 limitedVelocity = flatVelocity.normalized * moveSpeed;
-		    rb.linearVelocity = new Vector3(limitedVelocity.x, rb.linearVelocity.y, limitedVelocity.z);
+		    if (rb.linearVelocity.magnitude > moveSpeed)
+			    rb.linearVelocity = rb.linearVelocity.normalized * moveSpeed;
 	    }
+	    // Speed limit on ground or in air
+	    else
+	    {
+		    Vector3 flatVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+
+		    if (flatVelocity.magnitude > moveSpeed)
+		    {
+			    Vector3 limitedVelocity = flatVelocity.normalized * moveSpeed;
+			    rb.linearVelocity = new Vector3(limitedVelocity.x, rb.linearVelocity.y, limitedVelocity.z);
+		    }
+	    }
+    }
+
+    private bool OnSlope()
+    {
+	    if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 6.5f))
+	    {
+		    float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
+		    return angle < maxSlopeAngle && angle != 0;
+	    }
+
+	    return false;
+    }
+
+    private Vector3 GetSlopeMoveDirection()
+    {
+	    return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
     }
 
     private void StateHandler()
