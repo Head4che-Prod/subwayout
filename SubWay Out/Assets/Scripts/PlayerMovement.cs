@@ -2,9 +2,17 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-	[Header("Movement")] public float moveSpeed;
+	[Header("Movement")]
+	public float moveSpeed;
 
 	public float groundDrag;
+
+	public float airMultiplier;
+	
+	[Header("Ground Check")] 
+	public float playerHeight;
+	public LayerMask whatIsGround;
+	private bool grounded;
 
 	public Transform orientation;
 
@@ -14,8 +22,7 @@ public class PlayerMovement : MonoBehaviour
 	private Vector3 moveDirection;
 	
 	Rigidbody rb;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+	
     void Start()
     {
 	    rb = GetComponent<Rigidbody>();
@@ -24,8 +31,15 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()
     {
-	    MyInput();
-	    rb.linearDamping	= groundDrag;
+	    grounded = Physics.Raycast(transform.position, -Vector3.up, playerHeight * 0.5f + 6.5f);
+	    
+	    KeyboardInput();
+	    SpeedCtrl();
+	    
+	    if (grounded)
+		    rb.linearDamping = groundDrag;
+	    else
+		    rb.linearDamping = 0;
     }
 
     void FixedUpdate()
@@ -33,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
 	    MovePlayer();
     }
 
-    private void MyInput()
+    private void KeyboardInput()
     {
 	    horizontalInput = Input.GetAxisRaw("Horizontal");
 	    verticalInput = Input.GetAxisRaw("Vertical");
@@ -42,9 +56,21 @@ public class PlayerMovement : MonoBehaviour
     private void MovePlayer()
     {
 	    moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-	    rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+	    if (grounded)
+			rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+	    else if (!grounded)
+		    rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+	    
     }
 
-    // Update is called once per frame
-    
+    private void SpeedCtrl()
+    {
+	    Vector3 flatVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+
+	    if (flatVelocity.magnitude > moveSpeed)
+	    {
+		    Vector3 limitedVelocity = flatVelocity.normalized * moveSpeed;
+		    rb.linearVelocity = new Vector3(limitedVelocity.x, rb.linearVelocity.y, limitedVelocity.z);
+	    }
+    }
 }
