@@ -1,12 +1,12 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class MoveCamera : MonoBehaviour
 {
-    public Transform cameraPostion;
+    public Transform cameraPosition;
 
-    // Update is called once per frame
     private void Update()
     {
-        transform.position = cameraPostion.position;
+        transform.position = cameraPosition.position;
     }
 }
