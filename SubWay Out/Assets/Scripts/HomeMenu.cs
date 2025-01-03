@@ -28,4 +28,9 @@ public class HomeMenu : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
     }
+
+    public void MultiScreen()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MultiplayerConnection");
+    }
 }
