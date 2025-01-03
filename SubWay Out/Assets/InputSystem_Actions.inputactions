@@ -100,7 +100,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "WASD",
+                    "name": "Keyboard",
                     "id": "18b31270-ae4f-4105-aca3-8b4feab5ce8a",
                     "path": "Dpad",
                     "interactions": "",
