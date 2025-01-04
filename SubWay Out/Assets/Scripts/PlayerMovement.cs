@@ -1,6 +1,8 @@
+using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
 	[Header("Movement")]
 	private float moveSpeed;
@@ -14,9 +16,6 @@ public class PlayerMovement : MonoBehaviour
 	public Transform orientation;
 	
 	public MovementState state;
-
-	[Header("Keybindings")] 
-	public KeyCode sprintKey = KeyCode.LeftShift;
 	
 	[Header("Ground Check")] 
 	public float playerHeight;
@@ -26,23 +25,23 @@ public class PlayerMovement : MonoBehaviour
 	[Header("Slope Handling")] 
 	public float maxSlopeAngle;
 	private RaycastHit slopeHit;
-
-	
-	float horizontalInput;
-	float verticalInput;
+	public bool oldSlopeState;
 
 	private Vector3 moveDirection;
 	
 	Rigidbody rb;
+	InputAction moveAction;
 	
     void Start()
     {
 	    rb = GetComponent<Rigidbody>();
 	    rb.freezeRotation = true;
+	    moveAction = InputSystem.actions.FindAction("Player/Move");
     }
     
     void Update()
     {
+	    if (!IsLocalPlayer) return;
 	    grounded = Physics.Raycast(transform.position, -Vector3.up, playerHeight * 0.5f + 6.5f, whatIsGround);
 	    
 	    KeyboardInput();
@@ -62,19 +61,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void KeyboardInput()
     {
-	    horizontalInput = Input.GetAxisRaw("Horizontal");
-	    verticalInput = Input.GetAxisRaw("Vertical");
+	    moveAction = InputSystem.actions.FindAction("Player/Move");
     }
 
     private void MovePlayer()
     {
-	    moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+	    moveDirection = orientation.forward * moveAction.ReadValue<Vector2>().y + orientation.right * moveAction.ReadValue<Vector2>().x;
+	    
 	    // Slope
 	    if (OnSlope())
 	    {
 		    rb.AddForce(GetSlopeMoveDirection() * (moveSpeed * 20f), ForceMode.Force);
 		    if (rb.linearVelocity.y > 0)
-			    rb.AddForce(Vector3.down * 80f, ForceMode.Force);
+			    rb.AddForce(Vector3.down * 100f, ForceMode.Force);
 	    }
 	    
 	    // Ground
@@ -82,9 +81,13 @@ public class PlayerMovement : MonoBehaviour
 			rb.AddForce(moveDirection.normalized * (moveSpeed * 10f), ForceMode.Force);
 	    // Air
 	    else if (!grounded)
+	    {
 		    rb.AddForce(moveDirection.normalized * (moveSpeed * 10f * airMultiplier), ForceMode.Force);
+	    }
+		    
 
 	    rb.useGravity = !OnSlope();
+	    oldSlopeState = OnSlope();
     }
 
     private void SpeedCtrl()
@@ -127,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
     private void StateHandler()
     {
 	    // Sprint
-	    if (grounded && Input.GetKey(sprintKey))
+	    if (grounded && InputSystem.actions.FindAction("Player/Sprint").IsPressed())
 	    {
 		    state = MovementState.Sprinting;
 		    moveSpeed = sprintSpeed;

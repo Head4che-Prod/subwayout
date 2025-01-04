@@ -1,9 +1,15 @@
+using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-public class MoveCamera : MonoBehaviour
+public class MoveCamera : NetworkBehaviour
 {
+    public GameObject playerCamera;
     public Transform cameraPosition;
+
+    private void Start()
+    {
+        playerCamera.gameObject.SetActive(IsLocalPlayer);
+    }
 
     private void Update()
     {
