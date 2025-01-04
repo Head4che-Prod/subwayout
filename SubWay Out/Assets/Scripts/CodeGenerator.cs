@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class CodeGenerator : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI m_Object;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,15 +16,18 @@ public class CodeGenerator : MonoBehaviour
             if (ip.AddressFamily == AddressFamily.InterNetwork)
             {
                 string[] ipAdress = ip.ToString().Split('.');
+                Debug.Log(ipAdress.Length);
+                Debug.Log(ipAdress.ToString());
                 foreach (string part in ipAdress)
                 {
                     int n = int.Parse(part);
+                    Debug.Log(n);
                     textInput += $"{chars[n % chars.Length]}{chars[n / chars.Length]}";
                 }
+                break;
             }
         }
-
-        m_Object.text = textInput;
+        GameObject.FindGameObjectWithTag("MultiplayerTitle").GetComponent<TextMeshProUGUI>().text = textInput;
     }
 
     // Update is called once per frame
