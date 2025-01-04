@@ -14,11 +14,6 @@ public class HomeMenu : MonoBehaviour
         
     }
 
-    public void CreateGame()
-    {
-        
-    }
-
     public void Quit()
     {
         Application.Quit();
@@ -32,5 +27,10 @@ public class HomeMenu : MonoBehaviour
     public void MultiScreen()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("MultiplayerConnection");
+    }
+
+    public void OptionsScreen()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("OptionsPage");
     }
 }
