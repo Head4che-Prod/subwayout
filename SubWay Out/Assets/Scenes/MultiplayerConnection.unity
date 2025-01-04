@@ -693,7 +693,7 @@ GameObject:
   - component: {fileID: 601525845}
   m_Layer: 5
   m_Name: Text (TMP)
-  m_TagString: Untagged
+  m_TagString: MultiplayerTitle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -828,7 +828,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 543be6ae6d6fd794bbd8e34fd9b2c179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textInput: 
 --- !u!1 &705753130
 GameObject:
   m_ObjectHideFlags: 0
