@@ -378,6 +378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02104a5879a9eed4da60754043127d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   sensX: 400
   sensY: 400
   orientation: {fileID: 1678093537}
@@ -595,9 +596,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408177aa66086974695108b81ee14399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 25
-  groundDrag: 2
+  ShowTopMostFoldoutHeaderGroup: 1
   orientation: {fileID: 1678093537}
+  groundDrag: 2
+  airMultiplier: 1.25
+  walkSpeed: 50
+  sprintSpeed: 70
+  playerHeight: 10
+  maxSlopeAngle: 40
 --- !u!1 &1054335718
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,7 +757,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea289a1542adc9442bf6c672dd3d1da7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraPostion: {fileID: 609427916}
+  ShowTopMostFoldoutHeaderGroup: 1
+  playerCamera: {fileID: 0}
+  cameraPosition: {fileID: 0}
 --- !u!1 &1626903625
 GameObject:
   m_ObjectHideFlags: 0

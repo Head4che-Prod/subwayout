@@ -45,7 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea289a1542adc9442bf6c672dd3d1da7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraPostion: {fileID: 7930189688420473741}
+  ShowTopMostFoldoutHeaderGroup: 1
+  playerCamera: {fileID: 3530378596609524384}
+  cameraPosition: {fileID: 7930189688420473741}
 --- !u!1 &2486201601411644443
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,7 +113,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c2e40fa84d53ccd428f640eac126b1fb, type: 2}
+  - {fileID: 2100000, guid: 80b5c48a8471f574baa5c46b636a1dd1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -167,7 +169,7 @@ GameObject:
   - component: {fileID: 7930189688420473741}
   m_Layer: 0
   m_Name: CameraPos
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -181,7 +183,7 @@ Transform:
   m_GameObject: {fileID: 2979951803864466980}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 5.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -337,6 +339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02104a5879a9eed4da60754043127d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   sensX: 400
   sensY: 400
   orientation: {fileID: 3433698212701841324}
@@ -392,7 +395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1725313950
+  GlobalObjectIdHash: 795297937
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -423,14 +426,14 @@ MonoBehaviour:
   TickSyncChildren: 0
   UseUnreliableDeltas: 0
   SyncPositionX: 1
-  SyncPositionY: 0
+  SyncPositionY: 1
   SyncPositionZ: 1
   SyncRotAngleX: 1
-  SyncRotAngleY: 0
+  SyncRotAngleY: 1
   SyncRotAngleZ: 1
-  SyncScaleX: 0
-  SyncScaleY: 0
-  SyncScaleZ: 0
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
   ScaleThreshold: 0.01
@@ -497,18 +500,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408177aa66086974695108b81ee14399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 50
-  sprintSpeed: 70
+  ShowTopMostFoldoutHeaderGroup: 1
+  orientation: {fileID: 3433698212701841324}
   groundDrag: 5
   airMultiplier: 1.25
-  sprintKey: 304
+  walkSpeed: 50
+  sprintSpeed: 70
   playerHeight: 10
+  maxSlopeAngle: 40
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
-  maxSlopeAngle: 40
-  orientation: {fileID: 3433698212701841324}
-  state: 0
 --- !u!1 &8897388447206143973
 GameObject:
   m_ObjectHideFlags: 0

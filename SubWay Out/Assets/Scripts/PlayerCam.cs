@@ -1,9 +1,9 @@
-using System.Collections.Generic;
-using System.Collections; 
+using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerCam : MonoBehaviour
+public class PlayerCam : NetworkBehaviour
 {
+	[Header("Sensibility")]
     public float sensX;
 	public float sensY;
 

@@ -1,12 +1,18 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class MoveCamera : MonoBehaviour
+public class MoveCamera : NetworkBehaviour
 {
-    public Transform cameraPostion;
+    public GameObject playerCamera;
+    public Transform cameraPosition;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        playerCamera.gameObject.SetActive(IsLocalPlayer);
+    }
+
     private void Update()
     {
-        transform.position = cameraPostion.position;
+        transform.position = cameraPosition.position;
     }
 }

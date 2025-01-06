@@ -388,9 +388,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d54265dd90a612c46a8e5f00e7ceb3df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
   connectClientButton: {fileID: 583891019}
   connectHostButton: {fileID: 281759922}
+  uiCamera: {fileID: 279201149}
 --- !u!114 &279201155
 MonoBehaviour:
   m_ObjectHideFlags: 0
