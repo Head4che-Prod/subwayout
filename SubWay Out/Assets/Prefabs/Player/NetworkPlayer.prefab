@@ -501,18 +501,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  walkSpeed: 50
-  sprintSpeed: 70
+  orientation: {fileID: 3433698212701841324}
   groundDrag: 5
   airMultiplier: 1.25
-  orientation: {fileID: 3433698212701841324}
-  state: 0
+  walkSpeed: 50
+  sprintSpeed: 70
   playerHeight: 10
+  maxSlopeAngle: 40
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
-  maxSlopeAngle: 40
-  oldSlopeState: 0
 --- !u!1 &8897388447206143973
 GameObject:
   m_ObjectHideFlags: 0
