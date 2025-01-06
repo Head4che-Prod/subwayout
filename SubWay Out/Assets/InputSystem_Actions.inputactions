@@ -27,7 +27,7 @@
                     "name": "Attack",
                     "type": "Button",
                     "id": "746cd646-3cb5-4a04-9dbe-31923b1eaaf7",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -36,7 +36,7 @@
                     "name": "Interact",
                     "type": "Button",
                     "id": "66dafb2a-e8fb-46b8-8c68-8999467dca8c",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "Hold",
                     "initialStateCheck": false
@@ -81,7 +81,7 @@
                     "name": "Sprint",
                     "type": "Button",
                     "id": "907f7f8a-3bde-4d29-a9ca-c8a39147f20d",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -100,7 +100,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "WASD",
+                    "name": "Keyboard",
                     "id": "18b31270-ae4f-4105-aca3-8b4feab5ce8a",
                     "path": "Dpad",
                     "interactions": "",
@@ -492,7 +492,7 @@
                     "name": "Submit",
                     "type": "Button",
                     "id": "101da1ba-4c5a-4136-8a99-7b56d7689014",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -501,7 +501,7 @@
                     "name": "Cancel",
                     "type": "Button",
                     "id": "a6633a1c-2cbd-453e-b63d-519227080d9b",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false

@@ -1,18 +1,18 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class MoveCamera : MonoBehaviour
+public class MoveCamera : NetworkBehaviour
 {
-    public Transform cameraPostion;
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public GameObject playerCamera;
+    public Transform cameraPosition;
+
+    private void Start()
     {
-        
+        playerCamera.gameObject.SetActive(IsLocalPlayer);
     }
 
-    // Update is called once per frame
     private void Update()
     {
-        transform.position = cameraPostion.position;
+        transform.position = cameraPosition.position;
     }
 }
