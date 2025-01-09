@@ -1,33 +1,34 @@
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerCam : NetworkBehaviour
 {
-	[Header("Sensibility")]
+    [Header("Sensibility")]
     public float sensX;
-	public float sensY;
+    public float sensY;
 
-	public Transform orientation;
+    public Transform orientation;
 
     float xRotation;
-	float yRotation;
+    float yRotation;
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-		Cursor.visible = false;
+        Cursor.visible = false;
     }
     
     void Update()
     {
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
+        Vector2 lookVector2 = InputSystem.actions.FindAction("Player/Look").ReadValue<Vector2>();
+        float lookX = lookVector2.x * Time.deltaTime * sensX;
+        float lookY = lookVector2.y * Time.deltaTime * sensY;
 		
-		yRotation += mouseX;
+        yRotation += lookX;
+        xRotation -= lookY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-		xRotation -= mouseY;
-		xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-
-		transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
-		orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+        orientation.rotation = Quaternion.Euler(0, yRotation, 0);
     }
 }
