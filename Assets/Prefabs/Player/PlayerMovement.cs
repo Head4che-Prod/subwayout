@@ -9,7 +9,7 @@ namespace Prefabs.Player
 		private float _moveSpeed;
 		public float walkSpeed;
 		public float sprintSpeed;
-		public MovementState state;
+		private MovementState state;
 		private Vector3 _moveDirection;
 
 		public enum MovementState
@@ -43,15 +43,15 @@ namespace Prefabs.Player
 	
 		void Start()
 		{
-			_movementInput = InputSystem.actions.FindAction("Move");
-			_sprintInput = InputSystem.actions.FindAction("Sprint");
+			_movementInput = InputSystem.actions.FindAction("Player/Move");
+			_sprintInput = InputSystem.actions.FindAction("Player/Sprint");
 			_rb = GetComponent<Rigidbody>();
 			_rb.freezeRotation = true;
 		}
     
 		void Update()
 		{
-			_grounded = Physics.Raycast(transform.position, -Vector3.up, playerHeight * 0.5f + 6.5f, whatIsGround);
+			_grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 	    
 			KeyboardInput();
 			SpeedCtrl();
@@ -119,7 +119,7 @@ namespace Prefabs.Player
 
 		private bool OnSlope()
 		{
-			if (Physics.Raycast(transform.position, Vector3.down, out _slopeHit, playerHeight * 0.5f + 6.5f))
+			if (Physics.Raycast(transform.position, Vector3.down, out _slopeHit, playerHeight * 0.5f + 0.3f))
 			{
 				float angle = Vector3.Angle(Vector3.up, _slopeHit.normal);
 				return angle < maxSlopeAngle && angle != 0;
