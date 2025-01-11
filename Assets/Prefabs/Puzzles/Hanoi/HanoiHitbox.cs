@@ -11,9 +11,9 @@ public class HanoiHitbox : MonoBehaviour
         CollisionEnterEvent = new UnityEvent<GameObject>();
     }
 
-    private void OnCollisionEnter(Collision collisionInfo)
+    private void OnTriggerEnter(Collider collisionInfo)
     {
         CollisionEnterEvent?.Invoke(collisionInfo.gameObject);
-        Debug.Log("Something happened");
+        // Debug.Log($"{name} detected collision with {collisionInfo.gameObject.name}");
     }
 }
