@@ -1,0 +1,347 @@
+fileFormatVersion: 2
+guid: 5f7807a51ab823643ae6789db5ee78d9
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chrome
+    second: {fileID: 2100000, guid: 87b5a89dbb8871b4fb733e04501ee464, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chrome.001
+    second: {fileID: 2100000, guid: e8357a6dade415e4e898de130274f059, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Elastic Rubber.002
+    second: {fileID: 2100000, guid: ddc17d168ff433f409281d649d4eecdc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fan
+    second: {fileID: 2100000, guid: fea673d36063b56459310c02b7267be5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Iron
+    second: {fileID: 2100000, guid: 775d33794e1c2814bb3a61c161157224, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Light iron
+    second: {fileID: 2100000, guid: 91728bcf8b7f5ed4aa30a0a2da9b5190, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Linoleum old
+    second: {fileID: 2100000, guid: 9d12e60bdeea36b479a5089460b4e869, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.003
+    second: {fileID: 2100000, guid: 4913148a192e5a0488067cfb5aa10934, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.007
+    second: {fileID: 2100000, guid: d5cafd2274957df4e93bc19d235bd4de, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal scratched
+    second: {fileID: 2100000, guid: c0d8e4b6162fb62478c3bf9e7aaa3b7b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: a4640992867116e4c80e1ccad6522cc0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Oxidized Metal Plate
+    second: {fileID: 2100000, guid: 5be285500ca76fb409c36f2966a63c66, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Oxidized Metal Plate.001
+    second: {fileID: 2100000, guid: c6510fc0d2766394984d767712b10037, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Oxidized Metal Plate.002
+    second: {fileID: 2100000, guid: 329781ba4e8b9394780ec37c24a63ff6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Oxidized Metal Plate.003
+    second: {fileID: 2100000, guid: 310dffd5844f51946ac05cde0cb2615c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Oxidized Metal Plate.004
+    second: {fileID: 2100000, guid: 72563d05544b31f428b208aef2521e62, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Oxidized Metal Plate.005
+    second: {fileID: 2100000, guid: 3743a6fb468c0d24e83d777d72cfe8cb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Oxidized Metal Plate.006
+    second: {fileID: 2100000, guid: ba8cd95f6e0c5f84e81b20de344049ce, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Oxidized Metal Plate.007
+    second: {fileID: 2100000, guid: d8ee98472467980418628bc171045e8b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Oxidized Metal Plate.008
+    second: {fileID: 2100000, guid: 557ddcb65105edb4ea3b56ca56e538c5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Oxidized Metal Plate.009
+    second: {fileID: 2100000, guid: 837cdbe2393ba5a4380a6b44054d3ca5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Oxidized Metal Plate.010
+    second: {fileID: 2100000, guid: edb9d6878ccd5934a9e6261108cbd788, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Oxidized Metal Plate.011
+    second: {fileID: 2100000, guid: 9db9f3ecfe273fe45a62ce1d7006ed04, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rubber
+    second: {fileID: 2100000, guid: 2168a59b285f444488fe4f83abf3b4f8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TextureChair
+    second: {fileID: 2100000, guid: 6c42189317174824593fa015fa9cf404, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: door
+    second: {fileID: 2100000, guid: 98cfe02832796ad4c859495a3612780d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: dossierChair
+    second: {fileID: 2100000, guid: 139303adae233c44b8eb2751cfedb9af, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: vitre
+    second: {fileID: 2100000, guid: fd28d5542ca39a34989eb7cf411e0f98, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: vitre.001
+    second: {fileID: 2100000, guid: 7fadbeb8610384649b15ff9575582fe0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wagon
+    second: {fileID: 2100000, guid: 7f59860ce4f82ad4d953e0b4963bc0e8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: yellow plastic
+    second: {fileID: 2100000, guid: 9e0900f26ade53045a4dbff5c4948756, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: GWC Iron Hammered Finish_BaseColor
+    second: {fileID: 2800000, guid: 157f9e8954bf94540b58cded9fca97b2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: GWC Iron Hammered Finish_Metallic
+    second: {fileID: 2800000, guid: 953bad818764f9e45a52dea5d10e98f1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: GWC Iron Hammered Finish_Normal
+    second: {fileID: 2800000, guid: 082de82c3261e5a498a3afc2fbcfc45a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Metal039_2K_Color
+    second: {fileID: 2800000, guid: 6daf8b79183b14f48a0678c301032068, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Metal039_2K_Metalness
+    second: {fileID: 2800000, guid: 665b60b430e62fc448b6daa998c5ecee, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Metal039_2K_Roughness
+    second: {fileID: 2800000, guid: d49fccd93add2db4e88e137ce90fefeb, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: chaise
+    second: {fileID: 2800000, guid: 54416d9fb24c88b40ac9f5ca1321a3be, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: garage_floor_nor_gl_4k
+    second: {fileID: 2800000, guid: c8b49e3ebbb9ad745b75b28bebbaf858, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: grille aeration
+    second: {fileID: 2800000, guid: 54fdbbfbaa10eee4c892e1f980c7a1b4, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: linoleum_dirt_3_normal
+    second: {fileID: 2800000, guid: 301f8c03c72c18647b2d87be9257b35a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: linoleum_dirt_3_roughness
+    second: {fileID: 2800000, guid: 8a4111f2185ff6249b995e23e51fb532, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: metal_0012_metallic_2k
+    second: {fileID: 2800000, guid: fa2ca35ecc4b95c4ca294cb68947844f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: metal_0012_normal_opengl_2k
+    second: {fileID: 2800000, guid: c49fd9960e70ed047bdd2095ae3e8e7b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: moquette1
+    second: {fileID: 2800000, guid: b41e726685fa31a459c062474b25f784, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: rame text
+    second: {fileID: 2800000, guid: 2e685168be897a6458f27502ca35ac23, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: textureSol
+    second: {fileID: 2800000, guid: 93ea8b3278fa4ac4786e8c7cde1151ec, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: tiled_plane_DefaultMaterial_Normal
+    second: {fileID: 2800000, guid: 3300daae9bb697e49952cbb8c45a88f8, type: 3}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
