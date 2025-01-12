@@ -1,38 +1,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HanoiBall
+namespace Prefabs.Puzzles.Hanoi
 {
-    private static Dictionary<GameObject, HanoiBall> _registeredBalls = new Dictionary<GameObject, HanoiBall>();
+    public class HanoiBall
+    {
+        private static readonly Dictionary<GameObject, HanoiBall> RegisteredBalls =
+            new Dictionary<GameObject, HanoiBall>();
 
-    public static HanoiBall GetHanoiBall(GameObject ballObject)
-    {
-        try
+        public static HanoiBall GetHanoiBall(GameObject ballObject)
         {
-            return _registeredBalls[ballObject];
+            try
+            {
+                return RegisteredBalls[ballObject];
+            }
+            catch (KeyNotFoundException)
+            {
+                throw new HanoiException(
+                    $"Collider collided with object '{ballObject.name}' that is not a registered ball");
+            }
         }
-        catch (KeyNotFoundException)
-        {
-            throw new HanoiException($"Collider collided with object '{ballObject.name}' that is not a registered ball");
-        }
-    }
 
-    public static void AddHanoiBalls(params HanoiBall[] balls)
-    {
-        foreach (HanoiBall ball in balls)
-            if (!_registeredBalls.TryAdd(ball.Object, ball))
-                Debug.LogWarning($"Ball '{ball.Object.name}' already registered to Hanoi Towers system");
-    }
-    
-    public GameObject Object { get; }
-    public Collider Collider { get; }
-    public readonly int Weight;
-    public HanoiBall(GameObject ball, int ballWeight)
-    {
-        Object = ball;
-        Collider = ball.GetComponent<Collider>();
-        Weight = ballWeight;
-        
-        _registeredBalls.TryAdd(Object, this);
+        public static void AddHanoiBalls(params HanoiBall[] balls)
+        {
+            foreach (HanoiBall ball in balls)
+                if (!RegisteredBalls.TryAdd(ball.Object, ball))
+                    Debug.LogWarning($"Ball '{ball.Object.name}' already registered to Hanoi Towers system");
+        }
+
+        public GameObject Object { get; }
+        public readonly int Weight;
+        public Rigidbody Body { get; }
+
+        public HanoiBall(GameObject ball, int ballWeight)
+        {
+            Object = ball;
+            Weight = ballWeight;
+            Body = ball.GetComponent<Rigidbody>();
+
+            RegisteredBalls.TryAdd(Object, this);
+        }
     }
 }
