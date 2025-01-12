@@ -33,7 +33,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Light iron
-    second: {fileID: 2100000, guid: 91728bcf8b7f5ed4aa30a0a2da9b5190, type: 2}
+    second: {fileID: 2100000, guid: a4640992867116e4c80e1ccad6522cc0, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -148,12 +148,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: vitre.001
-    second: {fileID: 2100000, guid: 7fadbeb8610384649b15ff9575582fe0, type: 2}
+    second: {fileID: 2100000, guid: fd28d5542ca39a34989eb7cf411e0f98, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: wagon
-    second: {fileID: 2100000, guid: 7f59860ce4f82ad4d953e0b4963bc0e8, type: 2}
+    second: {fileID: 2100000, guid: 138687ebee0d3b8438f2a4ea21aa13e2, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
