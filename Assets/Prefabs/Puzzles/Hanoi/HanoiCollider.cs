@@ -1,48 +1,51 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class HanoiCollider
+namespace Prefabs.Puzzles.Hanoi
 {
-    
-    public static HanoiCollider[,] colliderGrid = new HanoiCollider[3, 3];
-    public readonly int Height;
-    public readonly int Bar;
-    
-    public GameObject Object { get; }
-    public Collider Collider { get; }
-    
-    public UnityEvent<GameObject, HanoiCollider> BallEnterBoxEvent;
-    public UnityEvent<GameObject> CollisionEnterEvent;
-
-    public HanoiBall ContainedBall = null;
-    
-    public HanoiCollider(GameObject detector, int detectorHeight, int detectorBar, UnityEvent<GameObject, HanoiCollider> ballEnterBoxEvent)
+    public class HanoiCollider
     {
-        Object = detector;
-        Collider = detector.GetComponent<Collider>();
-        Height = detectorHeight;
-        Bar = detectorBar;
-        colliderGrid[Bar, Height] = this;
-        
-        HanoiHitbox hitbox = detector.GetComponent<HanoiHitbox>();
-        
-        BallEnterBoxEvent = ballEnterBoxEvent;
-        
-        CollisionEnterEvent = hitbox.CollisionEnterEvent;
-        CollisionEnterEvent.AddListener(OnCollisionEnter);
+        public static readonly HanoiCollider[,] ColliderGrid = new HanoiCollider[3, 3];
+        public readonly int Height;
+        public readonly int Bar;
 
-    }
+        public GameObject Object { get; }
+        public HanoiBall ContainedBall;
+        
+        private readonly UnityEvent<GameObject, HanoiCollider> _ballEnterBoxEvent;
+        
+        public HanoiCollider(GameObject detector, int detectorHeight, int detectorBar,
+            UnityEvent<GameObject, HanoiCollider> ballEnterBoxEvent)
+        {
+            Object = detector;
+            Height = detectorHeight;
+            Bar = detectorBar;
+            ColliderGrid[Bar, Height] = this;
 
-    private void OnCollisionEnter(GameObject other)
-    {
-        // Debug.Log($"{Object.name} heard about collision with {other.name}");
-        BallEnterBoxEvent?.Invoke(other, this);
-    }
+            HanoiHitbox hitbox = detector.GetComponent<HanoiHitbox>();
 
-    public static void RemoveBall(HanoiBall ball)
-    {
-        foreach (HanoiCollider collider in colliderGrid)
-            if (collider.ContainedBall == ball)
-                collider.ContainedBall = null;
+            _ballEnterBoxEvent = ballEnterBoxEvent; 
+            hitbox.CollisionEnterEvent.AddListener(OnCollisionEnter);
+        }
+
+        private void OnCollisionEnter(GameObject other)
+        {
+            // Debug.Log($"{Object.name} heard about collision with {other.name}");
+            _ballEnterBoxEvent?.Invoke(other, this);
+        }
+
+        public static void RemoveBall(HanoiBall ball)
+        {
+            foreach (HanoiCollider collider in ColliderGrid)
+                if (collider.ContainedBall == ball)
+                    collider.ContainedBall = null;
+        }
+
+        public static void ResetBall(Rigidbody ballBody)
+        {
+            foreach (HanoiCollider collider in ColliderGrid)
+                if (ballBody == collider.ContainedBall?.Body)
+                    ballBody.position = collider.Object.transform.position;
+        }
     }
 }
