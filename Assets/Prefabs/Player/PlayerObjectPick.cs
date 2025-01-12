@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,17 +11,24 @@ namespace Prefabs.Player
         [SerializeField] private float reach;
 
         private ObjectGrabbable _objectGrabbable;
+        private InputAction _interactInput;
+
+        private void Start()
+        {
+            _interactInput = InputSystem.actions.FindAction("Player/Interact");
+        }
+
         private void Update()
         {
             Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * reach, Color.blue);
-            if (InputSystem.actions.FindAction("Player/Interact").WasPressedThisFrame())
+            if (_interactInput.WasPressedThisFrame())
             {
                 if (_objectGrabbable is null) // No item in hand
                 {
                     if (Physics.Raycast(playerCamera.transform.position,
                             playerCamera.transform.forward, out RaycastHit raycastHit, reach))
                     {
-                        if (raycastHit.transform.TryGetComponent(out ObjectGrabbable objGrabbable) && objGrabbable.Grabbable())
+                        if (raycastHit.transform.TryGetComponent(out ObjectGrabbable objGrabbable) && objGrabbable.Grabbable)
                         {
                             _objectGrabbable = objGrabbable;
                             _objectGrabbable.Grab(objectGrabPointTransform);
