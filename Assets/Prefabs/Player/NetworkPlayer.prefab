@@ -250,7 +250,7 @@ Transform:
   m_GameObject: {fileID: 1913258719231907689}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.25}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -735,7 +735,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 3530378596609524384}
   objectGrabPointTransform: {fileID: 5411741163773892280}
-  reach: 4
+  reach: 3
 --- !u!1 &8897388447206143973
 GameObject:
   m_ObjectHideFlags: 0
