@@ -22,7 +22,6 @@ public class ObjectGrabbable : MonoBehaviour
     {
         if (_grabPointTransform)
         {
-
             Vector3 force = new Vector3(
                 _grabPointTransform.position.x - Rb.position.x, 
                 _grabPointTransform.position.y - Rb.position.y,
@@ -36,6 +35,14 @@ public class ObjectGrabbable : MonoBehaviour
         _grabPointTransform = objectGrabPointTransform;
         Grabbable = false;
         Rb.useGravity = false;
+
+        if (!gameObject.TryGetComponent(out Outline _))
+        {
+            var outline = gameObject.AddComponent<Outline>();
+            outline.OutlineMode = Outline.Mode.OutlineAll;
+            outline.OutlineColor = Color.white;
+            outline.OutlineWidth = 5f;
+        }
     }
 
     public virtual void Drop()
