@@ -5,165 +5,24 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/HomeMenu.unity
     guid: 08c7482ac613bec41b2bac72019ab4e6
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/GameScene.unity
     guid: 4213d9549d26ba74da4510141a4ca992
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MultiplayerConnection.unity
     guid: ecd1367094339db43b3b1c8011a6488b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/OptionsPage.unity
     guid: e04c90f2e1c651d45899c9487dc84796
   - enabled: 1
     path: Assets/Scenes/NetworkDebug.unity
     guid: f9c1fa4fa50ee0c44918237bfbefadd8
   - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
-  - enabled: 1
     path: Assets/Scenes/ItemsDebug.unity
     guid: 2bcc28de09dee08418b114374ae70127
-  - enabled: 1
-    path: Assets/Scenes/NetworkDebug.unity
-    guid: f9c1fa4fa50ee0c44918237bfbefadd8
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

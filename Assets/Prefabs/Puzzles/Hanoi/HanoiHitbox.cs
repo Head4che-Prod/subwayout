@@ -2,18 +2,21 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class HanoiHitbox : MonoBehaviour
+namespace Prefabs.Puzzles.Hanoi
 {
-    [NonSerialized] public UnityEvent<GameObject> CollisionEnterEvent;
-
-    private void Start()
+    public class HanoiHitbox : MonoBehaviour
     {
-        CollisionEnterEvent = new UnityEvent<GameObject>();
-    }
+        [NonSerialized] public UnityEvent<GameObject> CollisionEnterEvent;
 
-    private void OnTriggerEnter(Collider collisionInfo)
-    {
-        CollisionEnterEvent?.Invoke(collisionInfo.gameObject);
-        // Debug.Log($"{name} detected collision with {collisionInfo.gameObject.name}");
+        private void Start()
+        {
+            CollisionEnterEvent = new UnityEvent<GameObject>();
+        }
+
+        private void OnTriggerEnter(Collider collisionInfo)
+        {
+            CollisionEnterEvent?.Invoke(collisionInfo.gameObject);
+            // Debug.Log($"{name} detected collision with {collisionInfo.gameObject.name}");
+        }
     }
 }

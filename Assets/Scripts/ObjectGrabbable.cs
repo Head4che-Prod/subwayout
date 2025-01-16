@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Vector3 = UnityEngine.Vector3;
 
+[RequireComponent(typeof(Rigidbody))]
 public class ObjectGrabbable : MonoBehaviour
 {
     [FormerlySerializedAs("lerpSpeed")] [SerializeField] private float moveSpeed = 10f;
@@ -9,8 +10,14 @@ public class ObjectGrabbable : MonoBehaviour
     protected Rigidbody Rb;
     private Transform _grabPointTransform;
 
-    public bool Grabbable { get; private set; }
+    protected bool IsGrabbable;
 
+    public virtual bool Grabbable   // This can be overridden
+    {
+        get => IsGrabbable;
+        private set => IsGrabbable = value;
+    }
+    
     private void Awake()
     {
         Grabbable = true;
@@ -31,7 +38,7 @@ public class ObjectGrabbable : MonoBehaviour
         }
     }
 
-    public void Grab(Transform objectGrabPointTransform)
+    public virtual void Grab(Transform objectGrabPointTransform)
     {
         _grabPointTransform = objectGrabPointTransform;
         Grabbable = false;

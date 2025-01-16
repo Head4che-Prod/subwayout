@@ -24,7 +24,7 @@ namespace Prefabs.Puzzles.Hanoi
 
             HanoiHitbox hitbox = detector.GetComponent<HanoiHitbox>();
 
-            _ballEnterBoxEvent = ballEnterBoxEvent; 
+            _ballEnterBoxEvent = ballEnterBoxEvent;
             hitbox.CollisionEnterEvent.AddListener(OnCollisionEnter);
         }
 

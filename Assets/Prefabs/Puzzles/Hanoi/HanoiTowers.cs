@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 namespace Prefabs.Puzzles.Hanoi
 {
-    public class HanoiTowers : MonoBehaviour
+    public class HanoiTowers : MonoBehaviour        // Only one should exist AT ALL TIMES
     {
         [Header("Balls")] [SerializeField] private GameObject bottomBall;
         [SerializeField] private GameObject middleBall;
@@ -37,11 +37,14 @@ namespace Prefabs.Puzzles.Hanoi
         private HanoiCollider _colliderMR;
         private HanoiCollider _colliderTR;
 
+        private void Awake()
+        {
+            _ballEnterBoxEvent = new UnityEvent<GameObject, HanoiCollider>(); // Needs to be initialized first as others depend on it
+        }
 
         private void Start() // When game gets loaded
         {
             // Add event listeners
-            _ballEnterBoxEvent = new UnityEvent<GameObject, HanoiCollider>();
             _ballEnterBoxEvent.AddListener(OnBallEnterBox);
 
             // Get ball objects
