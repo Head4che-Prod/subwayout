@@ -1,9 +1,13 @@
+using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Vector3 = UnityEngine.Vector3;
 
 [RequireComponent(typeof(Rigidbody))]
-public class ObjectGrabbable : MonoBehaviour
+[RequireComponent(typeof(NetworkRigidbody))]
+[RequireComponent(typeof(NetworkObject))]
+public class ObjectGrabbable : NetworkBehaviour
 {
     [FormerlySerializedAs("lerpSpeed")] [SerializeField] private float moveSpeed = 10f;
     [SerializeField] private bool affectedByGravity = true;
@@ -18,10 +22,10 @@ public class ObjectGrabbable : MonoBehaviour
         private set => IsGrabbable = value;
     }
     
-    private void Awake()
+    public override void OnNetworkSpawn()
     {
         Grabbable = true;
-        Rb = GetComponent<Rigidbody>();
+        Rb = GetComponent<NetworkRigidbody>().Rigidbody;
         Rb.interpolation = RigidbodyInterpolation.Interpolate;
     }
 
@@ -29,12 +33,13 @@ public class ObjectGrabbable : MonoBehaviour
     {
         if (_grabPointTransform)
         {
-
             Vector3 force = new Vector3(
                 _grabPointTransform.position.x - Rb.position.x, 
                 _grabPointTransform.position.y - Rb.position.y,
                 _grabPointTransform.position.z - Rb.position.z);
             Rb.linearVelocity = force * moveSpeed;
+            
+            //Rb.MovePosition(_grabPointTransform.position);
         }
     }
 
