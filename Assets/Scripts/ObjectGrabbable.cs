@@ -27,12 +27,15 @@ public class ObjectGrabbable : NetworkBehaviour
         Grabbable = true;
         Rb = GetComponent<NetworkRigidbody>().Rigidbody;
         Rb.interpolation = RigidbodyInterpolation.Interpolate;
+        Rb.isKinematic = !IsHost;  // The item should have physics only on host
     }
 
     private void FixedUpdate()
     {
         if (_grabPointTransform)
         {
+            Debug.Log($"Owner is {OwnerClientId}");
+            // Debug.Log($"{name} is at position {_grabPointTransform.position}");
             Vector3 force = new Vector3(
                 _grabPointTransform.position.x - Rb.position.x, 
                 _grabPointTransform.position.y - Rb.position.y,
@@ -45,9 +48,12 @@ public class ObjectGrabbable : NetworkBehaviour
 
     public virtual void Grab(Transform objectGrabPointTransform)
     {
+        
+        Debug.Log($"Owner {OwnerClientId} attempted grabbing {name}");
         _grabPointTransform = objectGrabPointTransform;
         Grabbable = false;
         Rb.useGravity = false;
+        Rb.isKinematic = false;
     }
 
     public virtual void Drop()
@@ -55,6 +61,7 @@ public class ObjectGrabbable : NetworkBehaviour
         _grabPointTransform = null;
         Grabbable = true;
         Rb.useGravity = affectedByGravity; // For object that may not be affected by gravity in puzzles in the future
+        Rb.isKinematic = !IsHost;
     }
 
 }

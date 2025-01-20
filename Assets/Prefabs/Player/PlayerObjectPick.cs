@@ -1,10 +1,10 @@
-using System;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Prefabs.Player
 {
-    public class PlayerObjectPick : MonoBehaviour
+    public class PlayerObjectPick : NetworkBehaviour
     {
         [SerializeField] private GameObject playerCamera;
         [SerializeField] private Transform objectGrabPointTransform;
