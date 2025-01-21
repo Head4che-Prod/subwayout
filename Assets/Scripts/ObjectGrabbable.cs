@@ -22,7 +22,7 @@ public class ObjectGrabbable : NetworkBehaviour
         private set => IsGrabbable = value;
     }
 
-    public void Awake()
+    public void Start()
     {
         Grabbable = true;
         Rb = GetComponent<NetworkRigidbody>().Rigidbody;
@@ -50,7 +50,7 @@ public class ObjectGrabbable : NetworkBehaviour
     {
         _grabPointTransform = null;
         Grabbable = true;
-        Rb.useGravity = affectedByGravity; // For object that may not be affected by gravity in puzzles in the future
+       Rb.useGravity = affectedByGravity; // For object that may not be affected by gravity in puzzles in the future
     }
 
 }
