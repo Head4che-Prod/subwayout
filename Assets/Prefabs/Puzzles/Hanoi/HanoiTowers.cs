@@ -65,10 +65,9 @@ namespace Prefabs.Puzzles.Hanoi
             _colliderTR = new HanoiCollider(detectorTR, 2, 2, _ballEnterBoxEvent);
 
             // Reset ball positions
-            _bBall.Object.transform.localPosition = new Vector3(2.5f, -1.5f, 1.25f);
-            _mBall.Object.transform.localPosition = new Vector3(2.5f, 0.25f, 1.25f);
-            _tBall.Object.transform.localPosition =
-                new Vector3(2.5f, 3.5f, 1.25f); // Put higher so it enters its collision last
+            _bBall.Object.transform.localPosition = new Vector3(2.5f, -2f, 0.9f);
+            _mBall.Object.transform.localPosition = new Vector3(2.5f, -2f, 0.9f);
+            _tBall.Object.transform.localPosition = new Vector3(2.5f, -2f, 0.9f); 
 
             // Initial ball positions
             HanoiCollider.ColliderGrid[0, 0].ContainedBall = _bBall;

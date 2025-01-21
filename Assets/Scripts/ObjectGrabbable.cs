@@ -21,28 +21,19 @@ public class ObjectGrabbable : NetworkBehaviour
         get => IsGrabbable;
         private set => IsGrabbable = value;
     }
-    
-    public override void OnNetworkSpawn()
+
+    public void Awake()
     {
         Grabbable = true;
         Rb = GetComponent<NetworkRigidbody>().Rigidbody;
-        Rb.interpolation = RigidbodyInterpolation.Interpolate;
-        Rb.isKinematic = !IsHost;  // The item should have physics only on host
+        Rb.isKinematic = true;
     }
 
     private void FixedUpdate()
     {
         if (_grabPointTransform)
         {
-            Debug.Log($"Owner is {OwnerClientId}");
-            // Debug.Log($"{name} is at position {_grabPointTransform.position}");
-            Vector3 force = new Vector3(
-                _grabPointTransform.position.x - Rb.position.x, 
-                _grabPointTransform.position.y - Rb.position.y,
-                _grabPointTransform.position.z - Rb.position.z);
-            Rb.linearVelocity = force * moveSpeed;
-            
-            //Rb.MovePosition(_grabPointTransform.position);
+            Rb.MovePosition(_grabPointTransform.position);
         }
     }
 
@@ -53,7 +44,6 @@ public class ObjectGrabbable : NetworkBehaviour
         _grabPointTransform = objectGrabPointTransform;
         Grabbable = false;
         Rb.useGravity = false;
-        Rb.isKinematic = false;
     }
 
     public virtual void Drop()
@@ -61,7 +51,6 @@ public class ObjectGrabbable : NetworkBehaviour
         _grabPointTransform = null;
         Grabbable = true;
         Rb.useGravity = affectedByGravity; // For object that may not be affected by gravity in puzzles in the future
-        Rb.isKinematic = !IsHost;
     }
 
 }
