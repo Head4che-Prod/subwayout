@@ -1,10 +1,10 @@
-name: Build Clients ⚒️
+name: Build ⚒️
 
 on: workflow_dispatch
 
 jobs:
   build:
-    name: Build client for ${{ matrix.targetPlatform }} 🪄
+    name: ${{ matrix.targetPlatform }} Client 🪄
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
