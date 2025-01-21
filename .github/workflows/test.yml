@@ -1,0 +1,66 @@
+name: Test project 🧪
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    name: Test in ${{ matrix.testMode }} 🔬
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        testMode:
+          - playmode
+          - editmode
+          - standalone
+    steps:
+      - name: Checkout repository 📦
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Add GitHub to the SSH known hosts file 🗝️
+        run: |
+          mkdir -p -m 0700 /home/runner/.ssh
+          curl --silent https://api.github.com/meta | jq --raw-output '"github.com "+.ssh_keys[]' >> /home/runner/.ssh/known_hosts
+          chmod 600 /home/runner/.ssh/known_hosts
+
+      - name: Accessing to private repos 🔐
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Cache the libraries 📚
+        uses: actions/cache@v3
+        with:
+          path: Library
+          restore-keys: Library-
+
+      - name: Run tests 🧪
+        uses: game-ci/unity-test-runner@v4
+        id: tests
+        env:
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+          UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
+        with:
+          testMode: ${{ matrix.testMode }}
+          artifactsPath: ${{ matrix.testMode }}-artifacts
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          checkName: ${{ matrix.testMode }} Test Results
+          coverageOptions: "generateAdditionalMetrics;generateHtmlReport;generateBadgeReport;assemblyFilters:+my.assembly.*"
+          sshAgent: ${{ env.SSH_AUTH_SOCK }} # use SSH to access to private repo
+
+      - name: Upload test results 📋
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: Test results for ${{ matrix.testMode }}
+          path: ${{ steps.tests.outputs.artifactsPath }}
+
+      - name: Upload coverage results 🛡️
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: Coverage results for ${{ matrix.testMode }}
+          path: ${{ steps.tests.outputs.coveragePath }}
