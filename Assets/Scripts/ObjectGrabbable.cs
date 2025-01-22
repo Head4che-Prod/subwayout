@@ -26,7 +26,7 @@ public class ObjectGrabbable : NetworkBehaviour
     {
         Grabbable = true;
         Rb = GetComponent<NetworkRigidbody>().Rigidbody;
-        Rb.isKinematic = true;
+        Rb.isKinematic = false;
     }
 
     private void FixedUpdate()
