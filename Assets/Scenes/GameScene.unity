@@ -7198,10 +7198,26 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: d3b70f9ade9acd3478f131432ea15e79, type: 2}
+    - target: {fileID: -3098153570128122177, guid: 1c584ab3ed8e89d4cb7f4d19a0ffab61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a11d943bc31257c47a7ff060052b5cf4, type: 2}
+    - target: {fileID: -1836850574906166957, guid: 1c584ab3ed8e89d4cb7f4d19a0ffab61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a11d943bc31257c47a7ff060052b5cf4, type: 2}
     - target: {fileID: 919132149155446097, guid: 1c584ab3ed8e89d4cb7f4d19a0ffab61, type: 3}
       propertyPath: m_Name
       value: CarsNotPlayable
       objectReference: {fileID: 0}
+    - target: {fileID: 6897004275692580430, guid: 1c584ab3ed8e89d4cb7f4d19a0ffab61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a11d943bc31257c47a7ff060052b5cf4, type: 2}
+    - target: {fileID: 8552985859011389436, guid: 1c584ab3ed8e89d4cb7f4d19a0ffab61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a11d943bc31257c47a7ff060052b5cf4, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: -8700617353114198275, guid: 1c584ab3ed8e89d4cb7f4d19a0ffab61, type: 3}
