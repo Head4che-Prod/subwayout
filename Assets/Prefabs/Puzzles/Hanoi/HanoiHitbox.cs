@@ -15,7 +15,8 @@ namespace Prefabs.Puzzles.Hanoi
 
         private void OnTriggerEnter(Collider collisionInfo)
         {
-            CollisionEnterEvent?.Invoke(collisionInfo.gameObject);
+            if (collisionInfo.gameObject.TryGetComponent<HanoiPieceBall>(out HanoiPieceBall ball))
+                CollisionEnterEvent?.Invoke(ball.parent);
             // Debug.Log($"{name} detected collision with {collisionInfo.gameObject.name}");
         }
     }

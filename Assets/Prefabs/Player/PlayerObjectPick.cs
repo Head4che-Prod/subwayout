@@ -28,6 +28,7 @@ namespace Prefabs.Player
                     if (Physics.Raycast(playerCamera.transform.position,
                             playerCamera.transform.forward, out RaycastHit raycastHit, reach))
                     {
+                        // Debug.Log(raycastHit.collider.gameObject.name);
                         if (raycastHit.transform.TryGetComponent(out ObjectGrabbable objGrabbable) && objGrabbable.Grabbable)
                         {
                             _objectGrabbable = objGrabbable;

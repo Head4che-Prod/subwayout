@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -31,7 +32,7 @@ namespace Prefabs.Puzzles.Hanoi
         private void OnCollisionEnter(GameObject other)
         {
             // Debug.Log($"{Object.name} heard about collision with {other.name}");
-            _ballEnterBoxEvent?.Invoke(other, this);
+            _ballEnterBoxEvent?.Invoke(other, this);    
         }
 
         public static void RemoveBall(HanoiBall ball)
@@ -45,7 +46,14 @@ namespace Prefabs.Puzzles.Hanoi
         {
             foreach (HanoiCollider collider in ColliderGrid)
                 if (ballBody == collider.ContainedBall?.Body)
-                    ballBody.position = collider.Object.transform.position;
+                {
+                    Debug.Log($"Let go of ball at ({ballBody.position.x}, {ballBody.position.y}, {ballBody.position.z})");
+                    ballBody.position = new Vector3(
+                        2.5f,
+                        collider.Object.transform.position.y,
+                        0.9f
+                    );
+                }
         }
     }
 }

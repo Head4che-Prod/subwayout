@@ -26,21 +26,26 @@ public class ObjectGrabbable : NetworkBehaviour
     {
         Grabbable = true;
         Rb = GetComponent<NetworkRigidbody>().Rigidbody;
-        Rb.isKinematic = false;
+        Rb.interpolation = RigidbodyInterpolation.Extrapolate;
     }
 
     private void FixedUpdate()
     {
         if (_grabPointTransform)
         {
-            Rb.MovePosition(_grabPointTransform.position);
+            Vector3 force = new Vector3(
+                _grabPointTransform.position.x - Rb.position.x, 
+                _grabPointTransform.position.y - Rb.position.y,
+                _grabPointTransform.position.z - Rb.position.z);
+            Rb.linearVelocity = force * moveSpeed;
+            // Rb.MovePosition(_grabPointTransform.position);
         }
     }
 
     public virtual void Grab(Transform objectGrabPointTransform)
     {
         
-        Debug.Log($"Owner {OwnerClientId} attempted grabbing {name}");
+        // Debug.Log($"Owner {OwnerClientId} attempted grabbing {name}");
         _grabPointTransform = objectGrabPointTransform;
         Grabbable = false;
         Rb.useGravity = false;
