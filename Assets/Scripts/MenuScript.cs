@@ -10,16 +10,17 @@ public class MenuScript : MonoBehaviour
     
     public void DemoHanoi()
     {
-        // UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Scenes/DemoHanoi");
     }
 
     public void DemoModels()
     {
-        // UnityEngine.SceneManagement.SceneManager.LoadScene("MultiplayerConnection");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Scenes/GameScene");
     }
 
-    public void Settings()
+    public void OpenSettings()
     {
-        // UnityEngine.SceneManagement.SceneManager.LoadScene("OptionsPage");
+		transform.Find("MainMenu").gameObject.SetActive(false);
+		transform.Find("AppearOnSelect").gameObject.SetActive(true);
     }
 }
