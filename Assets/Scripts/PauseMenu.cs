@@ -1,15 +1,20 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenuOpener : MonoBehaviour
 {
-    public GameObject pauseMenuUI; // Reference to your Pause Menu UI
+    private GameObject pauseMenuUI;
+    [SerializeField]
+    public GameObject gameElements;
 
     private bool isPaused = false;
 
     void Awake() 
     {
-        pauseMenuUI = transform.Find("PauseMenu").gameObject;
+        pauseMenuUI = transform.Find("PauseMenuUI").gameObject;
         pauseMenuUI.SetActive(false);
+        gameElements.SetActive(true);
     }
 
     void Update()
@@ -25,24 +30,25 @@ public class PauseMenuOpener : MonoBehaviour
 
     public void Resume()
     {
-        // Disable the pause menu UI and un-pause the game
         pauseMenuUI.SetActive(false);
+        gameElements.SetActive(true);
         Time.timeScale = 1f; // Resume game time
         isPaused = false;
     }
 
     void Pause()
     {
-        // Enable the pause menu UI and pause the game
         pauseMenuUI.SetActive(true);
+        gameElements.SetActive(false);
         Time.timeScale = 0f; // Freeze game time
         isPaused = true;
+        foreach (Selectable button in Selectable.allSelectablesArray)
+            if (button.name == "ResumeButton")
+                button.Select();
     }
 
     public void QuitGame()
     {
-        // Quit the application (works in a built game, not in the editor)
-        Debug.Log("Quitting the game...");
-        Application.Quit();
+        SceneManager.LoadScene("Scenes/DemoMenu");
     }
 }
