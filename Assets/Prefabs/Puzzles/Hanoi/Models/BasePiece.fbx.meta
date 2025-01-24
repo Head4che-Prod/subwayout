@@ -9,6 +9,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: BaseColorHanoi
     second: {fileID: 2100000, guid: 583d59a22c6aba94da0f4d9e72cdb07a, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: BaseColorHanoi Base Color
+    second: {fileID: 2800000, guid: 0f02ccd1eb383804e80469cc70d07bd7, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
