@@ -6,6 +6,18 @@ namespace Prefabs.Puzzles.Hanoi
 {
     public class HanoiCollider
     {
+        public static string DebugGrid()
+        {
+            return "|-------------|-------------|-------------|\n" +
+                   $"|{ColliderGrid[0, 2].ContainedBall?.Object.name,13}|{ColliderGrid[1, 2].ContainedBall?.Object.name,13}|{ColliderGrid[2, 2].ContainedBall?.Object.name,13}|\n" +
+                   "|-------------|-------------|-------------|\n" +
+                   $"|{ColliderGrid[0, 1].ContainedBall?.Object.name,13}|{ColliderGrid[1, 1].ContainedBall?.Object.name,13}|{ColliderGrid[2, 1].ContainedBall?.Object.name,13}|\n" +
+                   "|-------------|-------------|-------------|\n" +
+                   $"|{ColliderGrid[0, 0].ContainedBall?.Object.name,13}|{ColliderGrid[1, 0].ContainedBall?.Object.name,13}|{ColliderGrid[2, 0].ContainedBall?.Object.name,13}|\n" +
+                   "|-------------|-------------|-------------|";
+        }
+        
+        
         public static readonly HanoiCollider[,] ColliderGrid = new HanoiCollider[3, 3];
         public readonly int Height;
         public readonly int Bar;
@@ -42,16 +54,15 @@ namespace Prefabs.Puzzles.Hanoi
                     collider.ContainedBall = null;
         }
 
-        public static void ResetBall(Rigidbody ballBody)
+        public static void ResetBall(Transform ballTransform)
         {
             foreach (HanoiCollider collider in ColliderGrid)
-                if (ballBody == collider.ContainedBall?.Body)
+                if (ballTransform == collider.ContainedBall?.Object.transform)
                 {
-                    Debug.Log($"Let go of ball at ({ballBody.position.x}, {ballBody.position.y}, {ballBody.position.z})");
-                    ballBody.position = new Vector3(
-                        2.5f,
-                        collider.Object.transform.position.y,
-                        0.9f
+                    ballTransform.localPosition = new Vector3(
+                        collider.Object.transform.localPosition.x,
+                        collider.Object.transform.localPosition.y,
+                        1f
                     );
                 }
         }

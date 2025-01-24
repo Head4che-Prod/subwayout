@@ -32,7 +32,7 @@ namespace Prefabs.Player
                         if (raycastHit.transform.TryGetComponent(out ObjectGrabbable objGrabbable) && objGrabbable.Grabbable)
                         {
                             _objectGrabbable = objGrabbable;
-                            _objectGrabbable.Grab(objectGrabPointTransform);
+                            _objectGrabbable.Grab(objectGrabPointTransform, playerCamera.transform);
                         }
                     }
                 }

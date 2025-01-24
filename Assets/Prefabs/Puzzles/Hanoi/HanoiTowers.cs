@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -5,6 +6,8 @@ namespace Prefabs.Puzzles.Hanoi
 {
     public class HanoiTowers : MonoBehaviour        // Only one should exist AT ALL TIMES
     {
+        public static HanoiTowers ActiveTowersGameObject { get; private set; }
+        
         [Header("Balls")] [SerializeField] private GameObject bottomBall;
         [SerializeField] private GameObject middleBall;
         [SerializeField] private GameObject topBall;
@@ -44,6 +47,8 @@ namespace Prefabs.Puzzles.Hanoi
 
         private void Start() // When game gets loaded
         {
+            ActiveTowersGameObject = this;
+            
             // Add event listeners
             _ballEnterBoxEvent.AddListener(OnBallEnterBox);
 
@@ -65,9 +70,9 @@ namespace Prefabs.Puzzles.Hanoi
             _colliderTR = new HanoiCollider(detectorTR, 2, 2, _ballEnterBoxEvent);
 
             // Reset ball positions
-            _bBall.Object.transform.localPosition = new Vector3(2.5f, -1.5f, 0.9f);
-            _mBall.Object.transform.localPosition = new Vector3(2.5f, -0.5f, 0.9f);
-            _tBall.Object.transform.localPosition = new Vector3(2.5f, 0.5f, 0.9f); 
+            _bBall.Object.transform.localPosition = new Vector3(2.5f, -1.5f, 1f);
+            _mBall.Object.transform.localPosition = new Vector3(2.5f, -0.5f, 1f);
+            _tBall.Object.transform.localPosition = new Vector3(2.5f, 0.5f, 1f); 
 
             // Initial ball positions
             HanoiCollider.ColliderGrid[0, 0].ContainedBall = _bBall;
