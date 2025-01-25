@@ -11,12 +11,12 @@ public class MenuScript : MonoBehaviour
     
     public void DemoHanoi()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Scenes/DemoHanoi");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Scenes/TempHanoi");
     }
 
     public void DemoModels()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Scenes/GameScene");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Scenes/DemoScene");
     }
 
     public void OpenSettings()
