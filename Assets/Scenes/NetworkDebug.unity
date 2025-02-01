@@ -173,7 +173,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b67a4a1cdcecd6a4895158da74967194, type: 2}
+  - {fileID: 2100000, guid: 1c811d7550586c444aeffc1ff9013394, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -212,7 +212,7 @@ Transform:
   m_GameObject: {fileID: 91066858}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.2418714, y: -1.4622284, z: 10.508787}
+  m_LocalPosition: {x: 0, y: -1.5, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -396,9 +396,25 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 1685908116
       objectReference: {fileID: 0}
+    - target: {fileID: 4503098785757652205, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4714755399569761450, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1352292313
+      objectReference: {fileID: 0}
+    - target: {fileID: 5576126056825299356, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2370124971
+      objectReference: {fileID: 0}
     - target: {fileID: 6325281260247187622, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3597405228
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214884265827987280, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8906342971892380432, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -1125,7 +1141,7 @@ Transform:
   m_GameObject: {fileID: 612729327}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.579, y: -1.406, z: 0}
+  m_LocalPosition: {x: 0, y: -1.5, z: 0}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -2228,7 +2244,8 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -2237,13 +2254,22 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.047877744
+        value: 0.25532097
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0.04255319
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4

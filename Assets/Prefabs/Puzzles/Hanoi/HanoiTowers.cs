@@ -88,7 +88,7 @@ namespace Prefabs.Puzzles.Hanoi
                 && (box.Height == 0 ||
                     HanoiCollider.ColliderGrid[box.Bar, box.Height - 1].ContainedBall?.Weight > ball.Weight))
             {
-                Debug.Log($"Put ball {ballObject.name} at position ({box.Bar}, {box.Height}){(box.Height == 0 ? "" : $" on top of {HanoiCollider.ColliderGrid[box.Bar, box.Height - 1].ContainedBall.Object.name}")}.");
+                //Debug.Log($"Put ball {ballObject.name} at position ({box.Bar}, {box.Height}){(box.Height == 0 ? "" : $" on top of {HanoiCollider.ColliderGrid[box.Bar, box.Height - 1].ContainedBall.Object.name}")}.");
                 HanoiCollider.RemoveBall(ball);
                 box.ContainedBall = ball;
             }

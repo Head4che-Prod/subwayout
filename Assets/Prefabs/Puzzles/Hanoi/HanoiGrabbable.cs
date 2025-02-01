@@ -21,7 +21,7 @@ namespace Prefabs.Puzzles.Hanoi
                 float a = normal.x;
                 float b = normal.y;
                 float c = normal.z;
-                Debug.Log($"{a}x + {b}y + {c}z");
+                // Debug.Log($"{a}x + {b}y + {c}z");
 
                 
                 // A point in the plane (corresponding to the object you are currently holding)
@@ -70,7 +70,7 @@ namespace Prefabs.Puzzles.Hanoi
         public override void Grab(Transform objectGrabPointTransform, Transform playerCamera)
         {
             base.Grab(objectGrabPointTransform, playerCamera);
-            Debug.Log(HanoiCollider.DebugGrid());
+            //Debug.Log(HanoiCollider.DebugGrid());
             _useable = false;
         }
         public override void Drop()
