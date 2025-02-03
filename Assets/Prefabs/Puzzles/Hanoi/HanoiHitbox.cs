@@ -6,7 +6,7 @@ public class HanoiHitbox : MonoBehaviour
 {
     [NonSerialized] public UnityEvent<GameObject> CollisionEnterEvent;
 
-    private void Start()
+    private void Awake()
     {
         CollisionEnterEvent = new UnityEvent<GameObject>();
     }
