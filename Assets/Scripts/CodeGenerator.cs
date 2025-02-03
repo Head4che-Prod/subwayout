@@ -35,4 +35,9 @@ public class CodeGenerator : MonoBehaviour
     {
         
     }
+    
+    public void Close()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("HomeMenu");
+    }
 }
