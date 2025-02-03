@@ -51,7 +51,7 @@ jobs:
           sshAgent: ${{ env.SSH_AUTH_SOCK }} # use SSH to access to private repo
         
       - name: Upload artifacts 🪄
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: subwayout-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
