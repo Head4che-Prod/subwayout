@@ -12,16 +12,26 @@ public class DebugConsole : MonoBehaviour
     [SerializeField] Text displayText;
     [SerializeField] Selectable InputField;
     private static Dictionary<string, Action> commands;
+    private static bool isActivated = false;
+    private static int touchCount = 0;
+    private static float lastTouch = 0;
 
     void Awake()
     {
         if (singleton != null)
             DestroyImmediate(gameObject);
         else
+        {
             singleton = this;
 
-        commands = new Dictionary<string, Action>();
-        commands.Add("sayHello", () => Log("Hello, world !"));
+            commands = new Dictionary<string, Action>();
+            commands.Add("sayHello", () => Log("Hello, world !"));
+
+            touchCount = 0;
+            lastTouch = 0;
+        }
+
+        gameObject.transform.GetChild(0).gameObject.SetActive(isActivated);
     }
 
     void Update()
@@ -29,6 +39,25 @@ public class DebugConsole : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.T))
         {
             InputField.Select();
+        }
+
+        if (Input.GetKeyUp(KeyCode.RightShift))
+        {
+            if (Time.time - lastTouch < .5)
+            {
+                touchCount++;
+            }
+            else
+            {
+                touchCount = 0;
+            }
+            lastTouch = Time.time;
+            if (touchCount >= 5)
+            {
+                isActivated = !isActivated;
+                touchCount = 0;
+                gameObject.transform.GetChild(0).gameObject.SetActive(isActivated);
+            }
         }
     }
 
