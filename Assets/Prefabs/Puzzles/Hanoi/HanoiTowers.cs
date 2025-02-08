@@ -1,4 +1,4 @@
-using System;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -39,6 +39,8 @@ namespace Prefabs.Puzzles.Hanoi
         private HanoiCollider _colliderBR;
         private HanoiCollider _colliderMR;
         private HanoiCollider _colliderTR;
+        private float ti;
+        private bool _gameWon;
 
         private void Awake()
         {
@@ -49,6 +51,9 @@ namespace Prefabs.Puzzles.Hanoi
         {
             ActiveTowersGameObject = this;
             
+            ti = 0f;
+            _gameWon = false;
+
             // Add event listeners
             _ballEnterBoxEvent.AddListener(OnBallEnterBox);
 
@@ -80,6 +85,17 @@ namespace Prefabs.Puzzles.Hanoi
             HanoiCollider.ColliderGrid[0, 2].ContainedBall = _tBall;
         }
 
+        private void FixedUpdate() {
+            if (!_gameWon)
+                ti = Time.time;
+            else if (Time.time - ti > 3)
+            {
+                Debug.Log("Game won!");
+                NetworkManager.Singleton.Shutdown();
+                UnityEngine.SceneManagement.SceneManager.LoadScene("Scenes/DemoMenu");
+            }
+        }
+
         private void OnBallEnterBox(GameObject ballObject, HanoiCollider box)
         {
             // Debug.Log($"{ballObject.name} entered {box.Object.name}");
@@ -93,14 +109,11 @@ namespace Prefabs.Puzzles.Hanoi
                 box.ContainedBall = ball;
             }
 
+            _gameWon = true;
             // Check win condition
-            bool winCondition = true;
             for (int layer = 0; layer < 3; layer++)
                 if (HanoiCollider.ColliderGrid[2, layer].ContainedBall?.Weight != 2 - layer)
-                    winCondition = false;
-
-            if (winCondition)
-                Debug.Log("Game won!");
+                    _gameWon = false;
         }
     }
 }

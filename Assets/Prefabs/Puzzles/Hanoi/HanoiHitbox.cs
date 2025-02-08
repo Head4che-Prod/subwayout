@@ -8,10 +8,10 @@ namespace Prefabs.Puzzles.Hanoi
     {
         [NonSerialized] public UnityEvent<GameObject> CollisionEnterEvent;
 
-        private void Start()
-        {
-            CollisionEnterEvent = new UnityEvent<GameObject>();
-        }
+    private void Awake()
+    {
+        CollisionEnterEvent = new UnityEvent<GameObject>();
+    }
 
         private void OnTriggerEnter(Collider collisionInfo)
         {
