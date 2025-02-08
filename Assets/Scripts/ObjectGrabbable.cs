@@ -13,10 +13,10 @@ public class ObjectGrabbable : NetworkBehaviour
     [FormerlySerializedAs("lerpSpeed")] [SerializeField] private float moveSpeed = 10f;
     [SerializeField] private bool affectedByGravity = true;
     protected Rigidbody Rb { get; private set; }
-    protected Transform GrabPointTransform { get; private set; }
+    private Transform GrabPointTransform { get; set; }
     [CanBeNull] protected Transform HolderCameraTransform { get; private set; }
     
-    protected virtual Vector3 GrabPointPosition => GrabPointTransform.position;
+    private Vector3 GrabPointPosition => GrabPointTransform.position;
     protected bool IsGrabbable;
 
     public virtual bool Grabbable   // This can be overridden
@@ -28,18 +28,25 @@ public class ObjectGrabbable : NetworkBehaviour
     public void Start()
     {
         Grabbable = true;
+        
+        // Warning: All rigidbody settings in this section must be copied / adapted for HanoiGrabbable
         Rb = GetComponent<NetworkRigidbody>().Rigidbody;
         Rb.interpolation = RigidbodyInterpolation.Extrapolate;
     }
 
+    public virtual Vector3 CalculateMovementForce()
+    {
+        return new Vector3(
+            GrabPointPosition.x - transform.position.x, 
+            GrabPointPosition.y - transform.position.y,
+            GrabPointPosition.z - transform.position.z);
+    }
+    
     private void FixedUpdate()
     {
         if (GrabPointTransform)
         {
-            Vector3 force = new Vector3(
-                GrabPointPosition.x - transform.position.x, 
-                GrabPointPosition.y - transform.position.y,
-                GrabPointPosition.z - transform.position.z);
+            Vector3 force = CalculateMovementForce();
             Rb.linearVelocity = force * moveSpeed;
             // Rb.MovePosition(_grabPointTransform.position);
         }

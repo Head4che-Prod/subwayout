@@ -22,13 +22,10 @@ namespace Prefabs.Puzzles.Hanoi
         public readonly int Height;
         public readonly int Bar;
 
-        public GameObject Object { get; }
+        private GameObject Object { get; }
         public HanoiBall ContainedBall;
         
-        private readonly UnityEvent<GameObject, HanoiCollider> _ballEnterBoxEvent;
-        
-        public HanoiCollider(GameObject detector, int detectorHeight, int detectorBar,
-            UnityEvent<GameObject, HanoiCollider> ballEnterBoxEvent)
+        public HanoiCollider(GameObject detector, int detectorHeight, int detectorBar)
         {
             Object = detector;
             Height = detectorHeight;
@@ -37,14 +34,13 @@ namespace Prefabs.Puzzles.Hanoi
 
             HanoiHitbox hitbox = detector.GetComponent<HanoiHitbox>();
 
-            _ballEnterBoxEvent = ballEnterBoxEvent;
             hitbox.CollisionEnterEvent.AddListener(OnCollisionEnter);
         }
 
         private void OnCollisionEnter(GameObject other)
         {
             // Debug.Log($"{Object.name} heard about collision with {other.name}");
-            _ballEnterBoxEvent?.Invoke(other, this);    
+            HanoiTowers.Instance.BallEnterBoxEvent?.Invoke(other, this);    
         }
 
         public static void RemoveBall(HanoiBall ball)

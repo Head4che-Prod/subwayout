@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Prefabs.Puzzles.Hanoi.Debugs
 {
-    public class MoveLine : MonoBehaviour
+    public class MovementVector : MonoBehaviour
     {
         public static LineRenderer Instance;
 

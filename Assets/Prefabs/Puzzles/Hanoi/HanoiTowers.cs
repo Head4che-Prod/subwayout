@@ -1,3 +1,4 @@
+using System;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
@@ -6,7 +7,7 @@ namespace Prefabs.Puzzles.Hanoi
 {
     public class HanoiTowers : MonoBehaviour        // Only one should exist AT ALL TIMES
     {
-        public static HanoiTowers ActiveTowersGameObject { get; private set; }
+        public static HanoiTowers Instance { get; private set; }
         
         [Header("Balls")] [SerializeField] private GameObject bottomBall;
         [SerializeField] private GameObject middleBall;
@@ -23,7 +24,7 @@ namespace Prefabs.Puzzles.Hanoi
         [SerializeField] private GameObject detectorMR;
         [SerializeField] private GameObject detectorTR;
 
-        private UnityEvent<GameObject, HanoiCollider> _ballEnterBoxEvent;
+        public UnityEvent<GameObject, HanoiCollider> BallEnterBoxEvent { get; private set; }
 
         private HanoiBall _bBall;
         private HanoiBall _mBall;
@@ -44,18 +45,18 @@ namespace Prefabs.Puzzles.Hanoi
 
         private void Awake()
         {
-            _ballEnterBoxEvent = new UnityEvent<GameObject, HanoiCollider>(); // Needs to be initialized first as others depend on it
+            BallEnterBoxEvent = new UnityEvent<GameObject, HanoiCollider>(); // Needs to be initialized first as others depend on it
         }
 
         private void Start() // When game gets loaded
         {
-            ActiveTowersGameObject = this;
+            Instance = this;
             
             ti = 0f;
             _gameWon = false;
 
             // Add event listeners
-            _ballEnterBoxEvent.AddListener(OnBallEnterBox);
+            BallEnterBoxEvent.AddListener(OnBallEnterBox);
 
             // Get ball objects
             _bBall = new HanoiBall(bottomBall, 2);
@@ -64,15 +65,15 @@ namespace Prefabs.Puzzles.Hanoi
             HanoiBall.AddHanoiBalls(_bBall, _mBall, _tBall);
 
             // Get collision boxes
-            _colliderBL = new HanoiCollider(detectorBL, 0, 0, _ballEnterBoxEvent);
-            _colliderML = new HanoiCollider(detectorML, 1, 0, _ballEnterBoxEvent);
-            _colliderTL = new HanoiCollider(detectorTL, 2, 0, _ballEnterBoxEvent);
-            _colliderBM = new HanoiCollider(detectorBM, 0, 1, _ballEnterBoxEvent);
-            _colliderMM = new HanoiCollider(detectorMM, 1, 1, _ballEnterBoxEvent);
-            _colliderTM = new HanoiCollider(detectorTM, 2, 1, _ballEnterBoxEvent);
-            _colliderBR = new HanoiCollider(detectorBR, 0, 2, _ballEnterBoxEvent);
-            _colliderMR = new HanoiCollider(detectorMR, 1, 2, _ballEnterBoxEvent);
-            _colliderTR = new HanoiCollider(detectorTR, 2, 2, _ballEnterBoxEvent);
+            _colliderBL = new HanoiCollider(detectorBL, 0, 0);
+            _colliderML = new HanoiCollider(detectorML, 1, 0);
+            _colliderTL = new HanoiCollider(detectorTL, 2, 0);
+            _colliderBM = new HanoiCollider(detectorBM, 0, 1);
+            _colliderMM = new HanoiCollider(detectorMM, 1, 1);
+            _colliderTM = new HanoiCollider(detectorTM, 2, 1);
+            _colliderBR = new HanoiCollider(detectorBR, 0, 2);
+            _colliderMR = new HanoiCollider(detectorMR, 1, 2);
+            _colliderTR = new HanoiCollider(detectorTR, 2, 2);
 
             // Reset ball positions
             _bBall.Object.transform.localPosition = new Vector3(2.5f, -1.5f, 1f);
