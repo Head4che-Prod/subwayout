@@ -1,10 +1,10 @@
-using System;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Prefabs.Player
 {
-    public class PlayerObjectPick : MonoBehaviour
+    public class PlayerObjectPick : NetworkBehaviour
     {
         [SerializeField] private GameObject playerCamera;
         [SerializeField] private Transform objectGrabPointTransform;
@@ -28,10 +28,11 @@ namespace Prefabs.Player
                     if (Physics.Raycast(playerCamera.transform.position,
                             playerCamera.transform.forward, out RaycastHit raycastHit, reach))
                     {
+                        // Debug.Log(raycastHit.collider.gameObject.name);
                         if (raycastHit.transform.TryGetComponent(out ObjectGrabbable objGrabbable) && objGrabbable.Grabbable)
                         {
                             _objectGrabbable = objGrabbable;
-                            _objectGrabbable.Grab(objectGrabPointTransform);
+                            _objectGrabbable.Grab(objectGrabPointTransform, playerCamera.transform);
                         }
                     }
                 }

@@ -30,13 +30,11 @@ namespace Prefabs.Puzzles.Hanoi
 
         public GameObject Object { get; }
         public readonly int Weight;
-        public Rigidbody Body { get; }
 
         public HanoiBall(GameObject ball, int ballWeight)
         {
             Object = ball;
             Weight = ballWeight;
-            Body = ball.GetComponent<Rigidbody>();
 
             RegisteredBalls.TryAdd(Object, this);
         }
