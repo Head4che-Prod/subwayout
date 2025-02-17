@@ -54,7 +54,7 @@
                     "name": "Previous",
                     "type": "Button",
                     "id": "72d1257a-ee88-4818-b634-9164dab46a23",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -72,6 +72,15 @@
                     "name": "Sprint",
                     "type": "Button",
                     "id": "907f7f8a-3bde-4d29-a9ca-c8a39147f20d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Grab",
+                    "type": "Button",
+                    "id": "14c54772-aac4-4037-84dd-178c0c0d2190",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -439,6 +448,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6dc56668-29f8-4df9-aa0e-21d05b4f0cee",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grab",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

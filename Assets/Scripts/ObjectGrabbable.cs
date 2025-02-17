@@ -69,5 +69,4 @@ public class ObjectGrabbable : NetworkBehaviour
         Rb.useGravity = affectedByGravity; // For object that may not be affected by gravity in puzzles in the future
         HolderCameraTransform = null;
     }
-
 }
