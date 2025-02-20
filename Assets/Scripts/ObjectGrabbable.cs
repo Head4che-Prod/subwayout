@@ -54,7 +54,6 @@ public class ObjectGrabbable : NetworkBehaviour
 
     public virtual void Grab(Transform objectGrabPointTransform, Transform playerCamera)
     {
-        
         // Debug.Log($"Owner {OwnerClientId} attempted grabbing {name}");
         GrabPointTransform = objectGrabPointTransform;
         Grabbable = false;
