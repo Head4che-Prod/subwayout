@@ -8,8 +8,8 @@ namespace Interactive
 {
     public abstract class Interactive : NetworkBehaviour
     {
-        [SerializeField] protected GameObject playerCamera; // Defined for inherited class
         [SerializeField] protected InputAction inputKey;
+        [SerializeField] protected GameObject playerCamera; // Defined for inherited class
         [SerializeField] private float reach = 3;
 
         /// <summary>
@@ -20,21 +20,22 @@ namespace Interactive
         {
             inputKey = InputSystem.actions.FindAction(actionName);
         }
-        public void Update()
+
+        private void Start()
         {
-            if (inputKey.WasPressedThisFrame()) OnPress();
-            else if(inputKey.WasReleasedThisFrame()) OnRelease();
+            inputKey.performed += OnPress;
+            inputKey.canceled += OnRelease;
         }
 
         /// <summary>
         /// This function is called when the key is pressed.
         /// </summary>
-        public abstract void OnPress();
+        public abstract void OnPress(InputAction.CallbackContext context);
         
         /// <summary>
         /// This function is called when the key is released.
         /// </summary>
-        public abstract void OnRelease();
+        public abstract void OnRelease(InputAction.CallbackContext context);
 
     }
 }
