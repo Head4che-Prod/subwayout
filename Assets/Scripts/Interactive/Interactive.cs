@@ -23,14 +23,27 @@ namespace Interactive
 
         private void Start()
         {
-            inputKey.performed += OnPress;
+            inputKey.performed += HandlePress;
             inputKey.canceled += OnRelease;
+        }
+
+        public void HandlePress(InputAction.CallbackContext context)
+        {
+            OnPress(context);
+            if (Physics.Raycast(playerCamera.transform.position,
+                    playerCamera.transform.forward, out RaycastHit raycastHit, reach))
+                OnPress(context, raycastHit);
         }
 
         /// <summary>
         /// This function is called when the key is pressed.
         /// </summary>
         public abstract void OnPress(InputAction.CallbackContext context);
+        
+        /// <summary>
+        /// This function is called when the key is pressed and object reached.
+        /// </summary>
+        public abstract void OnPress(InputAction.CallbackContext context, RaycastHit raycastHit);
         
         /// <summary>
         /// This function is called when the key is released.
