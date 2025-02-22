@@ -47,13 +47,21 @@ public class ObjectGrabbable : NetworkBehaviour
         if (GrabPointTransform)
         {
             Vector3 force = CalculateMovementForce();
-            Rb.linearVelocity = force * moveSpeed;
+            MoveGrabbedObjectServerRpc(force * 3.0f);
+            // Rb.linearVelocity = force * moveSpee d;
             // Rb.MovePosition(_grabPointTransform.position);
         }
     }
 
+    [ServerRpc(RequireOwnership = false)]
+    private void MoveGrabbedObjectServerRpc(Vector3 move)
+    {
+        Rb.linearVelocity = move;
+    }
+
     public virtual void Grab(Transform objectGrabPointTransform, Transform playerCamera)
     {
+        
         // Debug.Log($"Owner {OwnerClientId} attempted grabbing {name}");
         GrabPointTransform = objectGrabPointTransform;
         Grabbable = false;
@@ -68,4 +76,5 @@ public class ObjectGrabbable : NetworkBehaviour
         Rb.useGravity = affectedByGravity; // For object that may not be affected by gravity in puzzles in the future
         HolderCameraTransform = null;
     }
+    
 }
