@@ -296,9 +296,9 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6005886500767136779}
-        m_TargetAssemblyTypeName: DebugConsole, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 8112998321356254070}
+        m_TargetAssemblyTypeName: Prefabs.UI.DebugConsole.DebugConsole, Assembly-CSharp
+        m_MethodName: ExecCommand
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -620,7 +620,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 1
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -678,7 +678,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayText: {fileID: 5544122004075864180}
-  InputField: {fileID: 5875634470906723412}
+  inputField: {fileID: 5875634470906723412}
 --- !u!1 &6716102826338897997
 GameObject:
   m_ObjectHideFlags: 0
