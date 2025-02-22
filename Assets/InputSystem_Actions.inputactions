@@ -537,6 +537,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Debug mode activation",
+                    "type": "PassThrough",
+                    "id": "34cdeee2-770b-43b9-99cd-a283a10e6e8c",
+                    "expectedControlType": "Key",
+                    "processors": "",
+                    "interactions": "MultiTap(tapCount=5)",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "ConsoleFocus",
+                    "type": "PassThrough",
+                    "id": "f81cfb75-35c0-452a-9f7a-b6795cbb3f3c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -955,6 +973,28 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceOrientation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2c20bedb-2075-471f-a60e-bfa95c72995b",
+                    "path": "<Keyboard>/rightShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Debug mode activation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7a60cbec-73cc-4bb3-99f2-d45396be5454",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "ConsoleFocus",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

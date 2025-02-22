@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -49,6 +50,7 @@ public class PauseMenuOpener : MonoBehaviour
 
     public void QuitGame()
     {
+        NetworkManager.Singleton.Shutdown();
         SceneManager.LoadScene("Scenes/DemoMenu");
     }
 }
