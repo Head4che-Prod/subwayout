@@ -1,55 +1,73 @@
+using JetBrains.Annotations;
+using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Vector3 = UnityEngine.Vector3;
 
-public class ObjectGrabbable : MonoBehaviour
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(NetworkRigidbody))]
+[RequireComponent(typeof(NetworkObject))]
+public class ObjectGrabbable : NetworkBehaviour
 {
     [FormerlySerializedAs("lerpSpeed")] [SerializeField] private float moveSpeed = 10f;
     [SerializeField] private bool affectedByGravity = true;
-    protected Rigidbody Rb;
-    private Transform _grabPointTransform;
+    protected Rigidbody Rb { get; private set; }
+    private Transform GrabPointTransform { get; set; }
+    [CanBeNull] protected Transform HolderCameraTransform { get; private set; }
+    
+    private Vector3 GrabPointPosition => GrabPointTransform.position;
+    protected bool IsGrabbable;
 
-    public bool Grabbable { get; private set; }
+    public virtual bool Grabbable   // This can be overridden
+    {
+        get => IsGrabbable;
+        private set => IsGrabbable = value;
+    }
 
-    private void Awake()
+    public void Start()
     {
         Grabbable = true;
-        Rb = GetComponent<Rigidbody>();
-        Rb.interpolation = RigidbodyInterpolation.Interpolate;
+        
+        // Warning: All rigidbody settings in this section must be copied / adapted for HanoiGrabbable
+        Rb = GetComponent<NetworkRigidbody>().Rigidbody;
+        Rb.interpolation = RigidbodyInterpolation.Extrapolate;
     }
 
+    public virtual Vector3 CalculateMovementForce()
+    {
+        return new Vector3(
+            GrabPointPosition.x - transform.position.x, 
+            GrabPointPosition.y - transform.position.y,
+            GrabPointPosition.z - transform.position.z);
+    }
+    
     private void FixedUpdate()
     {
-        if (_grabPointTransform)
+        if (GrabPointTransform)
         {
-            Vector3 force = new Vector3(
-                _grabPointTransform.position.x - Rb.position.x, 
-                _grabPointTransform.position.y - Rb.position.y,
-                _grabPointTransform.position.z - Rb.position.z);
+            Vector3 force = CalculateMovementForce();
             Rb.linearVelocity = force * moveSpeed;
+            // Rb.MovePosition(_grabPointTransform.position);
         }
     }
 
-    public void Grab(Transform objectGrabPointTransform)
+    public virtual void Grab(Transform objectGrabPointTransform, Transform playerCamera)
     {
-        _grabPointTransform = objectGrabPointTransform;
+        
+        // Debug.Log($"Owner {OwnerClientId} attempted grabbing {name}");
+        GrabPointTransform = objectGrabPointTransform;
         Grabbable = false;
         Rb.useGravity = false;
-
-        if (!gameObject.TryGetComponent(out Outline _))
-        {
-            var outline = gameObject.AddComponent<Outline>();
-            outline.OutlineMode = Outline.Mode.OutlineAll;
-            outline.OutlineColor = Color.white;
-            outline.OutlineWidth = 5f;
-        }
+        HolderCameraTransform = playerCamera;
     }
 
     public virtual void Drop()
     {
-        _grabPointTransform = null;
+        GrabPointTransform = null;
         Grabbable = true;
         Rb.useGravity = affectedByGravity; // For object that may not be affected by gravity in puzzles in the future
+        HolderCameraTransform = null;
     }
 
 }

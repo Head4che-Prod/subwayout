@@ -2698,7 +2698,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 938714339193474459, guid: f99acd1333783e440a8149dc5e005cd0, type: 3}
       propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: onModeActivationCommand
+      value: OnModeActivationCommand
       objectReference: {fileID: 0}
     - target: {fileID: 938714339193474459, guid: f99acd1333783e440a8149dc5e005cd0, type: 3}
       propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
