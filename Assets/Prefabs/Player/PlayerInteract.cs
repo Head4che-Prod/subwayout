@@ -1,4 +1,5 @@
-﻿using Unity.Netcode;
+﻿using System;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,6 +7,7 @@ namespace Prefabs.Player
 {
     public class PlayerInteract : NetworkBehaviour
     {
+        [Header("Player")]
         [SerializeField] private GameObject playerCamera;
         [SerializeField] private Transform objectGrabPointTransform;
         [SerializeField] private float reach;
@@ -27,35 +29,39 @@ namespace Prefabs.Player
         
         private void HandlePress(InputAction.CallbackContext context)
         {
+            Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * reach, Color.blue);
             if (
                 Physics.Raycast(
-                    playerCamera.transform.position, 
-                    playerCamera.transform.forward, 
-                    out RaycastHit raycastHit, reach)
-                )
-                if (context.action.id == _actionInput.id &&
-                    raycastHit.transform.TryGetComponent(out ObjectActionnable objActionnable)
-                    ) 
+                    playerCamera.transform.position,
+                    playerCamera.transform.forward,
+                    out RaycastHit raycastHit, reach) &&
+                raycastHit.transform.TryGetComponent(out ObjectInteractive interactive)
+            )
+            {
+                if (context.action.id == _actionInput.id && interactive is ObjectActionable objActionable) 
                 {   
-                    objActionnable.Action();
+                    objActionable.Action();
                 }
                 else if (
                     context.action.id == _grabInput.id &&
-                    raycastHit.transform.TryGetComponent(out ObjectGrabbable objGrabbable) &&
-                    objGrabbable.Grabbable
-                    )
+                    interactive is ObjectGrabbable objGrabbable &&
+                    objGrabbable.Grabbable &&
+                    _grabbedObject is null
+                )
                 {
-                    if (_grabbedObject is null)
-                    {
-                        _grabbedObject = objGrabbable;
-                        _grabbedObject.Grab(objectGrabPointTransform, playerCamera.transform);
-                    }
-                    else
-                    {
-                        _grabbedObject.Drop();
-                        _grabbedObject = null;
-                    }   
+                    Debug.Log("Grab");
+                    _grabbedObject = objGrabbable;
+                    _grabbedObject.Grab(objectGrabPointTransform, playerCamera.transform);
+                    return;
                 }
+            } 
+            
+            if (_grabbedObject is not null && context.action.id == _grabInput.id)
+            {
+                Debug.Log("Release");
+                _grabbedObject.Drop();
+                _grabbedObject = null;
+            }
         }
 
         private void HandleRelease(InputAction.CallbackContext context)

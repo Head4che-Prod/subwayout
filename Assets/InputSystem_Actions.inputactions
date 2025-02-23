@@ -45,7 +45,7 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "2719c937-d7fa-4ca6-b774-910936becc32",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -454,10 +454,10 @@
                 {
                     "name": "",
                     "id": "6dc56668-29f8-4df9-aa0e-21d05b4f0cee",
-                    "path": "",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
                     "action": "Grab",
                     "isComposite": false,
                     "isPartOfComposite": false

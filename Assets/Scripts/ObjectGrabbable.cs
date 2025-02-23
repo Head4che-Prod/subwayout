@@ -8,7 +8,7 @@ using Vector3 = UnityEngine.Vector3;
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(NetworkRigidbody))]
 [RequireComponent(typeof(NetworkObject))]
-public class ObjectGrabbable : NetworkBehaviour
+public class ObjectGrabbable : ObjectInteractive
 {
     [FormerlySerializedAs("lerpSpeed")] [SerializeField] private float moveSpeed = 10f;
     [SerializeField] private bool affectedByGravity = true;
@@ -17,18 +17,20 @@ public class ObjectGrabbable : NetworkBehaviour
     [CanBeNull] protected Transform HolderCameraTransform { get; private set; }
     
     private Vector3 GrabPointPosition => GrabPointTransform.position;
-    protected bool IsGrabbable;
+    protected NetworkVariable<bool> IsGrabbable = new (true);
 
     public virtual bool Grabbable   // This can be overridden
     {
-        get => IsGrabbable;
-        private set => IsGrabbable = value;
+        get => IsGrabbable.Value;
+        private set => IsGrabbable.Value = value;
     }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SetGrabbableServerRpc(bool value) => Grabbable = value;
 
     public void Start()
     {
-        Grabbable = true;
-        
+        SetGrabbableServerRpc(true);
         // Warning: All rigidbody settings in this section must be copied / adapted for HanoiGrabbable
         Rb = GetComponent<NetworkRigidbody>().Rigidbody;
         Rb.interpolation = RigidbodyInterpolation.Extrapolate;
@@ -47,8 +49,8 @@ public class ObjectGrabbable : NetworkBehaviour
         if (GrabPointTransform)
         {
             Vector3 force = CalculateMovementForce();
-            MoveGrabbedObjectServerRpc(force * 3.0f);
-            // Rb.linearVelocity = force * moveSpee d;
+            MoveGrabbedObjectServerRpc(force * 2.0f);
+            // Rb.linearVelocity = force * moveSpeed;
             // Rb.MovePosition(_grabPointTransform.position);
         }
     }
@@ -61,10 +63,9 @@ public class ObjectGrabbable : NetworkBehaviour
 
     public virtual void Grab(Transform objectGrabPointTransform, Transform playerCamera)
     {
-        
         // Debug.Log($"Owner {OwnerClientId} attempted grabbing {name}");
         GrabPointTransform = objectGrabPointTransform;
-        Grabbable = false;
+        SetGrabbableServerRpc(false);
         Rb.useGravity = false;
         HolderCameraTransform = playerCamera;
     }
@@ -72,7 +73,7 @@ public class ObjectGrabbable : NetworkBehaviour
     public virtual void Drop()
     {
         GrabPointTransform = null;
-        Grabbable = true;
+        SetGrabbableServerRpc(true);
         Rb.useGravity = affectedByGravity; // For object that may not be affected by gravity in puzzles in the future
         HolderCameraTransform = null;
     }

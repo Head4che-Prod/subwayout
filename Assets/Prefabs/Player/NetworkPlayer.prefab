@@ -566,7 +566,7 @@ GameObject:
   - component: {fileID: 7088814739842334021}
   - component: {fileID: 6686329594619532825}
   - component: {fileID: 2578371781939902612}
-  - component: {fileID: 3146751663887921008}
+  - component: {fileID: -3156459274891961919}
   m_Layer: 0
   m_Name: NetworkPlayer
   m_TagString: Untagged
@@ -606,7 +606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1725313950
+  GlobalObjectIdHash: 795297937
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -720,8 +720,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
-  maxSlopeAngle: 40
---- !u!114 &3146751663887921008
+--- !u!114 &-3156459274891961919
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -730,9 +729,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4957522455835016799}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ac9a7489d4ffbb4a8140e6aba446bcf, type: 3}
+  m_Script: {fileID: 11500000, guid: 087f4a16f9b544baa3dc7e1c35fda40e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   playerCamera: {fileID: 3530378596609524384}
   objectGrabPointTransform: {fileID: 5411741163773892280}
   reach: 3
