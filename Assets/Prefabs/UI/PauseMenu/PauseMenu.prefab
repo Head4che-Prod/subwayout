@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7837922783700264429}
-  - component: {fileID: 1582120482225761582}
+  - component: {fileID: 6289746866439314500}
   m_Layer: 0
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 9206590522648896704}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1582120482225761582
+--- !u!114 &6289746866439314500
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -636,7 +636,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1582120482225761582}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PauseMenuOpener, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
@@ -1205,7 +1205,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1582120482225761582}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PauseMenuOpener, Assembly-CSharp
         m_MethodName: Resume
         m_Mode: 1

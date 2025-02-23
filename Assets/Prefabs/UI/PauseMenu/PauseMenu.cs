@@ -5,14 +5,26 @@ using UnityEngine.UI;
 public class PauseMenuOpener : MonoBehaviour
 {
     private GameObject pauseMenuUI;
-    [SerializeField]
-    public GameObject gameElements;
+    private GameObject gameElements;
 
-    private bool isPaused = false;
+    private bool _isPaused = false;
+
+    private void SetGameElementsAttribute()
+    {
+        foreach (GameObject obj in SceneManager.GetActiveScene().GetRootGameObjects())
+        {
+            if (obj.name == "GameElements")
+            {
+                gameElements = obj;
+                return;
+            }
+        }
+    }
 
     void Awake() 
     {
         pauseMenuUI = transform.Find("PauseMenuUI").gameObject;
+        SetGameElementsAttribute();
         pauseMenuUI.SetActive(false);
         gameElements.SetActive(true);
     }
@@ -21,7 +33,7 @@ public class PauseMenuOpener : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
         {
-            if (isPaused)
+            if (_isPaused)
                 Resume();
             else
                 Pause();
@@ -33,7 +45,7 @@ public class PauseMenuOpener : MonoBehaviour
         pauseMenuUI.SetActive(false);
         gameElements.SetActive(true);
         Time.timeScale = 1f; // Resume game time
-        isPaused = false;
+        _isPaused = false;
     }
 
     void Pause()
@@ -41,7 +53,7 @@ public class PauseMenuOpener : MonoBehaviour
         pauseMenuUI.SetActive(true);
         gameElements.SetActive(false);
         Time.timeScale = 0f; // Freeze game time
-        isPaused = true;
+        _isPaused = true;
         foreach (Selectable button in Selectable.allSelectablesArray)
             if (button.name == "ResumeButton")
                 button.Select();
