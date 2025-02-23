@@ -2,65 +2,68 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PauseMenuOpener : MonoBehaviour
+namespace Prefabs.UI.PauseMenu
 {
-    private GameObject _pauseMenuUI;
-    private GameObject _gameElements;
-
-    private bool _isPaused = false;
-
-    private void SetGameElementsAttribute()
+    public class PauseMenuOpener : MonoBehaviour
     {
-        foreach (GameObject obj in SceneManager.GetActiveScene().GetRootGameObjects())
+        private GameObject _pauseMenuUI;
+        private GameObject _gameElements;
+
+        private bool _isPaused = false;
+
+        private void SetGameElementsAttribute()
         {
-            if (obj.name == "GameElements")
+            foreach (GameObject obj in SceneManager.GetActiveScene().GetRootGameObjects())
             {
-                _gameElements = obj;
-                return;
+                if (obj.name == "GameElements")
+                {
+                    _gameElements = obj;
+                    return;
+                }
             }
         }
-    }
 
-    void Awake() 
-    {
-        _pauseMenuUI = transform.Find("PauseMenuUI").gameObject;
-        SetGameElementsAttribute();
-        _pauseMenuUI.SetActive(false);
-        _gameElements.SetActive(true);
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
+        void Awake()
         {
-            if (_isPaused)
-                Resume();
-            else
-                Pause();
+            _pauseMenuUI = transform.Find("PauseMenuUI").gameObject;
+            SetGameElementsAttribute();
+            _pauseMenuUI.SetActive(false);
+            _gameElements.SetActive(true);
         }
-    }
 
-    public void Resume()
-    {
-        _pauseMenuUI.SetActive(false);
-        _gameElements.SetActive(true);
-        Time.timeScale = 1f; // Resume game time
-        _isPaused = false;
-    }
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
+            {
+                if (_isPaused)
+                    Resume();
+                else
+                    Pause();
+            }
+        }
 
-    void Pause()
-    {
-        _pauseMenuUI.SetActive(true);
-        _gameElements.SetActive(false);
-        Time.timeScale = 0f; // Freeze game time
-        _isPaused = true;
-        foreach (Selectable button in Selectable.allSelectablesArray)
-            if (button.name == "ResumeButton")
-                button.Select();
-    }
+        public void Resume()
+        {
+            _pauseMenuUI.SetActive(false);
+            _gameElements.SetActive(true);
+            Time.timeScale = 1f; // Resume game time
+            _isPaused = false;
+        }
 
-    public void QuitGame()
-    {
-        SceneManager.LoadScene("Scenes/DemoMenu");
+        void Pause()
+        {
+            _pauseMenuUI.SetActive(true);
+            _gameElements.SetActive(false);
+            Time.timeScale = 0f; // Freeze game time
+            _isPaused = true;
+            foreach (Selectable button in Selectable.allSelectablesArray)
+                if (button.name == "ResumeButton")
+                    button.Select();
+        }
+
+        public void QuitGame()
+        {
+            SceneManager.LoadScene("Scenes/DemoMenu");
+        }
     }
 }
