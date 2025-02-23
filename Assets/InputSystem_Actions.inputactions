@@ -45,7 +45,7 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "2719c937-d7fa-4ca6-b774-910936becc32",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -54,7 +54,7 @@
                     "name": "Previous",
                     "type": "Button",
                     "id": "72d1257a-ee88-4818-b634-9164dab46a23",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -63,7 +63,7 @@
                     "name": "Next",
                     "type": "Button",
                     "id": "bf40947c-ae70-49a1-b4ea-781fbd8acb0d",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -537,24 +537,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "Debug mode activation",
-                    "type": "PassThrough",
-                    "id": "34cdeee2-770b-43b9-99cd-a283a10e6e8c",
-                    "expectedControlType": "Key",
-                    "processors": "",
-                    "interactions": "MultiTap(tapCount=5)",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "ConsoleFocus",
-                    "type": "PassThrough",
-                    "id": "f81cfb75-35c0-452a-9f7a-b6795cbb3f3c",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -975,26 +957,52 @@
                     "action": "TrackedDeviceOrientation",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
+                }
+            ]
+        },
+        {
+            "name": "Debug",
+            "id": "00e5fdab-4fe5-4595-b407-83bff58fa3d3",
+            "actions": [
                 {
-                    "name": "",
-                    "id": "2c20bedb-2075-471f-a60e-bfa95c72995b",
-                    "path": "<Keyboard>/rightShift",
-                    "interactions": "",
+                    "name": "ConsoleFocus",
+                    "type": "PassThrough",
+                    "id": "26512e2a-8a78-4df9-b850-618db4db287c",
+                    "expectedControlType": "Button",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Debug mode activation",
-                    "isComposite": false,
-                    "isPartOfComposite": false
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
+                    "name": "Debug mode activation",
+                    "type": "PassThrough",
+                    "id": "eb416550-9aea-4ee4-a3c6-eca90d9bbef1",
+                    "expectedControlType": "Key",
+                    "processors": "",
+                    "interactions": "MultiTap(tapCount=5)",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
                     "name": "",
-                    "id": "7a60cbec-73cc-4bb3-99f2-d45396be5454",
+                    "id": "c48eb794-ea05-4bed-8839-e52008a36f86",
                     "path": "<Keyboard>/t",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "ConsoleFocus",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e0000054-d4a1-44cf-9fa7-be1d437b582f",
+                    "path": "<Keyboard>/rightShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Debug mode activation",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

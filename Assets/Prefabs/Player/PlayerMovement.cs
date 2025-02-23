@@ -60,11 +60,6 @@ namespace Prefabs.Player
 
 		private void KeyboardInput()
 		{
-			if (EventSystem.current.currentSelectedGameObject != null && 
-				EventSystem.current.currentSelectedGameObject.GetComponent<TMPro.TMP_InputField>() != null)
-			{
-				return;
-			}
 			Vector2 moveDirection = _movementInput.ReadValue<Vector2>();
 			_horizontalInput = moveDirection.x;
 			_verticalInput = moveDirection.y;
