@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class PauseMenuOpener : MonoBehaviour
 {
-    private GameObject pauseMenuUI;
-    private GameObject gameElements;
+    private GameObject _pauseMenuUI;
+    private GameObject _gameElements;
 
     private bool _isPaused = false;
 
@@ -15,7 +15,7 @@ public class PauseMenuOpener : MonoBehaviour
         {
             if (obj.name == "GameElements")
             {
-                gameElements = obj;
+                _gameElements = obj;
                 return;
             }
         }
@@ -23,10 +23,10 @@ public class PauseMenuOpener : MonoBehaviour
 
     void Awake() 
     {
-        pauseMenuUI = transform.Find("PauseMenuUI").gameObject;
+        _pauseMenuUI = transform.Find("PauseMenuUI").gameObject;
         SetGameElementsAttribute();
-        pauseMenuUI.SetActive(false);
-        gameElements.SetActive(true);
+        _pauseMenuUI.SetActive(false);
+        _gameElements.SetActive(true);
     }
 
     void Update()
@@ -42,16 +42,16 @@ public class PauseMenuOpener : MonoBehaviour
 
     public void Resume()
     {
-        pauseMenuUI.SetActive(false);
-        gameElements.SetActive(true);
+        _pauseMenuUI.SetActive(false);
+        _gameElements.SetActive(true);
         Time.timeScale = 1f; // Resume game time
         _isPaused = false;
     }
 
     void Pause()
     {
-        pauseMenuUI.SetActive(true);
-        gameElements.SetActive(false);
+        _pauseMenuUI.SetActive(true);
+        _gameElements.SetActive(false);
         Time.timeScale = 0f; // Freeze game time
         _isPaused = true;
         foreach (Selectable button in Selectable.allSelectablesArray)
