@@ -935,6 +935,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "DebugConsoleUpArrow",
+                    "type": "Button",
+                    "id": "220f1118-b980-4a80-a0be-5080e641a0a0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DebugConsoleDownArrow",
+                    "type": "Button",
+                    "id": "e3d3bab7-86a6-4250-9267-ca2553689f5a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -968,6 +986,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "DebugConsoleBackspace",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a7a97522-a052-4691-851e-743d0854a625",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DebugConsoleUpArrow",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "42797db2-d4b2-4bfc-9100-d7b52f42bdf6",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DebugConsoleDownArrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

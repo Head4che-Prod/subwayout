@@ -14,6 +14,10 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
         [SerializeField] TMP_InputField inputField;
         // Needs to be initialized here in order to avoid NullReferenceExceptions when adding commands in other files
         private static readonly Dictionary<string, Action> Commands = new Dictionary<string, Action>();
+        private List<string> _commandHistory;
+        private int _commandHistoryIndex;
+        private string _tempCommand;
+        
         private static bool _isActivated;
         private string _previousInputMap;
         private string _currentText;
@@ -24,6 +28,8 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
         private InputAction _cancelAction;
         private InputAction _submitAction;
         private InputAction _backspaceAction;
+        private InputAction _upAction;
+        private InputAction _downAction;
 
         void Awake()
         {
@@ -51,14 +57,22 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
             _cancelAction = _player.Input.actions["DebugConsoleCancel"];    // Names are distinct as to not interfere with other maps
             _submitAction = _player.Input.actions["DebugConsoleSubmit"];
             _backspaceAction = _player.Input.actions["DebugConsoleBackspace"];
+            _upAction = _player.Input.actions["DebugConsoleUpArrow"];
+            _downAction = _player.Input.actions["DebugConsoleDownArrow"];
             _showConsoleAction.performed += ToggleConsole;
             _focusConsoleAction.performed += FocusOnConsole;
             _submitAction.performed += _ => ExecCommand();
             _cancelAction.performed += _ => FocusOffConsole();
             _backspaceAction.performed += _ => Backspace();
+            _upAction.performed += _ => NavigateUpHistory();
+            _downAction.performed += _ => NavigateDownHistory();
+            
             
             _previousInputMap = _player.Input.currentActionMap.name;
-
+            _commandHistory = new List<string>();
+            _commandHistoryIndex = -1;
+            _tempCommand = "";
+            
             _currentText = "";
         }
 
@@ -76,12 +90,13 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
                 _previousInputMap = _player.Input.currentActionMap.name;
                 _player.InputManager.SetPlayerInputMap("DebugConsole");
                 Keyboard.current.onTextInput += HandleCommandInput;
+                _commandHistoryIndex = -1;
+                _tempCommand = "";
             }
         }
 
         private void FocusOffConsole() 
         {
-            Log("Switching back to " + _previousInputMap);
             _player.InputManager.SetPlayerInputMap(_previousInputMap);
             inputField.text = "";
             _currentText = "";
@@ -109,9 +124,43 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
                 inputField.text = _currentText;
             }
         }
+
+        public void NavigateUpHistory()
+        {
+            if (_commandHistoryIndex < _commandHistory.Count - 1)
+            {
+                if (_commandHistoryIndex == -1)
+                    _tempCommand = _currentText;
+                _commandHistoryIndex++;
+                _currentText = _commandHistory[_commandHistoryIndex];
+                inputField.text = _currentText;
+            }
+        }
+
+        public void NavigateDownHistory()
+        {
+            if (_commandHistoryIndex > 0)
+            {
+                _commandHistoryIndex--;
+                _currentText = _commandHistory[_commandHistoryIndex];
+                inputField.text = _currentText;
+            }
+            else
+            {
+                if (_tempCommand != "")
+                {
+                    _currentText = _tempCommand;
+                    inputField.text = _currentText;
+                    _tempCommand = "";
+                }
+                _commandHistoryIndex = -1;
+            }
+        }
         
         public void ExecCommand()
         {
+            if (_currentText.Trim() != "" && (_commandHistory.Count == 0 || _currentText != _commandHistory[0]))
+                _commandHistory.Insert(0, _currentText);
             Commands.GetValueOrDefault(_currentText, () => LogError("Command doesn't exist"))();
             FocusOffConsole();
         }
