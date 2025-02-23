@@ -568,6 +568,7 @@ GameObject:
   - component: {fileID: 2578371781939902612}
   - component: {fileID: 3146751663887921008}
   - component: {fileID: 311672426789615602}
+  - component: {fileID: 4887536796196509076}
   m_Layer: 0
   m_Name: NetworkPlayerDemo
   m_TagString: Untagged
@@ -749,6 +750,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 6862378571528470838}
   grabPointTransform: {fileID: 5411741163773892280}
+--- !u!114 &4887536796196509076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4957522455835016799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d68bad4891aa43229813e7d76b262810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8897388447206143973
 GameObject:
   m_ObjectHideFlags: 0

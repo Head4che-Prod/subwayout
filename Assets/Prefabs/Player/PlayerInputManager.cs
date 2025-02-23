@@ -10,7 +10,8 @@ namespace Prefabs.Player
         private static HashSet<string> _validInputModes = new HashSet<string>()
         {
             "Gameplay",
-            "Ui"
+            "UI",
+            "DebugConsole"
         };
 
         private PlayerObject _player;

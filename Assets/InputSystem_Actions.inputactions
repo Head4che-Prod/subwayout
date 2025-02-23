@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Debug mode activation",
+                    "name": "ShowConsole",
                     "type": "PassThrough",
                     "id": "8cbf614b-8183-4ffb-abac-db2dd40e6bfc",
                     "expectedControlType": "Key",
@@ -332,7 +332,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Debug mode activation",
+                    "action": "ShowConsole",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -444,7 +444,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Debug mode activation",
+                    "name": "ShowConsole",
                     "type": "PassThrough",
                     "id": "34cdeee2-770b-43b9-99cd-a283a10e6e8c",
                     "expectedControlType": "Key",
@@ -888,7 +888,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Debug mode activation",
+                    "action": "ShowConsole",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -900,6 +900,74 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "ConsoleFocus",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "DebugConsole",
+            "id": "11e3c7ab-6166-4c22-bb89-9e20ea63b41e",
+            "actions": [
+                {
+                    "name": "DebugConsoleSubmit",
+                    "type": "Button",
+                    "id": "25aab812-2b2b-4907-9c35-b68892712dc0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DebugConsoleCancel",
+                    "type": "Button",
+                    "id": "7585a31f-71d9-4992-b444-83cc9f90fb5b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DebugConsoleBackspace",
+                    "type": "Button",
+                    "id": "a21051f1-e5f1-436c-9575-e6b4727a0ede",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3a63034f-23bf-44de-b9ed-15e71eec7570",
+                    "path": "*/{Submit}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR",
+                    "action": "DebugConsoleSubmit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1bd62518-d3dc-4b8f-be2a-c5afe16b15e1",
+                    "path": "*/{Cancel}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR",
+                    "action": "DebugConsoleCancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f4dc5d9d-6743-49bd-88f3-e7333133e330",
+                    "path": "<Keyboard>/backspace",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DebugConsoleBackspace",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
