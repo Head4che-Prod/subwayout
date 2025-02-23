@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace Prefabs.UI.DebugConsole
+namespace Prefabs.Player.PlayerUI.DebugConsole
 {
     public class DebugConsole : MonoBehaviour
     {
@@ -16,6 +16,8 @@ namespace Prefabs.UI.DebugConsole
         [FormerlySerializedAs("InputField")] [SerializeField] Selectable inputField;
         private static Dictionary<string, Action> _commands;
         private static bool _isActivated = false;
+
+        private PlayerObject _player;
 
         void Awake()
         {
@@ -33,8 +35,13 @@ namespace Prefabs.UI.DebugConsole
             gameObject.transform.GetChild(0).gameObject.SetActive(_isActivated);
         }
 
+        public void Start()
+        {
+            _player = GetComponentInParent<PlayerObject>();
+        }
+
         public void focusOnConsole(InputAction.CallbackContext context) {
-            if (context.performed && this.gameObject.activeInHierarchy){
+            if (context.performed && gameObject.activeInHierarchy){
                 inputField.Select();
                 EventSystem.current.GetComponent<PlayerInput>().SwitchCurrentActionMap("Debug");
             }

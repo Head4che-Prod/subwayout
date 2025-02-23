@@ -20,19 +20,19 @@ namespace Prefabs.Player
 
         private void Update()
         {
-            Debug.DrawRay(_player.Camera.transform.position, _player.Camera.transform.forward * reach, Color.blue);
+            Debug.DrawRay(_player.playerCamera.transform.position, _player.playerCamera.transform.forward * reach, Color.blue);
             if (_interactInput.WasPressedThisFrame())
             {
                 if (_objectGrabbable is null) // No item in hand
                 {
-                    if (Physics.Raycast(_player.Camera.transform.position,
-                            _player.Camera.transform.forward, out RaycastHit raycastHit, reach))
+                    if (Physics.Raycast(_player.playerCamera.transform.position,
+                            _player.playerCamera.transform.forward, out RaycastHit raycastHit, reach))
                     {
                         // Debug.Log(raycastHit.collider.gameObject.name);
                         if (raycastHit.transform.TryGetComponent(out ObjectGrabbable objGrabbable) && objGrabbable.Grabbable)
                         {
                             _objectGrabbable = objGrabbable;
-                            _objectGrabbable.Grab(_player.GrabPointTransform, _player.Camera.transform);
+                            _objectGrabbable.Grab(_player.grabPointTransform, _player.playerCamera.transform);
                         }
                     }
                 }

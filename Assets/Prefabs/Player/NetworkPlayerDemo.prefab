@@ -747,8 +747,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfb86c7257924556ac138450d94be05f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Camera: {fileID: 6862378571528470838}
-  GrabPointTransform: {fileID: 5411741163773892280}
+  playerCamera: {fileID: 6862378571528470838}
+  grabPointTransform: {fileID: 5411741163773892280}
 --- !u!1 &8897388447206143973
 GameObject:
   m_ObjectHideFlags: 0

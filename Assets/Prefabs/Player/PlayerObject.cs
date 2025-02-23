@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace Prefabs.Player
 {
@@ -10,8 +11,8 @@ namespace Prefabs.Player
         public PlayerObjectPick ObjectPick {get; private set;}
         public Rigidbody Rigidbody {get; private set;}
         public PlayerInput Input {get; private set;}
-        public Camera Camera;
-        public Transform GrabPointTransform;
+        public Camera playerCamera;
+        public Transform grabPointTransform;
 
         public void Awake()
         {

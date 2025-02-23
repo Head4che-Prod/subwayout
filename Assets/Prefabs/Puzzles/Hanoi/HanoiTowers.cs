@@ -1,5 +1,5 @@
+using Prefabs.Player.PlayerUI.DebugConsole;
 using Prefabs.Puzzles.Hanoi.Debugs;
-using Prefabs.UI.DebugConsole;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;

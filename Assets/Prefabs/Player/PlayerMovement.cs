@@ -32,10 +32,10 @@ namespace Prefabs.Player
 		
 		void Start()
 		{
-			_movementInput = InputSystem.actions.FindAction("Gameplay/Move");
-			_sprintInput = InputSystem.actions.FindAction("Gameplay/Sprint");
 			_player = GetComponent<PlayerObject>();
 			_player.Rigidbody.freezeRotation = true;
+			_movementInput = _player.Input.actions["Move"];
+			_sprintInput = _player.Input.actions["Sprint"];
 		}
     
 		void Update()

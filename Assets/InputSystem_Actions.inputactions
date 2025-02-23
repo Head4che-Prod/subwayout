@@ -40,6 +40,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Debug mode activation",
+                    "type": "PassThrough",
+                    "id": "8cbf614b-8183-4ffb-abac-db2dd40e6bfc",
+                    "expectedControlType": "Key",
+                    "processors": "",
+                    "interactions": "MultiTap(tapCount=5)",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "ConsoleFocus",
+                    "type": "PassThrough",
+                    "id": "66a6f0b9-9042-4e28-af5b-e13bf9a91db2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -304,6 +322,28 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "24e14f75-aad3-4a7c-8bc9-0fc4d9c055a4",
+                    "path": "<Keyboard>/rightShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Debug mode activation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ab8c949e-b3b9-4f1f-925d-52b0516c0959",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "ConsoleFocus",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

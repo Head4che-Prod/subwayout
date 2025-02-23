@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -18,7 +19,13 @@ namespace Prefabs.Player
         {
             _player = GetComponent<PlayerObject>();
         }
-        
-        public static void SetPlayerInputMap(PlayerObject playerObject){}
+
+        public void SetPlayerInputMap(string inputMap)
+        {
+            if (_validInputModes.Contains(inputMap))
+                _player.Input.SwitchCurrentActionMap(inputMap);
+            else 
+                Debug.LogError($"Invalid input map: {inputMap}");
+        }
     }
 }

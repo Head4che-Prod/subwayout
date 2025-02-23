@@ -12,7 +12,7 @@ namespace TMPro.Examples
 
         public FpsCounterAnchorPositions AnchorPosition = FpsCounterAnchorPositions.BottomLeft;
 
-        private const string instructions = "Camera Control - <#ffff00>Shift + RMB\n</color>Zoom - <#ffff00>Mouse wheel.";
+        private const string instructions = "playerCamera Control - <#ffff00>Shift + RMB\n</color>Zoom - <#ffff00>Mouse wheel.";
 
         private TextMeshPro m_TextMeshPro;
         private TextContainer m_textContainer;
