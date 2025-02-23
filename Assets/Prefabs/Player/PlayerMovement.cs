@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace Prefabs.Player
@@ -29,14 +28,14 @@ namespace Prefabs.Player
 		private float _horizontalInput;
 		private float _verticalInput;
 
-		private Rigidbody _rb;
-	
+		private PlayerObject _player;
+		
 		void Start()
 		{
-			_movementInput = InputSystem.actions.FindAction("Player/Move");
-			_sprintInput = InputSystem.actions.FindAction("Player/Sprint");
-			_rb = GetComponent<Rigidbody>();
-			_rb.freezeRotation = true;
+			_movementInput = InputSystem.actions.FindAction("Gameplay/Move");
+			_sprintInput = InputSystem.actions.FindAction("Gameplay/Sprint");
+			_player = GetComponent<PlayerObject>();
+			_player.Rigidbody.freezeRotation = true;
 		}
     
 		void Update()
@@ -48,9 +47,9 @@ namespace Prefabs.Player
 			StateHandler();
 	    
 			if (_grounded)
-				_rb.linearDamping = groundDrag;
+				_player.Rigidbody.linearDamping = groundDrag;
 			else
-				_rb.linearDamping = 0;
+				_player.Rigidbody.linearDamping = 0;
 		}
 
 		void FixedUpdate()
@@ -60,11 +59,6 @@ namespace Prefabs.Player
 
 		private void KeyboardInput()
 		{
-			if (EventSystem.current.currentSelectedGameObject != null && 
-				EventSystem.current.currentSelectedGameObject.GetComponent<TMPro.TMP_InputField>() != null)
-			{
-				return;
-			}
 			Vector2 moveDirection = _movementInput.ReadValue<Vector2>();
 			_horizontalInput = moveDirection.x;
 			_verticalInput = moveDirection.y;
@@ -76,20 +70,20 @@ namespace Prefabs.Player
 	    
 			// Ground
 			if (_grounded)
-				_rb.AddForce(_moveDirection.normalized * (_moveSpeed * 10f), ForceMode.Force);
+				_player.Rigidbody.AddForce(_moveDirection.normalized * (_moveSpeed * 10f), ForceMode.Force);
 			// Air
 			else if (!_grounded)
-				_rb.AddForce(_moveDirection.normalized * (_moveSpeed * 10f * airMultiplier), ForceMode.Force);
+				_player.Rigidbody.AddForce(_moveDirection.normalized * (_moveSpeed * 10f * airMultiplier), ForceMode.Force);
 		}
 
 		private void SpeedCtrl()
 		{
-			Vector3 flatVelocity = new Vector3(_rb.linearVelocity.x, 0f, _rb.linearVelocity.z);
+			Vector3 flatVelocity = new Vector3(_player.Rigidbody.linearVelocity.x, 0f, _player.Rigidbody.linearVelocity.z);
 
 			if (flatVelocity.magnitude > _moveSpeed)
 			{
 				Vector3 limitedVelocity = flatVelocity.normalized * _moveSpeed;
-				_rb.linearVelocity = new Vector3(limitedVelocity.x, _rb.linearVelocity.y, limitedVelocity.z);
+				_player.Rigidbody.linearVelocity = new Vector3(limitedVelocity.x, _player.Rigidbody.linearVelocity.y, limitedVelocity.z);
 			}
 		}
 

@@ -20,7 +20,7 @@ public class PlayerCam : NetworkBehaviour
     
     void Update()
     {
-        Vector2 lookVector2 = InputSystem.actions.FindAction("Player/Look").ReadValue<Vector2>();
+        Vector2 lookVector2 = InputSystem.actions.FindAction("Gameplay/Look").ReadValue<Vector2>();
         float lookX = lookVector2.x * Time.deltaTime * sensX;
         float lookY = lookVector2.y * Time.deltaTime * sensY;
 		
