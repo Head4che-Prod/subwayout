@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Prefabs.UI.PauseMenu
 {
-    public class PauseMenuOpener : MonoBehaviour
+    public class PauseMenuOpener : NetworkBehaviour
     {
         private GameObject _pauseMenuUI;
         private GameObject _gameElements;
