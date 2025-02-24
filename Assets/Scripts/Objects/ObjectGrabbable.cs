@@ -17,7 +17,7 @@ namespace Objects
     public class ObjectGrabbable : ObjectInteractive
     {
         [Header("Physics")]
-        [FormerlySerializedAs("lerpSpeed")] [SerializeField] private float moveSpeed = 10f;
+        [FormerlySerializedAs("lerpSpeed")] [SerializeField] private float moveSpeed = 2.0f;
         [SerializeField] private bool affectedByGravity = true;
         protected Rigidbody Rb { get; private set; }
         private Transform GrabPointTransform { get; set; }
@@ -64,7 +64,7 @@ namespace Objects
             if (GrabPointTransform)
             {
                 Vector3 force = CalculateMovementForce();
-                MoveGrabbedObjectServerRpc(force * 2.0f); // todo: Speed need to be modified!
+                MoveGrabbedObjectServerRpc(force * moveSpeed); // todo: Speed need to be modified!
                 // Rb.linearVelocity = force * moveSpeed;
                 // Rb.MovePosition(_grabPointTransform.position);
             }
