@@ -17,8 +17,9 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
         private List<string> _commandHistory;
         private int _commandHistoryIndex;
         private string _tempCommand;
-        
-        private static bool _isActivated;
+        private bool _ignoreNextInput = false;
+
+        public static bool IsActivated { get; private set; }
         private string _previousInputMap;
         private string _currentText;
 
@@ -39,19 +40,19 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
             {
                 Singleton = this;
 
-                Commands.Add("sayHello", () => Log("Hello, world!"));
-                Commands.Add("inputMode", () => Log(_player.Input.currentActionMap.name));
-                Commands.Add("help", () => Log("Available commands:\n - " + String.Join("\n - ", Commands.Keys)));
+                Commands["sayHello"] = () => Log("Hello, world!");
+                Commands["inputMode"] = () => Log(_player.Input.currentActionMap.name);
+                Commands["help"] = () => Log("Available commands:\n - " + String.Join("\n - ", Commands.Keys));
             }
 
-            gameObject.transform.GetChild(0).gameObject.SetActive(_isActivated);
+            gameObject.transform.GetChild(0).gameObject.SetActive(IsActivated);
         }
 
         public void Start()
         {
             _player = GetComponentInParent<PlayerObject>();
-            _isActivated = false;
-            
+            IsActivated = false;
+
             _showConsoleAction = _player.Input.actions["ShowConsole"];
             _focusConsoleAction = _player.Input.actions["ConsoleFocus"];
             _cancelAction = _player.Input.actions["DebugConsoleCancel"];    // Names are distinct as to not interfere with other maps
@@ -66,36 +67,37 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
             _backspaceAction.performed += _ => Backspace();
             _upAction.performed += _ => NavigateUpHistory();
             _downAction.performed += _ => NavigateDownHistory();
-            
-            
+
+
             _previousInputMap = _player.Input.currentActionMap.name;
             _commandHistory = new List<string>();
             _commandHistoryIndex = -1;
             _tempCommand = "";
-            
+
             _currentText = "";
         }
 
         private void ToggleConsole(InputAction.CallbackContext ctx)
         {
-            _isActivated = !_isActivated;   
-            gameObject.transform.GetChild(0).gameObject.SetActive(_isActivated);
+            IsActivated = !IsActivated;
+            gameObject.transform.GetChild(0).gameObject.SetActive(IsActivated);
         }
 
         private void FocusOnConsole(InputAction.CallbackContext context)
         {
-            if (_isActivated)
+            if (IsActivated)
             {
-                inputField.Select();
                 _previousInputMap = _player.Input.currentActionMap.name;
                 _player.InputManager.SetPlayerInputMap("DebugConsole");
                 Keyboard.current.onTextInput += HandleCommandInput;
                 _commandHistoryIndex = -1;
                 _tempCommand = "";
+                inputField.Select();
+                _ignoreNextInput = true;
             }
         }
 
-        private void FocusOffConsole() 
+        private void FocusOffConsole()
         {
             _player.InputManager.SetPlayerInputMap(_previousInputMap);
             inputField.text = "";
@@ -106,7 +108,7 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
 
         private void HandleCommandInput(char c)
         {
-            if (Char.IsLetter(c) || c == ' ')
+            if ((Char.IsLetter(c) || c == ' ') && !_ignoreNextInput)
             {
                 if (!(Keyboard.current.shiftKey.isPressed ^
                       Keyboard.current.capsLockKey.isPressed)) // If caps lock XNOR shift
@@ -114,6 +116,8 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
                 _currentText += c;
                 inputField.text = _currentText;
             }
+
+            _ignoreNextInput = false;
         }
 
         private void Backspace()
@@ -156,13 +160,16 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
                 _commandHistoryIndex = -1;
             }
         }
-        
+
         public void ExecCommand()
         {
-            if (_currentText.Trim() != "" && (_commandHistory.Count == 0 || _currentText != _commandHistory[0]))
-                _commandHistory.Insert(0, _currentText);
-            Commands.GetValueOrDefault(_currentText, () => LogError("Command doesn't exist"))();
-            FocusOffConsole();
+            if (inputField.isFocused)
+            {
+                if (_currentText.Trim() != "" && (_commandHistory.Count == 0 || _currentText != _commandHistory[0]))
+                    _commandHistory.Insert(0, _currentText);
+                Commands.GetValueOrDefault(_currentText, () => LogError("Command doesn't exist"))();
+                FocusOffConsole();
+            }
         }
 
         public static void AddCommand(string name, Action func)
