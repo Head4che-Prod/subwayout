@@ -87,6 +87,18 @@ namespace Objects
         /// <param name="playerCamera"><see cref="Transform"/> of the player's camera.</param>
         public virtual void Grab(Transform objectGrabPointTransform, Transform playerCamera)
         {
+            if (objectGrabPointTransform is null)
+            {
+                Debug.LogError("objectGrabPointTransform is null");
+                return;
+            }
+
+            if (playerCamera is null)
+            {
+                Debug.LogError("playerCamera is null");
+                return;
+            }
+            
             // Debug.Log($"Owner {OwnerClientId} attempted grabbing {name}");
             GrabPointTransform = objectGrabPointTransform;
             SetGrabbableServerRpc(false);
@@ -111,16 +123,21 @@ namespace Objects
         /// <param name="placeholder"><see cref="ObjectPlaceholder"/> of the new location of the ObjectActionable</param>
         public void ToActionable(ObjectPlaceholder placeholder)
         {
-            if (placeholder.Free) ToActionableServerRpc(placeholder.transform);
+            if (placeholder.Free) ToActionableServerRpc(
+                placeholder.transform.position,
+                placeholder.transform.rotation,
+                placeholder.transform.localScale
+                );
         }
 
         /// <summary>
         /// Convert to ObjectActionable and destroy the current component by the server.
         /// </summary>
-        /// <param name="newLocation"><see cref="Transform"/> of the new location of the ObjectActionable</param>
-        /// <param name="type"></param>
+        /// <param name="position"><see cref="Vector3"/> position of <see cref="ObjectPlaceholder"/>'s <see cref="Transform"/></param>
+        /// <param name="rotation"><see cref="Quaternion"/> rotation of <see cref="ObjectPlaceholder"/>'s <see cref="Transform"/></param>
+        /// <param name="localScale"><see cref="Vector3"/> scale of <see cref="ObjectPlaceholder"/>'s <see cref="Transform"/></param>
         [ServerRpc(RequireOwnership = false)]
-        private void ToActionableServerRpc(Transform newLocation)
+        private void ToActionableServerRpc(Vector3 position, Quaternion rotation, Vector3 localScale)
         {
             ObjectActionable newActionable = null;
             switch (ConvertActionableType)
@@ -146,9 +163,9 @@ namespace Objects
                 return;
             
             // Edit properties of newActionable;
-            newActionable.transform.position = newLocation.position;
-            newActionable.transform.rotation = newLocation.rotation;
-            newActionable.transform.localScale  = newLocation.localScale;
+            newActionable.transform.position = position;
+            newActionable.transform.rotation = rotation;
+            newActionable.transform.localScale = localScale;
             
             Destroy(gameObject.GetComponent<ObjectGrabbable>());
         }
