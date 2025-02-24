@@ -1,3 +1,4 @@
+using Prefabs.Player;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,25 +11,30 @@ public class PlayerCam : NetworkBehaviour
 
     public Transform orientation;
 
-    float xRotation;
-    float yRotation;
+    private float _xRotation;
+    private float _yRotation;
+    
+    private InputAction _lookAction;
+    private PlayerObject _player;
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        _player = GetComponentInParent<PlayerObject>();
+        _lookAction = _player.Input.actions["Look"];
     }
     
     void Update()
     {
-        Vector2 lookVector2 = InputSystem.actions.FindAction("Player/Look").ReadValue<Vector2>();
+        Vector2 lookVector2 = _lookAction.ReadValue<Vector2>();
         float lookX = lookVector2.x * Time.deltaTime * sensX;
         float lookY = lookVector2.y * Time.deltaTime * sensY;
 		
-        yRotation += lookX;
-        xRotation -= lookY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        _yRotation += lookX;
+        _xRotation -= lookY;
+        _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
 
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
-        orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+        transform.rotation = Quaternion.Euler(_xRotation, _yRotation, 0);
+        orientation.rotation = Quaternion.Euler(0, _yRotation, 0);
     }
 }

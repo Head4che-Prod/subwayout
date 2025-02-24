@@ -2,7 +2,7 @@
     "name": "InputSystem_Actions",
     "maps": [
         {
-            "name": "Player",
+            "name": "Gameplay",
             "id": "258e4a2f-32b8-4b1c-a85a-1b8e10458f87",
             "actions": [
                 {
@@ -33,42 +33,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Crouch",
-                    "type": "Button",
-                    "id": "ea502717-e94c-4b72-8c5c-73f282214e66",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Jump",
-                    "type": "Button",
-                    "id": "2719c937-d7fa-4ca6-b774-910936becc32",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Previous",
-                    "type": "Button",
-                    "id": "72d1257a-ee88-4818-b634-9164dab46a23",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Next",
-                    "type": "Button",
-                    "id": "bf40947c-ae70-49a1-b4ea-781fbd8acb0d",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Sprint",
                     "type": "Button",
                     "id": "907f7f8a-3bde-4d29-a9ca-c8a39147f20d",
@@ -76,6 +40,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ShowConsole",
+                    "type": "PassThrough",
+                    "id": "8cbf614b-8183-4ffb-abac-db2dd40e6bfc",
+                    "expectedControlType": "Key",
+                    "processors": "",
+                    "interactions": "MultiTap(tapCount=5)",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "ConsoleFocus",
+                    "type": "PassThrough",
+                    "id": "66a6f0b9-9042-4e28-af5b-e13bf9a91db2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -312,28 +294,6 @@
                 },
                 {
                     "name": "",
-                    "id": "253bd9fd-a069-4557-a3fa-8ad21b66e9b9",
-                    "path": "<Keyboard>/2",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Next",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "36637927-6b4c-45d4-bfba-343587582d32",
-                    "path": "<Gamepad>/dpad/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Next",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "a24389ef-e006-410d-8001-9a9a011f798c",
                     "path": "<Keyboard>/leftShift",
                     "interactions": "",
@@ -367,78 +327,23 @@
                 },
                 {
                     "name": "",
-                    "id": "f2eea573-0737-44ed-8dc9-2f1c5abd0d88",
-                    "path": "<Keyboard>/space",
+                    "id": "24e14f75-aad3-4a7c-8bc9-0fc4d9c055a4",
+                    "path": "<Keyboard>/rightShift",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Jump",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "ShowConsole",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "dabb888a-d67c-4085-a53b-f2150ce614cc",
-                    "path": "<Gamepad>/buttonSouth",
+                    "id": "ab8c949e-b3b9-4f1f-925d-52b0516c0959",
+                    "path": "<Keyboard>/t",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8e91dacd-fac2-4a7a-adc8-39a1c802f43b",
-                    "path": "<XRController>/secondaryButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "XR",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "34c99502-9904-4d22-9afe-d204359eb224",
-                    "path": "<Keyboard>/1",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Previous",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0335d4db-5d24-404d-9d5f-a38f947ddcff",
-                    "path": "<Gamepad>/dpad/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Previous",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e2345420-f159-4161-93a1-09377688de00",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Crouch",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1161b69b-93bd-46ef-843e-400ef37bf76e",
-                    "path": "<Keyboard>/c",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Crouch",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "ConsoleFocus",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -537,6 +442,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ShowConsole",
+                    "type": "PassThrough",
+                    "id": "34cdeee2-770b-43b9-99cd-a283a10e6e8c",
+                    "expectedControlType": "Key",
+                    "processors": "",
+                    "interactions": "MultiTap(tapCount=5)",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "ConsoleFocus",
+                    "type": "PassThrough",
+                    "id": "f81cfb75-35c0-452a-9f7a-b6795cbb3f3c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -955,6 +878,136 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceOrientation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2c20bedb-2075-471f-a60e-bfa95c72995b",
+                    "path": "<Keyboard>/rightShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "ShowConsole",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7a60cbec-73cc-4bb3-99f2-d45396be5454",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "ConsoleFocus",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "DebugConsole",
+            "id": "11e3c7ab-6166-4c22-bb89-9e20ea63b41e",
+            "actions": [
+                {
+                    "name": "DebugConsoleSubmit",
+                    "type": "Button",
+                    "id": "25aab812-2b2b-4907-9c35-b68892712dc0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DebugConsoleCancel",
+                    "type": "Button",
+                    "id": "7585a31f-71d9-4992-b444-83cc9f90fb5b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DebugConsoleBackspace",
+                    "type": "Button",
+                    "id": "a21051f1-e5f1-436c-9575-e6b4727a0ede",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DebugConsoleUpArrow",
+                    "type": "Button",
+                    "id": "220f1118-b980-4a80-a0be-5080e641a0a0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DebugConsoleDownArrow",
+                    "type": "Button",
+                    "id": "e3d3bab7-86a6-4250-9267-ca2553689f5a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3a63034f-23bf-44de-b9ed-15e71eec7570",
+                    "path": "*/{Submit}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR",
+                    "action": "DebugConsoleSubmit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1bd62518-d3dc-4b8f-be2a-c5afe16b15e1",
+                    "path": "*/{Cancel}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR",
+                    "action": "DebugConsoleCancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f4dc5d9d-6743-49bd-88f3-e7333133e330",
+                    "path": "<Keyboard>/backspace",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DebugConsoleBackspace",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a7a97522-a052-4691-851e-743d0854a625",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DebugConsoleUpArrow",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "42797db2-d4b2-4bfc-9100-d7b52f42bdf6",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DebugConsoleDownArrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
