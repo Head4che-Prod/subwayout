@@ -19,7 +19,6 @@ namespace Objects
     /// <summary>
     /// Allow players to action an object.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class)]
     public abstract class ObjectActionable : ObjectInteractive
     {
         public abstract ActionableType ActionableType { get; }
