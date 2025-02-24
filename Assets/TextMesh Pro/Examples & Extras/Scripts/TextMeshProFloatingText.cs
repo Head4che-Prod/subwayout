@@ -143,7 +143,7 @@ namespace TMPro.Examples
                 // Move the floating text upward each update
                 m_floatingText_Transform.position += new Vector3(0, starting_Count * Time.deltaTime, 0);
 
-                // Align floating text perpendicular to Camera.
+                // Align floating text perpendicular to playerCamera.
                 if (!lastPOS.Compare(m_cameraTransform.position, 1000) || !lastRotation.Compare(m_cameraTransform.rotation, 1000))
                 {
                     lastPOS = m_cameraTransform.position;
@@ -198,7 +198,7 @@ namespace TMPro.Examples
                 // Move the floating text upward each update
                 m_floatingText_Transform.position += new Vector3(0, starting_Count * Time.deltaTime, 0);
 
-                // Align floating text perpendicular to Camera.
+                // Align floating text perpendicular to playerCamera.
                 if (!lastPOS.Compare(m_cameraTransform.position, 1000) || !lastRotation.Compare(m_cameraTransform.rotation, 1000))
                 {
                     lastPOS = m_cameraTransform.position;
