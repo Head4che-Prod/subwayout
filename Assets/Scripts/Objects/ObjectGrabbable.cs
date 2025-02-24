@@ -99,6 +99,34 @@ namespace Objects
             Rb.useGravity = affectedByGravity; // For object that may not be affected by gravity in puzzles in the future
             HolderCameraTransform = null;
         }
-    
+
+        /// <summary>
+        /// Convert to ObjectActionable and destroy the current component.
+        /// </summary>
+        /// <param name="newLocation">Transform of the new location of the ObjectActionable</param>
+        /// <returns>ObjectActionable</returns>
+        public ObjectActionable ToActionable(Transform newLocation)
+        {
+            return ToActionableServerRpc(newLocation);
+        }
+        
+        /// <summary>
+        /// Convert to ObjectActionable and destroy the current component by the server.
+        /// </summary>
+        /// <param name="newLocation">Transform of the new location of the ObjectActionable</param>
+        /// <returns>ObjectActionable</returns>
+        [ServerRpc(RequireOwnership = false)]
+        private ObjectActionable ToActionableServerRpc(Transform newLocation)
+        {
+            ObjectActionable newActionable = gameObject.AddComponent<ObjectActionable>();
+            
+            // Edit properties of newActionable;
+            newActionable.transform.position = newLocation.position;
+            newActionable.transform.rotation = newLocation.rotation;
+            newActionable.transform.localScale  = newLocation.localScale;
+            
+            Destroy(gameObject.GetComponent<ObjectGrabbable>());
+            return newActionable;
+        }
     }
 }
