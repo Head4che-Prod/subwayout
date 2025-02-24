@@ -1,6 +1,5 @@
-using System;
+using Objects;
 using Prefabs.Puzzles.Hanoi.Debugs;
-using Unity.Netcode;
 using UnityEngine;
 
 namespace Prefabs.Puzzles.Hanoi

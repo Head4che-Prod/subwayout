@@ -1,4 +1,5 @@
 ﻿using System;
+using Objects;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -40,7 +41,7 @@ namespace Prefabs.Player
             {
                 if (context.action.id == _actionInput.id && interactive is ObjectActionable objActionable) 
                 {   
-                    objActionable.Action();
+                    objActionable.HandleAction();
                 }
                 else if (
                     context.action.id == _grabInput.id &&
