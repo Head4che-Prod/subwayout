@@ -109,11 +109,9 @@ namespace Objects
         /// Convert to <see cref="ObjectActionable"/> and destroy the current component.
         /// </summary>
         /// <param name="placeholder"><see cref="ObjectPlaceholder"/> of the new location of the ObjectActionable</param>
-        /// <returns><see cref="ObjectActionable"/></returns>
-        [CanBeNull]
-        public ObjectActionable ToActionable(ObjectPlaceholder placeholder)
+        public void ToActionable(ObjectPlaceholder placeholder)
         {
-            return placeholder.Free ? ToActionableServerRpc(placeholder.transform) : null;
+            if (placeholder.Free) ToActionableServerRpc(placeholder.transform);
         }
 
         /// <summary>
@@ -121,10 +119,8 @@ namespace Objects
         /// </summary>
         /// <param name="newLocation"><see cref="Transform"/> of the new location of the ObjectActionable</param>
         /// <param name="type"></param>
-        /// <returns><see cref="ObjectActionable"/></returns>
         [ServerRpc(RequireOwnership = false)]
-        [CanBeNull]
-        private ObjectActionable ToActionableServerRpc(Transform newLocation)
+        private void ToActionableServerRpc(Transform newLocation)
         {
             ObjectActionable newActionable = null;
             switch (ConvertActionableType)
@@ -147,7 +143,7 @@ namespace Objects
             }
 
             if (newActionable is null)
-                return null;
+                return;
             
             // Edit properties of newActionable;
             newActionable.transform.position = newLocation.position;
@@ -155,7 +151,6 @@ namespace Objects
             newActionable.transform.localScale  = newLocation.localScale;
             
             Destroy(gameObject.GetComponent<ObjectGrabbable>());
-            return newActionable;
         }
         
     }
