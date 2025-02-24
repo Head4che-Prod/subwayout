@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using Objects.Actionables;
 using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace Objects
     [RequireComponent(typeof(NetworkObject))]
     public class ObjectGrabbable : ObjectInteractive
     {
+        [Header("Physics")]
         [FormerlySerializedAs("lerpSpeed")] [SerializeField] private float moveSpeed = 10f;
         [SerializeField] private bool affectedByGravity = true;
         protected Rigidbody Rb { get; private set; }
@@ -23,6 +25,9 @@ namespace Objects
     
         private Vector3 GrabPointPosition => GrabPointTransform.position;
         protected NetworkVariable<bool> IsGrabbable = new (true);
+        
+        // Used for potential convert to actionable.
+        [Header("Actionable")] public ActionableType? ConvertActionableType;
 
         public virtual bool Grabbable   // This can be overridden
         {
@@ -45,7 +50,7 @@ namespace Objects
             Rb.interpolation = RigidbodyInterpolation.Extrapolate;
         }
         
-        /// <returns>Vector3 of the difference between player's "grab point" and the current grabbed object positions.</returns>
+        /// <returns><see cref="Vector3"/> of the difference between player's <see cref="GrabPointPosition"/> and the current grabbed object positions.</returns>
         public virtual Vector3 CalculateMovementForce()
         {
             return new Vector3(
@@ -78,8 +83,8 @@ namespace Objects
         /// <summary>
         /// Make players grab the targeted object.
         /// </summary>
-        /// <param name="objectGrabPointTransform">Transform of the player's "grab point".</param>
-        /// <param name="playerCamera">Transform of the player's camera.</param>
+        /// <param name="objectGrabPointTransform"><see cref="Transform"/> of the player's "grab point".</param>
+        /// <param name="playerCamera"><see cref="Transform"/> of the player's camera.</param>
         public virtual void Grab(Transform objectGrabPointTransform, Transform playerCamera)
         {
             // Debug.Log($"Owner {OwnerClientId} attempted grabbing {name}");
@@ -101,24 +106,48 @@ namespace Objects
         }
 
         /// <summary>
-        /// Convert to ObjectActionable and destroy the current component.
+        /// Convert to <see cref="ObjectActionable"/> and destroy the current component.
         /// </summary>
-        /// <param name="newLocation">Transform of the new location of the ObjectActionable</param>
-        /// <returns>ObjectActionable</returns>
-        public ObjectActionable ToActionable(Transform newLocation)
+        /// <param name="placeholder"><see cref="ObjectPlaceholder"/> of the new location of the ObjectActionable</param>
+        /// <returns><see cref="ObjectActionable"/></returns>
+        [CanBeNull]
+        public ObjectActionable ToActionable(ObjectPlaceholder placeholder)
         {
-            return ToActionableServerRpc(newLocation);
+            return placeholder.Free ? ToActionableServerRpc(placeholder.transform) : null;
         }
-        
+
         /// <summary>
         /// Convert to ObjectActionable and destroy the current component by the server.
         /// </summary>
-        /// <param name="newLocation">Transform of the new location of the ObjectActionable</param>
-        /// <returns>ObjectActionable</returns>
+        /// <param name="newLocation"><see cref="Transform"/> of the new location of the ObjectActionable</param>
+        /// <param name="type"></param>
+        /// <returns><see cref="ObjectActionable"/></returns>
         [ServerRpc(RequireOwnership = false)]
+        [CanBeNull]
         private ObjectActionable ToActionableServerRpc(Transform newLocation)
         {
-            ObjectActionable newActionable = gameObject.AddComponent<ObjectActionable>();
+            ObjectActionable newActionable = null;
+            switch (ConvertActionableType)
+            {
+                case ActionableType.EmergencyTrigger:
+                    newActionable = gameObject.AddComponent<ActionableEmergencyTrigger>();
+                    break;
+                case ActionableType.Backpack:
+                    newActionable = gameObject.AddComponent<ActionableEmergencyTrigger>();
+                    break;
+                case ActionableType.MetroDoors:
+                    newActionable = gameObject.AddComponent<ActionableEmergencyTrigger>();
+                    break;
+                case ActionableType.Trapdoor:
+                    newActionable = gameObject.AddComponent<ActionableEmergencyTrigger>();
+                    break;
+                case ActionableType.AdvertisingDisplay:
+                    newActionable = gameObject.AddComponent<ActionableEmergencyTrigger>();
+                    break;
+            }
+
+            if (newActionable is null)
+                return null;
             
             // Edit properties of newActionable;
             newActionable.transform.position = newLocation.position;
@@ -128,5 +157,6 @@ namespace Objects
             Destroy(gameObject.GetComponent<ObjectGrabbable>());
             return newActionable;
         }
+        
     }
 }

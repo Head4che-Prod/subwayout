@@ -7,6 +7,5 @@ namespace Objects
     /// </summary>
     public abstract class ObjectInteractive : NetworkBehaviour
     {
-    
     }
 }

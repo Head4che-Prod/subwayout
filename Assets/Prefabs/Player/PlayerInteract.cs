@@ -28,29 +28,29 @@ namespace Prefabs.Player
             _grabInput.canceled += HandleRelease;
         }
         
+        /// <summary>
+        /// This method handle button press.
+        /// </summary>
+        /// <param name="context"><see cref="InputAction"/>'s <see cref="InputAction.CallbackContext"/> of the press</param>
         private void HandlePress(InputAction.CallbackContext context)
         {
             Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * reach, Color.blue);
-            if (
-                Physics.Raycast(
-                    playerCamera.transform.position,
-                    playerCamera.transform.forward,
-                    out RaycastHit raycastHit, reach) &&
-                raycastHit.transform.TryGetComponent(out ObjectInteractive interactive)
-            )
+            RaycastHit[] hits = new RaycastHit[2];
+            Physics.RaycastNonAlloc(playerCamera.transform.position, playerCamera.transform.forward, hits, reach);
+            
+            if (hits[0].transform.TryGetComponent(out ObjectInteractive interactive))
             {
+                // Action an object
                 if (context.action.id == _actionInput.id && interactive is ObjectActionable objActionable) 
                 {   
                     objActionable.HandleAction();
                 }
-                else if (
-                    context.action.id == _grabInput.id &&
-                    interactive is ObjectGrabbable objGrabbable &&
-                    objGrabbable.Grabbable &&
-                    _grabbedObject is null
-                )
+                
+                // Grab an object
+                else if (context.action.id == _grabInput.id &&
+                         interactive is ObjectGrabbable { Grabbable: true } objGrabbable &&
+                         _grabbedObject is null)
                 {
-                    Debug.Log("Grab");
                     _grabbedObject = objGrabbable;
                     _grabbedObject.Grab(objectGrabPointTransform, playerCamera.transform);
                     return;
@@ -59,15 +59,34 @@ namespace Prefabs.Player
             
             if (_grabbedObject is not null && context.action.id == _grabInput.id)
             {
-                Debug.Log("Release");
-                _grabbedObject.Drop();
-                _grabbedObject = null;
+                // Place an object
+                if (
+                    hits.Length >= 2 && 
+                    hits[1].transform.TryGetComponent(out ObjectPlaceholder placeholder) &&
+                    placeholder.Free &&
+                    _grabbedObject.ConvertActionableType == placeholder.actionableType
+                )
+                {
+                    _grabbedObject.ToActionable(placeholder);
+                    _grabbedObject = null;
+                }
+            
+                // Drop an object
+                else
+                {
+                    _grabbedObject.Drop();
+                    _grabbedObject = null;
+                }
+                
             }
         }
 
+        /// <summary>
+        /// This method handle button release.
+        /// </summary>
+        /// <param name="context"><see cref="InputAction"/>'s <see cref="InputAction.CallbackContext"/> of the release</param>
         private void HandleRelease(InputAction.CallbackContext context)
         {
-            
         }
     }
 }
