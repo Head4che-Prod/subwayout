@@ -47,7 +47,7 @@ namespace TMPro.Examples
 
 
         private const string event_SmoothingValue = "Slider - Smoothing Value";
-        private const string event_FollowDistance = "Slider - Camera Zoom";
+        private const string event_FollowDistance = "Slider - playerCamera Zoom";
 
 
         void Awake()
@@ -71,7 +71,7 @@ namespace TMPro.Examples
             if (CameraTarget == null)
             {
                 // If we don't have a target (assigned by the player, create a dummy in the center of the scene).
-                dummyTarget = new GameObject("Camera Target").transform;
+                dummyTarget = new GameObject("playerCamera Target").transform;
                 CameraTarget = dummyTarget;
             }
         }
@@ -95,7 +95,7 @@ namespace TMPro.Examples
                 }
                 else
                 {
-                    // Free Camera implementation
+                    // Free playerCamera implementation
                 }
 
                 if (MovementSmoothing == true)
@@ -223,8 +223,8 @@ namespace TMPro.Examples
                 {
                     if (dummyTarget == null)
                     {
-                        // We need a Dummy Target to anchor the Camera
-                        dummyTarget = new GameObject("Camera Target").transform;
+                        // We need a Dummy Target to anchor the playerCamera
+                        dummyTarget = new GameObject("playerCamera Target").transform;
                         dummyTarget.position = CameraTarget.position;
                         dummyTarget.rotation = CameraTarget.rotation;
                         CameraTarget = dummyTarget;

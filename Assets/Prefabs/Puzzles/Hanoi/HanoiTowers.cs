@@ -1,4 +1,5 @@
-using System;
+using Prefabs.Player.PlayerUI.DebugConsole;
+using Prefabs.Puzzles.Hanoi.Debugs;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,6 +9,7 @@ namespace Prefabs.Puzzles.Hanoi
     public class HanoiTowers : MonoBehaviour        // Only one should exist AT ALL TIMES
     {
         public static HanoiTowers Instance { get; private set; }
+        public bool IsInDebugMode { get; private set; }
         
         [Header("Balls")] [SerializeField] private GameObject bottomBall;
         [SerializeField] private GameObject middleBall;
@@ -43,6 +45,13 @@ namespace Prefabs.Puzzles.Hanoi
         private float ti;
         private bool _gameWon;
 
+        public void ToggleDebug()
+        {
+            IsInDebugMode = !IsInDebugMode;
+            MovementVector.Instance.enabled = IsInDebugMode;
+            DebugConsole.Singleton.Log($"Hanoi debug mode {(IsInDebugMode ? "activated" : "deactivated")}.");
+        }
+        
         private void Awake()
         {
             BallEnterBoxEvent = new UnityEvent<GameObject, HanoiCollider>(); // Needs to be initialized first as others depend on it
@@ -84,6 +93,9 @@ namespace Prefabs.Puzzles.Hanoi
             HanoiCollider.ColliderGrid[0, 0].ContainedBall = _bBall;
             HanoiCollider.ColliderGrid[0, 1].ContainedBall = _mBall;
             HanoiCollider.ColliderGrid[0, 2].ContainedBall = _tBall;
+
+            IsInDebugMode = false;
+            DebugConsole.AddCommand("hanoiToggleDebug", ToggleDebug);
         }
 
         private void FixedUpdate() {
