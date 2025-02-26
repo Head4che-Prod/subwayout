@@ -1,33 +1,22 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
-public class DynamicButton : MonoBehaviour, IPointerEnterHandler, IDeselectHandler, ISelectHandler
+public class DynamicButton : MonoBehaviour
 {
-    private Selectable selectable;
-	private GameObject childToAppear; // The child GameObject to toggle
+	private GameObject _childToAppear; // The child GameObject to toggle
     
 	private void Awake()
     {
         // Automatically retrieve the Selectable component (e.g., Button, Toggle) attached to the same GameObject
-        selectable = GetComponent<Selectable>();
-		childToAppear = transform.Find("AppearOnSelect").gameObject;
+		_childToAppear = transform.Find("AppearOnSelect").gameObject;
 	}
 
-	public void OnPointerEnter(PointerEventData eventData)
-	{
-		selectable.Select();
-	}
-
-	public void OnDeselect(BaseEventData eventData)
+	public void Select()
     {
-		childToAppear.SetActive(false);
+		_childToAppear.SetActive(true);
     }
 
-    public void OnSelect(BaseEventData eventData)
+    public void Deselect()
     {
-		childToAppear.SetActive(true);
+		_childToAppear.SetActive(false);
     }
 }
