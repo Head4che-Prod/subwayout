@@ -1,5 +1,5 @@
 using JetBrains.Annotations;
-using Objects.Actionables;
+using Prefabs.Player;
 using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEngine;
@@ -20,14 +20,12 @@ namespace Objects
         [FormerlySerializedAs("lerpSpeed")] [SerializeField] private float moveSpeed = 2.0f;
         [SerializeField] private bool affectedByGravity = true;
         protected Rigidbody Rb { get; private set; }
-        private Transform GrabPointTransform { get; set; }
-        [CanBeNull] protected Transform HolderCameraTransform { get; private set; }
+        
+        public PlayerObject Owner { get; private set; }
     
-        private Vector3 GrabPointPosition => GrabPointTransform.position;
+        private Vector3 GrabPointPosition => Owner.grabPointTransform.position;
         protected NetworkVariable<bool> IsGrabbable = new (true);
         
-        // Used for potential convert to actionable.
-        [Header("Actionable")] public ActionableType? ConvertActionableType;
 
         public virtual bool Grabbable   // This can be overridden
         {
@@ -61,7 +59,7 @@ namespace Objects
     
         private void FixedUpdate()
         {
-            if (GrabPointTransform)
+            if (Owner)
             {
                 Vector3 force = CalculateMovementForce();
                 MoveGrabbedObjectServerRpc(force * moveSpeed); // todo: Speed need to be modified!
@@ -83,27 +81,25 @@ namespace Objects
         /// <summary>
         /// Make players grab the targeted object.
         /// </summary>
-        /// <param name="objectGrabPointTransform"><see cref="Transform"/> of the player's "grab point".</param>
-        /// <param name="playerCamera"><see cref="Transform"/> of the player's camera.</param>
-        public virtual void Grab(Transform objectGrabPointTransform, Transform playerCamera)
+        /// <param name="player"><see cref="PlayerObject"/> holding the item".</param>
+        public virtual void Grab(PlayerObject player)
         {
-            if (objectGrabPointTransform is null)
+            Owner = player;
+            if (Owner.grabPointTransform is null)
             {
                 Debug.LogError("objectGrabPointTransform is null");
                 return;
             }
 
-            if (playerCamera is null)
+            if (Owner.playerCamera is null)
             {
                 Debug.LogError("playerCamera is null");
                 return;
             }
             
             // Debug.Log($"Owner {OwnerClientId} attempted grabbing {name}");
-            GrabPointTransform = objectGrabPointTransform;
             SetGrabbableServerRpc(false);
             Rb.useGravity = false;
-            HolderCameraTransform = playerCamera;
         }
 
         /// <summary>
@@ -111,64 +107,9 @@ namespace Objects
         /// </summary>
         public virtual void Drop()
         {
-            GrabPointTransform = null;
+            Owner = null;
             SetGrabbableServerRpc(true);
             Rb.useGravity = affectedByGravity; // For object that may not be affected by gravity in puzzles in the future
-            HolderCameraTransform = null;
         }
-
-        /// <summary>
-        /// Convert to <see cref="ObjectActionable"/> and destroy the current component.
-        /// </summary>
-        /// <param name="placeholder"><see cref="ObjectPlaceholder"/> of the new location of the ObjectActionable</param>
-        public void ToActionable(ObjectPlaceholder placeholder)
-        {
-            if (placeholder.Free) ToActionableServerRpc(
-                placeholder.transform.position,
-                placeholder.transform.rotation,
-                placeholder.transform.localScale
-                );
-        }
-
-        /// <summary>
-        /// Convert to ObjectActionable and destroy the current component by the server.
-        /// </summary>
-        /// <param name="position"><see cref="Vector3"/> position of <see cref="ObjectPlaceholder"/>'s <see cref="Transform"/></param>
-        /// <param name="rotation"><see cref="Quaternion"/> rotation of <see cref="ObjectPlaceholder"/>'s <see cref="Transform"/></param>
-        /// <param name="localScale"><see cref="Vector3"/> scale of <see cref="ObjectPlaceholder"/>'s <see cref="Transform"/></param>
-        [ServerRpc(RequireOwnership = false)]
-        private void ToActionableServerRpc(Vector3 position, Quaternion rotation, Vector3 localScale)
-        {
-            ObjectActionable newActionable = null;
-            switch (ConvertActionableType)
-            {
-                case ActionableType.EmergencyTrigger:
-                    newActionable = gameObject.AddComponent<ActionableEmergencyTrigger>();
-                    break;
-                case ActionableType.Backpack:
-                    newActionable = gameObject.AddComponent<ActionableEmergencyTrigger>();
-                    break;
-                case ActionableType.MetroDoors:
-                    newActionable = gameObject.AddComponent<ActionableEmergencyTrigger>();
-                    break;
-                case ActionableType.Trapdoor:
-                    newActionable = gameObject.AddComponent<ActionableEmergencyTrigger>();
-                    break;
-                case ActionableType.AdvertisingDisplay:
-                    newActionable = gameObject.AddComponent<ActionableEmergencyTrigger>();
-                    break;
-            }
-
-            if (newActionable is null)
-                return;
-            
-            // Edit properties of newActionable;
-            newActionable.transform.position = position;
-            newActionable.transform.rotation = rotation;
-            newActionable.transform.localScale = localScale;
-            
-            Destroy(gameObject.GetComponent<ObjectGrabbable>());
-        }
-        
     }
 }

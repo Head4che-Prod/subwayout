@@ -8,7 +8,7 @@ namespace Prefabs.Player
     {
         public PlayerInputManager InputManager {get; private set;}
         public PlayerMovement Movement {get; private set;}
-        public PlayerObjectPick ObjectPick {get; private set;}
+        public PlayerInteract Interaction {get; private set;}
         public Rigidbody Rigidbody {get; private set;}
         public PlayerInput Input {get; private set;}
         public Camera playerCamera;
@@ -18,7 +18,7 @@ namespace Prefabs.Player
         {
             InputManager = GetComponent<PlayerInputManager>();
             Movement = GetComponent<PlayerMovement>();
-            ObjectPick = GetComponent<PlayerObjectPick>();
+            Interaction = GetComponent<PlayerInteract>();
             Rigidbody = GetComponent<Rigidbody>();
             Input = GetComponent<PlayerInput>();
         }
