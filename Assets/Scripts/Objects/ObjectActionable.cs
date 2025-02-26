@@ -1,5 +1,4 @@
-﻿using System;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Objects
@@ -17,18 +16,18 @@ namespace Objects
     }
     
     /// <summary>
-    /// Allow players to action an object.
+    /// Allows players to action an object.
     /// </summary>
     public abstract class ObjectActionable : ObjectInteractable
     {
-        public abstract ActionableType ActionableType { get; }
+        protected abstract ActionableType ActionableType { get; }
 
         [Header("Animation")]
         [SerializeField] [CanBeNull] private NetworkAnimatorP2P animator;
         [SerializeField] [CanBeNull] private string animationName;
         
         /// <summary>
-        /// This function handle the <see cref="Action"/> function with the animation.
+        /// This function handles the <see cref="Action"/> function with the animation.
         /// </summary>
         public void HandleAction()
         {
@@ -38,10 +37,9 @@ namespace Objects
         }
 
         /// <summary>
-        /// Allow to perform specifics actions depending on object actioned.
-        /// <see cref="ObjectActionable"/>'s subclasses are the behavior of a specific (type of) object.
+        /// Allows specific actions to be performed depending on the object actioned.
+        /// <see cref="ObjectActionable"/>'s subclasses define the behavior of a specific (type of) object.
         /// </summary>
-        /// <remarks></remarks>
-        public abstract void Action();
+        protected abstract void Action();
     }
 }

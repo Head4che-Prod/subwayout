@@ -103,7 +103,7 @@ namespace Prefabs.Player
         }
 
         /// <summary>
-        /// This method handle button release.
+        /// This method handles button release.   // Why tho?
         /// </summary>
         /// <param name="context"><see cref="InputAction"/>'s <see cref="InputAction.CallbackContext"/> of the release</param>
         private void HandleRelease(InputAction.CallbackContext context)
