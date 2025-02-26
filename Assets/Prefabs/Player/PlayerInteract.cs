@@ -36,7 +36,7 @@ namespace Prefabs.Player
         }
         
         /// <summary>
-        /// This method handle button press.
+        /// This method handles button press.
         /// </summary>
         /// <param name="context"><see cref="InputAction"/>'s <see cref="InputAction.CallbackContext"/> of the press</param>
         private void HandlePress(InputAction.CallbackContext context)
@@ -55,17 +55,17 @@ namespace Prefabs.Player
             );
             
             // Handle the first raycast hit
-            if (/*hits[0]*/hit.transform is not null && /*hits[0]*/hit.transform.TryGetComponent(out ObjectInteractive interactive))
+            if (/*hits[0]*/hit.transform is not null && /*hits[0]*/hit.transform.TryGetComponent(out ObjectInteractable interactable))
             {
                 // Action an object
-                if (context.action.id == _actionInput.id && interactive is ObjectActionable objActionable) 
+                if (context.action.id == _actionInput.id && interactable is ObjectActionable objActionable) 
                 {   
                     objActionable.HandleAction();
                 }
                 
                 // Grab an object
                 else if (context.action.id == _grabInput.id &&
-                         interactive is ObjectGrabbable { Grabbable: true } objGrabbable &&
+                         interactable is ObjectGrabbable { Grabbable: true } objGrabbable &&
                          _grabbedObject is null)
                 {
                     _grabbedObject = objGrabbable;

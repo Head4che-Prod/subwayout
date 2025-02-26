@@ -14,7 +14,7 @@ namespace Objects
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(NetworkRigidbody))]
     [RequireComponent(typeof(NetworkObject))]
-    public class ObjectGrabbable : ObjectInteractive
+    public class ObjectGrabbable : ObjectInteractable
     {
         [Header("Physics")]
         [FormerlySerializedAs("lerpSpeed")] [SerializeField] private float moveSpeed = 2.0f;

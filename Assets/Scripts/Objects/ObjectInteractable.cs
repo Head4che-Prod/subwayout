@@ -5,7 +5,7 @@ namespace Objects
     /// <summary>
     /// Class of interactive objects. 
     /// </summary>
-    public abstract class ObjectInteractive : NetworkBehaviour
+    public abstract class ObjectInteractable : NetworkBehaviour
     {
     }
 }

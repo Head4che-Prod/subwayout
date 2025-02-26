@@ -6,7 +6,7 @@ namespace Objects
     /// <summary>
     /// Allow players to place grabbed <see cref="ObjectGrabbable"/>.
     /// </summary>
-    public class ObjectPlaceholder : ObjectInteractive
+    public class ObjectPlaceholder : ObjectInteractable
     {
         [SerializeField] public ActionableType actionableType;
         [SerializeField] private NetworkVariable<bool> isFree = new(true);

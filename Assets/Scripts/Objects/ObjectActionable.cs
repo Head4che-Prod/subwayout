@@ -19,7 +19,7 @@ namespace Objects
     /// <summary>
     /// Allow players to action an object.
     /// </summary>
-    public abstract class ObjectActionable : ObjectInteractive
+    public abstract class ObjectActionable : ObjectInteractable
     {
         public abstract ActionableType ActionableType { get; }
 
