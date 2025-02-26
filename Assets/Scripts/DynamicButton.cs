@@ -10,12 +10,12 @@ public class DynamicButton : MonoBehaviour
 		_childToAppear = transform.Find("AppearOnSelect").gameObject;
 	}
 
-	public void Select()
+	public void Activate()
     {
 		_childToAppear.SetActive(true);
     }
 
-    public void Deselect()
+    public void Deactivate()
     {
 		_childToAppear.SetActive(false);
     }

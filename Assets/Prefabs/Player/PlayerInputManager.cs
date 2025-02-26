@@ -19,12 +19,16 @@ namespace Prefabs.Player
         public void Start()
         {
             _player = GetComponent<PlayerObject>();
+            SetPlayerInputMap("Gameplay");
         }
 
         public void SetPlayerInputMap(string inputMap)
         {
             if (_validInputModes.Contains(inputMap))
+            {
+                _player.Input.currentActionMap.Disable();
                 _player.Input.SwitchCurrentActionMap(inputMap);
+            }
             else 
                 Debug.LogError($"Invalid input map: {inputMap}");
         }

@@ -25,6 +25,10 @@ namespace Prefabs.Player.PlayerUI.PauseMenu
             
             _pauseMenuUI = transform.Find("PauseMenuUI").gameObject;
             _pauseMenuUI.SetActive(false);
+        }
+
+        void Start()
+        {
             _player = GetComponentInParent<PlayerObject>();
             _pauseAction = _player.Input.actions["Pause"];
             _unpauseAction = _player.Input.actions["Cancel"];
@@ -35,13 +39,15 @@ namespace Prefabs.Player.PlayerUI.PauseMenu
 
         public void Resume()
         {
-            Debug.Log("Hi");
+            Debug.Log("Unpause");
+            Debug.Log(_player.Input.currentActionMap.name);
             if (_allowMenuChange)
             {
                 _allowMenuChange = false;
 
                 foreach (DynamicButton button in buttons)
-                    button.Deselect();
+                    if (button.isActiveAndEnabled)
+                        button.Deactivate();
                 
                 _pauseMenuUI.SetActive(false);
                 _player.InputManager.SetPlayerInputMap("Gameplay");
@@ -49,21 +55,21 @@ namespace Prefabs.Player.PlayerUI.PauseMenu
             }
         }
 
-        void Pause()
+        public void Pause()
         {
+            Debug.Log("Pause");
             if (_allowMenuChange)
             {
                 _allowMenuChange = false;
                 _pauseMenuUI.SetActive(true);
                 _player.InputManager.SetPlayerInputMap("UI");
-                buttons[0].Select();
+                buttons[0].Activate();
                 StartCoroutine(WaitForEscapeReleased());
             }
         }
 
         private IEnumerator WaitForEscapeReleased()
         {
-            while (Keyboard.current.escapeKey.isPressed)
             {
                 yield return null;
             }

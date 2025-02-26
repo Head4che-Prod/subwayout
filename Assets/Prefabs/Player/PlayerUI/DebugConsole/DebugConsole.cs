@@ -41,7 +41,7 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
                 Singleton = this;
 
                 Commands["sayHello"] = () => Log("Hello, world!");
-                Commands["inputMode"] = () => Log(_player.Input.currentActionMap.name);
+                Commands["inputMode"] = () => Log(_previousInputMap);
                 Commands["help"] = () => Log("Available commands:\n - " + String.Join("\n - ", Commands.Keys));
             }
 
@@ -163,13 +163,10 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
 
         public void ExecCommand()
         {
-            if (inputField.isFocused)
-            {
-                if (_currentText.Trim() != "" && (_commandHistory.Count == 0 || _currentText != _commandHistory[0]))
-                    _commandHistory.Insert(0, _currentText);
-                Commands.GetValueOrDefault(_currentText, () => LogError("Command doesn't exist"))();
-                FocusOffConsole();
-            }
+            if (_currentText.Trim() != "" && (_commandHistory.Count == 0 || _currentText != _commandHistory[0]))
+                _commandHistory.Insert(0, _currentText);
+            Commands.GetValueOrDefault(_currentText, () => LogError("Command doesn't exist"))();
+            FocusOffConsole();
         }
 
         public static void AddCommand(string name, Action func)
