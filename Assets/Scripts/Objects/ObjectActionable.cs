@@ -39,7 +39,9 @@ namespace Objects
 
         /// <summary>
         /// Allow to perform specifics actions depending on object actioned.
+        /// <see cref="ObjectActionable"/>'s subclasses are the behavior of a specific (type of) object.
         /// </summary>
+        /// <remarks></remarks>
         public abstract void Action();
     }
 }

@@ -21,24 +21,6 @@ namespace Prefabs.Player
         {
             _actionInput = InputSystem.actions.FindAction("Player/Interact");
             _grabInput = InputSystem.actions.FindAction("Player/Grab");
-
-            if (_actionInput is null)
-            {
-                Debug.LogError("Player/Interact action not found");
-                return;
-            }
-
-            if (_grabInput is null)
-            {
-                Debug.LogError("Player/Grab action not found");
-                return;
-            }
-
-            if (playerCamera is null)
-            {
-                Debug.LogError("Player camera is not assigned");
-                return;
-            }
             
             _actionInput.performed += HandlePress;
             _actionInput.canceled += HandleRelease;
@@ -52,16 +34,11 @@ namespace Prefabs.Player
         /// <param name="context"><see cref="InputAction"/>'s <see cref="InputAction.CallbackContext"/> of the press</param>
         private void HandlePress(InputAction.CallbackContext context)
         {
-            if (playerCamera == null)
-            {
-                Debug.LogError("playerCamera is null");
-                return;
-            }
-            
             Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * reach, Color.blue);
             RaycastHit[] hits = new RaycastHit[2];
             int hitCount = Physics.RaycastNonAlloc(playerCamera.transform.position, playerCamera.transform.forward, hits, reach);
             
+            // Handle the first raycast hit
             if (hitCount > 0 && hits[0].transform is not null && hits[0].transform.TryGetComponent(out ObjectInteractive interactive))
             {
                 // Action an object
