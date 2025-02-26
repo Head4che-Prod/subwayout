@@ -1012,10 +1012,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: DebugConsole
       objectReference: {fileID: 0}
-    - target: {fileID: 9119524345231105389, guid: acd9ba6658d33f444bf48e578ee4fce7, type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
