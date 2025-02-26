@@ -5,6 +5,8 @@ using Unity.Services.Authentication;
 using Unity.Services.Core;
 using TMPro;
 using Unity.Netcode;
+using System.Threading.Tasks;
+using UnityEngine.EventSystems;
 
 public class SessionManager
 {
@@ -42,30 +44,32 @@ public class SessionManager
         }
     }
 
-    public async void StartSessionAsHost()
+    public async Task StartSessionAsHost()
     {
         try
         {
             await UnityServices.InitializeAsync();
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
         }
-        catch (Exception e)
+        catch
         {
-            Debug.LogError($"Error initializing Unity Services: {e}");
         }
 
         SessionOptions options = new SessionOptions { MaxPlayers = 2, IsLocked = false, IsPrivate = true }.WithRelayNetwork();
 
         ActiveSession = await MultiplayerService.Instance.CreateSessionAsync(options);
-        Debug.Log($"Session {ActiveSession.Id} created ! Join code : {ActiveSession.Code}");
         GameObject.Find("StartMenu/WelcomeText").GetComponent<TextMeshProUGUI>().text = $"Enter the Subway\nWelcome to the station {ActiveSession.Code}";
+        GameObject.Find("StartMenu/ConnectedPlayersText").GetComponent<TextMeshProUGUI>().text = $"Connected players: 1/2";
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        EventSystem.current.SetSelectedGameObject(GameObject.Find("StartMenu/BackButton").gameObject);
     }
 
     public async void JoinSession(string joinCode)
     {
         ActiveSession = await MultiplayerService.Instance.JoinSessionByCodeAsync(joinCode);
         Debug.Log($"Session {ActiveSession.Id} joined !");
-        NetworkManager.Singleton.AddNetworkPrefab( Resources.Load<GameObject>("NetworkPlayer") );
+        NetworkManager.Singleton.AddNetworkPrefab(Resources.Load<GameObject>("NetworkPlayer"));
     }
 
     public async void KickPlayer()

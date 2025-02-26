@@ -159,6 +159,8 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
         
         public void ExecCommand()
         {
+            if (_currentText == "")
+                return;
             if (_currentText.Trim() != "" && (_commandHistory.Count == 0 || _currentText != _commandHistory[0]))
                 _commandHistory.Insert(0, _currentText);
             Commands.GetValueOrDefault(_currentText, () => LogError("Command doesn't exist"))();

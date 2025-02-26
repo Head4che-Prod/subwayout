@@ -1,11 +1,14 @@
 using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Sockets;
+using System.Threading.Tasks;
 using TMPro;
 using Unity.Netcode;
 using Unity.Services.Multiplayer;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HomeMenu : MonoBehaviour
@@ -18,6 +21,11 @@ public class HomeMenu : MonoBehaviour
         sessionManager = SessionManager.Singleton;
     }
 
+    // void Update()
+    // {
+    //     Debug.Log(EventSystem.current.currentSelectedGameObject?.name);
+    // }
+
     public void Quit()
     {
         Application.Quit();
@@ -27,23 +35,32 @@ public class HomeMenu : MonoBehaviour
     {
         transform.Find("MainMenu").gameObject.SetActive(false);
         transform.Find("StartMenu").gameObject.SetActive(true);
+        SetInteractibleStartButtons(false);
         foreach (Selectable selectable in Selectable.allSelectablesArray)
             if (selectable.name == "BackButton")
                 selectable.Select();
 
         // Start server / Lobby
-        sessionManager.StartSessionAsHost();
+
+        NetworkManager.Singleton.OnClientConnectedCallback += (id) => {
+            SetInteractibleStartButtons(true);
+            GameObject.Find("DisableOnSpawn").gameObject.SetActive(false);
+        };
+        _ = sessionManager.StartSessionAsHost();
     }
 
     public void CloseStart()
     {
         // Close server / Lobby
         sessionManager.LeaveSession();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         // Reset the join code
+
+        GameObject.Find("DisableOnSpawn").gameObject.SetActive(true);
         transform.Find("StartMenu/WelcomeText").GetComponent<TextMeshProUGUI>().text = "Enter the Subway\nLoading your station number...";
-        transform.Find("StartMenu/ConnectedPlayersText").GetComponent<TextMeshProUGUI>().text = "Connected players: 1/2";
-        NetworkManager.Singleton.Shutdown();
-     
+        transform.Find("StartMenu/ConnectedPlayersText").GetComponent<TextMeshProUGUI>().text = "Connected players: 0/2";
+
         transform.Find("StartMenu").gameObject.SetActive(false);
         transform.Find("MainMenu").gameObject.SetActive(true);
         foreach (Selectable selectable in Selectable.allSelectablesArray)
@@ -51,7 +68,8 @@ public class HomeMenu : MonoBehaviour
                 selectable.Select();
     }
 
-    public void SpawnPlayers() {
+    public void SpawnPlayers()
+    {
         foreach (ulong id in NetworkManager.Singleton.ConnectedClientsIds)
         {
             NetworkObject player = Instantiate(PlayerPrefab).GetComponent<NetworkObject>();
@@ -59,17 +77,34 @@ public class HomeMenu : MonoBehaviour
         }
     }
 
+    public void SetInteractibleStartButtons(bool interactible)
+    {
+        transform.Find("StartMenu/MultiButton").GetComponent<Button>().interactable = interactible;
+        transform.Find("StartMenu/SoloButton").GetComponent<Button>().interactable = interactible;
+    }
+
     public void Play()
     {
+        SetInteractibleStartButtons(false);
         // Get the player prefab
         // It is localized in Assets/Prefabs/Player/NetworkPlayer.prefab
-        SpawnPlayers();
 
         sessionManager.ActiveSession.AsHost().IsLocked = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         NetworkManager.Singleton.SceneManager.LoadScene("Scenes/TempHanoi", UnityEngine.SceneManagement.LoadSceneMode.Single);
     }
 
-    public void ActivateMyPlayer() {
+    public void PlayAlone()
+    {
+        SetInteractibleStartButtons(false);
+
+        sessionManager.KickPlayer();
+        Play();
+    }
+
+    public void ActivateMyPlayer()
+    {
         foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
         {
             if (player.GetComponent<NetworkObject>().OwnerClientId == NetworkManager.Singleton.LocalClientId)
