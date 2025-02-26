@@ -1,0 +1,297 @@
+fileFormatVersion: 2
+guid: d971b60a2b2c2524bbd5f140f0c0729b
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ContourLamp.001
+    second: {fileID: 2100000, guid: ae976574421c5fd45b8cf20b658c1e3e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Elastic Rubber.001
+    second: {fileID: 2100000, guid: 9ca6d099793bbf349b16869ee2015870, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FuelTexture
+    second: {fileID: 2100000, guid: 9800297c6e8b4df499217d791f6b4ab3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LampTexture.001
+    second: {fileID: 2100000, guid: 715b791b15242de46a8a68913cbcfb3e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: e04938a91b5a2f6448fb406ea80bac97, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal scratched.001
+    second: {fileID: 2100000, guid: 8b6ce9034ea393d4ca0a1f698fc180eb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MetalBar.001
+    second: {fileID: 2100000, guid: 7658fca8737b8b64b9bbd345fc413981, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MetalBar.002
+    second: {fileID: 2100000, guid: 05721257c47326943b8043b83b170d67, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MetalPlate.001
+    second: {fileID: 2100000, guid: 395c0ce9f7e9720438f1886ec7889ff4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MetalPlate.002
+    second: {fileID: 2100000, guid: 238a314b11cf0254db46d7907f2a704d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ondes
+    second: {fileID: 2100000, guid: 469667b2324c6cf44ac2ef2193580361, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rubber.001
+    second: {fileID: 2100000, guid: 4e123ceea493f9a47afdf67993ffc0f3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SolTexture.001
+    second: {fileID: 2100000, guid: 34061dddaa211e54d97ed58ab123f68e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TableauDeBordTexture
+    second: {fileID: 2100000, guid: 2316c562ce4c4a34fa14b78762bee07d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TextDoor.001
+    second: {fileID: 2100000, guid: 1f3cbd1517739e54a9eab711cf17de56, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TextDoor.003
+    second: {fileID: 2100000, guid: 72e476300e0e5044399c9fe54c88b742, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TextureChair.001
+    second: {fileID: 2100000, guid: 1304bd226426a3249b093c4be92cab12, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TexturePlafond.001
+    second: {fileID: 2100000, guid: ab0a365b05eaa724fba4aefaee0dac8b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: dossierChair.001
+    second: {fileID: 2100000, guid: 2e10ffd99799a044b93beed565030cc0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: vitre.001
+    second: {fileID: 2100000, guid: 2484c57611cdc904e8b5e73e0d3ce183, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: vitre.002
+    second: {fileID: 2100000, guid: 2484c57611cdc904e8b5e73e0d3ce183, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: vitre.004
+    second: {fileID: 2100000, guid: 2484c57611cdc904e8b5e73e0d3ce183, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: vitre.005
+    second: {fileID: 2100000, guid: 2484c57611cdc904e8b5e73e0d3ce183, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wagon.001
+    second: {fileID: 2100000, guid: dc3fedffeceb4d244b9b67d86400ac0e, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: LampTexture
+    second: {fileID: 2800000, guid: a0e63ffdb7b4b3345a65f9c2e2a1732e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: MetalBar
+    second: {fileID: 2800000, guid: 7df2471145155144388dcde93745dd13, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WhitecarbonFiber
+    second: {fileID: 2800000, guid: 31f6a28652d5e5740a078a2e7988c81c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: chaise
+    second: {fileID: 2800000, guid: 41e419d075df81740a4afdfeb259acde, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: contourLamp
+    second: {fileID: 2800000, guid: fc996c612165ce2429e10620325388d9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: fuelTexture
+    second: {fileID: 2800000, guid: af2bab5d59700fa40a7b3587fa04da4d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: metal Plate
+    second: {fileID: 2800000, guid: 7ab77abb050cb4d43a177955a49bbc1a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: moquette1
+    second: {fileID: 2800000, guid: b17448e21fefaa3449dc8cd591d729f9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ondesTexture
+    second: {fileID: 2800000, guid: 04ebe0c1e9ab3a54aba2f4dbbf47ba80, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: tableauDeBord
+    second: {fileID: 2800000, guid: 5c129d69bf88675498584ab01afe9c6a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: textDoor
+    second: {fileID: 2800000, guid: eb22513dae72b044c84d7f70c9b40e48, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: texturePlafond
+    second: {fileID: 2800000, guid: d858c4a97f488aa4aa79549d28de284f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: textureSol
+    second: {fileID: 2800000, guid: 9e0e660776d78764797edb1090b0f199, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: textureSubway
+    second: {fileID: 2800000, guid: 7b10e7d49e4e212449e14b6f9594b9c0, type: 3}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
