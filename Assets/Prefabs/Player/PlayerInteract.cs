@@ -21,11 +21,18 @@ namespace Prefabs.Player
         {
             _actionInput = InputSystem.actions.FindAction("Player/Interact");
             _grabInput = InputSystem.actions.FindAction("Player/Grab");
-            
-            _actionInput.performed += HandlePress;
-            _actionInput.canceled += HandleRelease;
-            _grabInput.performed += HandlePress;
-            _grabInput.canceled += HandleRelease;
+
+            try
+            {
+                _actionInput.performed += HandlePress;
+                _actionInput.canceled += HandleRelease;
+                _grabInput.performed += HandlePress;
+                _grabInput.canceled += HandleRelease;
+            }
+            catch (NullReferenceException e)
+            {
+                Debug.LogError(e.Message);
+            }
         }
         
         /// <summary>
@@ -35,11 +42,20 @@ namespace Prefabs.Player
         private void HandlePress(InputAction.CallbackContext context)
         {
             Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * reach, Color.blue);
+            /*
             RaycastHit[] hits = new RaycastHit[2];
             int hitCount = Physics.RaycastNonAlloc(playerCamera.transform.position, playerCamera.transform.forward, hits, reach);
+            */
+
+            Physics.Raycast(
+                playerCamera.transform.position,
+                playerCamera.transform.forward,
+                out RaycastHit hit,
+                reach
+            );
             
             // Handle the first raycast hit
-            if (hitCount > 0 && hits[0].transform is not null && hits[0].transform.TryGetComponent(out ObjectInteractive interactive))
+            if (/*hits[0]*/hit.transform is not null && /*hits[0]*/hit.transform.TryGetComponent(out ObjectInteractive interactive))
             {
                 // Action an object
                 if (context.action.id == _actionInput.id && interactive is ObjectActionable objActionable) 
@@ -61,6 +77,8 @@ namespace Prefabs.Player
             if (_grabbedObject is not null && context.action.id == _grabInput.id)
             {
                 // Place an object
+                
+                /*
                 if (
                     hitCount > 1 &&
                     hits[1].transform is not null &&
@@ -72,14 +90,15 @@ namespace Prefabs.Player
                     _grabbedObject.ToActionable(placeholder);
                     _grabbedObject = null;
                 }
+                */
             
                 // Drop an object
-                else
+                
+                // else
                 {
                     _grabbedObject.Drop();
                     _grabbedObject = null;
                 }
-                
             }
         }
 
