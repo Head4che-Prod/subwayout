@@ -1,4 +1,4 @@
-using System;
+using Objects;
 using Prefabs.Puzzles.Hanoi.Debugs;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ namespace Prefabs.Puzzles.Hanoi
         
         private static bool _useable = true;
         
-        public override bool Grabbable => _useable && IsGrabbable;  // Checks whether the hanoi towers are already in use.
+        public override bool Grabbable => _useable && IsGrabbable.Value;  // Checks whether the hanoi towers are already in use.
         public override void Grab(Transform objectGrabPointTransform, Transform playerCamera)
         {
             base.Grab(objectGrabPointTransform, playerCamera);
