@@ -1,4 +1,6 @@
+using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -19,7 +21,7 @@ public class PauseMenuOpener : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
                 Resume();
@@ -42,6 +44,7 @@ public class PauseMenuOpener : MonoBehaviour
         gameElements.SetActive(false);
         Time.timeScale = 0f; // Freeze game time
         isPaused = true;
+        EventSystem.current.SetSelectedGameObject(null);
         foreach (Selectable button in Selectable.allSelectablesArray)
             if (button.name == "ResumeButton")
                 button.Select();
@@ -49,6 +52,7 @@ public class PauseMenuOpener : MonoBehaviour
 
     public void QuitGame()
     {
+        NetworkManager.Singleton.Shutdown();
         SceneManager.LoadScene("Scenes/DemoMenu");
     }
 }

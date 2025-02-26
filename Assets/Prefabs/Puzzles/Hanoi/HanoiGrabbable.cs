@@ -30,8 +30,11 @@ namespace Prefabs.Puzzles.Hanoi
             Vector3 baseForce = base.CalculateMovementForce();
             Vector3 normalizedForce = baseForce - Vector3.Dot(baseForce, HanoiTowers.Instance.transform.forward) *
                 HanoiTowers.Instance.transform.forward;
-            MovementVector.Instance.SetPosition(0, Rb.position);
-            MovementVector.Instance.SetPosition(1, Rb.position + normalizedForce);
+            if (HanoiTowers.Instance.IsInDebugMode)
+            {
+                MovementVector.Instance.SetPosition(0, Rb.position);
+                MovementVector.Instance.SetPosition(1, Rb.position + normalizedForce);
+            }
             
             return normalizedForce;
         }
