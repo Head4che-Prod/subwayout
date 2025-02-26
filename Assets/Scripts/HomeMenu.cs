@@ -66,7 +66,7 @@ public class HomeMenu : MonoBehaviour
         SpawnPlayers();
 
         sessionManager.ActiveSession.AsHost().IsLocked = true;
-        NetworkManager.Singleton.SceneManager.LoadScene("Scenes/GameScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
+        NetworkManager.Singleton.SceneManager.LoadScene("Scenes/TempHanoi", UnityEngine.SceneManagement.LoadSceneMode.Single);
     }
 
     public void ActivateMyPlayer() {
