@@ -19,6 +19,8 @@ namespace Prefabs.Player
         public void Start()
         {
             _player = GetComponent<PlayerObject>();
+            foreach (string map in _validInputModes)
+                _player.Input.actions.FindActionMap(map).Disable();
             SetPlayerInputMap("Gameplay");
         }
 

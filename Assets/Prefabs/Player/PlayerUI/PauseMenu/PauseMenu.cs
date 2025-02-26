@@ -39,10 +39,9 @@ namespace Prefabs.Player.PlayerUI.PauseMenu
 
         public void Resume()
         {
-            Debug.Log("Unpause");
-            Debug.Log(_player.Input.currentActionMap.name);
             if (_allowMenuChange)
             {
+                Debug.Log("Unpause");
                 _allowMenuChange = false;
 
                 foreach (DynamicButton button in buttons)
@@ -57,7 +56,6 @@ namespace Prefabs.Player.PlayerUI.PauseMenu
 
         public void Pause()
         {
-            Debug.Log("Pause");
             if (_allowMenuChange)
             {
                 _allowMenuChange = false;
