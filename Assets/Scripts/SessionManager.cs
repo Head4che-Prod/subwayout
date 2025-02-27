@@ -38,9 +38,8 @@ public class SessionManager
             await UnityServices.InitializeAsync();
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
         }
-        catch (Exception e)
+        catch
         {
-            Debug.LogError($"Error initializing Unity Services: {e}");
         }
     }
 
@@ -67,9 +66,12 @@ public class SessionManager
 
     public async void JoinSession(string joinCode)
     {
+        Start();
+
         ActiveSession = await MultiplayerService.Instance.JoinSessionByCodeAsync(joinCode);
-        Debug.Log($"Session {ActiveSession.Id} joined !");
-        NetworkManager.Singleton.AddNetworkPrefab(Resources.Load<GameObject>("NetworkPlayer"));
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        EventSystem.current.SetSelectedGameObject(GameObject.Find("StartMenu/BackButton").gameObject);
     }
 
     public async void KickPlayer()
@@ -87,6 +89,7 @@ public class SessionManager
             try
             {
                 await ActiveSession.LeaveAsync();
+                GameObject.Find("DisableOnSpawn").gameObject.SetActive(true);
             }
             catch { }
             finally

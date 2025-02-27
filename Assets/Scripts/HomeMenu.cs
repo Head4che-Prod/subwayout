@@ -9,22 +9,26 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
 public class HomeMenu : MonoBehaviour
 {
     SessionManager sessionManager;
+    private GameObject disableOnSpawn;
     [SerializeField] public GameObject PlayerPrefab;
 
     void Start()
     {
         sessionManager = SessionManager.Singleton;
+        disableOnSpawn = GameObject.Find("DisableOnSpawn");
     }
 
-    // void Update()
-    // {
-    //     Debug.Log(EventSystem.current.currentSelectedGameObject?.name);
-    // }
+    void Update()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
 
     public void Quit()
     {
@@ -42,9 +46,14 @@ public class HomeMenu : MonoBehaviour
 
         // Start server / Lobby
 
-        NetworkManager.Singleton.OnClientConnectedCallback += (id) => {
+        // NetworkManager.Singleton.OnConnectionEvent += (a, b) => {
+        //     Cursor.lockState = CursorLockMode.Confined;
+        //     Cursor.visible = true;
+        // };
+        NetworkManager.Singleton.OnClientConnectedCallback += (id) =>
+        {
             SetInteractibleStartButtons(true);
-            GameObject.Find("DisableOnSpawn").gameObject.SetActive(false);
+            disableOnSpawn.SetActive(false);
         };
         _ = sessionManager.StartSessionAsHost();
     }
@@ -57,7 +66,7 @@ public class HomeMenu : MonoBehaviour
         Cursor.visible = true;
         // Reset the join code
 
-        GameObject.Find("DisableOnSpawn").gameObject.SetActive(true);
+        disableOnSpawn.SetActive(true);
         transform.Find("StartMenu/WelcomeText").GetComponent<TextMeshProUGUI>().text = "Enter the Subway\nLoading your station number...";
         transform.Find("StartMenu/ConnectedPlayersText").GetComponent<TextMeshProUGUI>().text = "Connected players: 0/2";
 
@@ -66,15 +75,6 @@ public class HomeMenu : MonoBehaviour
         foreach (Selectable selectable in Selectable.allSelectablesArray)
             if (selectable.name == "StartButton")
                 selectable.Select();
-    }
-
-    public void SpawnPlayers()
-    {
-        foreach (ulong id in NetworkManager.Singleton.ConnectedClientsIds)
-        {
-            NetworkObject player = Instantiate(PlayerPrefab).GetComponent<NetworkObject>();
-            player.SpawnWithOwnership(id);
-        }
     }
 
     public void SetInteractibleStartButtons(bool interactible)
@@ -86,9 +86,6 @@ public class HomeMenu : MonoBehaviour
     public void Play()
     {
         SetInteractibleStartButtons(false);
-        // Get the player prefab
-        // It is localized in Assets/Prefabs/Player/NetworkPlayer.prefab
-
         sessionManager.ActiveSession.AsHost().IsLocked = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -103,24 +100,9 @@ public class HomeMenu : MonoBehaviour
         Play();
     }
 
-    public void ActivateMyPlayer()
-    {
-        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
-        {
-            if (player.GetComponent<NetworkObject>().OwnerClientId == NetworkManager.Singleton.LocalClientId)
-            {
-                player.transform.Find("CameraHolder/PlayerCamera").gameObject.SetActive(true);
-            }
-            else
-            {
-                player.transform.Find("CameraHolder/PlayerCamera").gameObject.SetActive(false);
-            }
-        }
-    }
-
     public void Join()
     {
-        string joinCode = transform.Find("JoinMenu/JoinCodeInput").GetComponent<TMP_InputField>().text;
+        string joinCode = transform.Find("JoinMenu/JoinCodeInput").GetComponent<TMP_InputField>().text.ToUpper();
         sessionManager.JoinSession(joinCode);
         transform.Find("JoinMenu").gameObject.SetActive(false);
         transform.Find("WaitingForHostScreen").gameObject.SetActive(true);
@@ -171,7 +153,7 @@ public class HomeMenu : MonoBehaviour
         transform.Find("WaitingForHostScreen").gameObject.SetActive(false);
         transform.Find("JoinMenu").gameObject.SetActive(true);
         foreach (Selectable selectable in Selectable.allSelectablesArray)
-            if (selectable.name == "StartButton")
+            if (selectable.name == "JoinButton")
                 selectable.Select();
     }
 }

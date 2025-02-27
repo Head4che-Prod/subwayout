@@ -39,9 +39,9 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
             {
                 Singleton = this;
 
-                Commands.Add("sayHello", () => Log("Hello, world!"));
-                Commands.Add("inputMode", () => Log(_player.Input.currentActionMap.name));
-                Commands.Add("help", () => Log("Available commands:\n - " + String.Join("\n - ", Commands.Keys)));
+                Commands["sayHello"] = () => Log("Hello, world!");
+                Commands["inputMode"] = () => Log(_player.Input.currentActionMap.name);
+                Commands["help"] = () => Log("Available commands:\n - " + String.Join("\n - ", Commands.Keys));
             }
 
             gameObject.transform.GetChild(0).gameObject.SetActive(_isActivated);
