@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using Random = System.Random;
 
 namespace Prefabs.Puzzles.HintSystem
@@ -15,6 +16,24 @@ namespace Prefabs.Puzzles.HintSystem
         private readonly AudioClip _voiceLineFr;
         private readonly AudioClip _voiceLineEs;
 
+        private AudioClip _voiceLine
+        {
+            get
+            {
+                switch (LocalizationSettings.SelectedLocale.Identifier.Code)
+                {
+                    case "en-US":
+                        return _voiceLineEn;
+                    case "fr-FR":
+                        return _voiceLineFr;
+                    case "es-ES":
+                        return _voiceLineEs;
+                    default:
+                        Debug.LogError($"Language \"{LocalizationSettings.SelectedLocale.Identifier.Code}\" not found");
+                        return _voiceLineEn;
+                }
+            }
+        }
 
         public PuzzleHint(AudioClip voiceLineEn, AudioClip voiceLineFr, AudioClip voiceLineEs)
         {
@@ -26,8 +45,8 @@ namespace Prefabs.Puzzles.HintSystem
         public static AudioClip GetRandomVoiceLine()
         {
             if (Hints.Count == 0)
-                return HintIndex["NoHints"]._voiceLineEn;
-            return HintIndex[Hints[_r.Next(Hints.Count)]]._voiceLineEn;
+                return HintIndex["NoHints"]._voiceLine;
+            return HintIndex[Hints[_r.Next(Hints.Count)]]._voiceLine;
         }
 
     }
