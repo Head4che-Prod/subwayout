@@ -18,7 +18,7 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
         private int _commandHistoryIndex;
         private string _tempCommand;
         
-        private static bool _isActivated;
+        private static bool _isActivated = false;
         private string _previousInputMap;
         private string _currentText;
 

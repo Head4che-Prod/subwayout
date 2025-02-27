@@ -31,7 +31,7 @@ public class SessionManager
         set => activeSession = value;
     }
 
-    public async void Start()
+    public async Task Start()
     {
         try
         {
@@ -45,14 +45,7 @@ public class SessionManager
 
     public async Task StartSessionAsHost()
     {
-        try
-        {
-            await UnityServices.InitializeAsync();
-            await AuthenticationService.Instance.SignInAnonymouslyAsync();
-        }
-        catch
-        {
-        }
+        await Start();
 
         SessionOptions options = new SessionOptions { MaxPlayers = 2, IsLocked = false, IsPrivate = true }.WithRelayNetwork();
 
@@ -66,12 +59,12 @@ public class SessionManager
 
     public async void JoinSession(string joinCode)
     {
-        Start();
+        await Start();
 
         ActiveSession = await MultiplayerService.Instance.JoinSessionByCodeAsync(joinCode);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        EventSystem.current.SetSelectedGameObject(GameObject.Find("StartMenu/BackButton").gameObject);
+        EventSystem.current.SetSelectedGameObject(GameObject.Find("BackButton").gameObject);
     }
 
     public async void KickPlayer()

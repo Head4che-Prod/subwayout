@@ -102,6 +102,10 @@ public class HomeMenu : MonoBehaviour
 
     public void Join()
     {
+        NetworkManager.Singleton.OnClientConnectedCallback += (id) =>
+        {
+            disableOnSpawn.SetActive(false);
+        };
         string joinCode = transform.Find("JoinMenu/JoinCodeInput").GetComponent<TMP_InputField>().text.ToUpper();
         sessionManager.JoinSession(joinCode);
         transform.Find("JoinMenu").gameObject.SetActive(false);
