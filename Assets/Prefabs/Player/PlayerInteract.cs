@@ -3,14 +3,14 @@ using Objects;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace Prefabs.Player
 {
     public class PlayerInteract : NetworkBehaviour
     {
         [Header("Player")]
-        [SerializeField] private GameObject playerCamera;
-        [SerializeField] private Transform objectGrabPointTransform;
+        [SerializeField] private PlayerObject player;        
         [SerializeField] private float reach;
         
         private ObjectGrabbable _grabbedObject;
@@ -41,15 +41,15 @@ namespace Prefabs.Player
         /// <param name="context"><see cref="InputAction"/>'s <see cref="InputAction.CallbackContext"/> of the press</param>
         private void HandlePress(InputAction.CallbackContext context)
         {
-            Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * reach, Color.blue);
+            Debug.DrawRay(player.playerCamera.transform.position, player.playerCamera.transform.forward * reach, Color.blue);
             /*
             RaycastHit[] hits = new RaycastHit[2];
             int hitCount = Physics.RaycastNonAlloc(playerCamera.transform.position, playerCamera.transform.forward, hits, reach);
             */
 
             Physics.Raycast(
-                playerCamera.transform.position,
-                playerCamera.transform.forward,
+                player.playerCamera.transform.position,
+                player.playerCamera.transform.forward,
                 out RaycastHit hit,
                 reach
             );
@@ -60,7 +60,7 @@ namespace Prefabs.Player
                 // Action an object
                 if (context.action.id == _actionInput.id && interactable is ObjectActionable objActionable) 
                 {   
-                    objActionable.HandleAction();
+                    objActionable.HandleAction(player);
                 }
                 
                 // Grab an object
@@ -69,7 +69,7 @@ namespace Prefabs.Player
                          _grabbedObject is null)
                 {
                     _grabbedObject = objGrabbable;
-                    _grabbedObject.Grab(objectGrabPointTransform, playerCamera.transform);
+                    _grabbedObject.Grab(player);
                     return;
                 }
             } 

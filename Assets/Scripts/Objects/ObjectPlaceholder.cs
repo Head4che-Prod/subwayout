@@ -8,7 +8,6 @@ namespace Objects
     /// </summary>
     public class ObjectPlaceholder : ObjectInteractable
     {
-        [SerializeField] public ActionableType actionableType;
         [SerializeField] private NetworkVariable<bool> isFree = new(true);
 
         public bool Free { get; set; }

@@ -266,6 +266,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5411741163773892280}
+  - component: {fileID: 3988538835331814469}
   m_Layer: 0
   m_Name: ObjectGrabPoint
   m_TagString: Untagged
@@ -288,6 +289,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2807093509488964787}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3988538835331814469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913258719231907689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 943831300b8940fdb3979757701159e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 6371891161549056370}
 --- !u!1 &2486201601411644443
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,8 +839,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  playerCamera: {fileID: 3530378596609524384}
-  objectGrabPointTransform: {fileID: 5411741163773892280}
+  player: {fileID: 6371891161549056370}
   reach: 2
 --- !u!1 &8897388447206143973
 GameObject:
