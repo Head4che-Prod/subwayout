@@ -44,7 +44,7 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
                 Commands["help"] = () => Log("Available commands:\n - " + String.Join("\n - ", Commands.Keys));
             }
 
-            if (gameObject != null && gameObject.transform != null && gameObject.transform.GetChild(0) != null && gameObject.transform.GetChild(0).gameObject != null)
+            if (this != null && gameObject != null && gameObject.transform != null && gameObject.transform.GetChild(0) != null && gameObject.transform.GetChild(0).gameObject != null)
                 gameObject.transform.GetChild(0).gameObject.SetActive(_isActivated);
         }
 

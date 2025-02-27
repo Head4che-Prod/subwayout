@@ -24,6 +24,7 @@ public class SessionManager
     }
 
     private ISession activeSession;
+    private bool IsHost = false;
 
     public ISession ActiveSession
     {
@@ -41,11 +42,13 @@ public class SessionManager
         catch
         {
         }
+        IsHost = false;
     }
 
     public async Task StartSessionAsHost()
     {
         await Start();
+        IsHost = true;
 
         SessionOptions options = new SessionOptions { MaxPlayers = 2, IsLocked = false, IsPrivate = true }.WithRelayNetwork();
 
@@ -66,7 +69,7 @@ public class SessionManager
     public async Task JoinSession(string joinCode)
     {
         await Start();
-
+        IsHost = false;
         ActiveSession = await MultiplayerService.Instance.JoinSessionByCodeAsync(joinCode);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -75,14 +78,15 @@ public class SessionManager
 
     public async Task KickPlayer()
     {
-        if (!ActiveSession.IsHost) return;
-        string idToKick = ActiveSession.Players[0].Id == ActiveSession.Id ? ActiveSession.Players[1].Id : ActiveSession.Players[0].Id;
+        if (!IsHost) return;
+        string idToKick = ActiveSession.Players[1].Id;
         await ActiveSession.AsHost().RemovePlayerAsync(idToKick);
         Debug.Log($"Player {idToKick} kicked !");
     }
 
     public async Task LeaveSession()
     {
+        IsHost = false;
         if (ActiveSession != null)
         {
             try

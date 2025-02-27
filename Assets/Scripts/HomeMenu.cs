@@ -92,12 +92,11 @@ public class HomeMenu : MonoBehaviour
         NetworkManager.Singleton.SceneManager.LoadScene("Scenes/TempHanoi", UnityEngine.SceneManagement.LoadSceneMode.Single);
     }
 
-    public async Task PlayAlone()
+    public void PlayAlone()
     {
         SetInteractibleStartButtons(false);
 
-        await sessionManager.KickPlayer();
-        Play();
+        sessionManager.KickPlayer().ContinueWith((_) => Play());
     }
 
     public void Join()
@@ -114,7 +113,8 @@ public class HomeMenu : MonoBehaviour
             if (selectable.name == "BackButton")
                 selectable.Select();
 
-        NetworkManager.Singleton.OnClientDisconnectCallback += (_) => CloseJoin();
+        NetworkManager.Singleton.OnServerStopped += (_) => {SceneManager.LoadScene("Scenes/HomeMenu", LoadSceneMode.Single);};
+        NetworkManager.Singleton.OnServerStopped += (_) => CloseJoin();
     }
 
     public void OpenSettings()
@@ -155,7 +155,7 @@ public class HomeMenu : MonoBehaviour
 
     public void CloseWaitingForHostScreen()
     {
-        _ = sessionManager.LeaveSession();
+        _ = sessionManager.LeaveSession().ContinueWith((_) => {disableOnSpawn.SetActive(true);});
         transform.Find("WaitingForHostScreen").gameObject.SetActive(false);
         transform.Find("JoinMenu").gameObject.SetActive(true);
         foreach (Selectable selectable in Selectable.allSelectablesArray)
