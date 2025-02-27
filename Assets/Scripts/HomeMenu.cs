@@ -9,7 +9,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
 public class HomeMenu : MonoBehaviour
@@ -39,7 +38,7 @@ public class HomeMenu : MonoBehaviour
     {
         transform.Find("MainMenu").gameObject.SetActive(false);
         transform.Find("StartMenu").gameObject.SetActive(true);
-        SetInteractibleStartButtons(false);
+        SetInteractibleStartButtons(0);
         foreach (Selectable selectable in Selectable.allSelectablesArray)
             if (selectable.name == "BackButton")
                 selectable.Select();
@@ -52,10 +51,15 @@ public class HomeMenu : MonoBehaviour
         // };
         NetworkManager.Singleton.OnClientConnectedCallback += (id) =>
         {
-            SetInteractibleStartButtons(true);
+            SetInteractibleStartButtons(0);
             disableOnSpawn.SetActive(false);
         };
-        _ = sessionManager.StartSessionAsHost();
+        sessionManager.StartSessionAsHost().ContinueWith((task) =>
+        {
+            SetInteractibleStartButtons(0);
+            sessionManager.ActiveSession.PlayerJoined += (_) => SetInteractibleStartButtons(0);
+            sessionManager.ActiveSession.PlayerLeft += (_) => SetInteractibleStartButtons(-1);
+        }, TaskScheduler.FromCurrentSynchronizationContext());
     }
 
     public void CloseStart()
@@ -77,15 +81,23 @@ public class HomeMenu : MonoBehaviour
                 selectable.Select();
     }
 
-    public void SetInteractibleStartButtons(bool interactible)
+    public void SetInteractibleStartButtons(int dnp)
     {
-        transform.Find("StartMenu/MultiButton").GetComponent<Button>().interactable = interactible;
-        transform.Find("StartMenu/SoloButton").GetComponent<Button>().interactable = interactible;
+        if (sessionManager.ActiveSession == null)
+        {
+            transform.Find("StartMenu/MultiButton").GetComponent<Button>().interactable = false;
+            transform.Find("StartMenu/SoloButton").GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            transform.Find("StartMenu/MultiButton").GetComponent<Button>().interactable = (sessionManager.ActiveSession.PlayerCount + dnp) >= 2;
+            transform.Find("StartMenu/SoloButton").GetComponent<Button>().interactable = (sessionManager.ActiveSession.PlayerCount + dnp) >= 1;
+        }
     }
 
     public void Play()
     {
-        SetInteractibleStartButtons(false);
+        SetInteractibleStartButtons(-10);
         sessionManager.ActiveSession.AsHost().IsLocked = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -94,9 +106,9 @@ public class HomeMenu : MonoBehaviour
 
     public void PlayAlone()
     {
-        SetInteractibleStartButtons(false);
+        SetInteractibleStartButtons(-10);
 
-        sessionManager.KickPlayer().ContinueWith((_) => Play());
+        sessionManager.KickPlayer().ContinueWith((_) => Play(), TaskScheduler.FromCurrentSynchronizationContext());
     }
 
     public void Join()
@@ -105,16 +117,34 @@ public class HomeMenu : MonoBehaviour
         {
             disableOnSpawn.SetActive(false);
         };
+        NetworkManager.Singleton.OnClientDisconnectCallback += (id) => {
+            if (id == NetworkManager.Singleton.LocalClientId)
+{
+    Debug.Log("Local player disconnected!");
+    SceneManager.LoadScene("Scenes/HomeMenu", LoadSceneMode.Single);
+                    CloseStart();
+                    CloseWaitingForHostScreen();
+                    CloseJoin();
+}
+        };
+
         string joinCode = transform.Find("JoinMenu/JoinCodeInput").GetComponent<TMP_InputField>().text.ToUpper();
-        _ = sessionManager.JoinSession(joinCode);
+
+        sessionManager.JoinSession(joinCode).ContinueWith((task) =>
+        {
+            if (task.IsFaulted)
+                SetConnectedStatus("<color=red>Impossible to find the station. Check your connection and the code you entered.");
+            else
+                SetConnectedStatus("Connected ! Waiting for your host to start the game...");
+        }, TaskScheduler.FromCurrentSynchronizationContext());
+
         transform.Find("JoinMenu").gameObject.SetActive(false);
         transform.Find("WaitingForHostScreen").gameObject.SetActive(true);
         foreach (Selectable selectable in Selectable.allSelectablesArray)
             if (selectable.name == "BackButton")
                 selectable.Select();
 
-        NetworkManager.Singleton.OnServerStopped += (_) => {SceneManager.LoadScene("Scenes/HomeMenu", LoadSceneMode.Single);};
-        NetworkManager.Singleton.OnServerStopped += (_) => CloseJoin();
+       SetConnectedStatus("Traveling to this station...");
     }
 
     public void OpenSettings()
@@ -155,11 +185,17 @@ public class HomeMenu : MonoBehaviour
 
     public void CloseWaitingForHostScreen()
     {
-        _ = sessionManager.LeaveSession().ContinueWith((_) => {disableOnSpawn.SetActive(true);});
+        sessionManager.LeaveSession().ContinueWith((_) => { disableOnSpawn.SetActive(true); }, TaskScheduler.FromCurrentSynchronizationContext());
+        SetConnectedStatus("Traveling to this station...");
         transform.Find("WaitingForHostScreen").gameObject.SetActive(false);
         transform.Find("JoinMenu").gameObject.SetActive(true);
         foreach (Selectable selectable in Selectable.allSelectablesArray)
             if (selectable.name == "JoinButton")
                 selectable.Select();
+    }
+
+    private void SetConnectedStatus(string txt)
+    {
+        transform.Find("WaitingForHostScreen/TextPlay").GetComponent<TMP_Text>().text = txt;
     }
 }

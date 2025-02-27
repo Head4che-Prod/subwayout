@@ -62,7 +62,7 @@ public class SessionManager
             GameObject.Find("StartMenu/ConnectedPlayersText").GetComponent<TextMeshProUGUI>().text = $"Connected players: {ActiveSession.PlayerCount}/2";
         };
         ActiveSession.PlayerLeft += (id) => {
-            GameObject.Find("StartMenu/ConnectedPlayersText").GetComponent<TextMeshProUGUI>().text = $"Connected players: {ActiveSession.PlayerCount}/2";
+            GameObject.Find("StartMenu/ConnectedPlayersText").GetComponent<TextMeshProUGUI>().text = $"Connected players: {ActiveSession.PlayerCount - 1}/2";
         };
     }
 
@@ -74,6 +74,8 @@ public class SessionManager
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         EventSystem.current.SetSelectedGameObject(GameObject.Find("BackButton").gameObject);
+        if (activeSession == null)
+            throw new ArgumentException("Wrong code or no connection");
     }
 
     public async Task KickPlayer()
