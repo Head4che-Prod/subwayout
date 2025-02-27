@@ -1800,6 +1800,22 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 1925927879
       objectReference: {fileID: 0}
+    - target: {fileID: 4544173874050465634, guid: 5afb63c7f6b2a4b458455bde00bd105a, type: 3}
+      propertyPath: SyncScaleX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544173874050465634, guid: 5afb63c7f6b2a4b458455bde00bd105a, type: 3}
+      propertyPath: SyncScaleY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544173874050465634, guid: 5afb63c7f6b2a4b458455bde00bd105a, type: 3}
+      propertyPath: SyncScaleZ
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4740233847293281817, guid: 5afb63c7f6b2a4b458455bde00bd105a, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2196783186
+      objectReference: {fileID: 0}
     - target: {fileID: 5333414820007818918, guid: 5afb63c7f6b2a4b458455bde00bd105a, type: 3}
       propertyPath: m_Name
       value: HintSystem

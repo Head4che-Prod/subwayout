@@ -1,4 +1,5 @@
 using Objects;
+using Unity.Netcode;
 
 namespace Prefabs.Puzzles.HintSystem
 {
@@ -7,7 +8,14 @@ namespace Prefabs.Puzzles.HintSystem
         public void Deactivate()
         {
             Drop();
-            gameObject.SetActive(false);
+            DisableServerRPC();
+        }
+
+        [ServerRpc(RequireOwnership = false)]
+        private void DisableServerRPC()
+        {
+            //gameObject.SetActive(false);
+            NetworkObject.Despawn();
         }
     }
 }
