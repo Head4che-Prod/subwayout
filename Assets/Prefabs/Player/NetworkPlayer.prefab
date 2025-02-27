@@ -840,7 +840,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   player: {fileID: 6371891161549056370}
-  reach: 2
+  reach: 3
 --- !u!1 &8897388447206143973
 GameObject:
   m_ObjectHideFlags: 0
