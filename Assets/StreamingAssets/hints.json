@@ -1,8 +1,20 @@
 [
   {
     "ID": "NoHints",
-    "PathEn": "Placeholders/neige_fixed",
-    "PathFr": "Placeholders/neige_fixed",
-    "PathEs": "Placeholders/neige_fixed"
+    "PathEn": "NoHints/NoHintsEN",
+    "PathFr": "NoHints/NoHintsFR",
+    "PathEs": "NoHints/NoHintsES"
+  },
+  {
+    "ID": "HintTuto",
+    "PathEn": "HintTuto/HintTutoEN",
+    "PathFr": "HintTuto/HintTutoFR",
+    "PathEs": "HintTuto/HintTutoES"
+  },
+  {
+    "ID": "Map",
+    "PathEn": "Map/MapEN",
+    "PathFr": "Map/MapFR",
+    "PathEs": "Map/MapES"
   }
 ]
