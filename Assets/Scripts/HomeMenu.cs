@@ -61,7 +61,7 @@ public class HomeMenu : MonoBehaviour
     public void CloseStart()
     {
         // Close server / Lobby
-        sessionManager.LeaveSession();
+        _ = sessionManager.LeaveSession();
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         // Reset the join code
@@ -92,11 +92,11 @@ public class HomeMenu : MonoBehaviour
         NetworkManager.Singleton.SceneManager.LoadScene("Scenes/TempHanoi", UnityEngine.SceneManagement.LoadSceneMode.Single);
     }
 
-    public void PlayAlone()
+    public async Task PlayAlone()
     {
         SetInteractibleStartButtons(false);
 
-        sessionManager.KickPlayer();
+        await sessionManager.KickPlayer();
         Play();
     }
 
@@ -107,12 +107,14 @@ public class HomeMenu : MonoBehaviour
             disableOnSpawn.SetActive(false);
         };
         string joinCode = transform.Find("JoinMenu/JoinCodeInput").GetComponent<TMP_InputField>().text.ToUpper();
-        sessionManager.JoinSession(joinCode);
+        _ = sessionManager.JoinSession(joinCode);
         transform.Find("JoinMenu").gameObject.SetActive(false);
         transform.Find("WaitingForHostScreen").gameObject.SetActive(true);
         foreach (Selectable selectable in Selectable.allSelectablesArray)
             if (selectable.name == "BackButton")
                 selectable.Select();
+
+        NetworkManager.Singleton.OnClientDisconnectCallback += (_) => CloseJoin();
     }
 
     public void OpenSettings()
@@ -153,7 +155,7 @@ public class HomeMenu : MonoBehaviour
 
     public void CloseWaitingForHostScreen()
     {
-        sessionManager.LeaveSession();
+        _ = sessionManager.LeaveSession();
         transform.Find("WaitingForHostScreen").gameObject.SetActive(false);
         transform.Find("JoinMenu").gameObject.SetActive(true);
         foreach (Selectable selectable in Selectable.allSelectablesArray)

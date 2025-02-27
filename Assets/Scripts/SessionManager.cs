@@ -55,9 +55,15 @@ public class SessionManager
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         EventSystem.current.SetSelectedGameObject(GameObject.Find("StartMenu/BackButton").gameObject);
+        ActiveSession.PlayerJoined += (id) => {
+            GameObject.Find("StartMenu/ConnectedPlayersText").GetComponent<TextMeshProUGUI>().text = $"Connected players: {ActiveSession.PlayerCount}/2";
+        };
+        ActiveSession.PlayerLeft += (id) => {
+            GameObject.Find("StartMenu/ConnectedPlayersText").GetComponent<TextMeshProUGUI>().text = $"Connected players: {ActiveSession.PlayerCount}/2";
+        };
     }
 
-    public async void JoinSession(string joinCode)
+    public async Task JoinSession(string joinCode)
     {
         await Start();
 
@@ -67,7 +73,7 @@ public class SessionManager
         EventSystem.current.SetSelectedGameObject(GameObject.Find("BackButton").gameObject);
     }
 
-    public async void KickPlayer()
+    public async Task KickPlayer()
     {
         if (!ActiveSession.IsHost) return;
         string idToKick = ActiveSession.Players[0].Id == ActiveSession.Id ? ActiveSession.Players[1].Id : ActiveSession.Players[0].Id;
@@ -75,7 +81,7 @@ public class SessionManager
         Debug.Log($"Player {idToKick} kicked !");
     }
 
-    public async void LeaveSession()
+    public async Task LeaveSession()
     {
         if (ActiveSession != null)
         {
