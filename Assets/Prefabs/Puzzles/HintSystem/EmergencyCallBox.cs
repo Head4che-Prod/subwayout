@@ -21,7 +21,8 @@ namespace Prefabs.Puzzles.HintSystem
         {
             if (!_triggerInserted && _triggerGrabbable?.Owner == player)
             {
-                throw new NotImplementedException();
+                callTrigger.Activate();
+                insertableTrigger.Deactivate();
             }
         }
     }
