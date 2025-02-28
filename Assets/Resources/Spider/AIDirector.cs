@@ -5,7 +5,7 @@ public class AIDirector : MonoBehaviour
     private AIStateWandering _aiStateWandering;
     private AIStateBait _aiStateBait;
 
-    [SerializeField] private GameObject _bait;
+    private GameObject _bait;
     
     void Awake()
     {
@@ -21,6 +21,16 @@ public class AIDirector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _aiStateBait.StateUpdate(_bait.transform.position);
+        _bait = GameObject.FindGameObjectWithTag("Bait");
+
+        if(_bait is not null)
+        {
+            _aiStateBait.StateUpdate(_bait.transform.position);
+        }
+        else
+        {
+            _aiStateWandering.StateUpdate();
+        }
+        
     }
 }

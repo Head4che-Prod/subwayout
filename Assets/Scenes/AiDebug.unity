@@ -499,6 +499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f485825162d6c418a82d209547402b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bait: {fileID: 1184897014}
 --- !u!195 &1328944432
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -533,7 +534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ece189485de4574479e62eed1cc06729, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stopRange: 3
+  stopRange: 1.5
   IdleAnimation: Idle
 --- !u!1 &1474741041
 GameObject:
@@ -742,13 +743,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1661933321}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.16578053, y: -0, z: -0, w: 0.9861627}
+  m_LocalPosition: {x: 2.31, y: 3.8, z: -6.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 19.085, y: 0, z: 0}
 --- !u!114 &1661933325
 MonoBehaviour:
   m_ObjectHideFlags: 0

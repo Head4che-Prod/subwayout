@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Pickable
   - MultiplayerTitle
+  - Bait
   layers:
   - Default
   - TransparentFX
