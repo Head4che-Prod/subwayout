@@ -106,6 +106,7 @@ namespace Objects
         /// </summary>
         public virtual void Drop()
         {
+            Owner.Interaction.GrabbedObject = null;
             Owner = null;
             SetGrabbableServerRpc(true);
             Rb.useGravity = affectedByGravity; // For object that may not be affected by gravity in puzzles in the future

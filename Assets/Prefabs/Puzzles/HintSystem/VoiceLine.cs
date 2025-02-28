@@ -17,7 +17,6 @@ namespace Prefabs.Puzzles.HintSystem
                 File.ReadAllText(Path.Combine(Application.streamingAssetsPath, "hints.json")));
             foreach (VoiceLine voiceLine in voiceLines)
             {
-                Debug.Log(voiceLine.ID);
                 PuzzleHint.HintIndex.Add(voiceLine.ID,
                     new PuzzleHint(
                         Resources.Load<AudioClip>("Audio/Hints/"+voiceLine.PathEn),

@@ -51,7 +51,6 @@ namespace Prefabs.Puzzles.HintSystem
         
         protected override void Action(PlayerObject _)
         {
-            Debug.Log("Hint");
             _source.clip = PuzzleHint.GetRandomVoiceLine();
             _source.Play();
         }

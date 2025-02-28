@@ -13,7 +13,7 @@ namespace Prefabs.Player
         [SerializeField] private PlayerObject player;        
         [SerializeField] private float reach;
         
-        private ObjectGrabbable _grabbedObject;
+        [NonSerialized] public ObjectGrabbable GrabbedObject;
         private InputAction _actionInput;
         private InputAction _grabInput;
         
@@ -66,15 +66,15 @@ namespace Prefabs.Player
                 // Grab an object
                 else if (context.action.id == _grabInput.id &&
                          interactable is ObjectGrabbable { Grabbable: true } objGrabbable &&
-                         _grabbedObject is null)
+                         GrabbedObject is null)
                 {
-                    _grabbedObject = objGrabbable;
-                    _grabbedObject.Grab(player);
+                    GrabbedObject = objGrabbable;
+                    GrabbedObject.Grab(player);
                     return;
                 }
             } 
             
-            if (_grabbedObject is not null && context.action.id == _grabInput.id)
+            if (GrabbedObject is not null && context.action.id == _grabInput.id)
             {
                 // Place an object
                 
@@ -96,8 +96,7 @@ namespace Prefabs.Player
                 
                 // else
                 {
-                    _grabbedObject.Drop();
-                    _grabbedObject = null;
+                    GrabbedObject.Drop();
                 }
             }
         }
