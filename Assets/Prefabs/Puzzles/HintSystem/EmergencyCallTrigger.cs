@@ -46,7 +46,7 @@ namespace Prefabs.Puzzles.HintSystem
 
         public void Activate()
         {
-            (this as IOffStage).SetStageStateServerRPC(true);
+            (this as IOffStage).SetStageStateRPC(true);
         }
         
         protected override void Action(PlayerObject _)
@@ -55,5 +55,10 @@ namespace Prefabs.Puzzles.HintSystem
             _source.Play();
         }
 
+        protected override void Animate(Animator objectAnimator)
+        {
+            objectAnimator.SetTrigger("PullTrigger");
+            objectAnimator.ResetTrigger("PullTrigger");
+        }
     }
 }

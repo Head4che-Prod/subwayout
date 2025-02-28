@@ -21,8 +21,8 @@ namespace Objects
             Collider.enabled = newValue;
         }
 
-        [ServerRpc(RequireOwnership = false)]
-        public void SetStageStateServerRPC(bool state)
+        [Rpc(SendTo.Server, RequireOwnership = false)]
+        public void SetStageStateRPC(bool state)
         {
             IsOffStage.Value = state;
         }

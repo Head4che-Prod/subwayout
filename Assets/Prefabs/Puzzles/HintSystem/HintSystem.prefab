@@ -402,6 +402,7 @@ GameObject:
   - component: {fileID: 7786278603667745757}
   - component: {fileID: 2613145423236873926}
   - component: {fileID: 4740233847293281817}
+  - component: {fileID: 5535548707433403398}
   m_Layer: 0
   m_Name: HintTrigger
   m_TagString: Untagged
@@ -418,7 +419,7 @@ Transform:
   m_GameObject: {fileID: 5857529159657524803}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.9453385, y: -2.631534, z: 0.3022461}
+  m_LocalPosition: {x: 1.9453385, y: -1.96, z: 0.3022461}
   m_LocalScale: {x: 0.17350388, y: 1.2390743, z: 0.17350388}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -490,8 +491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  animator: {fileID: 0}
-  animationName: 
+  objectAnimator: {fileID: 5535548707433403398}
 --- !u!64 &7786278603667745757
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -636,6 +636,28 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
+--- !u!95 &5535548707433403398
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5857529159657524803}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 234a4f96527a8ec40b0008bd62f19a07, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6362980493735417507
 GameObject:
   m_ObjectHideFlags: 0
@@ -737,8 +759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  animator: {fileID: 0}
-  animationName: 
+  objectAnimator: {fileID: 0}
   insertableTrigger: {fileID: 8450191938813500120}
   callTrigger: {fileID: 6032755934079699111}
 --- !u!64 &4666454676953713763
