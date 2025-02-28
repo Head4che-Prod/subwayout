@@ -7,6 +7,7 @@ namespace Prefabs.Puzzles.HintSystem
 {
     public class EmergencyCallTrigger : ObjectActionable, IOffStage
     {
+        private static readonly int PullTrigger = Animator.StringToHash("PullTrigger");
         public NetworkVariable<bool> IsOffStage { get; } = new NetworkVariable<bool>(false);
         public MeshRenderer Renderer { get; set; }
         public MeshCollider Collider { get; set; }
@@ -57,8 +58,7 @@ namespace Prefabs.Puzzles.HintSystem
 
         protected override void Animate(Animator objectAnimator)
         {
-            objectAnimator.SetTrigger("PullTrigger");
-            objectAnimator.ResetTrigger("PullTrigger");
+            objectAnimator.SetTrigger(PullTrigger);
         }
     }
 }
