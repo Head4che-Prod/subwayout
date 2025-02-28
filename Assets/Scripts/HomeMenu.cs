@@ -16,17 +16,24 @@ public class HomeMenu : MonoBehaviour
     SessionManager sessionManager;
     private GameObject disableOnSpawn;
     [SerializeField] public GameObject PlayerPrefab;
+    private bool _isCursorActive = true;
 
     void Start()
     {
         sessionManager = SessionManager.Singleton;
         disableOnSpawn = GameObject.Find("DisableOnSpawn");
+        _isCursorActive = true;
+        SceneManager.activeSceneChanged += (from, to) => {
+            _isCursorActive = false;
+            Cursor.lockState = _isCursorActive? CursorLockMode.None: CursorLockMode.Locked;
+            Cursor.visible = _isCursorActive;
+        };
     }
 
     void Update()
     {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        Cursor.lockState = _isCursorActive? CursorLockMode.None: CursorLockMode.Locked;
+        Cursor.visible = _isCursorActive;
     }
 
     public void Quit()
@@ -66,6 +73,7 @@ public class HomeMenu : MonoBehaviour
     {
         // Close server / Lobby
         _ = sessionManager.LeaveSession();
+        _isCursorActive = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         // Reset the join code
@@ -99,6 +107,7 @@ public class HomeMenu : MonoBehaviour
     {
         SetInteractibleStartButtons(-10);
         sessionManager.ActiveSession.AsHost().IsLocked = true;
+        _isCursorActive = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         NetworkManager.Singleton.SceneManager.LoadScene("Scenes/TempHanoi", UnityEngine.SceneManagement.LoadSceneMode.Single);
@@ -117,15 +126,16 @@ public class HomeMenu : MonoBehaviour
         {
             disableOnSpawn.SetActive(false);
         };
-        NetworkManager.Singleton.OnClientDisconnectCallback += (id) => {
+        NetworkManager.Singleton.OnClientDisconnectCallback += (id) =>
+        {
             if (id == NetworkManager.Singleton.LocalClientId)
-{
-    Debug.Log("Local player disconnected!");
-    SceneManager.LoadScene("Scenes/HomeMenu", LoadSceneMode.Single);
-                    CloseStart();
-                    CloseWaitingForHostScreen();
-                    CloseJoin();
-}
+            {
+                Debug.Log("Local player disconnected!");
+                SceneManager.LoadScene("Scenes/HomeMenu", LoadSceneMode.Single);
+                CloseStart();
+                CloseWaitingForHostScreen();
+                CloseJoin();
+            }
         };
 
         string joinCode = transform.Find("JoinMenu/JoinCodeInput").GetComponent<TMP_InputField>().text.ToUpper();
@@ -144,7 +154,7 @@ public class HomeMenu : MonoBehaviour
             if (selectable.name == "BackButton")
                 selectable.Select();
 
-       SetConnectedStatus("Traveling to this station...");
+        SetConnectedStatus("Traveling to this station...");
     }
 
     public void OpenSettings()
