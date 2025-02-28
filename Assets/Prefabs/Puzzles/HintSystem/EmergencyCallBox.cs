@@ -25,7 +25,5 @@ namespace Prefabs.Puzzles.HintSystem
                 insertableTrigger.Deactivate();
             }
         }
-
-        protected override void Animate(Animator objectAnimator) { }
     }
 }

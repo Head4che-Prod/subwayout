@@ -1,3 +1,4 @@
+using System.Collections;
 using Objects;
 using Prefabs.Player;
 using Unity.Netcode;
@@ -7,17 +8,21 @@ namespace Prefabs.Puzzles.HintSystem
 {
     public class EmergencyCallTrigger : ObjectActionable, IOffStage
     {
-        private static readonly int PullTrigger = Animator.StringToHash("PullTrigger");
         public NetworkVariable<bool> IsOffStage { get; } = new NetworkVariable<bool>(false);
         public MeshRenderer Renderer { get; set; }
         public MeshCollider Collider { get; set; }
         
+        
+        private Animator _triggerAnimator;
+        private static readonly int PullTrigger = Animator.StringToHash("PullTrigger");
         private AudioSource _source;
+        private NetworkVariable<bool> _cooldownFinished = new NetworkVariable<bool>(true);
 
         public void Awake()
         {
             Renderer = GetComponent<MeshRenderer>();
             Collider = GetComponent<MeshCollider>();
+            _triggerAnimator = GetComponent<Animator>();
         }
 
         public void ChangeActivationState(bool oldValue, bool newValue)
@@ -52,13 +57,26 @@ namespace Prefabs.Puzzles.HintSystem
         
         protected override void Action(PlayerObject _)
         {
-            _source.clip = PuzzleHint.GetRandomVoiceLine();
-            _source.Play();
+            if (_cooldownFinished.Value)
+            {
+                _triggerAnimator.SetTrigger(PullTrigger);
+                _source.clip = PuzzleHint.GetRandomVoiceLine();
+                _source.Play();
+                StartCooldownServerRPC();
+            }
         }
 
-        protected override void Animate(Animator objectAnimator)
+        [ServerRpc(RequireOwnership = false)]
+        private void StartCooldownServerRPC()
         {
-            objectAnimator.SetTrigger(PullTrigger);
+            _cooldownFinished.Value = false;
+            StartCoroutine(TriggerCooldown());
+        }
+
+        private IEnumerator TriggerCooldown()
+        {
+            yield return new WaitForSeconds(20f);
+            _cooldownFinished.Value = true;
         }
     }
 }
