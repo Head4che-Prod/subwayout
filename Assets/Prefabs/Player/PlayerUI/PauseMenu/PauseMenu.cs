@@ -22,7 +22,7 @@ namespace Prefabs.Player.PlayerUI.PauseMenu
         {
             if (buttons.Length == 0)
                 Debug.LogError($"UI {name} has no buttons");
-            
+
             _pauseMenuUI = transform.Find("PauseMenuUI").gameObject;
             _pauseMenuUI.SetActive(false);
         }
@@ -43,11 +43,13 @@ namespace Prefabs.Player.PlayerUI.PauseMenu
             {
                 Debug.Log("Unpause");
                 _allowMenuChange = false;
-                
+
                 _pauseMenuUI.SetActive(false);
                 _player.InputManager.SetPlayerInputMap("Gameplay");
                 StartCoroutine(WaitForEscapeReleased());
             }
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         public void Pause()
@@ -58,6 +60,8 @@ namespace Prefabs.Player.PlayerUI.PauseMenu
                 _pauseMenuUI.SetActive(true);
                 _player.InputManager.SetPlayerInputMap("UI");
                 StartCoroutine(WaitForEscapeReleased());
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
             }
         }
 
@@ -68,11 +72,12 @@ namespace Prefabs.Player.PlayerUI.PauseMenu
             }
             _allowMenuChange = true;   // Player can now switch menu once again
         }
-        
-        
+
+
         public void QuitGame()
         {
-            SceneManager.LoadScene("Scenes/DemoMenu");
+            SceneManager.LoadScene("Scenes/HomeMenu");
+            _ = SessionManager.Singleton.LeaveSession();
         }
     }
 }
