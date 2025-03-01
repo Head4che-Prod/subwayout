@@ -10,6 +10,7 @@ namespace Prefabs.Puzzles.HintSystem
     {
         private Animator _triggerAnimator;
         private static readonly int PullTrigger = Animator.StringToHash("TriggerDown");
+        private static readonly int InsertTrigger = Animator.StringToHash("InsertTrigger");
         private AudioSource _source;
         private NetworkVariable<bool> _cooldownFinished = new NetworkVariable<bool>(true);
 
@@ -23,7 +24,7 @@ namespace Prefabs.Puzzles.HintSystem
             base.ChangeActivationState(oldValue, newValue);
             if (newValue)
             {
-                // Play animation
+                _triggerAnimator.SetTrigger(InsertTrigger);
                 _source = GetComponent<AudioSource>();
                 VoiceLine.LoadVoiceLines();
             }

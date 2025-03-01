@@ -8,6 +8,7 @@ namespace Prefabs.Puzzles.HintSystem
     public class PuzzleHint
     {
         private static Random _r = new Random(69);
+        private static bool _firstInteractionPlayed;
         
         public static List<string> Hints { get; } = new List<string>();
         public static Dictionary<string, PuzzleHint> HintIndex { get; } = new Dictionary<string, PuzzleHint>();
@@ -69,6 +70,11 @@ namespace Prefabs.Puzzles.HintSystem
 
         public static string GetRandomVoiceLine()
         {
+            if (!_firstInteractionPlayed)
+            {
+                _firstInteractionPlayed = true;
+                return "HintTuto";
+            }
             if (Hints.Count == 0)
                 return "NoHints";
             return Hints[_r.Next(Hints.Count)];
