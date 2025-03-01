@@ -1,3 +1,4 @@
+using System.Collections;
 using Objects;
 using Prefabs.Player;
 using Unity.Netcode;
@@ -5,55 +6,64 @@ using UnityEngine;
 
 namespace Prefabs.Puzzles.HintSystem
 {
-    public class EmergencyCallTrigger : ObjectActionable, IOffStage
+    public class EmergencyCallTrigger : ObjectActionable
     {
-        public NetworkVariable<bool> IsOffStage { get; } = new NetworkVariable<bool>(false);
-        public MeshRenderer Renderer { get; set; }
-        public MeshCollider Collider { get; set; }
-        
+        private Animator _triggerAnimator;
+        private static readonly int PullTrigger = Animator.StringToHash("TriggerDown");
+        private static readonly int InsertTrigger = Animator.StringToHash("InsertTrigger");
         private AudioSource _source;
+        private NetworkVariable<bool> _cooldownFinished = new NetworkVariable<bool>(true);
 
-        public void Awake()
+        public void Start()
         {
-            Renderer = GetComponent<MeshRenderer>();
-            Collider = GetComponent<MeshCollider>();
+            _triggerAnimator = GetComponent<Animator>();
         }
 
-        public void ChangeActivationState(bool oldValue, bool newValue)
+        protected override void ChangeActivationState(bool oldValue, bool newValue)
         {
-            Renderer.enabled = newValue;
-            Collider.enabled = newValue;
+            base.ChangeActivationState(oldValue, newValue);
             if (newValue)
             {
-                // Play animation
+                _triggerAnimator.SetTrigger(InsertTrigger);
                 _source = GetComponent<AudioSource>();
                 VoiceLine.LoadVoiceLines();
             }
         }
-        public void OnEnable()
-        {
-            IsOffStage.OnValueChanged += ChangeActivationState;
-        }
-
-        public void OnDisable()
-        {
-            IsOffStage.OnValueChanged -= ChangeActivationState;
-        }
-        public override void OnNetworkSpawn()
-        {
-            ChangeActivationState(false, false);
-        }
-
+        
         public void Activate()
         {
-            (this as IOffStage).SetStageStateServerRPC(true);
+            SetStageStateServerRPC(true);
         }
         
         protected override void Action(PlayerObject _)
         {
-            _source.clip = PuzzleHint.GetRandomVoiceLine();
+            if (_cooldownFinished.Value)
+            {
+                PlayVoiceLinesServerRPC();
+            }
+        }
+        [ServerRpc(RequireOwnership = false)]
+        private void PlayVoiceLinesServerRPC()
+        {
+            string line = PuzzleHint.GetRandomVoiceLine();
+            PlayVoiceLinesClientRPC(line);
+            _cooldownFinished.Value = false;
+            StartCoroutine(TriggerCooldown(PuzzleHint.HintIndex[line].Duration));
+        }
+
+        [ClientRpc]
+        private void PlayVoiceLinesClientRPC(string line)
+        {
+            _triggerAnimator.SetTrigger(PullTrigger);
+            _source.clip = PuzzleHint.HintIndex[line].VoiceLine;
             _source.Play();
         }
 
+        private IEnumerator TriggerCooldown(float duration)
+        {
+            yield return new WaitForSeconds(duration);
+            _cooldownFinished.Value = true;
+            _triggerAnimator.ResetTrigger(PullTrigger);
+        }
     }
 }
