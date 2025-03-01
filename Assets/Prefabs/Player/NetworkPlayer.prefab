@@ -266,6 +266,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5411741163773892280}
+  - component: {fileID: 3988538835331814469}
   m_Layer: 0
   m_Name: ObjectGrabPoint
   m_TagString: Untagged
@@ -288,6 +289,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2807093509488964787}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3988538835331814469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913258719231907689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 943831300b8940fdb3979757701159e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 6371891161549056370}
 --- !u!1 &2486201601411644443
 GameObject:
   m_ObjectHideFlags: 0
@@ -598,10 +612,10 @@ GameObject:
   - component: {fileID: 7088814739842334021}
   - component: {fileID: 6686329594619532825}
   - component: {fileID: 2578371781939902612}
-  - component: {fileID: 3146751663887921008}
   - component: {fileID: 6371891161549056370}
   - component: {fileID: 773850728464104108}
   - component: {fileID: -2297209973531631225}
+  - component: {fileID: 1128237524956896807}
   m_Layer: 0
   m_Name: NetworkPlayer
   m_TagString: Player
@@ -756,20 +770,6 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &3146751663887921008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4957522455835016799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ac9a7489d4ffbb4a8140e6aba446bcf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  reach: 3
 --- !u!114 &6371891161549056370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -826,6 +826,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d68bad4891aa43229813e7d76b262810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1128237524956896807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4957522455835016799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 087f4a16f9b544baa3dc7e1c35fda40e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  player: {fileID: 6371891161549056370}
+  reach: 3
 --- !u!1 &8897388447206143973
 GameObject:
   m_ObjectHideFlags: 0
