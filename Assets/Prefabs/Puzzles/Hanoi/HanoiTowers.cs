@@ -105,7 +105,7 @@ namespace Prefabs.Puzzles.Hanoi
             {
                 Debug.Log("Game won!");
                 NetworkManager.Singleton.Shutdown();
-                UnityEngine.SceneManagement.SceneManager.LoadScene("Scenes/DemoMenu");
+                UnityEngine.SceneManagement.SceneManager.LoadScene("Scenes/HomeMenu");
             }
         }
 
