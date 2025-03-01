@@ -6,29 +6,21 @@ using UnityEngine;
 
 namespace Prefabs.Puzzles.HintSystem
 {
-    public class EmergencyCallTrigger : ObjectActionable, IOffStage
+    public class EmergencyCallTrigger : ObjectActionable
     {
-        public NetworkVariable<bool> IsOffStage { get; } = new NetworkVariable<bool>(false);
-        public MeshRenderer Renderer { get; set; }
-        public MeshCollider Collider { get; set; }
-        
-        
         private Animator _triggerAnimator;
         private static readonly int PullTrigger = Animator.StringToHash("PullTrigger");
         private AudioSource _source;
         private NetworkVariable<bool> _cooldownFinished = new NetworkVariable<bool>(true);
 
-        public void Awake()
+        public void Start()
         {
-            Renderer = GetComponent<MeshRenderer>();
-            Collider = GetComponent<MeshCollider>();
             _triggerAnimator = GetComponent<Animator>();
         }
 
-        public void ChangeActivationState(bool oldValue, bool newValue)
+        protected override void ChangeActivationState(bool oldValue, bool newValue)
         {
-            Renderer.enabled = newValue;
-            Collider.enabled = newValue;
+            base.ChangeActivationState(oldValue, newValue);
             if (newValue)
             {
                 // Play animation
@@ -36,41 +28,33 @@ namespace Prefabs.Puzzles.HintSystem
                 VoiceLine.LoadVoiceLines();
             }
         }
-        public void OnEnable()
-        {
-            IsOffStage.OnValueChanged += ChangeActivationState;
-        }
-
-        public void OnDisable()
-        {
-            IsOffStage.OnValueChanged -= ChangeActivationState;
-        }
-        public override void OnNetworkSpawn()
-        {
-            ChangeActivationState(false, false);
-        }
-
+        
         public void Activate()
         {
-            (this as IOffStage).SetStageStateRPC(true);
+            SetStageStateServerRPC(true);
         }
         
         protected override void Action(PlayerObject _)
         {
             if (_cooldownFinished.Value)
             {
-                _triggerAnimator.SetTrigger(PullTrigger);
-                _source.clip = PuzzleHint.GetRandomVoiceLine();
-                _source.Play();
-                StartCooldownServerRPC();
+                PlayVoiceLinesServerRPC();
             }
         }
-
         [ServerRpc(RequireOwnership = false)]
-        private void StartCooldownServerRPC()
+        private void PlayVoiceLinesServerRPC()
         {
+            PlayVoiceLinesClientRPC(PuzzleHint.GetRandomVoiceLine());
             _cooldownFinished.Value = false;
             StartCoroutine(TriggerCooldown());
+        }
+
+        [ClientRpc]
+        private void PlayVoiceLinesClientRPC(string line)
+        {
+            _triggerAnimator.SetTrigger(PullTrigger);
+            _source.clip = PuzzleHint.HintIndex[line].VoiceLine;
+            _source.Play();
         }
 
         private IEnumerator TriggerCooldown()

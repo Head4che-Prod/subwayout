@@ -244,6 +244,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  canBeOffStage: 0
+  startOnStage: 0
   moveSpeed: 2
   affectedByGravity: 1
 --- !u!64 &524291002054464881
@@ -491,7 +493,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  objectAnimator: {fileID: 5535548707433403398}
+  canBeOffStage: 1
+  startOnStage: 0
 --- !u!64 &7786278603667745757
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -759,7 +762,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  objectAnimator: {fileID: 0}
+  canBeOffStage: 0
+  startOnStage: 0
   insertableTrigger: {fileID: 8450191938813500120}
   callTrigger: {fileID: 6032755934079699111}
 --- !u!64 &4666454676953713763

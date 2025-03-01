@@ -16,7 +16,7 @@ namespace Prefabs.Puzzles.HintSystem
         private readonly AudioClip _voiceLineFr;
         private readonly AudioClip _voiceLineEs;
 
-        private AudioClip _voiceLine
+        public AudioClip VoiceLine
         {
             get
             {
@@ -42,11 +42,11 @@ namespace Prefabs.Puzzles.HintSystem
             _voiceLineEs = voiceLineEs;
         }
 
-        public static AudioClip GetRandomVoiceLine()
+        public static string GetRandomVoiceLine()
         {
             if (Hints.Count == 0)
-                return HintIndex["NoHints"]._voiceLine;
-            return HintIndex[Hints[_r.Next(Hints.Count)]]._voiceLine;
+                return "NoHints";
+            return Hints[_r.Next(Hints.Count)];
         }
 
     }
