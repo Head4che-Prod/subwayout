@@ -19,9 +19,10 @@ namespace Prefabs.Player
 		[Header("Keybindings")] 
 		private InputAction _movementInput;
 		private InputAction _sprintInput;
-	
-		[Header("Ground Check")] 
-		public float playerHeight;
+
+		[Header("Ground Check")]
+		public Collider PlayerCollider;
+		private float _colliderHeight;
 		public LayerMask whatIsGround;
 		private bool _grounded;
 
@@ -36,13 +37,16 @@ namespace Prefabs.Player
 			_player.Rigidbody.freezeRotation = true;
 			_movementInput = _player.Input.actions["Move"];
 			_sprintInput = _player.Input.actions["Sprint"];
+
+			_colliderHeight = PlayerCollider.bounds.size.y;
 		}
     
 		void Update()
 		{
-			_grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+			_grounded = Physics.Raycast(PlayerCollider.transform.position, Vector3.down, _colliderHeight * 0.5f + 0.2f, whatIsGround);
+			Debug.DrawRay(PlayerCollider.transform.position, Vector3.down, Color.blue,_colliderHeight * 0.5f + 0.2f);
 	    
-			KeyboardInput();
+			ProcessInputs();
 			SpeedCtrl();
 			StateHandler();
 	    
@@ -57,7 +61,7 @@ namespace Prefabs.Player
 			MovePlayer();
 		}
 
-		private void KeyboardInput()
+		private void ProcessInputs()
 		{
 			Vector2 moveDirection = _movementInput.ReadValue<Vector2>();
 			_horizontalInput = moveDirection.x;

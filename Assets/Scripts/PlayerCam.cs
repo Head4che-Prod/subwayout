@@ -36,5 +36,7 @@ public class PlayerCam : NetworkBehaviour
 
         transform.rotation = Quaternion.Euler(_xRotation, _yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, _yRotation, 0);
+        
+        _player.transform.rotation = orientation.rotation;
     }
 }
