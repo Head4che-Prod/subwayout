@@ -18,7 +18,7 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
         private int _commandHistoryIndex;
         private string _tempCommand;
         
-        private static bool _isActivated = false;
+        private static bool _isActivated;
         private string _previousInputMap;
         private string _currentText;
 
@@ -39,13 +39,12 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
             {
                 Singleton = this;
 
-                Commands["sayHello"] = () => Log("Hello, world!");
-                Commands["inputMode"] = () => Log(_player.Input.currentActionMap.name);
-                Commands["help"] = () => Log("Available commands:\n - " + String.Join("\n - ", Commands.Keys));
+                Commands.Add("sayHello", () => Log("Hello, world!"));
+                Commands.Add("inputMode", () => Log(_player.Input.currentActionMap.name));
+                Commands.Add("help", () => Log("Available commands:\n - " + String.Join("\n - ", Commands.Keys)));
             }
 
-            if (this != null && gameObject != null && gameObject.transform != null && gameObject.transform.GetChild(0) != null && gameObject.transform.GetChild(0).gameObject != null)
-                gameObject.transform.GetChild(0).gameObject.SetActive(_isActivated);
+            gameObject.transform.GetChild(0).gameObject.SetActive(_isActivated);
         }
 
         public void Start()
@@ -160,8 +159,6 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
         
         public void ExecCommand()
         {
-            if (_currentText == "")
-                return;
             if (_currentText.Trim() != "" && (_commandHistory.Count == 0 || _currentText != _commandHistory[0]))
                 _commandHistory.Insert(0, _currentText);
             Commands.GetValueOrDefault(_currentText, () => LogError("Command doesn't exist"))();
