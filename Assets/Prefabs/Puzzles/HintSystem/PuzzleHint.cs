@@ -8,6 +8,7 @@ namespace Prefabs.Puzzles.HintSystem
     public class PuzzleHint
     {
         private static Random _r = new Random(69);
+        private static bool _firstInteractionPlayed;
         
         public static List<string> Hints { get; } = new List<string>();
         public static Dictionary<string, PuzzleHint> HintIndex { get; } = new Dictionary<string, PuzzleHint>();
@@ -15,8 +16,11 @@ namespace Prefabs.Puzzles.HintSystem
         private readonly AudioClip _voiceLineEn;
         private readonly AudioClip _voiceLineFr;
         private readonly AudioClip _voiceLineEs;
+        private readonly float _durationEn;
+        private readonly float _durationFr;
+        private readonly float _durationEs;
 
-        private AudioClip _voiceLine
+        public AudioClip VoiceLine
         {
             get
             {
@@ -35,18 +39,45 @@ namespace Prefabs.Puzzles.HintSystem
             }
         }
 
+        public float Duration
+        {
+            get
+            {
+                switch (LocalizationSettings.SelectedLocale.Identifier.Code)
+                {
+                    case "en-US":
+                        return _durationEn;
+                    case "fr-FR":
+                        return _durationFr;
+                    case "es-ES":
+                        return _durationEs;
+                    default:
+                        Debug.LogError($"Language \"{LocalizationSettings.SelectedLocale.Identifier.Code}\" not found");
+                        return _durationEn;
+                }
+            }
+        }
+        
         public PuzzleHint(AudioClip voiceLineEn, AudioClip voiceLineFr, AudioClip voiceLineEs)
         {
             _voiceLineEn = voiceLineEn;
             _voiceLineFr = voiceLineFr;
             _voiceLineEs = voiceLineEs;
+            _durationEn = _voiceLineEn.length;
+            _durationFr = _voiceLineFr.length;
+            _durationEs = _voiceLineEs.length;
         }
 
-        public static AudioClip GetRandomVoiceLine()
+        public static string GetRandomVoiceLine()
         {
+            if (!_firstInteractionPlayed)
+            {
+                _firstInteractionPlayed = true;
+                return "HintTuto";
+            }
             if (Hints.Count == 0)
-                return HintIndex["NoHints"]._voiceLine;
-            return HintIndex[Hints[_r.Next(Hints.Count)]]._voiceLine;
+                return "NoHints";
+            return Hints[_r.Next(Hints.Count)];
         }
 
     }

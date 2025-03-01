@@ -8,11 +8,11 @@ namespace Prefabs.Puzzles.HintSystem
         public void Deactivate()
         {
             Drop();
-            DisableServerRPC();
+            DisableRPC();
         }
 
-        [ServerRpc(RequireOwnership = false)]
-        private void DisableServerRPC()
+        [Rpc(SendTo.Server, RequireOwnership = false)]
+        private void DisableRPC()
         {
             //gameObject.SetActive(false);
             NetworkObject.Despawn();
