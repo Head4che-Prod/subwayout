@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Prefabs.Player.PlayerUI.DebugConsole
@@ -43,6 +45,7 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
                 Commands["sayHello"] = () => Log("Hello, world!");
                 Commands["inputMode"] = () => Log(_previousInputMap);
                 Commands["help"] = () => Log("Available commands:\n - " + String.Join("\n - ", Commands.Keys));
+                Commands["exit"] = () => NetworkManager.Singleton.SceneManager.LoadScene("Scenes/HomeMenu", LoadSceneMode.Single);
             }
 
             if (this != null && gameObject != null && gameObject.transform != null && gameObject.transform.GetChild(0) != null && gameObject.transform.GetChild(0).gameObject != null)
