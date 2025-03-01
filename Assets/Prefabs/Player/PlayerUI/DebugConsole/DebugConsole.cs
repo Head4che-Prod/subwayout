@@ -46,7 +46,7 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
             }
 
             if (this != null && gameObject != null && gameObject.transform != null && gameObject.transform.GetChild(0) != null && gameObject.transform.GetChild(0).gameObject != null)
-                gameObject.transform.GetChild(0).gameObject.SetActive(_isActivated);
+                gameObject.transform.GetChild(0).gameObject.SetActive(IsActivated);
         }
 
         public void Start()

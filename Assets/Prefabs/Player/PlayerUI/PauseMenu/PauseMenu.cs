@@ -43,10 +43,6 @@ namespace Prefabs.Player.PlayerUI.PauseMenu
             {
                 Debug.Log("Unpause");
                 _allowMenuChange = false;
-
-                foreach (DynamicButton button in buttons)
-                    if (button.isActiveAndEnabled)
-                        button.Deactivate();
                 
                 _pauseMenuUI.SetActive(false);
                 _player.InputManager.SetPlayerInputMap("Gameplay");
@@ -61,7 +57,6 @@ namespace Prefabs.Player.PlayerUI.PauseMenu
                 _allowMenuChange = false;
                 _pauseMenuUI.SetActive(true);
                 _player.InputManager.SetPlayerInputMap("UI");
-                buttons[0].Activate();
                 StartCoroutine(WaitForEscapeReleased());
             }
         }
