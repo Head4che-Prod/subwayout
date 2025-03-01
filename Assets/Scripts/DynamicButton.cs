@@ -18,7 +18,8 @@ public class DynamicButton : MonoBehaviour, IPointerEnterHandler, IDeselectHandl
 
 	public void OnPointerEnter(PointerEventData eventData)
 	{
-		selectable.Select();
+		if (gameObject.GetComponent<Button>().interactable)
+			selectable.Select();
 	}
 
 	public void OnDeselect(BaseEventData eventData)
