@@ -59,11 +59,17 @@ namespace Prefabs.Puzzles.HintSystem
             _source.Play();
         }
 
+        [ClientRpc]
+        private void ResetTriggerClientRPC()
+        {
+            _triggerAnimator.ResetTrigger(PullTrigger);
+        }
+
         private IEnumerator TriggerCooldown(float duration)
         {
             yield return new WaitForSeconds(duration);
             _cooldownFinished.Value = true;
-            _triggerAnimator.ResetTrigger(PullTrigger);
+            ResetTriggerClientRPC();
         }
     }
 }
