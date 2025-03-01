@@ -212,24 +212,24 @@ public class HomeMenu : MonoBehaviour
         transform.Find("WaitingForHostScreen/TextPlay").GetComponent<TMP_Text>().text = txt;
     }
 
-    public void setLangFr() {
+    public void SetLangFr() {
         LocalizationSettings.SelectedLocale = Locale.CreateLocale("fr-FR");
     }
 
-    public void setLangEn() {
+    public void SetLangEn() {
         LocalizationSettings.SelectedLocale = Locale.CreateLocale("en-US");
     }
 
-    public void setLangEs() {
+    public void SetLangEs() {
         LocalizationSettings.SelectedLocale = Locale.CreateLocale("es-ES");
     }
 
     private void SetLang() {
         if (LocalizationSettings.SelectedLocale.Identifier.Code.Contains("fr"))
-            setLangFr();
+            SetLangFr();
         else if (LocalizationSettings.SelectedLocale.Identifier.Code.Contains("es"))
-            setLangEs();
+            SetLangEs();
         else
-            setLangEn();
+            SetLangEn();
         }
 }
