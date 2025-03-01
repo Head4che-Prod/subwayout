@@ -44,9 +44,10 @@ namespace Prefabs.Puzzles.HintSystem
         [ServerRpc(RequireOwnership = false)]
         private void PlayVoiceLinesServerRPC()
         {
-            PlayVoiceLinesClientRPC(PuzzleHint.GetRandomVoiceLine());
+            string line = PuzzleHint.GetRandomVoiceLine();
+            PlayVoiceLinesClientRPC(line);
             _cooldownFinished.Value = false;
-            StartCoroutine(TriggerCooldown());
+            StartCoroutine(TriggerCooldown(PuzzleHint.HintIndex[line].Duration));
         }
 
         [ClientRpc]
@@ -57,9 +58,9 @@ namespace Prefabs.Puzzles.HintSystem
             _source.Play();
         }
 
-        private IEnumerator TriggerCooldown()
+        private IEnumerator TriggerCooldown(float duration)
         {
-            yield return new WaitForSeconds(20f);
+            yield return new WaitForSeconds(duration);
             _cooldownFinished.Value = true;
             _triggerAnimator.ResetTrigger(PullTrigger);
         }
