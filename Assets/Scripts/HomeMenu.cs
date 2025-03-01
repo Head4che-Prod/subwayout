@@ -8,6 +8,8 @@ using Unity.Services.Multiplayer;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -20,6 +22,7 @@ public class HomeMenu : MonoBehaviour
 
     void Start()
     {
+        SetLang();
         sessionManager = SessionManager.Singleton;
         disableOnSpawn = GameObject.Find("DisableOnSpawn");
         _isCursorActive = true;
@@ -208,4 +211,25 @@ public class HomeMenu : MonoBehaviour
     {
         transform.Find("WaitingForHostScreen/TextPlay").GetComponent<TMP_Text>().text = txt;
     }
+
+    public void SetLangFr() {
+        LocalizationSettings.SelectedLocale = Locale.CreateLocale("fr-FR");
+    }
+
+    public void SetLangEn() {
+        LocalizationSettings.SelectedLocale = Locale.CreateLocale("en-US");
+    }
+
+    public void SetLangEs() {
+        LocalizationSettings.SelectedLocale = Locale.CreateLocale("es-ES");
+    }
+
+    private void SetLang() {
+        if (LocalizationSettings.SelectedLocale.Identifier.Code.Contains("fr"))
+            SetLangFr();
+        else if (LocalizationSettings.SelectedLocale.Identifier.Code.Contains("es"))
+            SetLangEs();
+        else
+            SetLangEn();
+        }
 }
