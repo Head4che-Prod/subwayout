@@ -452,6 +452,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  canBeOffStage: 0
+  startOnStage: 0
   moveSpeed: 10
   affectedByGravity: 1
 --- !u!54 &224609091
@@ -1042,6 +1044,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  canBeOffStage: 0
+  startOnStage: 0
   isFree:
     m_InternalValue: 1
 --- !u!4 &750048327
@@ -2487,6 +2491,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  canBeOffStage: 0
+  startOnStage: 0
   moveSpeed: 2
   affectedByGravity: 1
 --- !u!114 &1809723345

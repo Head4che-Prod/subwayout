@@ -9,7 +9,7 @@ namespace Prefabs.Puzzles.HintSystem
     public class EmergencyCallTrigger : ObjectActionable
     {
         private Animator _triggerAnimator;
-        private static readonly int PullTrigger = Animator.StringToHash("PullTrigger");
+        private static readonly int PullTrigger = Animator.StringToHash("TriggerDown");
         private AudioSource _source;
         private NetworkVariable<bool> _cooldownFinished = new NetworkVariable<bool>(true);
 
@@ -61,6 +61,7 @@ namespace Prefabs.Puzzles.HintSystem
         {
             yield return new WaitForSeconds(20f);
             _cooldownFinished.Value = true;
+            _triggerAnimator.ResetTrigger(PullTrigger);
         }
     }
 }
