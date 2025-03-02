@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: Localization-Assets-Shared
   m_GUID: b8350da5ae318174988ae4ac2feb0777
   m_SerializeEntries:
+  - m_GUID: 5295203388ef2a54fa53c22dfbb66574
+    m_Address: Assets/Prefabs/Player/PlayerUI/PauseMenu/PauseMenu Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 85eb8582dbcadfb42b96e667f1a61fc8
     m_Address: Assets/Resources/Locales/NetworkDebugUI/NetworkDebugUI Shared Data.asset
     m_ReadOnly: 1
