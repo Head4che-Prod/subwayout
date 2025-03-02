@@ -22,6 +22,11 @@ public class PlayerCam : NetworkBehaviour
         Cursor.visible = false;
         _player = GetComponentInParent<PlayerObject>();
         _lookAction = _player.Input.actions["Look"];
+
+        _player.playerCamera.cullingMask &= ~(1 << 7);
+        
+        _player.playerCharacter.layer = 7;
+        SetLayerAllChildren(_player.playerCharacter.transform, 7);
     }
     
     void Update()
@@ -36,7 +41,16 @@ public class PlayerCam : NetworkBehaviour
 
         transform.rotation = Quaternion.Euler(_xRotation, _yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, _yRotation, 0);
-        
-        _player.transform.rotation = orientation.rotation;
+
+        _player.playerCharacter.transform.rotation = orientation.rotation;
+    }
+    
+    private void SetLayerAllChildren(Transform root, int layer)
+    {
+        Transform[] children = root.GetComponentsInChildren<Transform>(includeInactive: true);
+        foreach (Transform child in children)
+        {
+            child.gameObject.layer = layer;
+        }
     }
 }

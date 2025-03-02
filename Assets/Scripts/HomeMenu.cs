@@ -113,7 +113,7 @@ public class HomeMenu : MonoBehaviour
         _isCursorActive = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        NetworkManager.Singleton.SceneManager.LoadScene("Scenes/TempHanoi", UnityEngine.SceneManagement.LoadSceneMode.Single);
+        NetworkManager.Singleton.SceneManager.LoadScene("Scenes/DemoScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
     }
 
     public void PlayAlone()

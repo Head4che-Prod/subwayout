@@ -13,6 +13,7 @@ namespace Prefabs.Player
         public PlayerInput Input {get; private set;}
         public Camera playerCamera;
         public Transform grabPointTransform;
+        public GameObject playerCharacter;
 
         public void Awake()
         {

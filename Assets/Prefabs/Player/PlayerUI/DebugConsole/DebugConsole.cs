@@ -44,6 +44,7 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
 
                 Commands["sayHello"] = () => Log("Hello, world!");
                 Commands["inputMode"] = () => Log(_previousInputMap);
+                Commands["loadDemoScene"] = () => NetworkManager.Singleton.SceneManager.LoadScene("Scenes/DemoScene", LoadSceneMode.Single);
                 Commands["help"] = () => Log("Available commands:\n - " + String.Join("\n - ", Commands.Keys));
                 Commands["exit"] = () => NetworkManager.Singleton.SceneManager.LoadScene("Scenes/HomeMenu", LoadSceneMode.Single);
             }
