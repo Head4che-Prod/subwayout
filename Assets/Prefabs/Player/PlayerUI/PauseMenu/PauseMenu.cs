@@ -15,7 +15,7 @@ namespace Prefabs.Player.PlayerUI.PauseMenu
 
         private GameObject _pauseMenuUI;
 
-        private bool _allowMenuChange;      // Prevents multi-trigger
+        private static bool _allowMenuChange;      // Prevents multi-trigger
         [SerializeField] private DynamicButton[] buttons;
 
         void Awake()
@@ -39,15 +39,10 @@ namespace Prefabs.Player.PlayerUI.PauseMenu
 
         public void Resume()
         {
-            if (_allowMenuChange)
-            {
-                Debug.Log("Unpause");
-                _allowMenuChange = false;
+            _allowMenuChange = true;
 
-                _pauseMenuUI.SetActive(false);
-                _player.InputManager.SetPlayerInputMap("Gameplay");
-                StartCoroutine(WaitForEscapeReleased());
-            }
+            _pauseMenuUI.SetActive(false);
+            _player.InputManager.SetPlayerInputMap("Gameplay");
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
@@ -59,18 +54,9 @@ namespace Prefabs.Player.PlayerUI.PauseMenu
                 _allowMenuChange = false;
                 _pauseMenuUI.SetActive(true);
                 _player.InputManager.SetPlayerInputMap("UI");
-                StartCoroutine(WaitForEscapeReleased());
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
             }
-        }
-
-        private IEnumerator WaitForEscapeReleased()
-        {
-            {
-                yield return null;
-            }
-            _allowMenuChange = true;   // Player can now switch menu once again
         }
 
 
