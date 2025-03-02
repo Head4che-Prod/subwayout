@@ -78,6 +78,15 @@ MonoBehaviour:
     m_Localized: "Bienvenue \xE0 la station ______"
     m_Metadata:
       m_Items: []
+  - m_Id: 226402886107136
+    m_Localized: "<color=red>Impossible de trouver la station. V\xE9rifiez la connexion
+      et le code entr\xE9."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 227158242508800
+    m_Localized: "Connect\xE9 ! En attente de l'h\xF4te pour d\xE9marrer la partie..."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

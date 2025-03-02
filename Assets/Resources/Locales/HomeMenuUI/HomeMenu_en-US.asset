@@ -78,6 +78,15 @@ MonoBehaviour:
     m_Localized: Welcome to the station ______
     m_Metadata:
       m_Items: []
+  - m_Id: 226402886107136
+    m_Localized: <color=red>Impossible to find the station. Check your connection
+      and the code you entered.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 227158242508800
+    m_Localized: Connected ! Waiting for your host to start the game...
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

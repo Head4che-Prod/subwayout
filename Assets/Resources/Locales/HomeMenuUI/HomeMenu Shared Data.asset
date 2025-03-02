@@ -47,6 +47,10 @@ MonoBehaviour:
     m_Key: HomeMenu.text.LoadingText
     m_Metadata:
       m_Items: []
+  - m_Id: 212170555670528
+    m_Key: HomeMenu.text.WelcomeStation
+    m_Metadata:
+      m_Items: []
   - m_Id: 19676014460928
     m_Key: HomeMenu.text.ConnectedPlayers
     m_Metadata:
@@ -71,8 +75,12 @@ MonoBehaviour:
     m_Key: HomeMenu.text.Traveling
     m_Metadata:
       m_Items: []
-  - m_Id: 212170555670528
-    m_Key: HomeMenu.text.WelcomeStation
+  - m_Id: 226402886107136
+    m_Key: HomeMenu.text.Error
+    m_Metadata:
+      m_Items: []
+  - m_Id: 227158242508800
+    m_Key: HomeMenu.text.Waiting
     m_Metadata:
       m_Items: []
   m_Metadata:

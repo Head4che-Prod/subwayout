@@ -20,22 +20,27 @@ public class HomeMenu : MonoBehaviour
     [SerializeField] public GameObject PlayerPrefab;
     private bool _isCursorActive = true;
 
+    private GameObject _traveling;
+    private GameObject _error;
+    private GameObject _waiting;
+
     void Start()
     {
         SetLang();
         sessionManager = SessionManager.Singleton;
         disableOnSpawn = GameObject.Find("DisableOnSpawn");
         _isCursorActive = true;
-        SceneManager.activeSceneChanged += (from, to) => {
+        SceneManager.activeSceneChanged += (from, to) =>
+        {
             _isCursorActive = false;
-            Cursor.lockState = _isCursorActive? CursorLockMode.None: CursorLockMode.Locked;
+            Cursor.lockState = _isCursorActive ? CursorLockMode.None : CursorLockMode.Locked;
             Cursor.visible = _isCursorActive;
         };
     }
 
     void Update()
     {
-        Cursor.lockState = _isCursorActive? CursorLockMode.None: CursorLockMode.Locked;
+        Cursor.lockState = _isCursorActive ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = _isCursorActive;
     }
 
@@ -83,7 +88,8 @@ public class HomeMenu : MonoBehaviour
 
         disableOnSpawn.SetActive(true);
         // transform.Find("StartMenu/WelcomeText").GetComponent<TextMeshProUGUI>().text = "Enter the Subway\nLoading your station number...";
-        transform.Find("StartMenu/ConnectedPlayersText").GetComponent<TextMeshProUGUI>().text = "Connected players: 0/2";
+        transform.Find("StartMenu/ConnectedPlayersText").GetComponent<TextMeshProUGUI>().text =
+            "Connected players: 0/2";
 
         transform.Find("StartMenu").gameObject.SetActive(false);
         transform.Find("MainMenu").gameObject.SetActive(true);
@@ -101,8 +107,10 @@ public class HomeMenu : MonoBehaviour
         }
         else
         {
-            transform.Find("StartMenu/MultiButton").GetComponent<Button>().interactable = (sessionManager.ActiveSession.PlayerCount + dnp) >= 2;
-            transform.Find("StartMenu/SoloButton").GetComponent<Button>().interactable = (sessionManager.ActiveSession.PlayerCount + dnp) >= 1;
+            transform.Find("StartMenu/MultiButton").GetComponent<Button>().interactable =
+                (sessionManager.ActiveSession.PlayerCount + dnp) >= 2;
+            transform.Find("StartMenu/SoloButton").GetComponent<Button>().interactable =
+                (sessionManager.ActiveSession.PlayerCount + dnp) >= 1;
         }
     }
 
@@ -113,7 +121,8 @@ public class HomeMenu : MonoBehaviour
         _isCursorActive = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        NetworkManager.Singleton.SceneManager.LoadScene("Scenes/DemoScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
+        NetworkManager.Singleton.SceneManager.LoadScene("Scenes/DemoScene",
+            UnityEngine.SceneManagement.LoadSceneMode.Single);
     }
 
     public void PlayAlone()
@@ -125,10 +134,7 @@ public class HomeMenu : MonoBehaviour
 
     public void Join()
     {
-        NetworkManager.Singleton.OnClientConnectedCallback += (id) =>
-        {
-            disableOnSpawn.SetActive(false);
-        };
+        NetworkManager.Singleton.OnClientConnectedCallback += (id) => { disableOnSpawn.SetActive(false); };
         NetworkManager.Singleton.OnClientDisconnectCallback += (id) =>
         {
             if (id == NetworkManager.Singleton.LocalClientId)
@@ -143,22 +149,36 @@ public class HomeMenu : MonoBehaviour
 
         string joinCode = transform.Find("JoinMenu/JoinCodeInput").GetComponent<TMP_InputField>().text.ToUpper();
 
-        sessionManager.JoinSession(joinCode).ContinueWith((task) =>
-        {
-            if (task.IsFaulted)
-                SetConnectedStatus("<color=red>Impossible to find the station. Check your connection and the code you entered.");
-            else
-                SetConnectedStatus("Connected ! Waiting for your host to start the game...");
-        }, TaskScheduler.FromCurrentSynchronizationContext());
-
         transform.Find("JoinMenu").gameObject.SetActive(false);
         transform.Find("WaitingForHostScreen").gameObject.SetActive(true);
         foreach (Selectable selectable in Selectable.allSelectablesArray)
             if (selectable.name == "BackButton")
                 selectable.Select();
 
-        SetConnectedStatus("Traveling to this station...");
+        _traveling = GameObject.Find("WaitingForHostScreen/Texts/Traveling");
+        _traveling.SetActive(true);
+        _error = GameObject.Find("WaitingForHostScreen/Texts/Error");
+        _error.SetActive(false);
+        _waiting = GameObject.Find("WaitingForHostScreen/Texts/Waiting");
+        _waiting.SetActive(false);
+
+        sessionManager.JoinSession(joinCode).ContinueWith((task) =>
+        {
+            if (task.IsFaulted)
+            {
+                _traveling.SetActive(false);
+                _waiting.SetActive(false);
+                _error.SetActive(true);
+            }
+            else
+            {
+                _traveling.SetActive(false);
+                _waiting.SetActive(true);
+                _error.SetActive(false);            
+            }
+        }, TaskScheduler.FromCurrentSynchronizationContext()).ContinueWith((t) => Debug.Log(t.IsFaulted));
     }
+
 
     public void OpenSettings()
     {
@@ -198,8 +218,11 @@ public class HomeMenu : MonoBehaviour
 
     public void CloseWaitingForHostScreen()
     {
-        sessionManager.LeaveSession().ContinueWith((_) => { disableOnSpawn.SetActive(true); }, TaskScheduler.FromCurrentSynchronizationContext());
-        SetConnectedStatus("Traveling to this station...");
+        sessionManager.LeaveSession().ContinueWith((_) => { disableOnSpawn.SetActive(true); },
+            TaskScheduler.FromCurrentSynchronizationContext());
+        _traveling.SetActive(true);
+        _waiting.SetActive(true);
+        _error.SetActive(true);
         transform.Find("WaitingForHostScreen").gameObject.SetActive(false);
         transform.Find("JoinMenu").gameObject.SetActive(true);
         foreach (Selectable selectable in Selectable.allSelectablesArray)
@@ -207,29 +230,28 @@ public class HomeMenu : MonoBehaviour
                 selectable.Select();
     }
 
-    private void SetConnectedStatus(string txt)
+    public void SetLangFr()
     {
-        transform.Find("WaitingForHostScreen/TextPlay").GetComponent<TMP_Text>().text = txt;
-    }
-
-    public void SetLangFr() {
         LocalizationSettings.SelectedLocale = Locale.CreateLocale("fr-FR");
     }
 
-    public void SetLangEn() {
+    public void SetLangEn()
+    {
         LocalizationSettings.SelectedLocale = Locale.CreateLocale("en-US");
     }
 
-    public void SetLangEs() {
+    public void SetLangEs()
+    {
         LocalizationSettings.SelectedLocale = Locale.CreateLocale("es-ES");
     }
 
-    private void SetLang() {
+    private void SetLang()
+    {
         if (LocalizationSettings.SelectedLocale.Identifier.Code.Contains("fr"))
             SetLangFr();
         else if (LocalizationSettings.SelectedLocale.Identifier.Code.Contains("es"))
             SetLangEs();
         else
             SetLangEn();
-        }
+    }
 }

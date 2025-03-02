@@ -78,6 +78,15 @@ MonoBehaviour:
     m_Localized: "Bienvenido a la estaci\xF3n ______"
     m_Metadata:
       m_Items: []
+  - m_Id: 226402886107136
+    m_Localized: "<color=red>Imposible encontrar la estaci\xF3n. Compruebe su conexi\xF3n
+      y el c\xF3digo introducido."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 227158242508800
+    m_Localized: "\xA1Conectado! Esperando a que tu anfitri\xF3n inicie el juego..."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
