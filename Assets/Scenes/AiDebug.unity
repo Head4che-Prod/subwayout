@@ -304,11 +304,11 @@ GameObject:
   - component: {fileID: 1184897015}
   m_Layer: 0
   m_Name: Bait
-  m_TagString: Untagged
+  m_TagString: Bait
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!54 &1184897015
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -499,7 +499,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f485825162d6c418a82d209547402b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bait: {fileID: 1184897014}
 --- !u!195 &1328944432
 NavMeshAgent:
   m_ObjectHideFlags: 0
