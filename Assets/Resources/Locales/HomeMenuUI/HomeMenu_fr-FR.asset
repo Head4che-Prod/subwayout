@@ -34,6 +34,42 @@ MonoBehaviour:
     m_Localized: Quitter
     m_Metadata:
       m_Items: []
+  - m_Id: 12185864126464
+    m_Localized: Langue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13076423917568
+    m_Localized: Retour
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17643312136192
+    m_Localized: "Entrer dans le m\xE9tro\nChargement de votre num\xE9ro de station..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19676014460928
+    m_Localized: "Joueurs connect\xE9s : 0/2"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20815212593152
+    m_Localized: Voyager ensemble
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21376519520256
+    m_Localized: Voyager seul
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22114888990720
+    m_Localized: "Rejoindre la station de m\xE9tro de votre ami !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23305488318464
+    m_Localized: 'Code de la station :'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25482600529920
+    m_Localized: En chemin vers cette station...
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

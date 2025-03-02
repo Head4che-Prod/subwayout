@@ -31,6 +31,42 @@ MonoBehaviour:
     m_Key: HomeMenu.button.quit
     m_Metadata:
       m_Items: []
+  - m_Id: 12185864126464
+    m_Key: HomeMenu.text.Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13076423917568
+    m_Key: HomeMenu.button.Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17643312136192
+    m_Key: HomeMenu.text.EntrerSubway
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19676014460928
+    m_Key: HomeMenu.text.ConnectedPlayers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20815212593152
+    m_Key: HomeMenu.button.TravelTogether
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21376519520256
+    m_Key: HomeMenu.button.TravelAlone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22114888990720
+    m_Key: HomeMenu.text.JoinFriends
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23305488318464
+    m_Key: HomeMenu.text.StationCode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25482600529920
+    m_Key: HomeMenu.text.Traveling
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

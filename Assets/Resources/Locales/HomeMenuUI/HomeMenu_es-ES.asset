@@ -34,6 +34,42 @@ MonoBehaviour:
     m_Localized: Salir
     m_Metadata:
       m_Items: []
+  - m_Id: 12185864126464
+    m_Localized: Idioma
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13076423917568
+    m_Localized: "Atr\xE1s"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17643312136192
+    m_Localized: "Entrar en el metro\nCargando su n\xFAmero de estaci\xF3n..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19676014460928
+    m_Localized: 'Jugadores conectados : 0/2'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20815212593152
+    m_Localized: Viajar juntos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21376519520256
+    m_Localized: Viajar solo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22114888990720
+    m_Localized: "\xA1\xDAnase a la estaci\xF3n de metro de su amigo!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23305488318464
+    m_Localized: "C\xF3digo de estaci\xF3n :"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25482600529920
+    m_Localized: "De camino a esta estaci\xF3n..."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
