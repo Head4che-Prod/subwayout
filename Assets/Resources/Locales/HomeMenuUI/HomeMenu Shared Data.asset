@@ -43,6 +43,10 @@ MonoBehaviour:
     m_Key: HomeMenu.text.EntrerSubway
     m_Metadata:
       m_Items: []
+  - m_Id: 211033886703616
+    m_Key: HomeMenu.text.LoadingText
+    m_Metadata:
+      m_Items: []
   - m_Id: 19676014460928
     m_Key: HomeMenu.text.ConnectedPlayers
     m_Metadata:
@@ -65,6 +69,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 25482600529920
     m_Key: HomeMenu.text.Traveling
+    m_Metadata:
+      m_Items: []
+  - m_Id: 212170555670528
+    m_Key: HomeMenu.text.WelcomeStation
     m_Metadata:
       m_Items: []
   m_Metadata:

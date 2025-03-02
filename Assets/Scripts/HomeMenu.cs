@@ -82,7 +82,7 @@ public class HomeMenu : MonoBehaviour
         // Reset the join code
 
         disableOnSpawn.SetActive(true);
-        transform.Find("StartMenu/WelcomeText").GetComponent<TextMeshProUGUI>().text = "Enter the Subway\nLoading your station number...";
+        // transform.Find("StartMenu/WelcomeText").GetComponent<TextMeshProUGUI>().text = "Enter the Subway\nLoading your station number...";
         transform.Find("StartMenu/ConnectedPlayersText").GetComponent<TextMeshProUGUI>().text = "Connected players: 0/2";
 
         transform.Find("StartMenu").gameObject.SetActive(false);

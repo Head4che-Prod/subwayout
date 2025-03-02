@@ -43,9 +43,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 17643312136192
-    m_Localized: 'Enter the Subway
-
-      Loading your station number...'
+    m_Localized: Enter the Subway
     m_Metadata:
       m_Items: []
   - m_Id: 19676014460928
@@ -70,6 +68,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 25482600529920
     m_Localized: Traveling to this station...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 211033886703616
+    m_Localized: Loading your station number...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 212170555670528
+    m_Localized: Welcome to the station ______
     m_Metadata:
       m_Items: []
   references:

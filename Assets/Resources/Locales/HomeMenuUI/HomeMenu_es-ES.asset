@@ -43,7 +43,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 17643312136192
-    m_Localized: "Entrar en el metro\nCargando su n\xFAmero de estaci\xF3n..."
+    m_Localized: Entre en el metro
     m_Metadata:
       m_Items: []
   - m_Id: 19676014460928
@@ -68,6 +68,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 25482600529920
     m_Localized: "De camino a esta estaci\xF3n..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 211033886703616
+    m_Localized: "Cargando su n\xFAmero de estaci\xF3n..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 212170555670528
+    m_Localized: "Bienvenido a la estaci\xF3n ______"
     m_Metadata:
       m_Items: []
   references:

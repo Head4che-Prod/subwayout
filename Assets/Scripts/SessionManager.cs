@@ -11,6 +11,7 @@ using UnityEngine.EventSystems;
 public class SessionManager
 {
     private static SessionManager singleton;
+
     public static SessionManager Singleton
     {
         get
@@ -19,12 +20,15 @@ public class SessionManager
             {
                 singleton = new SessionManager();
             }
+
             return singleton;
         }
     }
 
     private ISession activeSession;
     private bool IsHost = false;
+    private GameObject LoadingText;
+    private GameObject StationNumber;
 
     public ISession ActiveSession
     {
@@ -42,27 +46,41 @@ public class SessionManager
         catch
         {
         }
+
         IsHost = false;
     }
 
     public async Task StartSessionAsHost()
     {
+        LoadingText = GameObject.Find("StartMenu/LoadingText");
+        StationNumber = GameObject.Find("StartMenu/StationNumber");
+        StationNumber.SetActive(false);
         await Start();
         IsHost = true;
 
-        SessionOptions options = new SessionOptions { MaxPlayers = 2, IsLocked = false, IsPrivate = true }.WithRelayNetwork();
+        SessionOptions options =
+            new SessionOptions { MaxPlayers = 2, IsLocked = false, IsPrivate = true }.WithRelayNetwork();
 
         ActiveSession = await MultiplayerService.Instance.CreateSessionAsync(options);
-        GameObject.Find("StartMenu/WelcomeText").GetComponent<TextMeshProUGUI>().text = $"Enter the Subway\nWelcome to the station {ActiveSession.Code}";
-        GameObject.Find("StartMenu/ConnectedPlayersText").GetComponent<TextMeshProUGUI>().text = $"Connected players: 1/2";
+        StationNumber.SetActive(true);
+        LoadingText.SetActive(false);
+        string oldText = StationNumber.GetComponent<TextMeshProUGUI>().text;
+        StationNumber.GetComponent<TextMeshProUGUI>().text = oldText[..^6] + ActiveSession.Code;
+        GameObject.Find("StartMenu/ConnectedPlayersText").GetComponent<TextMeshProUGUI>().text = GameObject.Find("StartMenu/ConnectedPlayersText").GetComponent<TextMeshProUGUI>().text[..^3]+
+            "1/2";
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         EventSystem.current.SetSelectedGameObject(GameObject.Find("StartMenu/BackButton").gameObject);
-        ActiveSession.PlayerJoined += (id) => {
-            GameObject.Find("StartMenu/ConnectedPlayersText").GetComponent<TextMeshProUGUI>().text = $"Connected players: {ActiveSession.PlayerCount}/2";
+        
+        ActiveSession.PlayerJoined += (id) =>
+        {
+            GameObject.Find("StartMenu/ConnectedPlayersText").GetComponent<TextMeshProUGUI>().text =
+                GameObject.Find("StartMenu/ConnectedPlayersText").GetComponent<TextMeshProUGUI>().text[..^3]+$"{ActiveSession.PlayerCount}/2";
         };
-        ActiveSession.PlayerLeft += (id) => {
-            GameObject.Find("StartMenu/ConnectedPlayersText").GetComponent<TextMeshProUGUI>().text = $"Connected players: {ActiveSession.PlayerCount - 1}/2";
+        ActiveSession.PlayerLeft += (id) =>
+        {
+            GameObject.Find("StartMenu/ConnectedPlayersText").GetComponent<TextMeshProUGUI>().text =
+                GameObject.Find("StartMenu/ConnectedPlayersText").GetComponent<TextMeshProUGUI>().text[..^3]+$"{ActiveSession.PlayerCount - 1}/2";
         };
     }
 
@@ -96,7 +114,9 @@ public class SessionManager
                 await ActiveSession.LeaveAsync();
                 GameObject.Find("DisableOnSpawn").gameObject.SetActive(true);
             }
-            catch { }
+            catch
+            {
+            }
             finally
             {
                 activeSession = null;
