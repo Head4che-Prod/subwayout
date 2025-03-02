@@ -2482,10 +2482,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 626758450}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.2, y: 0.8}
-  m_AnchorMax: {x: 0.8, y: 0.8}
-  m_AnchoredPosition: {x: 0, y: -100}
-  m_SizeDelta: {x: 0, y: 50}
+  m_AnchorMin: {x: 0.5, y: 0.7}
+  m_AnchorMax: {x: 0.5, y: 0.7}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1152, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &471129339
 MonoBehaviour:
@@ -2818,6 +2818,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerPrefab: {fileID: 4957522455835016799, guid: da7793438d9c54242b42fc7ff40a05e6, type: 3}
+  MyNetworkManager: {fileID: 500021958}
+--- !u!1 &500021958 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3905868970949995120, guid: 6ec80a32750f6c3439cde8ab5e176b37, type: 3}
+  m_PrefabInstance: {fileID: 1180823510}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &509133523
 GameObject:
   m_ObjectHideFlags: 0
@@ -8080,10 +8086,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 626758450}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.2, y: 0.8}
-  m_AnchorMax: {x: 0.8, y: 0.8}
-  m_AnchoredPosition: {x: 0, y: -25}
-  m_SizeDelta: {x: 0, y: 50}
+  m_AnchorMin: {x: 0.5, y: 0.8}
+  m_AnchorMax: {x: 0.5, y: 0.8}
+  m_AnchoredPosition: {x: 0, y: -20}
+  m_SizeDelta: {x: 1152, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1732984782
 MonoBehaviour:
@@ -8699,7 +8705,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 62.5, y: -25}
-  m_SizeDelta: {x: 89, y: 50}
+  m_SizeDelta: {x: 122.95, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1838382648
 MonoBehaviour:
@@ -9400,9 +9406,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 626758450}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 299}
+  m_AnchorMin: {x: 0.5, y: 0.8}
+  m_AnchorMax: {x: 0.5, y: 0.8}
+  m_AnchoredPosition: {x: 0, y: -20}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1948377569
@@ -10259,7 +10265,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Join
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}

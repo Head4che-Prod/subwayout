@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -62,7 +63,7 @@ namespace Prefabs.Player.PlayerUI.PauseMenu
 
         public void QuitGame()
         {
-            SceneManager.LoadScene("Scenes/HomeMenu");
+            SceneManager.LoadScene("Scenes/HomeMenu", LoadSceneMode.Single);
             _ = SessionManager.Singleton.LeaveSession();
         }
     }

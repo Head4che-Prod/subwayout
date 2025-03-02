@@ -1,9 +1,12 @@
+using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using TMPro;
 using Unity.Netcode;
+using Unity.Services.Authentication;
 using Unity.Services.Multiplayer;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -19,6 +22,7 @@ public class HomeMenu : MonoBehaviour
     private GameObject disableOnSpawn;
     [SerializeField] public GameObject PlayerPrefab;
     private bool _isCursorActive = true;
+    public GameObject MyNetworkManager;
 
     private GameObject _traveling;
     private GameObject _error;
@@ -26,6 +30,29 @@ public class HomeMenu : MonoBehaviour
 
     void Start()
     {
+        if (NetworkManager.Singleton.IsHost || NetworkManager.Singleton.IsClient)
+            NetworkManager.Singleton.Shutdown();
+
+
+        if (SessionManager.Singleton.ActiveSession != null)
+        {
+            SessionManager.Singleton.Reset();
+        }
+
+        // Sign out of Unity Authentication
+        try
+        {
+            AuthenticationService.Instance.SignOut();
+        }
+        catch { }
+
+        try
+        {
+            GameObject.Find("DisableOnSpawn").gameObject.SetActive(true);
+        }
+        catch { }
+
+
         SetLang();
         sessionManager = SessionManager.Singleton;
         disableOnSpawn = GameObject.Find("DisableOnSpawn");
@@ -59,21 +86,16 @@ public class HomeMenu : MonoBehaviour
                 selectable.Select();
 
         // Start server / Lobby
-
-        // NetworkManager.Singleton.OnConnectionEvent += (a, b) => {
-        //     Cursor.lockState = CursorLockMode.Confined;
-        //     Cursor.visible = true;
-        // };
-        NetworkManager.Singleton.OnClientConnectedCallback += (id) =>
+        sessionManager.AddOnClientConnectedCallback((id) =>
         {
             SetInteractibleStartButtons(0);
             disableOnSpawn.SetActive(false);
-        };
+        });
         sessionManager.StartSessionAsHost().ContinueWith((task) =>
         {
             SetInteractibleStartButtons(0);
-            sessionManager.ActiveSession.PlayerJoined += (_) => SetInteractibleStartButtons(0);
-            sessionManager.ActiveSession.PlayerLeft += (_) => SetInteractibleStartButtons(-1);
+            sessionManager.AddOnPlayerJoined((_) => SetInteractibleStartButtons(0));
+            sessionManager.AddOnPlayerLeft((_) => SetInteractibleStartButtons(-1));
         }, TaskScheduler.FromCurrentSynchronizationContext());
     }
 
@@ -86,16 +108,18 @@ public class HomeMenu : MonoBehaviour
         Cursor.visible = true;
         // Reset the join code
 
-        disableOnSpawn.SetActive(true);
-        // transform.Find("StartMenu/WelcomeText").GetComponent<TextMeshProUGUI>().text = "Enter the Subway\nLoading your station number...";
-        transform.Find("StartMenu/ConnectedPlayersText").GetComponent<TextMeshProUGUI>().text =
-            "Connected players: 0/2";
+        SceneManager.LoadScene("scenes/HomeMenu");
 
-        transform.Find("StartMenu").gameObject.SetActive(false);
-        transform.Find("MainMenu").gameObject.SetActive(true);
-        foreach (Selectable selectable in Selectable.allSelectablesArray)
-            if (selectable.name == "StartButton")
-                selectable.Select();
+        // disableOnSpawn.SetActive(true);
+        // // transform.Find("StartMenu/WelcomeText").GetComponent<TextMeshProUGUI>().text = "Enter the Subway\nLoading your station number...";
+        // transform.Find("StartMenu/ConnectedPlayersText").GetComponent<TextMeshProUGUI>().text =
+        //     "Connected players: 0/2";
+
+        // transform.Find("StartMenu").gameObject.SetActive(false);
+        // transform.Find("MainMenu").gameObject.SetActive(true);
+        // foreach (Selectable selectable in Selectable.allSelectablesArray)
+        //     if (selectable.name == "StartButton")
+        //         selectable.Select();
     }
 
     public void SetInteractibleStartButtons(int dnp)
@@ -121,8 +145,7 @@ public class HomeMenu : MonoBehaviour
         _isCursorActive = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        NetworkManager.Singleton.SceneManager.LoadScene("Scenes/DemoScene",
-            UnityEngine.SceneManagement.LoadSceneMode.Single);
+        NetworkManager.Singleton.SceneManager.LoadScene("Scenes/DemoScene", LoadSceneMode.Single);
     }
 
     public void PlayAlone()
@@ -134,8 +157,8 @@ public class HomeMenu : MonoBehaviour
 
     public void Join()
     {
-        NetworkManager.Singleton.OnClientConnectedCallback += (id) => { disableOnSpawn.SetActive(false); };
-        NetworkManager.Singleton.OnClientDisconnectCallback += (id) =>
+        sessionManager.AddOnClientConnectedCallback((id) => { disableOnSpawn.SetActive(false); });
+        sessionManager.AddOnClientDisconnectedCallback((id) =>
         {
             if (id == NetworkManager.Singleton.LocalClientId)
             {
@@ -145,7 +168,7 @@ public class HomeMenu : MonoBehaviour
                 CloseWaitingForHostScreen();
                 CloseJoin();
             }
-        };
+        });
 
         string joinCode = transform.Find("JoinMenu/JoinCodeInput").GetComponent<TMP_InputField>().text.ToUpper();
 
@@ -174,7 +197,7 @@ public class HomeMenu : MonoBehaviour
             {
                 _traveling.SetActive(false);
                 _waiting.SetActive(true);
-                _error.SetActive(false);            
+                _error.SetActive(false);
             }
         }, TaskScheduler.FromCurrentSynchronizationContext()).ContinueWith((t) => Debug.Log(t.IsFaulted));
     }
