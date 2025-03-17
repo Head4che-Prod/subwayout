@@ -1,6 +1,9 @@
 using System;
 
-public class HanoiException : Exception
+namespace Prefabs.Puzzles.Hanoi
 {
-    public HanoiException(string s) : base(s) { }
+    public class HanoiException : Exception
+    {
+        public HanoiException(string s) : base(s) { }
+    }
 }

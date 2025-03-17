@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/HomeMenu.unity
     guid: 08c7482ac613bec41b2bac72019ab4e6
   - enabled: 1
-    path: Assets/Scenes/TempHanoi.unity
+    path: Assets/Scenes/PuzzleTests.unity
     guid: f0bf5d09032373a4e89b7502ead15d03
   - enabled: 1
     path: Assets/Scenes/DemoScene.unity

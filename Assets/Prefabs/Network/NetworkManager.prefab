@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1900631957935877604}
   - component: {fileID: 3645188647328369677}
   m_Layer: 0
-  m_Name: NetworkManager Save
+  m_Name: NetworkManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_DisconnectTimeoutMS: 30000
   ConnectionData:
     Address: 127.0.0.1
-    Port: 5211
+    Port: 7777
     ServerListenAddress: 0.0.0.0
   DebugSimulator:
     PacketDelayMS: 0

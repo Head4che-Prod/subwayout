@@ -1,14 +1,18 @@
 using Objects;
 using Prefabs.Player;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class DoorAnim : ObjectActionable
+namespace Prefabs.PlayableCar.Animation
 {
-    private static readonly int OpenCabinDoor = Animator.StringToHash("OpenCabinDoor");
-    [SerializeField] private Animator _animDoor;
-    protected override void Action(PlayerObject player)
+    public class DoorAnim : ObjectActionable
     {
-        Debug.Log("Closed Door");
-        _animDoor.SetBool(OpenCabinDoor, !_animDoor.GetBool(OpenCabinDoor));
+        private static readonly int OpenCabinDoor = Animator.StringToHash("OpenCabinDoor");
+        [FormerlySerializedAs("_animDoor")] [SerializeField] private Animator animDoor;
+        protected override void Action(PlayerObject player)
+        {
+            Debug.Log("Closed Door");
+            animDoor.SetBool(OpenCabinDoor, !animDoor.GetBool(OpenCabinDoor));
+        }
     }
 }
