@@ -42,7 +42,8 @@ namespace Prefabs.Puzzles.HintSystem
                 PlayVoiceLinesServerRPC();
             }
         }
-        [ServerRpc(RequireOwnership = false)]
+        
+        [Rpc(SendTo.Server, RequireOwnership = false)]
         private void PlayVoiceLinesServerRPC()
         {
             string line = PuzzleHint.GetRandomVoiceLine();
@@ -51,7 +52,7 @@ namespace Prefabs.Puzzles.HintSystem
             StartCoroutine(TriggerCooldown(PuzzleHint.HintIndex[line].Duration));
         }
 
-        [ClientRpc]
+        [Rpc(SendTo.NotServer)]
         private void PlayVoiceLinesClientRPC(string line)
         {
             _triggerAnimator.SetTrigger(PullTrigger);
@@ -59,7 +60,7 @@ namespace Prefabs.Puzzles.HintSystem
             _source.Play();
         }
 
-        [ClientRpc]
+        [Rpc(SendTo.NotServer)]
         private void ResetTriggerClientRPC()
         {
             _triggerAnimator.ResetTrigger(PullTrigger);
