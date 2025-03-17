@@ -32,35 +32,36 @@ namespace Prefabs.Puzzles.HintSystem
         
         public void Activate()
         {
-            SetStageStateServerRPC(true);
+            SetStageStateServerRpc(true);
         }
         
         protected override void Action(PlayerObject _)
         {
             if (_cooldownFinished.Value)
             {
-                PlayVoiceLinesServerRPC();
+                PlayVoiceLinesServerRpc();
             }
         }
-        [ServerRpc(RequireOwnership = false)]
-        private void PlayVoiceLinesServerRPC()
+        
+        [Rpc(SendTo.Server, RequireOwnership = false)]
+        private void PlayVoiceLinesServerRpc()
         {
             string line = PuzzleHint.GetRandomVoiceLine();
-            PlayVoiceLinesClientRPC(line);
+            PlayVoiceLinesClientRpc(line);
             _cooldownFinished.Value = false;
             StartCoroutine(TriggerCooldown(PuzzleHint.HintIndex[line].Duration));
         }
 
-        [ClientRpc]
-        private void PlayVoiceLinesClientRPC(string line)
+        [Rpc(SendTo.ClientsAndHost)]
+        private void PlayVoiceLinesClientRpc(string line)
         {
             _triggerAnimator.SetTrigger(PullTrigger);
             _source.clip = PuzzleHint.HintIndex[line].VoiceLine;
             _source.Play();
         }
 
-        [ClientRpc]
-        private void ResetTriggerClientRPC()
+        [Rpc(SendTo.ClientsAndHost)]
+        private void ResetTriggerClientRpc()
         {
             _triggerAnimator.ResetTrigger(PullTrigger);
         }
@@ -69,7 +70,7 @@ namespace Prefabs.Puzzles.HintSystem
         {
             yield return new WaitForSeconds(duration);
             _cooldownFinished.Value = true;
-            ResetTriggerClientRPC();
+            ResetTriggerClientRpc();
         }
     }
 }
