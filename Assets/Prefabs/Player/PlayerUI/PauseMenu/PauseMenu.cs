@@ -1,12 +1,7 @@
-using System.Collections;
 using HomeMenu;
-using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
-
 namespace Prefabs.Player.PlayerUI.PauseMenu
 {
     public class PauseMenu : MonoBehaviour
