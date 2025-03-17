@@ -49,8 +49,8 @@ namespace Objects
             if (canBeOffStage)
                 IsOffStage.OnValueChanged -= ChangeActivationState;
         }
-
-        [ServerRpc(RequireOwnership = false)]
+            
+        [Rpc(SendTo.Server, RequireOwnership = false)]
         protected void SetStageStateServerRPC(bool state)
         {
             IsOffStage.Value = state;
