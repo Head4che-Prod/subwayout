@@ -1,6 +1,5 @@
 ﻿using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Objects
 {
@@ -24,7 +23,6 @@ namespace Objects
                 Collider = GetComponent<Collider>();
             }
         }
-
 
         protected virtual void ChangeActivationState(bool oldValue, bool newValue)
         {
@@ -51,9 +49,9 @@ namespace Objects
             if (canBeOffStage)
                 IsOffStage.OnValueChanged -= ChangeActivationState;
         }
-
-        [ServerRpc(RequireOwnership = false)]
-        protected void SetStageStateServerRPC(bool state)
+            
+        [Rpc(SendTo.Server, RequireOwnership = false)]
+        protected void SetStageStateServerRpc(bool state)
         {
             IsOffStage.Value = state;
         }

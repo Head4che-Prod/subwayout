@@ -1,4 +1,3 @@
-using System;
 using Objects;
 using Prefabs.Player;
 using UnityEngine;

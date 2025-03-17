@@ -5266,14 +5266,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1900631957935877604, guid: 6ec80a32750f6c3439cde8ab5e176b37, type: 3}
-      propertyPath: NetworkConfig.Prefabs.NetworkPrefabsLists.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1900631957935877604, guid: 6ec80a32750f6c3439cde8ab5e176b37, type: 3}
-      propertyPath: 'NetworkConfig.Prefabs.NetworkPrefabsLists.Array.data[0]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 81476030cf008e54ca418c888104b2d0, type: 2}
     - target: {fileID: 3283200594067080472, guid: 6ec80a32750f6c3439cde8ab5e176b37, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5316,7 +5308,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3905868970949995120, guid: 6ec80a32750f6c3439cde8ab5e176b37, type: 3}
       propertyPath: m_Name
-      value: MyNetworkManager
+      value: NetworkManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8705,7 +8697,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 62.5, y: -25}
-  m_SizeDelta: {x: 122.95, y: 50}
+  m_SizeDelta: {x: 89, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1838382648
 MonoBehaviour:

@@ -36,7 +36,7 @@ namespace Objects
         /// This method ask the server to set grabbability of an object over the Network.
         /// </summary>
         /// <param name="value">Boolean of Grabbable.</param>
-        [ServerRpc(RequireOwnership = false)]
+        [Rpc(SendTo.Server, RequireOwnership = false)]
         private void SetGrabbableServerRpc(bool value) => Grabbable = value;
 
         public void Start()
@@ -71,7 +71,7 @@ namespace Objects
         /// This method ask the server to apply a velocity to a grabbed object.
         /// </summary>
         /// <param name="move">Vector3 velocity of grabbed object.</param>
-        [ServerRpc(RequireOwnership = false)]
+        [Rpc(SendTo.Server, RequireOwnership = false)]
         private void MoveGrabbedObjectServerRpc(Vector3 move)
         {
             Rb.linearVelocity = move;
