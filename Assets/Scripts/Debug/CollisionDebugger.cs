@@ -1,9 +1,12 @@
 using UnityEngine;
 
-public class CollisionDetector : MonoBehaviour
+namespace Debug
 {
-    void OnCollisionEnter(Collision collision)
+    public class CollisionDetector : MonoBehaviour
     {
-        Debug.Log($"{name} collided with {collision.gameObject.name}");
+        void OnCollisionEnter(Collision collision)
+        {
+            UnityEngine.Debug.Log($"{name} collided with {collision.gameObject.name}");
+        }
     }
 }
