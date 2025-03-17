@@ -51,7 +51,7 @@ namespace Objects
         }
             
         [Rpc(SendTo.Server, RequireOwnership = false)]
-        protected void SetStageStateServerRPC(bool state)
+        protected void SetStageStateServerRpc(bool state)
         {
             IsOffStage.Value = state;
         }
