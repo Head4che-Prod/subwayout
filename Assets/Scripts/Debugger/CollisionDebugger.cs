@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Debug
+namespace Debugger 
 {
     public class CollisionDetector : MonoBehaviour
     {
