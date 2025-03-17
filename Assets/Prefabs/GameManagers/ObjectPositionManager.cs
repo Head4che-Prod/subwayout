@@ -1,9 +1,10 @@
 using System.Collections.Generic;
+using Objects;
 using Prefabs.Player.PlayerUI.DebugConsole;
 using Unity.Netcode;
 using UnityEngine;
 
-namespace Objects
+namespace Prefabs.GameManagers
 {
     public class ObjectPositionManager : MonoBehaviour
     {
@@ -15,7 +16,7 @@ namespace Objects
             {
                 if (_singleton == null)
                 {
-                    Debug.LogError("Object position manager singleton has not been initialized.");
+                    Debug.LogWarning("Object position manager singleton has not been initialized.");
                 }
                 return _singleton;
             }
@@ -33,24 +34,30 @@ namespace Objects
             }
         }
 
-        public void Start()
+        public void Awake()
         {
             Singleton = this;
         }
         
-        public List<IResettablePosition> ResettableObjects { get; } = new List<IResettablePosition>();
-
-        [ServerRpc(RequireOwnership = false)]
+        public HashSet<IResettablePosition> ResettableObjects { get; } = new HashSet<IResettablePosition>();
+        
+        [Rpc(SendTo.Server,RequireOwnership = false)]
         private static void ResetPositionsServerRpc()
         {
             ResetPositionsClientRpc();
         }
 
-        [ClientRpc]
+        [Rpc(SendTo.ClientsAndHost)]
         private static void ResetPositionsClientRpc()
         {
             foreach (IResettablePosition resettableObject in _singleton.ResettableObjects)
                 resettableObject.ResetPosition();
+        }
+
+        [Rpc(SendTo.ClientsAndHost)]
+        public static void ForgetResettableObjectClientRpc(IResettablePosition resettableObject)
+        {
+            _singleton.ResettableObjects.Remove(resettableObject);
         }
     }
 }

@@ -119,6 +119,9 @@ namespace Objects
 
         public void ResetPosition()
         {
+            if (Owner != null)
+                Drop();
+            
             transform.position = InitialPosition;
             transform.rotation = InitialRotation;
         }
