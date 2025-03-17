@@ -1,18 +1,21 @@
 using Unity.Netcode;
 using UnityEngine;
 
-public class MoveCamera : NetworkBehaviour
+namespace Prefabs.Player
 {
-    public GameObject playerCamera;
-    public Transform cameraPosition;
-
-    private void Start()
+    public class MoveCamera : NetworkBehaviour
     {
-        playerCamera.gameObject.SetActive(IsLocalPlayer);
-    }
+        public GameObject playerCamera;
+        public Transform cameraPosition;
 
-    private void Update()
-    {
-        transform.position = cameraPosition.position;
+        private void Start()
+        {
+            playerCamera.gameObject.SetActive(IsLocalPlayer);
+        }
+
+        private void Update()
+        {
+            transform.position = cameraPosition.position;
+        }
     }
 }
