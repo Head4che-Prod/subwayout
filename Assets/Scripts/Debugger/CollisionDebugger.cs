@@ -6,7 +6,7 @@ namespace Debugger
     {
         void OnCollisionEnter(Collision collision)
         {
-            UnityEngine.Debug.Log($"{name} collided with {collision.gameObject.name}");
+            Debug.Log($"{name} collided with {collision.gameObject.name}");
         }
     }
 }
