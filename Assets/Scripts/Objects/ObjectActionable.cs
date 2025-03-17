@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-using Prefabs.Player;
-using UnityEngine;
+﻿using Prefabs.Player;
 
 namespace Objects
 {

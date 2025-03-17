@@ -1,6 +1,5 @@
 ﻿using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Objects
 {
@@ -24,7 +23,6 @@ namespace Objects
                 Collider = GetComponent<Collider>();
             }
         }
-
 
         protected virtual void ChangeActivationState(bool oldValue, bool newValue)
         {
