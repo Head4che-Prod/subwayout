@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using Objects;
-using Prefabs.Player.PlayerUI.DebugConsole;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
