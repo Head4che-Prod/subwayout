@@ -53,6 +53,7 @@ namespace Objects
             // Warning: All rigidbody settings in this section must be copied / adapted for HanoiGrabbable
             Rb = GetComponent<NetworkRigidbody>().Rigidbody;
             Rb.interpolation = RigidbodyInterpolation.Extrapolate;
+            Rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             
             Outline = GetComponent<ObjectOutline>();
             Outline.enabled = false;
