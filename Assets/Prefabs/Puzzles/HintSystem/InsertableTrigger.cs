@@ -16,6 +16,7 @@ namespace Prefabs.Puzzles.HintSystem
         private void DisableRPC()
         {
             ObjectPositionManager.ForgetResettableObjectClientRpc(this);
+            ObjectHighlightManager.ForgetHighlightableObjectClientRpc(Outline);
             NetworkObject.Despawn();
         }
     }

@@ -1,12 +1,6 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Prefabs/GameManagers/GameManagers.prefab.meta
 guid: ef50728f52ab4bc4294f4081cce31c6d
 PrefabImporter:
-========
-guid: 15ec7c3806f85714585e55f5d4608df5
-folderAsset: yes
-DefaultImporter:
->>>>>>>> main:Assets/Scripts/Debugger.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

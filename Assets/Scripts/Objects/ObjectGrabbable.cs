@@ -1,3 +1,4 @@
+using Prefabs.GameManagers;
 using Prefabs.Player;
 using Unity.Netcode;
 using Unity.Netcode.Components;
@@ -12,12 +13,17 @@ namespace Objects
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(NetworkRigidbody))]
     [RequireComponent(typeof(NetworkObject))]
+    [RequireComponent(typeof(ObjectOutline))]
     public class ObjectGrabbable : ObjectInteractable, IResettablePosition
     {
         [Header("Physics")] [FormerlySerializedAs("lerpSpeed")] [SerializeField]
         private float moveSpeed = 2.0f;
 
         [SerializeField] private bool affectedByGravity = true;
+        
+        [Header("Visuals")]
+        [SerializeField] private bool canBeHighlighted = true;
+        
         protected Rigidbody Rb { get; private set; }
         
         public PlayerObject Owner { get; private set; }
@@ -30,6 +36,8 @@ namespace Objects
             get => IsGrabbable.Value;
             private set => IsGrabbable.Value = value;
         }
+        
+        protected ObjectOutline Outline;
 
         /// <summary>
         /// This method ask the server to set grabbability of an object over the Network.
@@ -45,6 +53,9 @@ namespace Objects
             // Warning: All rigidbody settings in this section must be copied / adapted for HanoiGrabbable
             Rb = GetComponent<NetworkRigidbody>().Rigidbody;
             Rb.interpolation = RigidbodyInterpolation.Extrapolate;
+            
+            Outline = GetComponent<ObjectOutline>();
+            Outline.enabled = false;
         }
 
         /// <returns><see cref="Vector3"/> of the difference between player's <see cref="GrabPointPosition"/> and the current grabbed object positions.</returns>
@@ -99,6 +110,12 @@ namespace Objects
             // Debug.Log($"Owner {OwnerClientId} attempted grabbing {name}");
             SetGrabbableServerRpc(false);
             Rb.useGravity = false;
+            
+            if (canBeHighlighted)
+            {
+                ObjectHighlightManager.RegisterHighlightableObject(Outline);
+                Outline.enabled = ObjectHighlightManager.HighlightEnabled;
+            }
         }
 
         /// <summary>

@@ -50,14 +50,14 @@ namespace Prefabs.GameManagers
         [Rpc(SendTo.ClientsAndHost)]
         private static void ResetPositionsClientRpc()
         {
-            foreach (IResettablePosition resettableObject in _singleton.ResettableObjects)
+            foreach (IResettablePosition resettableObject in Singleton.ResettableObjects)
                 resettableObject.ResetPosition();
         }
 
         [Rpc(SendTo.ClientsAndHost)]
         public static void ForgetResettableObjectClientRpc(IResettablePosition resettableObject)
         {
-            _singleton.ResettableObjects.Remove(resettableObject);
+            Singleton.ResettableObjects.Remove(resettableObject);
         }
     }
 }
