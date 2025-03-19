@@ -3,7 +3,12 @@ guid: 1d188f203af37ca49817254273352a1a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TopHanoiColor
+    second: {fileID: 2100000, guid: b67a4a1cdcecd6a4895158da74967194, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
