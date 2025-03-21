@@ -8,6 +8,7 @@ namespace Objects
     /// </summary>
     public abstract class ObjectInteractable : NetworkBehaviour
     {
+        [Header("Offstage system")]
         [SerializeField] protected bool canBeOffStage;
         [SerializeField] protected bool startOnStage;
         private NetworkVariable<bool> IsOffStage { get; } = new NetworkVariable<bool>(false);
