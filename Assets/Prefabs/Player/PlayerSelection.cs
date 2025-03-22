@@ -1,10 +1,13 @@
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI; //useful for the buttons
 public class PlayerSelection : MonoBehaviour
 {
     private int currentPlayer;
     [SerializeField] private Button previousPlayerButton;
     [SerializeField] private Button nextPlayerButton;
+    [SerializeField] private string sceneName;
 
     private void Awake()
     {
@@ -25,5 +28,10 @@ public class PlayerSelection : MonoBehaviour
     {
         currentPlayer += _change; //will set the index to + change 
         SelectMyPlayer(currentPlayer); //will immediately call the function with the new index
+    }
+
+    public void ChangeScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }
