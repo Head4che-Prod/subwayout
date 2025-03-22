@@ -373,6 +373,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArthurPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 3828329800832388817, guid: f7a2781bf84ed1144a278efc88bd63e2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4493672475744906946, guid: f7a2781bf84ed1144a278efc88bd63e2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -20
@@ -612,7 +616,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Back
+  m_text: Save
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1446,7 +1450,7 @@ GameObject:
   - component: {fileID: 1515830412}
   - component: {fileID: 1515830411}
   m_Layer: 0
-  m_Name: BackButton
+  m_Name: SaveButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1515,7 +1519,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1515830412}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1777432152}
+        m_TargetAssemblyTypeName: PlayerSelection, Assembly-CSharp
+        m_MethodName: ChangeScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: HomeMenu
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1515830412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1814,7 +1830,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   previousPlayerButton: {fileID: 3111098}
   nextPlayerButton: {fileID: 1737743514}
-  sceneName: 
+  prefabPlayer: {fileID: 4957522455835016799, guid: da7793438d9c54242b42fc7ff40a05e6, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

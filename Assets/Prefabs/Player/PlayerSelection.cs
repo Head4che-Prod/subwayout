@@ -26,9 +26,10 @@ public class PlayerSelection : MonoBehaviour
     public void ChangeScene(string sceneName)
     {
         Transform child = prefabPlayer.transform.GetChild(0);
+        Debug.Log(currentPlayer);
         for (int i = 1; i < child.childCount; i++)
         {
-            child.GetChild(currentPlayer + 1).gameObject.SetActive(currentPlayer + 1 == i);
+            child.GetChild(i).gameObject.SetActive(currentPlayer + 1 == i);
         }
         SceneManager.LoadScene(sceneName);
     }
