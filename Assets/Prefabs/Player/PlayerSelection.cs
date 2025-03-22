@@ -12,10 +12,13 @@ public class PlayerSelection : MonoBehaviour
 
     private void Awake()
     {
-        ChangeMyPlayer(0); //when we start, we are sure that we have one player activated
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(i==currentPlayer);
+        }
     }
     
-    public void ChangeMyPlayer(int change)
+    public void ChangeMyPlayer(int change) //for my buttons < and >
     {
         transform.GetChild(currentPlayer).gameObject.SetActive(false);
         currentPlayer += change + transform.childCount; //will set the index to + change 
