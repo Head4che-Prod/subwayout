@@ -1,9 +1,9 @@
+using Prefabs.GameManagers;
 using Prefabs.Player;
 using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.Serialization;
-using Vector3 = UnityEngine.Vector3;
 
 namespace Objects
 {
@@ -13,24 +13,31 @@ namespace Objects
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(NetworkRigidbody))]
     [RequireComponent(typeof(NetworkObject))]
-    public class ObjectGrabbable : ObjectInteractable
+    [RequireComponent(typeof(ObjectOutline))]
+    public class ObjectGrabbable : ObjectInteractable, IResettablePosition
     {
-        [Header("Physics")]
-        [FormerlySerializedAs("lerpSpeed")] [SerializeField] private float moveSpeed = 2.0f;
+        [Header("Physics")] [FormerlySerializedAs("lerpSpeed")] [SerializeField]
+        private float moveSpeed = 2.0f;
+
         [SerializeField] private bool affectedByGravity = true;
+        
+        [Header("Visuals")]
+        [SerializeField] private bool canBeHighlighted = true;
+        
         protected Rigidbody Rb { get; private set; }
         
         public PlayerObject Owner { get; private set; }
-    
-        private Vector3 GrabPointPosition => Owner.grabPointTransform.position;
-        protected NetworkVariable<bool> IsGrabbable = new (true);
-        
 
-        public virtual bool Grabbable   // This can be overridden
+        private Vector3 GrabPointPosition => Owner.grabPointTransform.position;
+        protected NetworkVariable<bool> IsGrabbable = new(true);
+
+        public virtual bool Grabbable // This can be overridden
         {
             get => IsGrabbable.Value;
             private set => IsGrabbable.Value = value;
         }
+        
+        protected ObjectOutline Outline;
 
         /// <summary>
         /// This method ask the server to set grabbability of an object over the Network.
@@ -41,21 +48,26 @@ namespace Objects
 
         public void Start()
         {
+            ((IResettablePosition)this).RegisterInitialState(transform.position, transform.rotation);
             SetGrabbableServerRpc(true);
             // Warning: All rigidbody settings in this section must be copied / adapted for HanoiGrabbable
             Rb = GetComponent<NetworkRigidbody>().Rigidbody;
             Rb.interpolation = RigidbodyInterpolation.Extrapolate;
+            Rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+            
+            Outline = GetComponent<ObjectOutline>();
+            Outline.enabled = false;
         }
-        
+
         /// <returns><see cref="Vector3"/> of the difference between player's <see cref="GrabPointPosition"/> and the current grabbed object positions.</returns>
         public virtual Vector3 CalculateMovementForce()
         {
             return new Vector3(
-                GrabPointPosition.x - transform.position.x, 
+                GrabPointPosition.x - transform.position.x,
                 GrabPointPosition.y - transform.position.y,
                 GrabPointPosition.z - transform.position.z);
         }
-    
+
         private void FixedUpdate()
         {
             if (Owner)
@@ -95,10 +107,16 @@ namespace Objects
                 Debug.LogError("playerCamera is null");
                 return;
             }
-            
+
             // Debug.Log($"Owner {OwnerClientId} attempted grabbing {name}");
             SetGrabbableServerRpc(false);
             Rb.useGravity = false;
+            
+            if (canBeHighlighted)
+            {
+                ObjectHighlightManager.RegisterHighlightableObject(Outline);
+                Outline.enabled = ObjectHighlightManager.HighlightEnabled;
+            }
         }
 
         /// <summary>
@@ -109,7 +127,21 @@ namespace Objects
             Owner.Interaction.GrabbedObject = null;
             Owner = null;
             SetGrabbableServerRpc(true);
-            Rb.useGravity = affectedByGravity; // For object that may not be affected by gravity in puzzles in the future
+            Rb.useGravity =
+                affectedByGravity; // For object that may not be affected by gravity in puzzles in the future
+        }
+        
+        // Position reset interface
+        public Vector3 InitialPosition { get; set; }
+        public Quaternion InitialRotation { get; set; }
+
+        public void ResetPosition()
+        {
+            if (Owner != null)
+                Drop();
+            
+            transform.position = InitialPosition;
+            transform.rotation = InitialRotation;
         }
     }
 }
