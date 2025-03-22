@@ -9,13 +9,13 @@ namespace Prefabs.Player
     public class PlayerInteract : NetworkBehaviour
     {
         [Header("Player")]
-        [SerializeField] private PlayerObject player;        
+        [SerializeField] private PlayerObject player;
         [SerializeField] private float reach;
-        
+
         [NonSerialized] public ObjectGrabbable GrabbedObject;
         private InputAction _actionInput;
         private InputAction _grabInput;
-        
+
         private void Start()
         {
             _actionInput = InputSystem.actions.FindAction("Gameplay/Interact");
@@ -33,7 +33,7 @@ namespace Prefabs.Player
                 Debug.LogError(e.Message);
             }
         }
-        
+
         /// <summary>
         /// This method handles button press.
         /// </summary>
@@ -52,16 +52,16 @@ namespace Prefabs.Player
                 out RaycastHit hit,
                 reach
             );
-            
+
             // Handle the first raycast hit
             if (/*hits[0]*/hit.transform is not null && /*hits[0]*/hit.transform.TryGetComponent(out ObjectInteractable interactable))
             {
                 // Action an object
-                if (context.action.id == _actionInput.id && interactable is ObjectActionable objActionable) 
-                {   
+                if (context.action.id == _actionInput.id && interactable is ObjectActionable objActionable)
+                {
                     objActionable.HandleAction(player);
                 }
-                
+
                 // Grab an object
                 else if (context.action.id == _grabInput.id &&
                          interactable is ObjectGrabbable { Grabbable: true } objGrabbable &&
@@ -71,12 +71,12 @@ namespace Prefabs.Player
                     GrabbedObject.Grab(player);
                     return;
                 }
-            } 
-            
+            }
+
             if (GrabbedObject is not null && context.action.id == _grabInput.id)
             {
                 // Place an object
-                
+
                 /*
                 if (
                     hitCount > 1 &&
@@ -90,9 +90,9 @@ namespace Prefabs.Player
                     _grabbedObject = null;
                 }
                 */
-            
+
                 // Drop an object
-                
+
                 // else
                 {
                     GrabbedObject.Drop();
@@ -106,6 +106,22 @@ namespace Prefabs.Player
         /// <param name="context"><see cref="InputAction"/>'s <see cref="InputAction.CallbackContext"/> of the release</param>
         private void HandleRelease(InputAction.CallbackContext context)
         {
+        }
+
+        override public void OnDestroy()
+        {
+            base.OnDestroy();
+            if (_actionInput != null)
+            {
+                _actionInput.performed -= HandlePress;
+                _actionInput.canceled -= HandleRelease;
+            }
+
+            if (_grabInput != null)
+            {
+                _grabInput.performed -= HandlePress;
+                _grabInput.canceled -= HandleRelease;
+            }
         }
     }
 }
