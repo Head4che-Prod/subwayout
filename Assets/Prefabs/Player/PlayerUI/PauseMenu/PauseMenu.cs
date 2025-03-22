@@ -49,7 +49,6 @@ namespace Prefabs.Player.PlayerUI.PauseMenu
 
         public void Pause()
         {
-            Debug.Log("triggered");
             _pauseMenuUI.SetActive(true);
             _player.InputManager.SetPlayerInputMap("UI");
             Cursor.lockState = CursorLockMode.None;
@@ -64,7 +63,6 @@ namespace Prefabs.Player.PlayerUI.PauseMenu
             Destroy(NetworkManager.Singleton.gameObject);
             SceneManager.LoadScene("Scenes/HomeMenu", LoadSceneMode.Single);
             _ = SessionManager.Singleton.LeaveSession();
-
         }
     }
 }
