@@ -16,7 +16,7 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: fa6a9e7efdc1bea42b2552b42de43138
   m_Entries:
   - m_Id: 12110675968
-    m_Key: PlayerSelectionMenu.Back
+    m_Key: PlayerSelectionMenu.Save
     m_Metadata:
       m_Items: []
   m_Metadata:

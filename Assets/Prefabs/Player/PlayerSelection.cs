@@ -1,37 +1,35 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI; //useful for the buttons
 public class PlayerSelection : MonoBehaviour
 {
-    private int currentPlayer;
+    private static int currentPlayer = 0;
     [SerializeField] private Button previousPlayerButton;
     [SerializeField] private Button nextPlayerButton;
-    [SerializeField] private string sceneName;
+    [SerializeField] public GameObject prefabPlayer;
 
     private void Awake()
     {
-        SelectMyPlayer(0); //when we start, we are sure that we have one player activated
+        ChangeMyPlayer(0); //when we start, we are sure that we have one player activated
     }
-    private void SelectMyPlayer(int _index)
+    
+    public void ChangeMyPlayer(int change)
     {
-        previousPlayerButton.interactable = (_index != 0); //set the "previous" button to interactable only if we're not on the first model
-        nextPlayerButton.interactable = (_index != transform.childCount-1); //set the "next" button to interactable only if we're not on the last model
-        for (int i = 0; i < transform.childCount; i++) //for loop that iterates until no children
-        {
-            transform.GetChild(i).gameObject.SetActive(i == _index); // will activate the child of the index
-        }
-        
-    }
-
-    public void ChangeMyPlayer(int _change)
-    {
-        currentPlayer += _change; //will set the index to + change 
-        SelectMyPlayer(currentPlayer); //will immediately call the function with the new index
+        transform.GetChild(currentPlayer).gameObject.SetActive(false);
+        currentPlayer += change + transform.childCount; //will set the index to + change 
+        currentPlayer %= transform.childCount;
+        transform.GetChild(currentPlayer).gameObject.SetActive(true);
     }
 
     public void ChangeScene(string sceneName)
     {
+        Transform child = prefabPlayer.transform.GetChild(0);
+        for (int i = 1; i < child.childCount; i++)
+        {
+            child.GetChild(currentPlayer + 1).gameObject.SetActive(currentPlayer + 1 == i);
+        }
         SceneManager.LoadScene(sceneName);
     }
 }
