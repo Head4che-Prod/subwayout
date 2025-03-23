@@ -195,5 +195,36 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
         {
             Log($"<color=red>{msg}</color>");
         }
+
+        private void ExecCommand(InputAction.CallbackContext _) {
+            ExecCommand();
+        }
+
+        private void FocusOffConsole(InputAction.CallbackContext _) {
+            FocusOffConsole();
+        }
+
+        private void Backspace(InputAction.CallbackContext _) {
+            Backspace();
+        }
+
+        private void NavigateUpHistory(InputAction.CallbackContext _) {
+            NavigateUpHistory();
+        }
+
+        private void NavigateDownHistory(InputAction.CallbackContext _) {
+            NavigateDownHistory();
+        }
+
+        public void OnDestroy()
+        {
+            _showConsoleAction.performed -= ToggleConsole;
+            _focusConsoleAction.performed -= FocusOnConsole;
+            _submitAction.performed -= ExecCommand;
+            _cancelAction.performed -= FocusOffConsole;
+            _backspaceAction.performed -= Backspace;
+            _upAction.performed -= NavigateUpHistory;
+            _downAction.performed -= NavigateDownHistory;
+        }
     }
 }
