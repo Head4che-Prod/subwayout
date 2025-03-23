@@ -10,13 +10,13 @@ namespace Prefabs.Player
     public class PlayerInteract : NetworkBehaviour
     {
         [Header("Player")]
-        [SerializeField] private PlayerObject player;        
+        [SerializeField] private PlayerObject player;
         [SerializeField] private float reach;
-        
+
         [NonSerialized] public ObjectGrabbable GrabbedObject;
         private InputAction _actionInput;
         private InputAction _grabInput;
-        
+
         private void Start()
         {
             _actionInput = InputSystem.actions.FindAction("Gameplay/Interact");
@@ -24,8 +24,8 @@ namespace Prefabs.Player
 
             try
             {
-                _actionInput.performed += _ => HandleAction();
-                _grabInput.performed += _ => HandleGrab();
+                _actionInput.performed += HandleAction;
+                _grabInput.performed += HandleGrab;
             }
             catch (NullReferenceException e)
             {
@@ -33,7 +33,7 @@ namespace Prefabs.Player
             }
         }
 
-        private void HandleAction()
+        private void HandleAction(InputAction.CallbackContext context)
         {
             Debug.Log("Try to action");
 
@@ -63,7 +63,7 @@ namespace Prefabs.Player
             }
         }
         
-        private void HandleGrab()
+        private void HandleGrab(InputAction.CallbackContext context)
         {
             Debug.Log("Try to grab");
             
@@ -104,7 +104,7 @@ namespace Prefabs.Player
                     Debug.Log($"Drop pointed {GrabbedObject.name}");
                     GrabbedObject.Drop();
                 }
-                
+
                 // Grab an object
                 else if (grabbable is { Grabbable: true } && GrabbedObject is null)
                 {
@@ -117,6 +117,21 @@ namespace Prefabs.Player
             {
                 Debug.Log($"Drop {GrabbedObject.name}");
                 GrabbedObject.Drop();
+            }
+        }
+
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+            if (_actionInput != null)
+            {
+                _actionInput.performed -= HandleAction;
+            }
+
+            if (_grabInput != null)
+            {
+                
+                _grabInput.performed -= HandleGrab;
             }
         }
     }
