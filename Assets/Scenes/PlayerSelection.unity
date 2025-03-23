@@ -1830,7 +1830,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   previousPlayerButton: {fileID: 3111098}
   nextPlayerButton: {fileID: 1737743514}
-  prefabPlayer: {fileID: 4957522455835016799, guid: da7793438d9c54242b42fc7ff40a05e6, type: 3}
+  prefabPlayer: {fileID: 6371891161549056370, guid: da7793438d9c54242b42fc7ff40a05e6, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
