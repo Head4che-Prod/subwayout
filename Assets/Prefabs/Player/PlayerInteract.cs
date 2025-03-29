@@ -66,10 +66,10 @@ namespace Prefabs.Player
         private void HandleGrab(InputAction.CallbackContext context)
         {
             RaycastHit grabHit;
-            
+            ObjectGrabbable grabbable = null;
             try
             {
-                RaycastHit[] hits = new RaycastHit[3];
+                RaycastHit[] hits = new RaycastHit[4];
                 Physics.RaycastNonAlloc(
                     player.playerCamera.transform.position,
                     player.playerCamera.transform.forward,
@@ -79,8 +79,8 @@ namespace Prefabs.Player
                 
                 grabHit = hits
                     .OrderBy(hit => hit.distance > 0 ? hit.distance : float.MaxValue)
-                    .TakeWhile(hit => hit.transform != null && hit.transform.TryGetComponent(out ObjectInteractable _))
-                    .First(hit => hit.transform.TryGetComponent<ObjectGrabbable>(out _));
+                    .TakeWhile(hit => hit.transform != null && hit.transform.TryGetComponent<ObjectInteractable>(out _))
+                    .First(hit => hit.transform.TryGetComponent<ObjectGrabbable>(out grabbable));
             }
             catch (Exception e)
             {
@@ -98,7 +98,7 @@ namespace Prefabs.Player
                 Color.blue
             );
 
-            if (grabHit.transform.TryGetComponent(out ObjectGrabbable grabbable))
+            if (grabbable != null)
             {
                 // Grab an object
                 if (grabbable is { Grabbable: true } && GrabbedObject is null)
