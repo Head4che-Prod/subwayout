@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Objects;
 using Unity.Netcode;
@@ -16,38 +17,38 @@ namespace Prefabs.Player
         [NonSerialized] public ObjectGrabbable GrabbedObject;
         private InputAction _actionInput;
         private InputAction _grabInput;
-
+        
         private void Start()
         {
             _actionInput = InputSystem.actions.FindAction("Gameplay/Interact");
             _grabInput = InputSystem.actions.FindAction("Gameplay/Grab");
-
-            try
-            {
-                _actionInput.performed += HandleAction;
-                _grabInput.performed += HandleGrab;
-            }
-            catch (NullReferenceException e)
-            {
-                Debug.LogError(e.Message);
-            }
+            
+            _actionInput.performed += HandleAction;
+            _grabInput.performed += HandleGrab;
         }
 
         private void HandleAction(InputAction.CallbackContext context)
         {
-            Debug.Log("Try to action");
-
             RaycastHit actionHit;
             try
             {
-                RaycastHit[] results = new RaycastHit[3];
-                Physics.RaycastNonAlloc(player.playerCamera.transform.position, player.playerCamera.transform.forward,
-                    results, reach);
-                actionHit = results.First(hit => hit.transform.TryGetComponent<ObjectActionable>(out _));
+                RaycastHit[] hits = new RaycastHit[3];
+                Physics.RaycastNonAlloc(
+                    player.playerCamera.transform.position, 
+                    player.playerCamera.transform.forward,
+                    hits, 
+                    reach
+                );
+                
+                actionHit = hits
+                    .OrderBy(hit => hit.distance > 0 ? hit.distance : float.MaxValue)
+                    .TakeWhile(hit => hit.transform != null && hit.transform.TryGetComponent(out ObjectInteractable _))
+                    .First(hit => hit.transform.TryGetComponent<ObjectActionable>(out _));
             }
-            catch (NullReferenceException)
+            catch (Exception e)
             {
-                return;
+                if (e is NullReferenceException or InvalidOperationException) return; // actionHit not found
+                throw;
             }
             
             Debug.DrawRay(
@@ -56,39 +57,39 @@ namespace Prefabs.Player
                 Color.red
             );
 
-            if (actionHit.transform is not null && actionHit.transform.TryGetComponent(out ObjectActionable actionable))
+            if (actionHit.transform.TryGetComponent(out ObjectActionable actionable))
             {
-                Debug.Log($"Action {actionable.name}");
                 actionable.HandleAction(player);
             }
         }
         
         private void HandleGrab(InputAction.CallbackContext context)
         {
-            Debug.Log("Try to grab");
-            
-            
             RaycastHit grabHit;
+            
             try
             {
                 RaycastHit[] hits = new RaycastHit[3];
                 Physics.RaycastNonAlloc(
-                    player.playerCamera.transform.position, 
-                    player.playerCamera.transform.forward, 
-                    hits, 
+                    player.playerCamera.transform.position,
+                    player.playerCamera.transform.forward,
+                    hits,
                     reach
                 );
+                
                 grabHit = hits
+                    .OrderBy(hit => hit.distance > 0 ? hit.distance : float.MaxValue)
+                    .TakeWhile(hit => hit.transform != null && hit.transform.TryGetComponent(out ObjectInteractable _))
                     .First(hit => hit.transform.TryGetComponent<ObjectGrabbable>(out _));
             }
-            catch (NullReferenceException)
+            catch (Exception e)
             {
-                if (GrabbedObject is not null)
+                if (e is NullReferenceException or InvalidOperationException)
                 {
-                    Debug.Log($"Drop {GrabbedObject.name}");
-                    GrabbedObject.Drop();
+                    if (GrabbedObject is not null) GrabbedObject.Drop();
+                    return;
                 }
-                return;
+                throw;
             }
             
             Debug.DrawRay(
@@ -97,42 +98,29 @@ namespace Prefabs.Player
                 Color.blue
             );
 
-            if (grabHit.transform is not null && grabHit.transform.TryGetComponent(out ObjectGrabbable grabbable))
+            if (grabHit.transform.TryGetComponent(out ObjectGrabbable grabbable))
             {
-                if (grabbable == GrabbedObject)
-                {
-                    Debug.Log($"Drop pointed {GrabbedObject.name}");
-                    GrabbedObject.Drop();
-                }
-
                 // Grab an object
-                else if (grabbable is { Grabbable: true } && GrabbedObject is null)
+                if (grabbable is { Grabbable: true } && GrabbedObject is null)
                 {
-                    Debug.Log($"Grab {grabbable.name}");
                     GrabbedObject = grabbable;
                     GrabbedObject.Grab(player);
                 }
-            }
-            else if (GrabbedObject is not null)
-            {
-                Debug.Log($"Drop {GrabbedObject.name}");
-                GrabbedObject.Drop();
+                // Drop grabbed pointed grabbed object
+                else if (grabbable == GrabbedObject)
+                    GrabbedObject.Drop();
             }
         }
 
         public override void OnDestroy()
         {
             base.OnDestroy();
+            
             if (_actionInput != null)
-            {
                 _actionInput.performed -= HandleAction;
-            }
-
+            
             if (_grabInput != null)
-            {
-                
                 _grabInput.performed -= HandleGrab;
-            }
         }
     }
 }
