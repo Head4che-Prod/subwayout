@@ -1,3 +1,4 @@
+using System;
 using Objects;
 using Prefabs.Player;
 using Prefabs.Puzzles.Hanoi.Debugs;
@@ -28,16 +29,20 @@ namespace Prefabs.Puzzles.Hanoi
 
         public override Vector3 CalculateMovementForce()
         {
-            Vector3 baseForce = base.CalculateMovementForce();
-            Vector3 normalizedForce = baseForce - Vector3.Dot(baseForce, HanoiTowers.Instance.transform.up) *
-                HanoiTowers.Instance.transform.up;
-            if (HanoiTowers.Instance.IsInDebugMode)
+            if (Physics.Raycast(Owner.playerCamera.transform.position, Owner.playerCamera.transform.forward,
+                    out RaycastHit hit, 12f, 3))
             {
-                MovementVector.Instance.SetPosition(0, Rb.position);
-                MovementVector.Instance.SetPosition(1, Rb.position + normalizedForce);
+                if (HanoiTowers.Instance.IsInDebugMode)
+                {
+                    MovementVector.Instance.SetPosition(0, transform.position);
+                    MovementVector.Instance.SetPosition(1, hit.point);
+                }
+                
+                return hit.point - transform.position;
             }
-            
-            return normalizedForce;
+
+            Drop();
+            return Vector3.zero;
         }
     }
 }

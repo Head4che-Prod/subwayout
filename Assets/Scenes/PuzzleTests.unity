@@ -1036,7 +1036,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3725620081756407415, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3725620081756407415, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1044,7 +1044,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3725620081756407415, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3725620081756407415, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
       propertyPath: m_LocalRotation.y
@@ -1052,11 +1052,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3725620081756407415, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.5
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3725620081756407415, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -60
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3725620081756407415, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -1070,9 +1070,21 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 3027745964
       objectReference: {fileID: 0}
+    - target: {fileID: 5066629958883494709, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1854179523
+      objectReference: {fileID: 0}
     - target: {fileID: 5576126056825299356, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 2227423956
+      objectReference: {fileID: 0}
+    - target: {fileID: 6156760683002833162, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 959921387
+      objectReference: {fileID: 0}
+    - target: {fileID: 8133669200978482854, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3653275067
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

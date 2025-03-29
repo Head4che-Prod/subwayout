@@ -16,13 +16,13 @@ namespace Objects
     public class ObjectGrabbable : ObjectInteractable
     {
         [Header("Physics")]
-        [FormerlySerializedAs("lerpSpeed")] [SerializeField] private float moveSpeed = 2.0f;
+        [FormerlySerializedAs("lerpSpeed")] [SerializeField] protected float moveSpeed = 2.0f;
         [SerializeField] private bool affectedByGravity = true;
         protected Rigidbody Rb { get; private set; }
         
         public PlayerObject Owner { get; private set; }
     
-        private Vector3 GrabPointPosition => Owner.grabPointTransform.position;
+        protected Vector3 GrabPointPosition => Owner.grabPointTransform.position;
         protected NetworkVariable<bool> IsGrabbable = new (true);
         
 
@@ -62,8 +62,6 @@ namespace Objects
             {
                 Vector3 force = CalculateMovementForce();
                 MoveGrabbedObjectServerRpc(force * moveSpeed); // todo: Speed need to be modified!
-                // Rb.linearVelocity = force * moveSpeed;
-                // Rb.MovePosition(_grabPointTransform.position);
             }
         }
 
