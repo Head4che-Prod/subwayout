@@ -55,8 +55,8 @@ namespace Prefabs.Puzzles.Hanoi
                 {
                     ballTransform.localPosition = new Vector3(
                         collider.Object.transform.localPosition.x,
-                        collider.Object.transform.localPosition.y,
-                        1f
+                        0.0135f,
+                        collider.Object.transform.localPosition.z
                     );
                 }
         }
