@@ -85,9 +85,9 @@ namespace Prefabs.Puzzles.Hanoi
             _colliderTR = new HanoiCollider(detectorTR, 2, 2);
 
             // Reset ball positions
-            _bBall.Object.transform.localPosition = new Vector3(2.5f, -1.5f, 1f);
-            _mBall.Object.transform.localPosition = new Vector3(2.5f, -0.5f, 1f);
-            _tBall.Object.transform.localPosition = new Vector3(2.5f, 0.5f, 1f); 
+            _bBall.Object.transform.localPosition = Vector3.zero;
+            _mBall.Object.transform.localPosition = Vector3.zero;
+            _tBall.Object.transform.localPosition = Vector3.zero;
 
             // Initial ball positions
             HanoiCollider.ColliderGrid[0, 0].ContainedBall = _bBall;
@@ -96,6 +96,7 @@ namespace Prefabs.Puzzles.Hanoi
 
             IsInDebugMode = false;
             DebugConsole.AddCommand("hanoiToggleDebug", ToggleDebug);
+            DebugConsole.AddCommand("hanoiGrid", () => DebugConsole.Singleton.Log(HanoiCollider.DebugGrid()));
         }
 
         private void FixedUpdate() {

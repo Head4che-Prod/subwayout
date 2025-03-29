@@ -29,8 +29,8 @@ namespace Prefabs.Puzzles.Hanoi
         public override Vector3 CalculateMovementForce()
         {
             Vector3 baseForce = base.CalculateMovementForce();
-            Vector3 normalizedForce = baseForce - Vector3.Dot(baseForce, HanoiTowers.Instance.transform.forward) *
-                HanoiTowers.Instance.transform.forward;
+            Vector3 normalizedForce = baseForce - Vector3.Dot(baseForce, HanoiTowers.Instance.transform.up) *
+                HanoiTowers.Instance.transform.up;
             if (HanoiTowers.Instance.IsInDebugMode)
             {
                 MovementVector.Instance.SetPosition(0, Rb.position);
