@@ -17,6 +17,8 @@ namespace Prefabs.Player
         [NonSerialized] public ObjectGrabbable GrabbedObject;
         private InputAction _actionInput;
         private InputAction _grabInput;
+        [Header("Raycasting")]
+        [SerializeField] private int allocationSize;
         
         private void Start()
         {
@@ -29,10 +31,10 @@ namespace Prefabs.Player
 
         private void HandleAction(InputAction.CallbackContext context)
         {
-            RaycastHit actionHit;
+            ObjectActionable actionable = null;
             try
             {
-                RaycastHit[] hits = new RaycastHit[3];
+                RaycastHit[] hits = new RaycastHit[allocationSize];
                 Physics.RaycastNonAlloc(
                     player.playerCamera.transform.position, 
                     player.playerCamera.transform.forward,
@@ -40,24 +42,24 @@ namespace Prefabs.Player
                     reach
                 );
                 
-                actionHit = hits
+                float distance = hits
                     .OrderBy(hit => hit.distance > 0 ? hit.distance : float.MaxValue)
-                    .TakeWhile(hit => hit.transform != null && hit.transform.TryGetComponent(out ObjectInteractable _))
-                    .First(hit => hit.transform.TryGetComponent<ObjectActionable>(out _));
+                    .TakeWhile(hit => hit.transform != null && hit.transform.TryGetComponent<ObjectInteractable>(out _))
+                    .First(hit => hit.transform.TryGetComponent<ObjectActionable>(out actionable)).distance;
+                
+                Debug.DrawRay(
+                    player.playerCamera.transform.position, 
+                    player.playerCamera.transform.forward * distance,
+                    Color.red
+                );
             }
             catch (Exception e)
             {
                 if (e is NullReferenceException or InvalidOperationException) return; // actionHit not found
                 throw;
             }
-            
-            Debug.DrawRay(
-                player.playerCamera.transform.position, 
-                player.playerCamera.transform.forward * actionHit.distance, 
-                Color.red
-            );
 
-            if (actionHit.transform.TryGetComponent(out ObjectActionable actionable))
+            if (actionable != null)
             {
                 actionable.HandleAction(player);
             }
@@ -65,11 +67,10 @@ namespace Prefabs.Player
         
         private void HandleGrab(InputAction.CallbackContext context)
         {
-            RaycastHit grabHit;
             ObjectGrabbable grabbable = null;
             try
             {
-                RaycastHit[] hits = new RaycastHit[4];
+                RaycastHit[] hits = new RaycastHit[allocationSize];
                 Physics.RaycastNonAlloc(
                     player.playerCamera.transform.position,
                     player.playerCamera.transform.forward,
@@ -77,10 +78,16 @@ namespace Prefabs.Player
                     reach
                 );
                 
-                grabHit = hits
+                float distance = hits
                     .OrderBy(hit => hit.distance > 0 ? hit.distance : float.MaxValue)
                     .TakeWhile(hit => hit.transform != null && hit.transform.TryGetComponent<ObjectInteractable>(out _))
-                    .First(hit => hit.transform.TryGetComponent<ObjectGrabbable>(out grabbable));
+                    .First(hit => hit.transform.TryGetComponent<ObjectGrabbable>(out grabbable)).distance;
+                
+                Debug.DrawRay(
+                    player.playerCamera.transform.position, 
+                    player.playerCamera.transform.forward * distance, 
+                    Color.blue
+                );
             }
             catch (Exception e)
             {
@@ -92,12 +99,6 @@ namespace Prefabs.Player
                 throw;
             }
             
-            Debug.DrawRay(
-                player.playerCamera.transform.position, 
-                player.playerCamera.transform.forward * grabHit.distance, 
-                Color.blue
-            );
-
             if (grabbable != null)
             {
                 // Grab an object
@@ -116,11 +117,8 @@ namespace Prefabs.Player
         {
             base.OnDestroy();
             
-            if (_actionInput != null)
-                _actionInput.performed -= HandleAction;
-            
-            if (_grabInput != null)
-                _grabInput.performed -= HandleGrab;
+            if (_actionInput != null) _actionInput.performed -= HandleAction;
+            if (_grabInput != null) _grabInput.performed -= HandleGrab;
         }
     }
 }
