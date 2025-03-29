@@ -6,13 +6,13 @@ namespace Prefabs.Puzzles.Hanoi
     {
         public static string DebugGrid()
         {
-            return "|-------------|-------------|-------------|\n" +
-                   $"|{ColliderGrid[0, 2].ContainedBall?.Object.name,13}|{ColliderGrid[1, 2].ContainedBall?.Object.name,13}|{ColliderGrid[2, 2].ContainedBall?.Object.name,13}|\n" +
-                   "|-------------|-------------|-------------|\n" +
-                   $"|{ColliderGrid[0, 1].ContainedBall?.Object.name,13}|{ColliderGrid[1, 1].ContainedBall?.Object.name,13}|{ColliderGrid[2, 1].ContainedBall?.Object.name,13}|\n" +
-                   "|-------------|-------------|-------------|\n" +
-                   $"|{ColliderGrid[0, 0].ContainedBall?.Object.name,13}|{ColliderGrid[1, 0].ContainedBall?.Object.name,13}|{ColliderGrid[2, 0].ContainedBall?.Object.name,13}|\n" +
-                   "|-------------|-------------|-------------|";
+            return "<mspace=0.55em>|------------|------------|------------|\n" +
+                   $"|{ColliderGrid[0, 2].ContainedBall?.Object.name,12}|{ColliderGrid[1, 2].ContainedBall?.Object.name,12}|{ColliderGrid[2, 2].ContainedBall?.Object.name,12}|\n" +
+                   "|------------|------------|------------|\n" +
+                   $"|{ColliderGrid[0, 1].ContainedBall?.Object.name,12}|{ColliderGrid[1, 1].ContainedBall?.Object.name,12}|{ColliderGrid[2, 1].ContainedBall?.Object.name,12}|\n" +
+                   "|------------|------------|------------|\n" +
+                   $"|{ColliderGrid[0, 0].ContainedBall?.Object.name,12}|{ColliderGrid[1, 0].ContainedBall?.Object.name,12}|{ColliderGrid[2, 0].ContainedBall?.Object.name,12}|\n" +
+                   "|------------|------------|------------|</mspace>";
         }
         
         

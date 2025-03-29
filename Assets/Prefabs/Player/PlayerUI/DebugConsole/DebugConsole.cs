@@ -12,7 +12,7 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
     public class DebugConsole : MonoBehaviour
     {
         public static DebugConsole Singleton;
-        [SerializeField] Text displayText;
+        [SerializeField] TMP_Text displayText;
         [SerializeField] TMP_InputField inputField;
         // Needs to be initialized here in order to avoid NullReferenceExceptions when adding commands in other files
         private static readonly Dictionary<string, Action> Commands = new Dictionary<string, Action>();
