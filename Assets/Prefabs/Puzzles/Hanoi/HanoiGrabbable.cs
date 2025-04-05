@@ -34,29 +34,52 @@ namespace Prefabs.Puzzles.Hanoi
             {
                 Vector3 direction = HanoiTowers.Instance.transform.InverseTransformVector(hit.point - transform.position);
                 direction.y = 0;
-                
-                Vector3 hitPointLocal = HanoiTowers.Instance.transform.InverseTransformDirection(hit.point);
-                Vector3 positionLocal = HanoiTowers.Instance.transform.InverseTransformDirection(transform.position);
 
-                if (direction.magnitude > 0.2f)
+                if (direction.magnitude > 0.01f)
                 {
-                    if (Math.Abs(hitPointLocal.x - positionLocal.x) >
-                        Math.Abs(hitPointLocal.z - positionLocal.z) + 0.2f)
+                    ushort movementMode = 0;
+                    Vector3 hitPointLocal = HanoiTowers.Instance.transform.InverseTransformDirection(hit.point);
+                    Vector3 positionLocal =
+                        HanoiTowers.Instance.transform.InverseTransformDirection(transform.position);
+
+                    if (Math.Abs((hitPointLocal.x - positionLocal.x) / (hitPointLocal.z - positionLocal.z)) > 2f)
+                    {
+                        movementMode = 1;
                         direction.z = 0;
-                    else if (Math.Abs(hitPointLocal.z - positionLocal.z) >
-                             Math.Abs(hitPointLocal.x - positionLocal.x) + 0.2f)
+                    }
+                    else if (Math.Abs((hitPointLocal.z - positionLocal.z) / (hitPointLocal.x - positionLocal.x)) > 2f)
+                    {
+                        movementMode = 2;
                         direction.x = 0;
+                    }
+                
+                    direction = HanoiTowers.Instance.transform.InverseTransformVector(direction.normalized) * 0.1f;
+                
+                    if (HanoiTowers.Instance.IsInDebugMode)
+                    {
+                        MovementVector.Instance.startColor = movementMode switch
+                        {
+                            0 => Color.magenta,
+                            1 => Color.red,
+                            2 => Color.blue,
+                            _ => throw new ArgumentOutOfRangeException()
+                        };
+                        MovementVector.Instance.SetPosition(0, transform.position);
+                        MovementVector.Instance.SetPosition(1, transform.position + direction);
+                    }
+                
+                    return direction;
                 }
-                
-                direction = HanoiTowers.Instance.transform.InverseTransformVector(direction.normalized) * 0.1f;
-                
-                if (HanoiTowers.Instance.IsInDebugMode)
+                else
                 {
-                    MovementVector.Instance.SetPosition(0, transform.position);
-                    MovementVector.Instance.SetPosition(1, direction);
+                    if (HanoiTowers.Instance.IsInDebugMode)
+                    {
+                        MovementVector.Instance.SetPosition(0, transform.position);
+                        MovementVector.Instance.SetPosition(1, transform.position);
+                    }
+
+                    return Vector3.zero;
                 }
-                
-                return direction;
             }
 
             Drop();
