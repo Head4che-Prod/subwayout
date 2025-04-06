@@ -6,11 +6,22 @@ using UnityEngine.Events;
 
 namespace Prefabs.Puzzles.Hanoi
 {
-    public class HanoiTowers : MonoBehaviour        // Only one should exist AT ALL TIMES
+    public class HanoiTowers : NetworkBehaviour        // Only one should exist AT ALL TIMES
     {
+        
+        /// <summary>
+        /// The instance of the game currently loaded.
+        /// </summary>
         public static HanoiTowers Instance { get; private set; }
+        
+        /// <summary>
+        /// Whether the puzzle should render debug tools.
+        /// </summary>
         public bool IsInDebugMode { get; private set; }
         
+        /// <summary>
+        /// Whether a player is currently using the puzzle.
+        /// </summary>
         public NetworkVariable<bool> InUse { get; private set; }
         
         [Header("Balls")] [SerializeField] private GameObject bottomBall;
@@ -47,10 +58,14 @@ namespace Prefabs.Puzzles.Hanoi
         private float ti;
         private bool _gameWon;
 
-        public void ToggleDebug()
+        /// <summary>
+        /// Toggle debug visuals on and off.
+        /// </summary>
+        private void ToggleDebug()
         {
             IsInDebugMode = !IsInDebugMode;
             MovementVector.Instance.enabled = IsInDebugMode;
+            TargetPosition.Instance.enabled = IsInDebugMode;
             DebugConsole.Singleton.Log($"Hanoi debug mode {(IsInDebugMode ? "activated" : "deactivated")}.");
         }
         
@@ -114,6 +129,11 @@ namespace Prefabs.Puzzles.Hanoi
             }
         }
 
+        /// <summary>
+        /// Updates the internal positions of the balls in the puzzle.
+        /// </summary>
+        /// <param name="ballObject"><see cref="GameObject"/> that entered the collider.</param>
+        /// <param name="box"><see cref="HanoiCollider"/> that was entered.</param>
         private void OnBallEnterBox(GameObject ballObject, HanoiCollider box)
         {
             // Debug.Log($"{ballObject.name} entered {box.Object.name}");
