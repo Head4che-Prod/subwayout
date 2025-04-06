@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Prefabs.Puzzles.Hanoi
 {
@@ -10,6 +11,6 @@ namespace Prefabs.Puzzles.Hanoi
         /// <summary>
         /// The piece the HanoiPieceBall is part of.
         /// </summary>
-        public GameObject parent;
+        public HanoiBall parent;
     }
 }

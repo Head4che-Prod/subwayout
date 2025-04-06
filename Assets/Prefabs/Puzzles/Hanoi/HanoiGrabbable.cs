@@ -21,7 +21,7 @@ namespace Prefabs.Puzzles.Hanoi
             base.Drop();
             
             // Debug.Log($"Let go of {name} at ({Rb.position.x}, {Rb.position.y}, {Rb.position.z})");
-            HanoiCollider.ResetBall(transform);
+            HanoiHitbox.ResetBall(transform);
             HanoiTowers.Instance.InUse.Value = false;
         }
 
