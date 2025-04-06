@@ -87,10 +87,6 @@ MonoBehaviour:
     m_Localized: Connected ! Waiting for your host to start the game...
     m_Metadata:
       m_Items: []
-  - m_Id: 7624205895614464
-    m_Localized: Change skin
-    m_Metadata:
-      m_Items: []
   references:
     version: 2
     RefIds: []

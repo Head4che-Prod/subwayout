@@ -83,10 +83,6 @@ MonoBehaviour:
     m_Key: HomeMenu.text.Waiting
     m_Metadata:
       m_Items: []
-  - m_Id: 7624205895614464
-    m_Key: HomeMenu.button.SelectSkin
-    m_Metadata:
-      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

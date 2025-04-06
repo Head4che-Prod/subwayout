@@ -27,12 +27,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-fr-FR
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 87ca0693c0c5a584f9c20d8672359f11
-    m_Address: PlayerSelectionMenu_fr-FR
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-fr-FR
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c7383204f7191784ab0211db7e28f928
     m_Address: HomeMenu_fr-FR
     m_ReadOnly: 1

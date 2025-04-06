@@ -76,24 +76,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "HighlightHold",
-                    "type": "Button",
-                    "id": "b4d738a1-7f62-4499-bc5e-f95cd3a911cc",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "HighlightToggle",
-                    "type": "Button",
-                    "id": "7afc67c9-ac23-4fb9-b5d4-0d1e7b7fe93b",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -402,28 +384,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Grab",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8363ca1d-f8f1-4b26-a91f-960305eb5aed",
-                    "path": "<Keyboard>/alt",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "HighlightHold",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "236d4e49-ab31-45eb-ae4b-d724199444bc",
-                    "path": "<Keyboard>/backquote",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "HighlightToggle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

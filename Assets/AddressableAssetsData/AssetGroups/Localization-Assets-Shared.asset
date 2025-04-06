@@ -30,12 +30,6 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: fa6a9e7efdc1bea42b2552b42de43138
-    m_Address: Assets/Prefabs/Player/PlayerUI/PlayerSelectionMenu/PlayerSelectionMenu
-      Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 8d862e40054381d4595ad350715c3cc5, type: 2}
   m_SchemaSet:

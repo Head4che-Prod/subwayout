@@ -50,7 +50,7 @@ GameObject:
   - component: {fileID: 4544173874050465634}
   - component: {fileID: 5519829752834942417}
   - component: {fileID: 8450191938813500120}
-  - component: {fileID: 828198204556652652}
+  - component: {fileID: 524291002054464881}
   m_Layer: 0
   m_Name: TriggerGrabbable
   m_TagString: Untagged
@@ -248,8 +248,8 @@ MonoBehaviour:
   startOnStage: 0
   moveSpeed: 2
   affectedByGravity: 1
---- !u!65 &828198204556652652
-BoxCollider:
+--- !u!64 &524291002054464881
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -266,9 +266,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.9491842, y: 2.2393968, z: 5.882212}
-  m_Center: {x: -0.04638062, y: 0.19895771, z: 0.0010604861}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8050392602797321999, guid: 749b5b6c74369824b9105ffa926a324c, type: 3}
 --- !u!1 &3164800604506928722
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,4 @@
-using System;
 using HomeMenu;
-using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -13,9 +11,8 @@ namespace Prefabs.Player.PlayerUI.PauseMenu
         private InputAction _unpauseAction;
 
         private GameObject _pauseMenuUI;
-        private Action<InputAction.CallbackContext> _pause;
-        private Action<InputAction.CallbackContext> _unpause;
 
+        private static bool _allowMenuChange;      // Prevents multi-trigger
         [SerializeField] private DynamicButton[] buttons;
 
         void Awake()
@@ -32,15 +29,15 @@ namespace Prefabs.Player.PlayerUI.PauseMenu
             _player = GetComponentInParent<PlayerObject>();
             _pauseAction = _player.Input.actions["Pause"];
             _unpauseAction = _player.Input.actions["Cancel"];
-
-            _pause = _ => Pause();
-            _unpause = _ => Resume();
-            _pauseAction.performed += _pause;
-            _unpauseAction.performed += _unpause;
+            _pauseAction.performed += _ => Pause();
+            _unpauseAction.performed += _ => Resume();
+            _allowMenuChange = true;
         }
 
         public void Resume()
         {
+            _allowMenuChange = true;
+
             _pauseMenuUI.SetActive(false);
             _player.InputManager.SetPlayerInputMap("Gameplay");
             Cursor.lockState = CursorLockMode.Locked;
@@ -49,18 +46,19 @@ namespace Prefabs.Player.PlayerUI.PauseMenu
 
         public void Pause()
         {
-            _pauseMenuUI.SetActive(true);
-            _player.InputManager.SetPlayerInputMap("UI");
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            if (_allowMenuChange)
+            {
+                _allowMenuChange = false;
+                _pauseMenuUI.SetActive(true);
+                _player.InputManager.SetPlayerInputMap("UI");
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
         }
 
 
         public void QuitGame()
         {
-            _pauseAction.performed -= _pause;
-            _unpauseAction.performed -= _unpause;
-            Destroy(NetworkManager.Singleton.gameObject);
             SceneManager.LoadScene("Scenes/HomeMenu", LoadSceneMode.Single);
             _ = SessionManager.Singleton.LeaveSession();
         }

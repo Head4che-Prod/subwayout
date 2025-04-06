@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Objects;
 using Unity.Netcode;
 using UnityEngine;
@@ -11,114 +9,103 @@ namespace Prefabs.Player
     public class PlayerInteract : NetworkBehaviour
     {
         [Header("Player")]
-        [SerializeField] private PlayerObject player;
+        [SerializeField] private PlayerObject player;        
         [SerializeField] private float reach;
-
+        
         [NonSerialized] public ObjectGrabbable GrabbedObject;
         private InputAction _actionInput;
         private InputAction _grabInput;
-        [Header("Raycasting")]
-        [SerializeField] private int allocationSize;
         
         private void Start()
         {
             _actionInput = InputSystem.actions.FindAction("Gameplay/Interact");
             _grabInput = InputSystem.actions.FindAction("Gameplay/Grab");
-            
-            _actionInput.performed += HandleAction;
-            _grabInput.performed += HandleGrab;
-        }
 
-        private void HandleAction(InputAction.CallbackContext context)
-        {
-            ObjectActionable actionable = null;
             try
             {
-                RaycastHit[] hits = new RaycastHit[allocationSize];
-                Physics.RaycastNonAlloc(
-                    player.playerCamera.transform.position, 
-                    player.playerCamera.transform.forward,
-                    hits, 
-                    reach
-                );
-                
-                float distance = hits
-                    .OrderBy(hit => hit.distance > 0 ? hit.distance : float.MaxValue)
-                    .TakeWhile(hit => hit.transform != null && hit.transform.TryGetComponent<ObjectInteractable>(out _))
-                    .First(hit => hit.transform.TryGetComponent<ObjectActionable>(out actionable)).distance;
-                
-                Debug.DrawRay(
-                    player.playerCamera.transform.position, 
-                    player.playerCamera.transform.forward * distance,
-                    Color.red
-                );
+                _actionInput.performed += HandlePress;
+                _actionInput.canceled += HandleRelease;
+                _grabInput.performed += HandlePress;
+                _grabInput.canceled += HandleRelease;
             }
-            catch (Exception e)
+            catch (NullReferenceException e)
             {
-                if (e is NullReferenceException or InvalidOperationException) return; // actionHit not found
-                throw;
-            }
-
-            if (actionable != null)
-            {
-                actionable.HandleAction(player);
+                Debug.LogError(e.Message);
             }
         }
         
-        private void HandleGrab(InputAction.CallbackContext context)
+        /// <summary>
+        /// This method handles button press.
+        /// </summary>
+        /// <param name="context"><see cref="InputAction"/>'s <see cref="InputAction.CallbackContext"/> of the press</param>
+        private void HandlePress(InputAction.CallbackContext context)
         {
-            ObjectGrabbable grabbable = null;
-            try
+            Debug.DrawRay(player.playerCamera.transform.position, player.playerCamera.transform.forward * reach, Color.blue);
+            /*
+            RaycastHit[] hits = new RaycastHit[2];
+            int hitCount = Physics.RaycastNonAlloc(playerCamera.transform.position, playerCamera.transform.forward, hits, reach);
+            */
+
+            Physics.Raycast(
+                player.playerCamera.transform.position,
+                player.playerCamera.transform.forward,
+                out RaycastHit hit,
+                reach
+            );
+            
+            // Handle the first raycast hit
+            if (/*hits[0]*/hit.transform is not null && /*hits[0]*/hit.transform.TryGetComponent(out ObjectInteractable interactable))
             {
-                RaycastHit[] hits = new RaycastHit[allocationSize];
-                Physics.RaycastNonAlloc(
-                    player.playerCamera.transform.position,
-                    player.playerCamera.transform.forward,
-                    hits,
-                    reach
-                );
+                // Action an object
+                if (context.action.id == _actionInput.id && interactable is ObjectActionable objActionable) 
+                {   
+                    objActionable.HandleAction(player);
+                }
                 
-                float distance = hits
-                    .OrderBy(hit => hit.distance > 0 ? hit.distance : float.MaxValue)
-                    .TakeWhile(hit => hit.transform != null && hit.transform.TryGetComponent<ObjectInteractable>(out _))
-                    .First(hit => hit.transform.TryGetComponent<ObjectGrabbable>(out grabbable)).distance;
-                
-                Debug.DrawRay(
-                    player.playerCamera.transform.position, 
-                    player.playerCamera.transform.forward * distance, 
-                    Color.blue
-                );
-            }
-            catch (Exception e)
-            {
-                if (e is NullReferenceException or InvalidOperationException)
+                // Grab an object
+                else if (context.action.id == _grabInput.id &&
+                         interactable is ObjectGrabbable { Grabbable: true } objGrabbable &&
+                         GrabbedObject is null)
                 {
-                    if (GrabbedObject is not null) GrabbedObject.Drop();
+                    GrabbedObject = objGrabbable;
+                    GrabbedObject.Grab(player);
                     return;
                 }
-                throw;
-            }
+            } 
             
-            if (grabbable != null)
+            if (GrabbedObject is not null && context.action.id == _grabInput.id)
             {
-                // Grab an object
-                if (grabbable is { Grabbable: true } && GrabbedObject is null)
+                // Place an object
+                
+                /*
+                if (
+                    hitCount > 1 &&
+                    hits[1].transform is not null &&
+                    hits[1].transform.TryGetComponent(out ObjectPlaceholder placeholder) &&
+                    placeholder.Free &&
+                    _grabbedObject.ConvertActionableType == placeholder.actionableType
+                )
                 {
-                    GrabbedObject = grabbable;
-                    GrabbedObject.Grab(player);
+                    _grabbedObject.ToActionable(placeholder);
+                    _grabbedObject = null;
                 }
-                // Drop grabbed pointed grabbed object
-                else if (grabbable == GrabbedObject)
+                */
+            
+                // Drop an object
+                
+                // else
+                {
                     GrabbedObject.Drop();
+                }
             }
         }
 
-        public override void OnDestroy()
+        /// <summary>
+        /// This method handles button release.   // Why tho?
+        /// </summary>
+        /// <param name="context"><see cref="InputAction"/>'s <see cref="InputAction.CallbackContext"/> of the release</param>
+        private void HandleRelease(InputAction.CallbackContext context)
         {
-            base.OnDestroy();
-            
-            if (_actionInput != null) _actionInput.performed -= HandleAction;
-            if (_grabInput != null) _grabInput.performed -= HandleGrab;
         }
     }
 }
