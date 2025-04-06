@@ -10,6 +10,7 @@ namespace Prefabs.Puzzles.HintSystem
         {
             Drop();
             DisableRPC();
+            TutorialManager.Singleton.State = TutorialState.HintSystemUnlocked;
         }
 
         [Rpc(SendTo.Server, RequireOwnership = false)]
