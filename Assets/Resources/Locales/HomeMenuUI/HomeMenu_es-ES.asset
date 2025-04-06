@@ -87,6 +87,10 @@ MonoBehaviour:
     m_Localized: "\xA1Conectado! Esperando a que tu anfitri\xF3n inicie el juego..."
     m_Metadata:
       m_Items: []
+  - m_Id: 7624205895614464
+    m_Localized: "Selecci\xF3n del car\xE1cter"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
