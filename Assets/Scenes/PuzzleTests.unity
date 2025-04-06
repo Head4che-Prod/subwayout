@@ -1022,10 +1022,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: HanoiTowers
       objectReference: {fileID: 0}
-    - target: {fileID: 3657512214294959400, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 1309262674
-      objectReference: {fileID: 0}
     - target: {fileID: 3725620081756407415, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5
@@ -1066,17 +1062,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4714755399569761450, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 3027745964
+    - target: {fileID: 3820972833678949838, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 0.08805084
       objectReference: {fileID: 0}
     - target: {fileID: 5066629958883494709, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1854179523
-      objectReference: {fileID: 0}
-    - target: {fileID: 5576126056825299356, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 2227423956
       objectReference: {fileID: 0}
     - target: {fileID: 6156760683002833162, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
       propertyPath: GlobalObjectIdHash

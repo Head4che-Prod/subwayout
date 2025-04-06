@@ -11,6 +11,8 @@ namespace Prefabs.Puzzles.Hanoi
         public static HanoiTowers Instance { get; private set; }
         public bool IsInDebugMode { get; private set; }
         
+        public NetworkVariable<bool> InUse { get; private set; }
+        
         [Header("Balls")] [SerializeField] private GameObject bottomBall;
         [SerializeField] private GameObject middleBall;
         [SerializeField] private GameObject topBall;
@@ -60,6 +62,8 @@ namespace Prefabs.Puzzles.Hanoi
         private void Start() // When game gets loaded
         {
             Instance = this;
+
+            InUse = new NetworkVariable<bool>(false);
             
             ti = 0f;
             _gameWon = false;

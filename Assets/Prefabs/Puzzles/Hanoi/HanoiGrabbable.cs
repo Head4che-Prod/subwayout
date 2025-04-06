@@ -8,15 +8,13 @@ namespace Prefabs.Puzzles.Hanoi
 {
     public class HanoiGrabbable : ObjectGrabbable
     {
+        public override bool Grabbable => !HanoiTowers.Instance.InUse.Value && IsGrabbable.Value;  // Checks whether the hanoi towers are already in use.
         
-        private static bool _useable = true;
-        
-        public override bool Grabbable => _useable && IsGrabbable.Value;  // Checks whether the hanoi towers are already in use.
         public override void Grab(PlayerObject player)
         {
             base.Grab(player);
             //Debug.Log(HanoiCollider.DebugGrid());
-            _useable = false;
+            HanoiTowers.Instance.InUse.Value = true;
         }
         public override void Drop()
         {
@@ -24,36 +22,45 @@ namespace Prefabs.Puzzles.Hanoi
             
             // Debug.Log($"Let go of {name} at ({Rb.position.x}, {Rb.position.y}, {Rb.position.z})");
             HanoiCollider.ResetBall(transform);
-            _useable = true;
+            HanoiTowers.Instance.InUse.Value = false;
         }
 
         public override Vector3 CalculateMovementForce()
         {
             if (Physics.Raycast(Owner.playerCamera.transform.position, Owner.playerCamera.transform.forward,
-                    out RaycastHit hit, 12f, 1000))  // Only let layer 3 pass
+                    out RaycastHit hit, 12f, 1 << 3))  // Only let layer 3 pass
             {
+                // Put vector in local space (to access data relative to the gamed plane)
                 Vector3 direction = HanoiTowers.Instance.transform.InverseTransformVector(hit.point - transform.position);
+                
+                if (HanoiTowers.Instance.IsInDebugMode)
+                {
+                    TargetPosition.Instance.SetPosition(0, hit.point);
+                    TargetPosition.Instance.SetPosition(1, transform.position);
+                }
                 direction.y = 0;
 
-                if (direction.magnitude > 0.01f)
+                
+                if (direction.magnitude > 0.01f) // Only move if movement will actually make a difference
                 {
                     ushort movementMode = 0;
-                    Vector3 hitPointLocal = HanoiTowers.Instance.transform.InverseTransformDirection(hit.point);
-                    Vector3 positionLocal =
-                        HanoiTowers.Instance.transform.InverseTransformDirection(transform.position);
+                    //Vector3 hitPointLocal = HanoiTowers.Instance.transform.InverseTransformDirection(hit.point);
+                    //Vector3 positionLocal =
+                    //    HanoiTowers.Instance.transform.InverseTransformDirection(transform.position);
 
-                    if (Math.Abs((hitPointLocal.x - positionLocal.x) / (hitPointLocal.z - positionLocal.z)) > 2f)
+                    if (direction.x / direction.z > 2f)
                     {
                         movementMode = 1;
                         direction.z = 0;
                     }
-                    else if (Math.Abs((hitPointLocal.z - positionLocal.z) / (hitPointLocal.x - positionLocal.x)) > 2f)
+                    else if (direction.z / direction.x > 2f)
                     {
                         movementMode = 2;
                         direction.x = 0;
                     }
-                
-                    direction = HanoiTowers.Instance.transform.InverseTransformVector(direction.normalized) * 0.1f;
+                    
+                    // Put vector back into global space
+                    direction = HanoiTowers.Instance.transform.TransformVector(direction.normalized) * 0.25f;
                 
                     if (HanoiTowers.Instance.IsInDebugMode)
                     {

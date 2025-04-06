@@ -18,11 +18,11 @@ namespace Objects
         [Header("Physics")]
         [FormerlySerializedAs("lerpSpeed")] [SerializeField] protected float moveSpeed = 2.0f;
         [SerializeField] private bool affectedByGravity = true;
-        protected Rigidbody Rb { get; private set; }
+        private Rigidbody Rb { get; set; }
         
         public PlayerObject Owner { get; private set; }
-    
-        protected Vector3 GrabPointPosition => Owner.grabPointTransform.position;
+
+        private Vector3 GrabPointPosition => Owner.grabPointTransform.position;
         protected NetworkVariable<bool> IsGrabbable = new (true);
         
 
