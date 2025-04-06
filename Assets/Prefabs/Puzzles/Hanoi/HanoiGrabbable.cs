@@ -60,7 +60,7 @@ namespace Prefabs.Puzzles.Hanoi
                     }
                     
                     // Put vector back into global space
-                    direction = HanoiTowers.Instance.transform.TransformVector(direction.normalized) * 0.25f;
+                    direction = HanoiTowers.Instance.transform.TransformVector(direction.normalized * 0.25f);
                 
                     if (HanoiTowers.Instance.IsInDebugMode)
                     {

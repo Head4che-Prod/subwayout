@@ -14,6 +14,7 @@ namespace Objects
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(NetworkRigidbody))]
     [RequireComponent(typeof(NetworkObject))]
+    [RequireComponent(typeof(ObjectOutline))]
     public class ObjectGrabbable : ObjectInteractable, IResettablePosition
     {
         [Header("Physics")] [FormerlySerializedAs("lerpSpeed")] [SerializeField]
