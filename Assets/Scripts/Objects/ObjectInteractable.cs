@@ -8,6 +8,8 @@ namespace Objects
     /// </summary>
     public abstract class ObjectInteractable : NetworkBehaviour
     {
+        [SerializeField] AudioClip soundEffect;
+        
         [Header("Offstage system")]
         [SerializeField] protected bool canBeOffStage;
         [SerializeField] protected bool startOnStage;
@@ -43,6 +45,7 @@ namespace Objects
         {
             if (canBeOffStage)
                 IsOffStage.OnValueChanged += ChangeActivationState;
+            SoundManager.singleton.PlaySound(soundEffect, transform, 1f); // shitty line
         }
 
         public void OnDisable()

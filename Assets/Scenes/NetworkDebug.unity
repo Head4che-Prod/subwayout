@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  soundEffect: {fileID: 8300000, guid: bc6ce5f5cc9c2d64aadcafcabeac3abf, type: 3}
   canBeOffStage: 0
   startOnStage: 0
   moveSpeed: 2
@@ -1253,7 +1254,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4659821117883930749, guid: ef50728f52ab4bc4294f4081cce31c6d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1051609172}
   m_SourcePrefab: {fileID: 100100000, guid: ef50728f52ab4bc4294f4081cce31c6d, type: 3}
 --- !u!1 &967280505
 GameObject:
@@ -1403,8 +1407,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  soundEffect: {fileID: 8300000, guid: bc6ce5f5cc9c2d64aadcafcabeac3abf, type: 3}
   canBeOffStage: 0
   startOnStage: 0
+--- !u!1 &1051609168 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4659821117883930749, guid: ef50728f52ab4bc4294f4081cce31c6d, type: 3}
+  m_PrefabInstance: {fileID: 848087824}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1051609172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1051609168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 481db155d435267428fd90d72f83e46b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundFXObject: {fileID: 5765392344587224176, guid: 5d1f71e7cddd6b74bb3889f50f808bea, type: 3}
 --- !u!1 &1258918181
 GameObject:
   m_ObjectHideFlags: 0
@@ -1637,6 +1660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  soundEffect: {fileID: 8300000, guid: bc6ce5f5cc9c2d64aadcafcabeac3abf, type: 3}
   canBeOffStage: 0
   startOnStage: 0
   moveSpeed: 2
@@ -2439,6 +2463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  soundEffect: {fileID: 8300000, guid: bc6ce5f5cc9c2d64aadcafcabeac3abf, type: 3}
   canBeOffStage: 0
   startOnStage: 0
   moveSpeed: 2
@@ -2521,6 +2546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  soundEffect: {fileID: 8300000, guid: bc6ce5f5cc9c2d64aadcafcabeac3abf, type: 3}
   canBeOffStage: 0
   startOnStage: 0
 --- !u!135 &1932370782
@@ -2847,6 +2873,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  soundEffect: {fileID: 0}
   canBeOffStage: 0
   startOnStage: 0
 --- !u!114 &1959571363
@@ -2862,6 +2889,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  soundEffect: {fileID: 8300000, guid: bc6ce5f5cc9c2d64aadcafcabeac3abf, type: 3}
   canBeOffStage: 0
   startOnStage: 0
   moveSpeed: 2
