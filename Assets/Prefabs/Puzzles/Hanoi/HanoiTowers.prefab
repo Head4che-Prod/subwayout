@@ -3309,6 +3309,7 @@ GameObject:
   - component: {fileID: 6156760683002833162}
   - component: {fileID: 2873841041859609692}
   - component: {fileID: 7029362708068778588}
+  - component: {fileID: 6587641659237137333}
   m_Layer: 0
   m_Name: MiddlePiece
   m_TagString: Untagged
@@ -3454,6 +3455,7 @@ MonoBehaviour:
   startOnStage: 0
   moveSpeed: 10
   affectedByGravity: 1
+  canBeHighlighted: 0
 --- !u!114 &7029362708068778588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3467,6 +3469,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 1
+--- !u!114 &6587641659237137333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8212785696297785526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &8256449611374506181
 GameObject:
   m_ObjectHideFlags: 0
@@ -3606,6 +3626,7 @@ GameObject:
   - component: {fileID: 4927992562717126572}
   - component: {fileID: 111033654724552817}
   - component: {fileID: 2807084494974347788}
+  - component: {fileID: 5978893820570998078}
   m_Layer: 0
   m_Name: TopPiece
   m_TagString: Untagged
@@ -3751,6 +3772,7 @@ MonoBehaviour:
   startOnStage: 0
   moveSpeed: 10
   affectedByGravity: 1
+  canBeHighlighted: 0
 --- !u!114 &2807084494974347788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3764,6 +3786,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 0
+--- !u!114 &5978893820570998078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8296183580863650448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &8560694226868619178
 GameObject:
   m_ObjectHideFlags: 0
@@ -3779,6 +3819,7 @@ GameObject:
   - component: {fileID: 5066629958883494709}
   - component: {fileID: 6631059129065459361}
   - component: {fileID: 4944842209243708975}
+  - component: {fileID: 3010917517631029723}
   m_Layer: 0
   m_Name: BasePiece
   m_TagString: Untagged
@@ -3924,6 +3965,7 @@ MonoBehaviour:
   startOnStage: 0
   moveSpeed: 10
   affectedByGravity: 1
+  canBeHighlighted: 0
 --- !u!114 &4944842209243708975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3937,6 +3979,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 2
+--- !u!114 &3010917517631029723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8560694226868619178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &8654399721826974094
 GameObject:
   m_ObjectHideFlags: 0

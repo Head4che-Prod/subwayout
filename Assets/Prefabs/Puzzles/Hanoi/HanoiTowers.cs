@@ -7,7 +7,6 @@ namespace Prefabs.Puzzles.Hanoi
 {
     public class HanoiTowers : NetworkBehaviour        // Only one should exist AT ALL TIMES
     {
-        
         /// <summary>
         /// The instance of the game currently loaded.
         /// </summary>
@@ -90,7 +89,23 @@ namespace Prefabs.Puzzles.Hanoi
                 if (Instance.ColliderGrid[2, layer].containedBall?.weight != 2 - layer)
                     _gameWon = false;
         }
-        
+
+        /// <summary>
+        /// Resets the balls' internal positions to their initial state.
+        /// </summary>
+        public void ResetPositions()
+        {
+            for (int bar = 0; bar < 3; bar++)
+            for (int level = 0; level  < 3; level++)
+            {
+                HanoiBall ball = ColliderGrid[bar, level].containedBall;
+                if (ball != null)
+                {
+                    ColliderGrid[bar, level].containedBall = null;
+                    ColliderGrid[0, 2 - ball.weight].containedBall = ball;
+                }
+            }
+        }
         
         /// <summary>
         /// Table representation of the internal state of the game.

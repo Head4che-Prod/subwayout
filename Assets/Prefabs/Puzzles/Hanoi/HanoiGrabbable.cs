@@ -94,5 +94,11 @@ namespace Prefabs.Puzzles.Hanoi
             Drop();
             return Vector3.zero;
         }
+
+        public override void ResetPosition()
+        {
+            HanoiTowers.Instance.ResetPositions();
+            base.ResetPosition();
+        }
     }
 }

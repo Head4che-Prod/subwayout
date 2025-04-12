@@ -35,7 +35,7 @@ namespace Objects
         public PlayerObject Owner { get; private set; }
 
         private Vector3 GrabPointPosition => Owner.grabPointTransform.position;
-        protected NetworkVariable<bool> IsGrabbable = new(true);
+        protected readonly NetworkVariable<bool> IsGrabbable = new(true);
         
         public virtual bool Grabbable // This can be overridden
         {
@@ -139,7 +139,7 @@ namespace Objects
         public Vector3 InitialPosition { get; set; }
         public Quaternion InitialRotation { get; set; }
 
-        public void ResetPosition()
+        public virtual void ResetPosition()
         {
             if (Owner != null)
                 Drop();
