@@ -1,4 +1,4 @@
-using System.Collections;
+using Prefabs.GameManagers;
 using Prefabs.Player.PlayerUI.DebugConsole;
 using Unity.Netcode;
 using UnityEngine;
@@ -26,7 +26,6 @@ namespace Prefabs.Puzzles.Hanoi
         /// </summary>
         public readonly HanoiHitbox[,] ColliderGrid = new HanoiHitbox[3,3];
         
-        private float _ti;
         private bool _gameWon;
 
         /// <summary>
@@ -35,6 +34,10 @@ namespace Prefabs.Puzzles.Hanoi
         private void ToggleDebug()
         {
             IsInDebugMode = !IsInDebugMode;
+            if (IsInDebugMode)
+                InUse.OnValueChanged += InUseDebugger;
+            else
+                InUse.OnValueChanged -= InUseDebugger;
             DebugConsole.Singleton.Log($"Hanoi debug mode {(IsInDebugMode ? "activated" : "deactivated")}.");
         }
         
@@ -47,24 +50,13 @@ namespace Prefabs.Puzzles.Hanoi
         {
             InUse = new NetworkVariable<bool>(false);
             
-            _ti = 0f;
             _gameWon = false;
             
             IsInDebugMode = false;
             DebugConsole.AddCommand("hanoiToggleDebug", ToggleDebug);
             DebugConsole.AddCommand("hanoiGrid", () => DebugConsole.Singleton.Log(DebugGrid()));
         }
-        
-        private void FixedUpdate() {
-            if (!_gameWon)
-                _ti = Time.time;
-            else if (Time.time - _ti > 3)
-            {
-                Debug.Log("Game won!");
-                NetworkManager.Singleton.Shutdown();
-                UnityEngine.SceneManagement.SceneManager.LoadScene("Scenes/HomeMenu", UnityEngine.SceneManagement.LoadSceneMode.Single);
-            }
-        }
+
 
         /// <summary>
         /// Updates the internal positions of the balls in the puzzle.
@@ -88,8 +80,21 @@ namespace Prefabs.Puzzles.Hanoi
             for (int layer = 0; layer < 3; layer++)
                 if (Instance.ColliderGrid[2, layer].containedBall?.weight != 2 - layer)
                     _gameWon = false;
+            
+            if (_gameWon)
+                FinishGame(ball);
         }
 
+        
+        private void FinishGame(HanoiBall ball)
+        {
+            ball.GetComponent<HanoiGrabbable>().Drop();
+            Debug.Log("Game won!");
+            InUse.Value = true;
+            foreach (HanoiHitbox box in ColliderGrid)
+                    ObjectPositionManager.ForgetResettableObjectClientRpc(box.containedBall?.GetComponent<HanoiGrabbable>());
+        }
+        
         /// <summary>
         /// Resets the balls' internal positions to their initial state.
         /// </summary>
@@ -120,5 +125,7 @@ namespace Prefabs.Puzzles.Hanoi
                    $"|{ColliderGrid[0, 0].containedBall?.gameObject.name,12}|{ColliderGrid[1, 0].containedBall?.gameObject.name,12}|{ColliderGrid[2, 0].containedBall?.gameObject.name,12}|\n" +
                    "|------------|------------|------------|</mspace>";
         }
+
+        private void InUseDebugger(bool a, bool b) => Debug.Log($"In use: {InUse.Value}");
     }
 }
