@@ -21,7 +21,7 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
         private string _tempCommand;
         private bool _ignoreNextInput = false;
 
-        public static bool IsActivated { get; private set; }
+        private static bool _isActivated;
         private string _previousInputMap;
         private string _currentText;
 
@@ -50,13 +50,13 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
             }
 
             if (this != null && gameObject != null && gameObject.transform != null && gameObject.transform.GetChild(0) != null && gameObject.transform.GetChild(0).gameObject != null)
-                gameObject.transform.GetChild(0).gameObject.SetActive(IsActivated);
+                gameObject.transform.GetChild(0).gameObject.SetActive(_isActivated);
         }
 
         public void Start()
         {
             _player = GetComponentInParent<PlayerObject>();
-            IsActivated = false;
+            _isActivated = false;
 
             _showConsoleAction = _player.Input.actions["ShowConsole"];
             _focusConsoleAction = _player.Input.actions["ConsoleFocus"];
@@ -84,13 +84,13 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
 
         private void ToggleConsole(InputAction.CallbackContext ctx)
         {
-            IsActivated = !IsActivated;
-            gameObject.transform.GetChild(0).gameObject.SetActive(IsActivated);
+            _isActivated = !_isActivated;
+            gameObject.transform.GetChild(0).gameObject.SetActive(_isActivated);
         }
 
         private void FocusOnConsole(InputAction.CallbackContext context)
         {
-            if (IsActivated)
+            if (_isActivated)
             {
                 _previousInputMap = _player.Input.currentActionMap.name;
                 _player.InputManager.SetPlayerInputMap("DebugConsole");
@@ -115,8 +115,7 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
         {
             if ((Char.IsLetter(c) || c == ' ') && !_ignoreNextInput)
             {
-                if (!(Keyboard.current.shiftKey.isPressed ^
-                      Keyboard.current.capsLockKey.isPressed)) // If caps lock XNOR shift
+                if (!Keyboard.current.shiftKey.isPressed)
                     c = Char.ToLower(c);
                 _currentText += c;
                 inputField.text = _currentText;
@@ -134,7 +133,7 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
             }
         }
 
-        public void NavigateUpHistory()
+        private void NavigateUpHistory()
         {
             if (_commandHistoryIndex < _commandHistory.Count - 1)
             {
@@ -146,7 +145,7 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
             }
         }
 
-        public void NavigateDownHistory()
+        private void NavigateDownHistory()
         {
             if (_commandHistoryIndex > 0)
             {
@@ -166,7 +165,7 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
             }
         }
 
-        public void ExecCommand()
+        private void ExecCommand()
         {
             if (_currentText == "")
                 return;
@@ -195,6 +194,37 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
         public void LogError(string msg)
         {
             Log($"<color=red>{msg}</color>");
+        }
+
+        private void ExecCommand(InputAction.CallbackContext _) {
+            ExecCommand();
+        }
+
+        private void FocusOffConsole(InputAction.CallbackContext _) {
+            FocusOffConsole();
+        }
+
+        private void Backspace(InputAction.CallbackContext _) {
+            Backspace();
+        }
+
+        private void NavigateUpHistory(InputAction.CallbackContext _) {
+            NavigateUpHistory();
+        }
+
+        private void NavigateDownHistory(InputAction.CallbackContext _) {
+            NavigateDownHistory();
+        }
+
+        public void OnDestroy()
+        {
+            _showConsoleAction.performed -= ToggleConsole;
+            _focusConsoleAction.performed -= FocusOnConsole;
+            _submitAction.performed -= ExecCommand;
+            _cancelAction.performed -= FocusOffConsole;
+            _backspaceAction.performed -= Backspace;
+            _upAction.performed -= NavigateUpHistory;
+            _downAction.performed -= NavigateDownHistory;
         }
     }
 }

@@ -1,4 +1,5 @@
 using Objects;
+using Prefabs.GameManagers;
 using Unity.Netcode;
 
 namespace Prefabs.Puzzles.HintSystem
@@ -14,7 +15,8 @@ namespace Prefabs.Puzzles.HintSystem
         [Rpc(SendTo.Server, RequireOwnership = false)]
         private void DisableRPC()
         {
-            //gameObject.SetActive(false);
+            ObjectPositionManager.ForgetResettableObjectClientRpc(this);
+            ObjectHighlightManager.ForgetHighlightableObjectClientRpc(Outline);
             NetworkObject.Despawn();
         }
     }
