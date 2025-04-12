@@ -1,4 +1,5 @@
-﻿using Unity.Netcode;
+﻿using System;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Objects
@@ -8,7 +9,7 @@ namespace Objects
     /// </summary>
     public abstract class ObjectInteractable : NetworkBehaviour
     {
-        [SerializeField] AudioClip soundEffect;
+        //[SerializeField] AudioClip soundEffect;
         
         [Header("Offstage system")]
         [SerializeField] protected bool canBeOffStage;
@@ -26,6 +27,7 @@ namespace Objects
                 Collider = GetComponent<Collider>();
             }
         }
+        
 
         protected virtual void ChangeActivationState(bool oldValue, bool newValue)
         {
@@ -45,8 +47,6 @@ namespace Objects
         {
             if (canBeOffStage)
                 IsOffStage.OnValueChanged += ChangeActivationState;
-            if (soundEffect != null)
-                SoundManager.singleton.PlaySound(soundEffect, transform, 1f); // shitty line
         }
 
         public void OnDisable()

@@ -1,5 +1,5 @@
 ﻿using Prefabs.Player;
-
+using UnityEngine;
 namespace Objects
 {
     /// <summary>
@@ -7,6 +7,7 @@ namespace Objects
     /// </summary>
     public abstract class ObjectActionable : ObjectInteractable
     {
+        [SerializeField] AudioClip soundEffect;
         
         /// <summary>
         /// This function handles the <see cref="Action"/> function with the animation.
@@ -14,6 +15,9 @@ namespace Objects
         public void HandleAction(PlayerObject player)
         {
             Action(player);
+            
+            if (soundEffect != null)
+                SoundManager.singleton.PlaySound(soundEffect, transform, 1f); // shitty line
         }
 
         /// <summary>
