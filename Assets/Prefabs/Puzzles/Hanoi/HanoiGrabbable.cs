@@ -15,7 +15,6 @@ namespace Prefabs.Puzzles.Hanoi
         public override void Grab(PlayerObject player)
         {
             base.Grab(player);
-            //Debug.Log(HanoiCollider.DebugGrid());
             HanoiTowers.Instance.InUse.Value = true;
         }
         public override void Drop()

@@ -1,8 +1,5 @@
-using System;
 using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 namespace Prefabs.Puzzles.Hanoi
 {
