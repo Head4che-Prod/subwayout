@@ -552,7 +552,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2133813318192819992, guid: 5afb63c7f6b2a4b458455bde00bd105a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 693926887}
   m_SourcePrefab: {fileID: 100100000, guid: 5afb63c7f6b2a4b458455bde00bd105a, type: 3}
 --- !u!1 &304534195
 GameObject:
@@ -902,6 +905,29 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &693926885 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2133813318192819992, guid: 5afb63c7f6b2a4b458455bde00bd105a, type: 3}
+  m_PrefabInstance: {fileID: 218257107}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &693926887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693926885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &1742847443
 GameObject:
   m_ObjectHideFlags: 0
@@ -1075,6 +1101,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 43833442771577604, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
+      propertyPath: m_Name
+      value: finalBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 43833442771577604, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 335500301652983014, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2780020891740978576, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
       propertyPath: m_Name
       value: HanoiTowers
@@ -1136,7 +1174,8 @@ PrefabInstance:
       value: 3653275067
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 707865679684361329, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c08ec93f7515cf4eab25b798ef3f3d1, type: 3}
