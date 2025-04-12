@@ -45,7 +45,8 @@ namespace Objects
         {
             if (canBeOffStage)
                 IsOffStage.OnValueChanged += ChangeActivationState;
-            SoundManager.singleton.PlaySound(soundEffect, transform, 1f); // shitty line
+            if (soundEffect != null)
+                SoundManager.singleton.PlaySound(soundEffect, transform, 1f); // shitty line
         }
 
         public void OnDisable()
