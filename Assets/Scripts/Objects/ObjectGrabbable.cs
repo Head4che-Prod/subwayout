@@ -19,19 +19,24 @@ namespace Objects
     {
         [Header("Physics")] [FormerlySerializedAs("lerpSpeed")] [SerializeField]
         private float moveSpeed = 2.0f;
+        
+        /// <summary>
+        /// How strict the collision detection is for the grabbed object. Use lower for objects that need to be moved precisely, and higher for objects that can be moved fast.
+        /// </summary>
+        protected virtual CollisionDetectionMode CollisionDetectionMode => CollisionDetectionMode.ContinuousDynamic;
 
         [SerializeField] private bool affectedByGravity = true;
         
         [Header("Visuals")]
         [SerializeField] private bool canBeHighlighted = true;
         
-        private Rigidbody Rb { get; private set; }
+        private Rigidbody Rb { get; set; }
         
         public PlayerObject Owner { get; private set; }
 
         private Vector3 GrabPointPosition => Owner.grabPointTransform.position;
         protected NetworkVariable<bool> IsGrabbable = new(true);
-
+        
         public virtual bool Grabbable // This can be overridden
         {
             get => IsGrabbable.Value;
@@ -54,7 +59,7 @@ namespace Objects
             // Warning: All rigidbody settings in this section must be copied / adapted for HanoiGrabbable
             Rb = GetComponent<NetworkRigidbody>().Rigidbody;
             Rb.interpolation = RigidbodyInterpolation.Extrapolate;
-            Rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+            Rb.collisionDetectionMode = CollisionDetectionMode;
             
             Outline = GetComponent<ObjectOutline>();
             Outline.enabled = false;

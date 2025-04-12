@@ -8,6 +8,8 @@ namespace Prefabs.Puzzles.Hanoi
 {
     public class HanoiGrabbable : ObjectGrabbable
     {
+        protected override CollisionDetectionMode CollisionDetectionMode => CollisionDetectionMode.Discrete;
+
         public override bool Grabbable => !HanoiTowers.Instance.InUse.Value && IsGrabbable.Value;  // Checks whether the hanoi towers are already in use.
         
         public override void Grab(PlayerObject player)
