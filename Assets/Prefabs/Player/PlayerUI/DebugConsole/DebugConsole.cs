@@ -218,13 +218,20 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
 
         public void OnDestroy()
         {
-            _showConsoleAction.performed -= ToggleConsole;
-            _focusConsoleAction.performed -= FocusOnConsole;
-            _submitAction.performed -= ExecCommand;
-            _cancelAction.performed -= FocusOffConsole;
-            _backspaceAction.performed -= Backspace;
-            _upAction.performed -= NavigateUpHistory;
-            _downAction.performed -= NavigateDownHistory;
+            if (_showConsoleAction != null)
+                _showConsoleAction.performed -= ToggleConsole;
+            if (_focusConsoleAction != null)
+                _focusConsoleAction.performed -= FocusOnConsole;
+            if (_submitAction != null)
+                _submitAction.performed -= ExecCommand;
+            if (_cancelAction != null)
+                _cancelAction.performed -= FocusOffConsole;
+            if (_backspaceAction != null)
+                _backspaceAction.performed -= Backspace;
+            if (_upAction != null)
+                _upAction.performed -= NavigateUpHistory;
+            if (_downAction != null)
+                _downAction.performed -= NavigateDownHistory;
         }
     }
 }
