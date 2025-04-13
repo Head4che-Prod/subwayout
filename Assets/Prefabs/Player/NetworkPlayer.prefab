@@ -767,7 +767,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   player: {fileID: 6371891161549056370}
   reach: 3
-  allocationSize: 4
+  allocationSize: 6
 --- !u!1 &7305760799034490760
 GameObject:
   m_ObjectHideFlags: 0

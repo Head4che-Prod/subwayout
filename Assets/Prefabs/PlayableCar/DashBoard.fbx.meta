@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1d188f203af37ca49817254273352a1a
+guid: 29d82243025636241adf56aa57e9f4f8
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: TopHanoiColor
-    second: {fileID: 2100000, guid: b67a4a1cdcecd6a4895158da74967194, type: 2}
+      name: TableauDeBordTexture
+    second: {fileID: 2100000, guid: 2316c562ce4c4a34fa14b78762bee07d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
