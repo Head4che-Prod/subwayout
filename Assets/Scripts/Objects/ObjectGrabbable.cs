@@ -52,6 +52,10 @@ namespace Objects
         [Rpc(SendTo.Server, RequireOwnership = false)]
         private void SetGrabbableServerRpc(bool value) => Grabbable = value;
 
+        public void Awake()
+        {
+            IsGrabbable = new NetworkVariable<bool>(true);
+        }
         
         public void Start()
         {
@@ -64,8 +68,6 @@ namespace Objects
             
             Outline = GetComponent<ObjectOutline>();
             Outline.enabled = false;
-            
-            IsGrabbable = new NetworkVariable<bool>(true);
         }
         
         /// <returns><see cref="Vector3"/> of the difference between player's <see cref="GrabPointPosition"/> and the current grabbed object positions.</returns>

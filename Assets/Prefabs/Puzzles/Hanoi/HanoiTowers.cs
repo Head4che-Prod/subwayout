@@ -44,12 +44,11 @@ namespace Prefabs.Puzzles.Hanoi
         private void Awake()
         {
             Instance = this;
+            InUse = new NetworkVariable<bool>(false);
         }
 
         private void Start() // When game gets loaded
         {
-            InUse = new NetworkVariable<bool>(false);
-            
             _gameWon = false;
             
             IsInDebugMode = false;
