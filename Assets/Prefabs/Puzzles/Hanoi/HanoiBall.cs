@@ -1,42 +1,21 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Prefabs.Puzzles.Hanoi
 {
-    public class HanoiBall
+    /// <summary>
+    /// Internal representation of a ball, storing its size and position.
+    /// </summary>
+    public class HanoiBall : MonoBehaviour
     {
-        private static readonly Dictionary<GameObject, HanoiBall> RegisteredBalls =
-            new Dictionary<GameObject, HanoiBall>();
-
-        public static HanoiBall GetHanoiBall(GameObject ballObject)
+        /// <summary>
+        /// Weight of the ball. Balls can not be placed on heavier ones.
+        /// </summary>}
+        [SerializeField, Range(0, 2)] public int weight;
+        
+        private void Start()
         {
-            try
-            {
-                return RegisteredBalls[ballObject];
-            }
-            catch (KeyNotFoundException)
-            {
-                throw new HanoiException(
-                    $"Collider collided with object '{ballObject.name}' that is not a registered ball");
-            }
+            gameObject.transform.localPosition = new Vector3(0.12f, 0.0135f, 0.033f + 0.03f * weight);
         }
-
-        public static void AddHanoiBalls(params HanoiBall[] balls)
-        {
-            foreach (HanoiBall ball in balls)
-                if (!RegisteredBalls.TryAdd(ball.Object, ball))
-                    Debug.LogWarning($"Ball '{ball.Object.name}' already registered to Hanoi Towers system");
-        }
-
-        public GameObject Object { get; }
-        public readonly int Weight;
-
-        public HanoiBall(GameObject ball, int ballWeight)
-        {
-            Object = ball;
-            Weight = ballWeight;
-
-            RegisteredBalls.TryAdd(Object, this);
-        }
+        
     }
 }

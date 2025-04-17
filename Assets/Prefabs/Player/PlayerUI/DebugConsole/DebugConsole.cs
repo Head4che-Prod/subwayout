@@ -12,7 +12,7 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
     public class DebugConsole : MonoBehaviour
     {
         public static DebugConsole Singleton;
-        [SerializeField] Text displayText;
+        [SerializeField] TMP_Text displayText;
         [SerializeField] TMP_InputField inputField;
         // Needs to be initialized here in order to avoid NullReferenceExceptions when adding commands in other files
         private static readonly Dictionary<string, Action> Commands = new Dictionary<string, Action>();
@@ -218,13 +218,20 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
 
         public void OnDestroy()
         {
-            _showConsoleAction.performed -= ToggleConsole;
-            _focusConsoleAction.performed -= FocusOnConsole;
-            _submitAction.performed -= ExecCommand;
-            _cancelAction.performed -= FocusOffConsole;
-            _backspaceAction.performed -= Backspace;
-            _upAction.performed -= NavigateUpHistory;
-            _downAction.performed -= NavigateDownHistory;
+            if (_showConsoleAction != null)
+                _showConsoleAction.performed -= ToggleConsole;
+            if (_focusConsoleAction != null)
+                _focusConsoleAction.performed -= FocusOnConsole;
+            if (_submitAction != null)
+                _submitAction.performed -= ExecCommand;
+            if (_cancelAction != null)
+                _cancelAction.performed -= FocusOffConsole;
+            if (_backspaceAction != null)
+                _backspaceAction.performed -= Backspace;
+            if (_upAction != null)
+                _upAction.performed -= NavigateUpHistory;
+            if (_downAction != null)
+                _downAction.performed -= NavigateDownHistory;
         }
     }
 }
