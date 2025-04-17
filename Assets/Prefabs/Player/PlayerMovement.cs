@@ -14,7 +14,6 @@ namespace Prefabs.Player
 	
 		public float groundDrag;
 		public float airMultiplier;
-		public Transform orientation;
 
 		[Header("Keybindings")] 
 		private InputAction _movementInput;
