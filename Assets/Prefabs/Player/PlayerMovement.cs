@@ -70,7 +70,7 @@ namespace Prefabs.Player
 
 		private void MovePlayer()
 		{
-			_moveDirection = orientation.forward * _verticalInput + orientation.right * _horizontalInput;
+			_moveDirection = transform.forward * _verticalInput + transform.right * _horizontalInput;
 	    
 			// Ground
 			if (_grounded)
