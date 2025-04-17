@@ -6,10 +6,11 @@ using UnityEngine.Serialization;
 
 public class SingleChair : ObjectActionable
 {
-    private static readonly int chairMove = Animator.StringToHash("ChairMove");
+    private static readonly int activateUp = Animator.StringToHash("activateUp");
     [FormerlySerializedAs("ChairMove")] [SerializeField]private Animator anim;
     protected override void Action(PlayerObject player)
     {
-        anim.SetBool(chairMove, !anim.GetBool(chairMove));
+        Debug.Log("Chair anim played ");
+        anim.SetBool(activateUp, !anim.GetBool(activateUp));
     }
 }
