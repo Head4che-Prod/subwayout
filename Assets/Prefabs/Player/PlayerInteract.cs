@@ -31,6 +31,8 @@ namespace Prefabs.Player
 
         private void HandleAction(InputAction.CallbackContext context)
         {
+            Debug.Log("Try to action");
+            
             ObjectActionable actionable = null;
             try
             {
@@ -46,6 +48,13 @@ namespace Prefabs.Player
                     .OrderBy(hit => hit.distance > 0 ? hit.distance : float.MaxValue)
                     .TakeWhile(hit => hit.transform != null && hit.transform.TryGetComponent<ObjectInteractable>(out _))
                     .First(hit => hit.transform.TryGetComponent<ObjectActionable>(out actionable)).distance;
+
+                foreach (RaycastHit hit in hits
+                             .OrderBy(hit => hit.distance > 0 ? hit.distance : float.MaxValue)
+                             .TakeWhile(hit => hit.transform != null && hit.transform.TryGetComponent<ObjectInteractable>(out _)))
+                    Debug.Log(hit.transform.name);
+                
+                Debug.Log($"Action {actionable.name}");
                 
                 Debug.DrawRay(
                     player.playerCamera.transform.position, 
@@ -67,6 +76,7 @@ namespace Prefabs.Player
         
         private void HandleGrab(InputAction.CallbackContext context)
         {
+            Debug.Log("Try to grab");
             ObjectGrabbable grabbable = null;
             try
             {
@@ -82,6 +92,13 @@ namespace Prefabs.Player
                     .OrderBy(hit => hit.distance > 0 ? hit.distance : float.MaxValue)
                     .TakeWhile(hit => hit.transform != null && hit.transform.TryGetComponent<ObjectInteractable>(out _))
                     .First(hit => hit.transform.TryGetComponent<ObjectGrabbable>(out grabbable)).distance;
+                
+                foreach (RaycastHit hit in hits
+                             .OrderBy(hit => hit.distance > 0 ? hit.distance : float.MaxValue)
+                             .TakeWhile(hit => hit.transform != null && hit.transform.TryGetComponent<ObjectInteractable>(out _)))
+                    Debug.Log(hit.transform.name);
+                
+                Debug.Log($"Grab {grabbable.name}");
                 
                 Debug.DrawRay(
                     player.playerCamera.transform.position, 
@@ -104,12 +121,16 @@ namespace Prefabs.Player
                 // Grab an object
                 if (grabbable is { Grabbable: true } && GrabbedObject is null)
                 {
+                    Debug.Log("Grab");
                     GrabbedObject = grabbable;
                     GrabbedObject.Grab(player);
                 }
                 // Drop grabbed pointed grabbed object
                 else if (grabbable == GrabbedObject)
+                {
+                    Debug.Log("Drop");
                     GrabbedObject.Drop();
+                }
             }
         }
 
