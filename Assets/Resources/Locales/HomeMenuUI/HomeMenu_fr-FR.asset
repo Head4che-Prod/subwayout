@@ -87,6 +87,10 @@ MonoBehaviour:
     m_Localized: "Connect\xE9 ! En attente de l'h\xF4te pour d\xE9marrer la partie..."
     m_Metadata:
       m_Items: []
+  - m_Id: 7624205895614464
+    m_Localized: Choix du personnage
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

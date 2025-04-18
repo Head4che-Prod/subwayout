@@ -1,10 +1,16 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Prefabs.Puzzles.Hanoi
 {
-    // Used to detect if the object colliding with HanoiCollider is a ball
+    /// <summary>
+    /// End part of a Hanoi piece that stays inside the box. Used to detect if the object colliding with HanoiCollider is a ball.
+    /// </summary>
     public class HanoiPieceBall : MonoBehaviour
     {
-        public GameObject parent;
+        /// <summary>
+        /// The piece the HanoiPieceBall is part of.
+        /// </summary>
+        public HanoiBall parent;
     }
 }

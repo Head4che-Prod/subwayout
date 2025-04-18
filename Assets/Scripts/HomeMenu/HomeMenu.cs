@@ -51,7 +51,7 @@ namespace HomeMenu
             _isCursorActive = true;
             SceneManager.activeSceneChanged += (from, to) =>
             {
-                _isCursorActive = false;
+                _isCursorActive = to.name =="HomeMenu" || to.name=="PlayerSelection";
                 Cursor.lockState = _isCursorActive ? CursorLockMode.None : CursorLockMode.Locked;
                 Cursor.visible = _isCursorActive;
             };
@@ -268,6 +268,11 @@ namespace HomeMenu
                 SetLangEs();
             else
                 SetLangEn();
+        }
+
+        public void OpenSkinSelector()
+        {
+            SceneManager.LoadScene("Scenes/PlayerSelection", LoadSceneMode.Single);
         }
     }
 }

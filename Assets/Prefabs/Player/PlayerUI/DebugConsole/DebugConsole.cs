@@ -12,7 +12,7 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
     public class DebugConsole : MonoBehaviour
     {
         public static DebugConsole Singleton;
-        [SerializeField] Text displayText;
+        [SerializeField] TMP_Text displayText;
         [SerializeField] TMP_InputField inputField;
         // Needs to be initialized here in order to avoid NullReferenceExceptions when adding commands in other files
         private static readonly Dictionary<string, Action> Commands = new Dictionary<string, Action>();
@@ -194,6 +194,44 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
         public void LogError(string msg)
         {
             Log($"<color=red>{msg}</color>");
+        }
+
+        private void ExecCommand(InputAction.CallbackContext _) {
+            ExecCommand();
+        }
+
+        private void FocusOffConsole(InputAction.CallbackContext _) {
+            FocusOffConsole();
+        }
+
+        private void Backspace(InputAction.CallbackContext _) {
+            Backspace();
+        }
+
+        private void NavigateUpHistory(InputAction.CallbackContext _) {
+            NavigateUpHistory();
+        }
+
+        private void NavigateDownHistory(InputAction.CallbackContext _) {
+            NavigateDownHistory();
+        }
+
+        public void OnDestroy()
+        {
+            if (_showConsoleAction != null)
+                _showConsoleAction.performed -= ToggleConsole;
+            if (_focusConsoleAction != null)
+                _focusConsoleAction.performed -= FocusOnConsole;
+            if (_submitAction != null)
+                _submitAction.performed -= ExecCommand;
+            if (_cancelAction != null)
+                _cancelAction.performed -= FocusOffConsole;
+            if (_backspaceAction != null)
+                _backspaceAction.performed -= Backspace;
+            if (_upAction != null)
+                _upAction.performed -= NavigateUpHistory;
+            if (_downAction != null)
+                _downAction.performed -= NavigateDownHistory;
         }
     }
 }

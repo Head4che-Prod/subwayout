@@ -4,6 +4,7 @@ using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Objects
 {
@@ -18,19 +19,24 @@ namespace Objects
     {
         [Header("Physics")] [FormerlySerializedAs("lerpSpeed")] [SerializeField]
         private float moveSpeed = 2.0f;
+        
+        /// <summary>
+        /// How strict the collision detection is for the grabbed object. Use lower for objects that need to be moved precisely, and higher for objects that can be moved fast.
+        /// </summary>
+        protected virtual CollisionDetectionMode CollisionDetectionMode => CollisionDetectionMode.ContinuousDynamic;
 
         [SerializeField] private bool affectedByGravity = true;
         
         [Header("Visuals")]
         [SerializeField] private bool canBeHighlighted = true;
         
-        protected Rigidbody Rb { get; private set; }
+        private Rigidbody Rb { get; set; }
         
         public PlayerObject Owner { get; private set; }
 
         private Vector3 GrabPointPosition => Owner.grabPointTransform.position;
-        protected NetworkVariable<bool> IsGrabbable = new(true);
-
+        protected NetworkVariable<bool> IsGrabbable;
+        
         public virtual bool Grabbable // This can be overridden
         {
             get => IsGrabbable.Value;
@@ -46,6 +52,11 @@ namespace Objects
         [Rpc(SendTo.Server, RequireOwnership = false)]
         private void SetGrabbableServerRpc(bool value) => Grabbable = value;
 
+        public void Awake()
+        {
+            IsGrabbable = new NetworkVariable<bool>(true);
+        }
+        
         public void Start()
         {
             ((IResettablePosition)this).RegisterInitialState(transform.position, transform.rotation);
@@ -53,12 +64,12 @@ namespace Objects
             // Warning: All rigidbody settings in this section must be copied / adapted for HanoiGrabbable
             Rb = GetComponent<NetworkRigidbody>().Rigidbody;
             Rb.interpolation = RigidbodyInterpolation.Extrapolate;
-            Rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+            Rb.collisionDetectionMode = CollisionDetectionMode;
             
             Outline = GetComponent<ObjectOutline>();
             Outline.enabled = false;
         }
-
+        
         /// <returns><see cref="Vector3"/> of the difference between player's <see cref="GrabPointPosition"/> and the current grabbed object positions.</returns>
         public virtual Vector3 CalculateMovementForce()
         {
@@ -74,8 +85,6 @@ namespace Objects
             {
                 Vector3 force = CalculateMovementForce();
                 MoveGrabbedObjectServerRpc(force * moveSpeed); // todo: Speed need to be modified!
-                // Rb.linearVelocity = force * moveSpeed;
-                // Rb.MovePosition(_grabPointTransform.position);
             }
         }
 
@@ -135,7 +144,7 @@ namespace Objects
         public Vector3 InitialPosition { get; set; }
         public Quaternion InitialRotation { get; set; }
 
-        public void ResetPosition()
+        public virtual void ResetPosition()
         {
             if (Owner != null)
                 Drop();
