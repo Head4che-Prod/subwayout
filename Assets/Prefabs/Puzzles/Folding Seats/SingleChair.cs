@@ -1,16 +1,36 @@
+using System;
 using Objects;
 using UnityEngine;
 using Prefabs.Player;
-using UnityEngine.Serialization;
+using UnityEngine.Networking;
 
-
-public class SingleChair : ObjectActionable
+namespace Prefabs.Puzzles.FoldingSeats
 {
-    private static readonly int activateUp = Animator.StringToHash("activateUp");
-    [FormerlySerializedAs("ChairMove")] [SerializeField]private Animator anim;
-    protected override void Action(PlayerObject player)
+    public class SingleChair : ObjectActionable
     {
-        Debug.Log("Chair anim played ");
-        anim.SetBool(activateUp, !anim.GetBool(activateUp));
+        private Animator _chairAnimator;
+        private static readonly int ChairUp = Animator.StringToHash("ChairUp");
+        private static readonly int ChairDown = Animator.StringToHash("ChairDown");
+
+        public void Start()
+        {
+            _chairAnimator = GetComponent<Animator>();
+        }
+
+        protected override void Action(PlayerObject _)
+        {
+            Debug.Log("seat pressed");
+            if (!_chairAnimator.GetBool(ChairUp))
+            {
+                _chairAnimator.SetBool(ChairUp,true);
+            }
+            else
+            {
+                _chairAnimator.SetBool(ChairDown, false);
+            }
+                
+        }
     }
+    
+
 }
