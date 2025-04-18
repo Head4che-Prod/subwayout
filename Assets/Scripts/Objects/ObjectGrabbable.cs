@@ -52,7 +52,7 @@ namespace Objects
         [Rpc(SendTo.Server, RequireOwnership = false)]
         private void SetGrabbableServerRpc(bool value) => Grabbable = value;
 
-        public void Awake()
+        public new void Awake()
         {
             IsGrabbable = new NetworkVariable<bool>(true);
         }
