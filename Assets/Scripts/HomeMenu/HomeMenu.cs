@@ -51,7 +51,7 @@ namespace HomeMenu
             _isCursorActive = true;
             SceneManager.activeSceneChanged += (from, to) =>
             {
-                _isCursorActive = to.name =="HomeMenu" || to.name=="PlayerSelection";
+                _isCursorActive = to.name == "HomeMenu" || to.name == "PlayerSelection";
                 Cursor.lockState = _isCursorActive ? CursorLockMode.None : CursorLockMode.Locked;
                 Cursor.visible = _isCursorActive;
             };
@@ -149,10 +149,10 @@ namespace HomeMenu
 
         public void Join()
         {
-            _sessionManager.AddOnClientConnectedCallback((id) => { _disableOnSpawn.SetActive(false); });
+            _sessionManager.AddOnClientConnectedCallback((id) => { if (this != null && this.gameObject != null) _disableOnSpawn.SetActive(false); });
             _sessionManager.AddOnClientDisconnectedCallback((id) =>
             {
-                if (id == NetworkManager.Singleton.LocalClientId)
+                if (this != null && this.gameObject != null && id == NetworkManager.Singleton.LocalClientId)
                 {
                     Debug.Log("Local player disconnected!");
                     SceneManager.LoadScene("Scenes/HomeMenu", LoadSceneMode.Single);
