@@ -80,11 +80,13 @@ namespace HomeMenu
             // Start server / Lobby
             _sessionManager.AddOnClientConnectedCallback((id) =>
             {
+                if (this == null || this.gameObject == null) return;
                 SetInteractibleStartButtons(0);
                 _disableOnSpawn.SetActive(false);
             });
             _sessionManager.StartSessionAsHost().ContinueWith((task) =>
             {
+                if (this == null || this.gameObject == null) return;
                 SetInteractibleStartButtons(0);
                 _sessionManager.AddOnPlayerJoined((_) => SetInteractibleStartButtons(0));
                 _sessionManager.AddOnPlayerLeft((_) => SetInteractibleStartButtons(-1));
