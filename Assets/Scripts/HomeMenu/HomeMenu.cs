@@ -88,8 +88,8 @@ namespace HomeMenu
             {
                 if (this == null || this.gameObject == null) return;
                 SetInteractibleStartButtons(0);
-                _sessionManager.AddOnPlayerJoined((_) => SetInteractibleStartButtons(0));
-                _sessionManager.AddOnPlayerLeft((_) => SetInteractibleStartButtons(-1));
+                _sessionManager.AddOnPlayerJoined((_) => { if (this != null && this.gameObject != null) SetInteractibleStartButtons(0); });
+                _sessionManager.AddOnPlayerLeft((_) => { if (this != null && this.gameObject != null) SetInteractibleStartButtons(-1); });
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
