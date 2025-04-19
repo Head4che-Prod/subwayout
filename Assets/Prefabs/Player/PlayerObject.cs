@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 namespace Prefabs.Player
 {
-    public class PlayerObject : MonoBehaviour
+    public class PlayerObject : NetworkBehaviour
     {
         [NonSerialized] public int CurrentSkin = 0;
         public PlayerInputManager InputManager {get; private set;}
@@ -37,6 +37,13 @@ namespace Prefabs.Player
             for (int i = 1; i < models.childCount; i++)
             {
                 models.GetChild(i).gameObject.SetActive(PlayerSelection.CurrentPlayer + 1 == i);
+            }
+
+            if (!IsLocalPlayer) {
+                transform.Find("UI").gameObject.SetActive(false);
+                transform.Find("Canvas").gameObject.SetActive(false);
+                transform.Find("CameraPos").gameObject.SetActive(false);
+                transform.Find("CameraHolder").gameObject.SetActive(false);
             }
         }
     }
