@@ -10,8 +10,6 @@ namespace Prefabs.Player
         public float sensX;
         public float sensY;
 
-        public Transform orientation;
-
         private float _xRotation;
         private float _yRotation;
     
@@ -40,10 +38,8 @@ namespace Prefabs.Player
             _xRotation -= lookY;
             _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
 
+            _player.transform.rotation = Quaternion.Euler(0, _yRotation, 0);
             transform.rotation = Quaternion.Euler(_xRotation, _yRotation, 0);
-            orientation.rotation = Quaternion.Euler(0, _yRotation, 0);
-
-            _player.playerCharacter.transform.rotation = orientation.rotation;
         }
     
         private void SetLayerAllChildren(Transform root, int layer)
