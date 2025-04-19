@@ -14,7 +14,6 @@ namespace Prefabs.Player
 	
 		public float groundDrag;
 		public float airMultiplier;
-		public Transform orientation;
 
 		[Header("Keybindings")] 
 		private InputAction _movementInput;
@@ -70,7 +69,7 @@ namespace Prefabs.Player
 
 		private void MovePlayer()
 		{
-			_moveDirection = orientation.forward * _verticalInput + orientation.right * _horizontalInput;
+			_moveDirection = transform.forward * _verticalInput + transform.right * _horizontalInput;
 	    
 			// Ground
 			if (_grounded)
