@@ -522,7 +522,6 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   sensX: 50
   sensY: 50
-  orientation: {fileID: 0}
 --- !u!1 &4957522455835016799
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,7 +635,6 @@ MonoBehaviour:
   sprintSpeed: 10
   groundDrag: 5
   airMultiplier: 0.4
-  orientation: {fileID: 0}
   PlayerCollider: {fileID: 3936763041024648637}
   whatIsGround:
     serializedVersion: 2
@@ -713,6 +711,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   player: {fileID: 6371891161549056370}
   reach: 3
+  allocationSize: 6
 --- !u!114 &7177244133462510066
 MonoBehaviour:
   m_ObjectHideFlags: 0
