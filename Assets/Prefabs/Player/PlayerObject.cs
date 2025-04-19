@@ -1,5 +1,6 @@
 using System;
 using Prefabs.UI;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -28,6 +29,10 @@ namespace Prefabs.Player
 
         public void Start()
         {
+            // foreach (PlayerObject player in GameObject.FindGameObjectsWithTag)
+            // {
+                
+            // }
             Transform models = transform.Find("Character");
             for (int i = 1; i < models.childCount; i++)
             {
