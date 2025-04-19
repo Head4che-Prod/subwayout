@@ -12076,10 +12076,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChairsDuo (6)
       objectReference: {fileID: 0}
-    - target: {fileID: 9052184246037120341, guid: a0b30122bd44ad24686415b860ca51c0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12140,10 +12136,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8898951464978509391, guid: 9cfdb70debcb55443be1312d47ac422f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8898951464978509391, guid: 9cfdb70debcb55443be1312d47ac422f, type: 3}
-      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -12268,10 +12260,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8898951464978509391, guid: 9cfdb70debcb55443be1312d47ac422f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8898951464978509391, guid: 9cfdb70debcb55443be1312d47ac422f, type: 3}
-      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -12645,10 +12633,6 @@ PrefabInstance:
     - target: {fileID: 9052184246037120341, guid: a0b30122bd44ad24686415b860ca51c0, type: 3}
       propertyPath: m_Name
       value: ChairsDuo (7)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9052184246037120341, guid: a0b30122bd44ad24686415b860ca51c0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13062,10 +13046,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChairsDuo (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 9052184246037120341, guid: a0b30122bd44ad24686415b860ca51c0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13190,10 +13170,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChairsDuo (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 9052184246037120341, guid: a0b30122bd44ad24686415b860ca51c0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13254,10 +13230,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8898951464978509391, guid: 9cfdb70debcb55443be1312d47ac422f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8898951464978509391, guid: 9cfdb70debcb55443be1312d47ac422f, type: 3}
-      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -13382,10 +13354,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8898951464978509391, guid: 9cfdb70debcb55443be1312d47ac422f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8898951464978509391, guid: 9cfdb70debcb55443be1312d47ac422f, type: 3}
-      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
