@@ -154,11 +154,18 @@ namespace HomeMenu
             _sessionManager.AddOnClientConnectedCallback((id) => { if (this != null && this.gameObject != null) _disableOnSpawn.SetActive(false); });
             _sessionManager.AddOnClientDisconnectedCallback((id) =>
             {
-                Debug.Log("Local player disconnected!");
-                SceneManager.LoadScene("Scenes/HomeMenu", LoadSceneMode.Single);
-                CloseStart();
-                CloseWaitingForHostScreen();
-                CloseJoin();
+                if (id == NetworkManager.Singleton.LocalClientId)
+                {
+                    Debug.Log("Local player disconnected!");
+                    SceneManager.LoadScene("Scenes/HomeMenu", LoadSceneMode.Single);
+                    try
+                    {
+                        CloseStart();
+                        CloseWaitingForHostScreen();
+                        CloseJoin();
+                    }
+                    catch { }
+                }
             });
 
             string joinCode = transform.Find("JoinMenu/JoinCodeInput").GetComponent<TMP_InputField>().text.ToUpper();
