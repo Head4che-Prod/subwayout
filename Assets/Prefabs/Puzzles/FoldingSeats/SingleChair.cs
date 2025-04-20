@@ -9,9 +9,8 @@ namespace Prefabs.Puzzles.FoldingSeats
     public class SingleChair : ObjectActionable
     {
         private static readonly int ChairUp = Animator.StringToHash("activateUp");
-        private static readonly int ChairDown = Animator.StringToHash("ChairDown");
         [SerializeField] private Animator chairAnimator;
-        private NetworkVariable<bool> isUp = new NetworkVariable<bool>(false);
+        private NetworkVariable<bool> _isUp = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone);
 
         protected override void Action(PlayerObject player)
         {
@@ -19,14 +18,14 @@ namespace Prefabs.Puzzles.FoldingSeats
             // chairAnimator.SetBool(ChairUp, !chairAnimator.GetBool(ChairUp));
             // isUp.Value = chairAnimator.GetBool(ChairUp);
 
-            isUp.Value = !chairAnimator.GetBool(ChairUp);
+            _isUp.Value = !chairAnimator.GetBool(ChairUp);
+            _isUp.OnValueChanged += AnimateChair;
         }
 
-        private void Update()
+        private void AnimateChair(bool _, bool curr)
         {
-            chairAnimator.SetBool(ChairUp, isUp.Value);
-        }
+            Debug.Log($"[CHAIR] New value: {curr}");
+            chairAnimator.SetBool(ChairUp, curr);
+        } 
     }
-    
-
 }
