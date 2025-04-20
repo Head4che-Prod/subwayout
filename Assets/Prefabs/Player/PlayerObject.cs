@@ -35,13 +35,14 @@ namespace Prefabs.Player
                 transform.Find("Canvas").gameObject.SetActive(false);
                 transform.Find("CameraPos").gameObject.SetActive(false);
                 transform.Find("CameraHolder").gameObject.SetActive(false);
-            } else {
-                Transform models = transform.Find("Character");
-                for (int i = 1; i < models.childCount; i++)
-                {
-                    models.GetChild(i).gameObject.SetActive(PlayerSelection.CurrentPlayer + 1 == i);
-                }
             }
+
+            Transform models = transform.Find("Character");
+            for (int i = 1; i < models.childCount; i++)
+            {
+                models.GetChild(i).gameObject.SetActive(PlayerSelection.CurrentPlayer + 1 == i);
+            }
+
         }
     }
 }
