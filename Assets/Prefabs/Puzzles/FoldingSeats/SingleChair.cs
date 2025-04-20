@@ -34,29 +34,21 @@ namespace Prefabs.Puzzles.FoldingSeats
             _isUp.OnValueChanged += OnValueChanged;
         }
 
-        private void OnValueChanged(bool previousValue, bool newValue)
-        {
-            if (newValue)
-            {
-                chairAnimator.SetBool(ChairUp, true);
-            }
-            else
-            {
-                chairAnimator.SetBool(ChairUp, false);
-            }
-        }
+        private void OnValueChanged(bool _, bool newValue)
+            => chairAnimator.SetBool(ChairUp, newValue);
         protected override void Action(PlayerObject player)
-        {
-           ChangedServerRpc(!chairAnimator.GetBool(ChairUp));
-        }
+            => ChangedServerRpc(!chairAnimator.GetBool(ChairUp));
         
-        [ServerRpc]
+        [Rpc(SendTo.Server, RequireOwnership = false)]
         private void ChangedServerRpc(bool isUpValChanged)
         {
             _isUp.Value = isUpValChanged;
         }
         
-        
-        
+        public override void OnNetworkDespawn()
+        {
+            base.OnNetworkDespawn();
+            _isUp.OnValueChanged -= OnValueChanged;
+        }
     }
 }
