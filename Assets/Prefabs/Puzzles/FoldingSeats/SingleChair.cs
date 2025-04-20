@@ -13,18 +13,19 @@ namespace Prefabs.Puzzles.FoldingSeats
         [SerializeField] private Animator chairAnimator;
         private NetworkVariable<bool> isUp = new NetworkVariable<bool>(false);
 
-        private void Start()
-        {
-            isUp.Value = false;
-        }
-
         protected override void Action(PlayerObject player)
         {
             Debug.Log("has touched the seat");
-            chairAnimator.SetBool(ChairUp, !chairAnimator.GetBool(ChairUp));
-            isUp.Value = chairAnimator.GetBool(ChairUp);
+            // chairAnimator.SetBool(ChairUp, !chairAnimator.GetBool(ChairUp));
+            // isUp.Value = chairAnimator.GetBool(ChairUp);
+
+            isUp.Value = !chairAnimator.GetBool(ChairUp);
         }
 
+        private void Update()
+        {
+            chairAnimator.SetBool(ChairUp, isUp.Value);
+        }
     }
     
 
