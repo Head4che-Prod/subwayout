@@ -9,6 +9,7 @@ namespace Prefabs.Player
 {
     public class PlayerObject : NetworkBehaviour
     {
+        [NonSerialized] public static NetworkVariable<Dictionary<ulong, byte>> PlayerSkins =
             new NetworkVariable<Dictionary<ulong, byte>>(new Dictionary<ulong, byte>());
         public PlayerInputManager InputManager { get; private set; }
         public PlayerMovement Movement { get; private set; }
