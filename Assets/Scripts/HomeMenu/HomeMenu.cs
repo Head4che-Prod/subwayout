@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
+using Prefabs.Player;
 using TMPro;
 using Unity.Netcode;
 using Unity.Services.Authentication;
@@ -143,6 +144,9 @@ namespace HomeMenu
             _isCursorActive = false;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            
+            PlayerObject.SetSkins();
+            
             NetworkManager.Singleton.SceneManager.LoadScene("Scenes/DemoScene", LoadSceneMode.Single);
         }
 

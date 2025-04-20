@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Prefabs.UI;
 using Unity.Netcode;
 using UnityEngine;
@@ -8,7 +9,7 @@ namespace Prefabs.Player
 {
     public class PlayerObject : NetworkBehaviour
     {
-        [NonSerialized] public int CurrentSkin = 0;
+            new NetworkVariable<Dictionary<ulong, byte>>(new Dictionary<ulong, byte>());
         public PlayerInputManager InputManager { get; private set; }
         public PlayerMovement Movement { get; private set; }
         public PlayerInteract Interaction { get; private set; }
@@ -37,12 +38,25 @@ namespace Prefabs.Player
                 transform.Find("CameraHolder").gameObject.SetActive(false);
             }
 
-            Transform models = transform.Find("Character");
-            for (int i = 1; i < models.childCount; i++)
-            {
-                models.GetChild(i).gameObject.SetActive(PlayerSelection.CurrentPlayer + 1 == i);
-            }
+        }
 
+        public override void OnNetworkSpawn()
+        {
+            if (IsLocalPlayer)
+                PlayerSkins.Value.Add(NetworkManager.Singleton.LocalClientId, (byte)(PlayerSelection.CurrentPlayerSkin + 1));
+        }
+
+        public static void SetSkins()
+        {
+            foreach (KeyValuePair<ulong, NetworkClient> client in NetworkManager.Singleton.ConnectedClients)
+            {
+                Transform models = client.Value.PlayerObject.transform.Find("Character");
+                byte skin = PlayerSkins.Value[client.Key];
+                for (int i = 1; i < models.childCount; i++)     // First child in unused
+                {
+                    models.GetChild(i).gameObject.SetActive(skin == i);
+                }
+            }
         }
     }
 }
