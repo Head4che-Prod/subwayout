@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using TMPro;
 using Unity.Netcode;
@@ -54,6 +55,9 @@ namespace HomeMenu
                 _isCursorActive = to.name == "HomeMenu" || to.name == "PlayerSelection";
                 Cursor.lockState = _isCursorActive ? CursorLockMode.None : CursorLockMode.Locked;
                 Cursor.visible = _isCursorActive;
+
+                foreach (GameObject networkManager in GameObject.FindGameObjectsWithTag("NetworkManager").Skip(1))
+                    Destroy(networkManager);
             };
         }
 
