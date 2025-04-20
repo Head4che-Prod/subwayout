@@ -12,20 +12,51 @@ namespace Prefabs.Puzzles.FoldingSeats
         [SerializeField] private Animator chairAnimator;
         private NetworkVariable<bool> _isUp = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone);
 
-        protected override void Action(PlayerObject player)
-        {
-            Debug.Log("has touched the seat");
-            // chairAnimator.SetBool(ChairUp, !chairAnimator.GetBool(ChairUp));
-            // isUp.Value = chairAnimator.GetBool(ChairUp);
+        // protected override void Action(PlayerObject player)
+        // {
+        //     Debug.Log("has touched the seat");
+        //     // chairAnimator.SetBool(ChairUp, !chairAnimator.GetBool(ChairUp));
+        //     // isUp.Value = chairAnimator.GetBool(ChairUp);
+        //
+        //     _isUp.Value = !chairAnimator.GetBool(ChairUp);
+        //     _isUp.OnValueChanged += AnimateChair;
+        // }
+        //
+        // private void AnimateChair(bool _, bool curr)
+        // {
+        //     Debug.Log($"[CHAIR] New value: {curr}");
+        //     chairAnimator.SetBool(ChairUp, curr);
+        // } 
 
-            _isUp.Value = !chairAnimator.GetBool(ChairUp);
-            _isUp.OnValueChanged += AnimateChair;
+        public override void OnNetworkSpawn()
+        {
+            base.OnNetworkSpawn();
+            _isUp.OnValueChanged += OnValueChanged;
         }
 
-        private void AnimateChair(bool _, bool curr)
+        private void OnValueChanged(bool previousValue, bool newValue)
         {
-            Debug.Log($"[CHAIR] New value: {curr}");
-            chairAnimator.SetBool(ChairUp, curr);
-        } 
+            if (newValue)
+            {
+                chairAnimator.SetBool(ChairUp, true);
+            }
+            else
+            {
+                chairAnimator.SetBool(ChairUp, false);
+            }
+        }
+        protected override void Action(PlayerObject player)
+        {
+           ChangedServerRpc(!chairAnimator.GetBool(ChairUp));
+        }
+        
+        [ServerRpc]
+        private void ChangedServerRpc(bool isUpValChanged)
+        {
+            _isUp.Value = isUpValChanged;
+        }
+        
+        
+        
     }
 }
