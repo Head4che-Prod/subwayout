@@ -145,17 +145,11 @@ namespace HomeMenu
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             
-            ApplySkinsInstructionRpc();
+            PlayerSkinManager.Singleton.ApplySkinsInstructionRpc();
             
             NetworkManager.Singleton.SceneManager.LoadScene("Scenes/DemoScene", LoadSceneMode.Single);
         }
 
-        [Rpc(SendTo.ClientsAndHost, RequireOwnership = false)]
-        private void ApplySkinsInstructionRpc()
-        {
-            Debug.Log("Received request to change skin.");
-            PlayerObject.ApplySkins();
-        }
         
         public void PlayAlone()
         {
