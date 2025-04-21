@@ -9,10 +9,19 @@ namespace Prefabs.Player
 {
     public class PlayerSkinManager : NetworkBehaviour
     {
+        /// <summary>
+        /// Dictionary matching the player's client ID to their skin ID.
+        /// </summary>
         private static readonly Dictionary<ulong, byte> PlayerSkins = new Dictionary<ulong, byte>();
 
+        /// <summary>
+        /// Internal singleton instance of the class, used to call <see cref="ApplySkinsInstruction"/>.
+        /// </summary>
         private static PlayerSkinManager _singleton;
 
+        /// <summary>
+        /// Accessor and setter for the <see cref="_singleton"/>.
+        /// </summary>
         public static PlayerSkinManager Singleton
         {
             get
@@ -26,8 +35,6 @@ namespace Prefabs.Player
             {
                 if (_singleton == null)
                     _singleton = value;
-                else 
-                    Debug.LogWarning("PlayerSkinManager already initialized");
             }
         }
         
@@ -43,12 +50,21 @@ namespace Prefabs.Player
             SetPlayerSkin(NetworkManager.Singleton.LocalClientId);
         }
         
+        /// <summary>
+        /// If <paramref name="clientId"/> matches the client's ID, requests the server to log the client's skin. Called when a player connects to the network.
+        /// </summary>
+        /// <param name="clientId">The ID of the player whose skin is to be set.</param>
         private void SetPlayerSkin(ulong clientId)
         {
             if (NetworkManager.Singleton.LocalClientId == clientId)
                 SetSkinServerRpc(NetworkManager.Singleton.LocalClientId, (byte)(PlayerSelection.CurrentPlayerSkin + 1));
         }
         
+        /// <summary>
+        /// Logs a player's skin to the server's <see cref="PlayerSkins"/> dictionary.
+        /// </summary>
+        /// <param name="clientId">The ID of the player whose skin is to be set.</param>
+        /// <param name="skinId">The skin ID to set for the player.</param>
         [Rpc(SendTo.Server, RequireOwnership = false)]
         private void SetSkinServerRpc(ulong clientId, byte skinId)
         {
@@ -56,22 +72,24 @@ namespace Prefabs.Player
                 Debug.Log($"Logging clients {clientId}'s skin.");
         }
 
+        /// <summary>
+        /// Requests all clients to apply the skins in <see cref="PlayerSkins"/>. Must be called by the server.
+        /// </summary>
         public void ApplySkinsInstruction() => ApplySkinsInstructionRpc(new DictUlongByteWrapper(PlayerSkins));
         
+        /// <summary>
+        /// Applies the skins on all the <see cref="PlayerObject"/> clones.
+        /// </summary>
+        /// <param name="playerSkins">Wrapper containing the skins to apply to the ID of each clone.</param>
         [Rpc(SendTo.ClientsAndHost, RequireOwnership = false)]
         private void ApplySkinsInstructionRpc(DictUlongByteWrapper playerSkins)
         {
-            Debug.Log("Received request to change skin.");
-            ApplySkins(playerSkins.Dictionary);
-        }
-        
-        private static void ApplySkins(Dictionary<ulong, byte> playerSkins)
-        {
-            Debug.Log("Applying skins...");
+            Debug.Log("Received request to apply skins.");
+            
             foreach (KeyValuePair<ulong, NetworkClient> client in NetworkManager.Singleton.ConnectedClients)
             {
                 Transform models = client.Value.PlayerObject.transform.Find("Character");
-                byte skin = playerSkins[client.Key];
+                byte skin = playerSkins.Dictionary[client.Key];
                 for (int i = 1; i < models.childCount; i++)     // First child in unused
                 {
                     Debug.Log(models.GetChild(i).gameObject.name);

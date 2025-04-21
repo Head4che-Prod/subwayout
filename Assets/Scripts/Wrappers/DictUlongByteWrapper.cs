@@ -5,6 +5,9 @@ using Unity.Netcode;
 
 namespace Wrappers
 {
+    /// <summary>
+    /// Used to serialize a Dictionary&lt;ulong, byte&gt; in order to be sent by RPCs. Expensive serialization.
+    /// </summary>
     public struct DictUlongByteWrapper : INetworkSerializable
     {
         public Dictionary<ulong, byte> Dictionary;
