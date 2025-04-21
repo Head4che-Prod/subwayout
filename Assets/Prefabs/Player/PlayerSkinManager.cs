@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using Prefabs.UI;
 using Unity.Netcode;
 using UnityEngine;
+using Wrappers;
 
 namespace Prefabs.Player
 {
     public class PlayerSkinManager : NetworkBehaviour
     {
-        [NonSerialized] public static NetworkVariable<Dictionary<ulong, byte>> PlayerSkins =
-            new NetworkVariable<Dictionary<ulong, byte>>(new Dictionary<ulong, byte>());
+        private static readonly Dictionary<ulong, byte> PlayerSkins = new Dictionary<ulong, byte>();
 
         private static PlayerSkinManager _singleton;
 
@@ -52,28 +52,26 @@ namespace Prefabs.Player
         [Rpc(SendTo.Server, RequireOwnership = false)]
         private void SetSkinServerRpc(ulong clientId, byte skinId)
         {
-            if (PlayerSkins.Value.TryAdd(clientId, skinId))
+            if (PlayerSkins.TryAdd(clientId, skinId))
                 Debug.Log($"Logging clients {clientId}'s skin.");
         }
 
-        public void ApplySkinsInstruction() => ApplySkinsInstructionRpc();
+        public void ApplySkinsInstruction() => ApplySkinsInstructionRpc(new DictUlongByteWrapper(PlayerSkins));
         
         [Rpc(SendTo.ClientsAndHost, RequireOwnership = false)]
-        private void ApplySkinsInstructionRpc()
+        private void ApplySkinsInstructionRpc(DictUlongByteWrapper playerSkins)
         {
             Debug.Log("Received request to change skin.");
-            ApplySkins();
+            ApplySkins(playerSkins.Dictionary);
         }
         
-        private static void ApplySkins()
+        private static void ApplySkins(Dictionary<ulong, byte> playerSkins)
         {
             Debug.Log("Applying skins...");
-            foreach (KeyValuePair<ulong, byte> elm in PlayerSkins.Value)
-                Debug.Log($"Dict: {elm.Key} - {elm.Value}");
             foreach (KeyValuePair<ulong, NetworkClient> client in NetworkManager.Singleton.ConnectedClients)
             {
                 Transform models = client.Value.PlayerObject.transform.Find("Character");
-                byte skin = PlayerSkins.Value[client.Key];
+                byte skin = playerSkins[client.Key];
                 for (int i = 1; i < models.childCount; i++)     // First child in unused
                 {
                     Debug.Log(models.GetChild(i).gameObject.name);
