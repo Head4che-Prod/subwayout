@@ -150,7 +150,7 @@ namespace HomeMenu
             NetworkManager.Singleton.SceneManager.LoadScene("Scenes/DemoScene", LoadSceneMode.Single);
         }
 
-        [Rpc(SendTo.Everyone, RequireOwnership = false)]
+        [Rpc(SendTo.ClientsAndHost, RequireOwnership = false)]
         private void ApplySkinsInstructionRpc()
         {
             Debug.Log("Received request to change skin.");
