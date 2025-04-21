@@ -68,6 +68,8 @@ namespace Prefabs.Player
         private static void ApplySkins()
         {
             Debug.Log("Applying skins...");
+            foreach (KeyValuePair<ulong, byte> elm in PlayerSkins.Value)
+                Debug.Log($"Dict: {elm.Key} - {elm.Value}");
             foreach (KeyValuePair<ulong, NetworkClient> client in NetworkManager.Singleton.ConnectedClients)
             {
                 Transform models = client.Value.PlayerObject.transform.Find("Character");
