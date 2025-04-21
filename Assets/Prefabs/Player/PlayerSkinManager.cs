@@ -55,10 +55,11 @@ namespace Prefabs.Player
             if (PlayerSkins.Value.TryAdd(clientId, skinId))
                 Debug.Log($"Logging clients {clientId}'s skin.");
         }
-        
+
+        public void ApplySkinsInstruction() => ApplySkinsInstructionRpc();
         
         [Rpc(SendTo.ClientsAndHost, RequireOwnership = false)]
-        public void ApplySkinsInstructionRpc()
+        private void ApplySkinsInstructionRpc()
         {
             Debug.Log("Received request to change skin.");
             ApplySkins();

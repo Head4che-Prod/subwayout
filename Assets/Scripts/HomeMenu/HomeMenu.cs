@@ -145,7 +145,7 @@ namespace HomeMenu
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             
-            PlayerSkinManager.Singleton.ApplySkinsInstructionRpc();
+            PlayerSkinManager.Singleton.ApplySkinsInstruction();
             
             NetworkManager.Singleton.SceneManager.LoadScene("Scenes/DemoScene", LoadSceneMode.Single);
         }
