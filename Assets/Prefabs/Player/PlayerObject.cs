@@ -62,6 +62,7 @@ namespace Prefabs.Player
         
         public static void ApplySkins()
         {
+            Debug.Log("Applying skins...");
             foreach (KeyValuePair<ulong, NetworkClient> client in NetworkManager.Singleton.ConnectedClients)
             {
                 Transform models = client.Value.PlayerObject.transform.Find("Character");
