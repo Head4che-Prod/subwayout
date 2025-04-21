@@ -92,7 +92,6 @@ namespace Prefabs.Player
                 byte skin = playerSkins.Dictionary[client.Key];
                 for (int i = 1; i < models.childCount; i++)     // First child in unused
                 {
-                    Debug.Log(models.GetChild(i).gameObject.name);
                     models.GetChild(i).gameObject.SetActive(skin == i);
                 }
                 Debug.Log($"Applied skin of client {client.Key} on client {NetworkManager.Singleton.LocalClientId}.");
