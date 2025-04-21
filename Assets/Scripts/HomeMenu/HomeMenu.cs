@@ -145,11 +145,17 @@ namespace HomeMenu
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             
-            PlayerObject.ApplySkins();
+            ApplySkinsInstructionRpc();
             
             NetworkManager.Singleton.SceneManager.LoadScene("Scenes/DemoScene", LoadSceneMode.Single);
         }
 
+        [Rpc(SendTo.Everyone)]
+        private void ApplySkinsInstructionRpc()
+        {
+            PlayerObject.ApplySkins();
+        }
+        
         public void PlayAlone()
         {
             SetInteractibleStartButtons(-10);
