@@ -39,15 +39,28 @@ namespace Prefabs.Player
                 transform.Find("CameraHolder").gameObject.SetActive(false);
             }
 
+            NetworkManager.Singleton.OnClientConnectedCallback += SetPlayerSkin;
         }
 
-        public override void OnNetworkSpawn()
+        public override void OnNetworkSpawn()   // Do to wonky Network management on our side, this is called whenever a client connects.
         {
-            if (IsLocalPlayer)
-                PlayerSkins.Value.Add(NetworkManager.Singleton.LocalClientId, (byte)(PlayerSelection.CurrentPlayerSkin + 1));
+            SetPlayerSkin(NetworkManager.Singleton.LocalClientId);
         }
-
-        public static void SetSkins()
+        
+        private void SetPlayerSkin(ulong clientId)
+        {
+            if (NetworkManager.Singleton.LocalClientId == clientId)
+                SetSkinServerRpc(NetworkManager.Singleton.LocalClientId, (byte)(PlayerSelection.CurrentPlayerSkin + 1));
+        }
+        
+        [Rpc(SendTo.Server, RequireOwnership = false)]
+        private void SetSkinServerRpc(ulong clientId, byte skinId)
+        {
+            if (PlayerSkins.Value.TryAdd(clientId, skinId))
+                Debug.Log($"Logging clients {clientId}'s skin.");
+        }
+        
+        public static void ApplySkins()
         {
             foreach (KeyValuePair<ulong, NetworkClient> client in NetworkManager.Singleton.ConnectedClients)
             {
@@ -55,8 +68,10 @@ namespace Prefabs.Player
                 byte skin = PlayerSkins.Value[client.Key];
                 for (int i = 1; i < models.childCount; i++)     // First child in unused
                 {
+                    Debug.Log(models.GetChild(i).gameObject.name);
                     models.GetChild(i).gameObject.SetActive(skin == i);
                 }
+                Debug.Log($"Applied skin of client {client.Key} on client {NetworkManager.Singleton.LocalClientId}.");
             }
         }
     }

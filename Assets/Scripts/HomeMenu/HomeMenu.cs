@@ -145,7 +145,7 @@ namespace HomeMenu
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             
-            PlayerObject.SetSkins();
+            PlayerObject.ApplySkins();
             
             NetworkManager.Singleton.SceneManager.LoadScene("Scenes/DemoScene", LoadSceneMode.Single);
         }
@@ -153,10 +153,15 @@ namespace HomeMenu
         public void PlayAlone()
         {
             SetInteractibleStartButtons(-10);
-
-            _sessionManager.KickPlayer().ContinueWith((_) => Play(), TaskScheduler.FromCurrentSynchronizationContext());
+            HandlePlayAlone();
         }
 
+        private async void HandlePlayAlone()
+        {
+            await _sessionManager.KickPlayer();
+            Play();
+        }
+        
         public void Join()
         {
             _sessionManager.AddOnClientConnectedCallback((id) => { if (this != null && this.gameObject != null) _disableOnSpawn.SetActive(false); });

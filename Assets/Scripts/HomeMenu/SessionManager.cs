@@ -175,7 +175,7 @@ namespace HomeMenu
 
         public async Task KickPlayer()
         {
-            if (!_isHost) return;
+            if (!_isHost || ActiveSession.Players.Count == 1) return;
             string idToKick = ActiveSession.Players[1].Id;
             await ActiveSession.AsHost().RemovePlayerAsync(idToKick);
             Debug.Log($"Player {idToKick} kicked !");
