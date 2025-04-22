@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
@@ -13,7 +14,8 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void PlaySound(AudioClip audioClip, Transform spawnTansform, float volume)
+    [Rpc(SendTo.NotServer)]
+    public void PlaySoundRpc(AudioClip audioClip, Transform spawnTansform, float volume)
     {
         AudioSource audioSource = Instantiate(soundFXObject, spawnTansform.position, Quaternion.identity);
         

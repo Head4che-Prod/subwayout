@@ -17,7 +17,7 @@ namespace Objects
             Action(player);
             
             if (soundEffect != null)
-                SoundManager.singleton.PlaySound(soundEffect, transform, 1f); // shitty line
+                SoundManager.singleton.PlaySoundRpc(soundEffect, transform, 1f); // Modified to be an RPC
         }
 
         /// <summary>
