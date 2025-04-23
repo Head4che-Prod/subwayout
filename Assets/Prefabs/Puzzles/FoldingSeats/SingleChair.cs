@@ -3,6 +3,7 @@ using Objects;
 using UnityEngine;
 using Prefabs.Player;
 using Unity.Netcode;
+using UnityEngine.Serialization;
 
 namespace Prefabs.Puzzles.FoldingSeats
 {
@@ -10,45 +11,32 @@ namespace Prefabs.Puzzles.FoldingSeats
     {
         private static readonly int ChairUp = Animator.StringToHash("activateUp");
         [SerializeField] private Animator chairAnimator;
-        private NetworkVariable<bool> _isUp = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone);
-
-        // protected override void Action(PlayerObject player)
-        // {
-        //     Debug.Log("has touched the seat");
-        //     // chairAnimator.SetBool(ChairUp, !chairAnimator.GetBool(ChairUp));
-        //     // isUp.Value = chairAnimator.GetBool(ChairUp);
-        //
-        //     _isUp.Value = !chairAnimator.GetBool(ChairUp);
-        //     _isUp.OnValueChanged += AnimateChair;
-        // }
-        //
-        // private void AnimateChair(bool _, bool curr)
-        // {
-        //     Debug.Log($"[CHAIR] New value: {curr}");
-        //     chairAnimator.SetBool(ChairUp, curr);
-        // } 
-
+        public NetworkVariable<bool> isUp = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone);
+        
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
-            _isUp.OnValueChanged += OnValueChanged;
+            isUp.OnValueChanged += OnValueChanged;
         }
 
         private void OnValueChanged(bool _, bool newValue)
-            => chairAnimator.SetBool(ChairUp, newValue);
+        {
+            chairAnimator.SetBool(ChairUp, newValue);
+            ChairsManager.Singleton.CheckChairs(); // we call CheckChairs here so that when only one value changes we check, no need to check at every frame
+        }
         protected override void Action(PlayerObject player)
             => ChangedServerRpc(!chairAnimator.GetBool(ChairUp));
         
         [Rpc(SendTo.Server, RequireOwnership = false)]
         private void ChangedServerRpc(bool isUpValChanged)
         {
-            _isUp.Value = isUpValChanged;
+            isUp.Value = isUpValChanged;
         }
         
         public override void OnNetworkDespawn()
         {
             base.OnNetworkDespawn();
-            _isUp.OnValueChanged -= OnValueChanged;
+            isUp.OnValueChanged -= OnValueChanged;
         }
     }
 }
