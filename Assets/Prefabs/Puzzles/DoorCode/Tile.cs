@@ -12,11 +12,10 @@ public class Tile : Objects.ObjectActionable
 
 
     private Text TextField;
-    public NetworkVariable<byte> value;
+    public NetworkVariable<byte> value = new NetworkVariable<byte>(0);
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        value = new NetworkVariable<byte>(0);
         TextField = transform.GetChild(0).GetChild(0).GetComponent<Text>();
         TextField.text = $"{value.Value}";
         value.OnValueChanged += (prev, newVal) =>

@@ -194,6 +194,7 @@ GameObject:
   - component: {fileID: 8735888185564996563}
   - component: {fileID: 3179992488225204826}
   - component: {fileID: 3303084294097029575}
+  - component: {fileID: 9012762919603378051}
   m_Layer: 0
   m_Name: Tile
   m_TagString: Untagged
@@ -282,7 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2182277627
+  GlobalObjectIdHash: 2599760829
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -310,3 +311,27 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   canBeOffStage: 0
   startOnStage: 0
+  value:
+    m_InternalValue: 0
+--- !u!64 &9012762919603378051
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8891703893070841339}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1550514412580984892, guid: dfa21e3e849c8704ebbd0a34c283d720, type: 3}
