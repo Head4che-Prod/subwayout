@@ -8,7 +8,7 @@ public class Digicode : MonoBehaviour
 {
     private const int password = 7642;
     private static int EnteredPassword = 0;
-    private static bool CanDoorOpen { get => EnteredPassword == password; }
+    public static bool CanDoorOpen { get => EnteredPassword == password; }
     public void Start()
     {
         for (int i = 0; i < 4; i++)

@@ -12,7 +12,7 @@ namespace Prefabs.PlayableCar.Animation
         protected override void Action(PlayerObject player)
         {
             Debug.Log("Closed Door");
-            animDoor.SetBool(OpenCabinDoor, !animDoor.GetBool(OpenCabinDoor));
+            animDoor.SetBool(OpenCabinDoor, Digicode.CanDoorOpen && !animDoor.GetBool(OpenCabinDoor));
         }
     }
 }
