@@ -13,7 +13,8 @@ public class Tile : Objects.ObjectActionable
 
     private Text TextField;
     public NetworkVariable<byte> value = new NetworkVariable<byte>(0);
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public int Coef { get; set; }
+
     void Start()
     {
         TextField = transform.GetChild(0).GetChild(0).GetComponent<Text>();

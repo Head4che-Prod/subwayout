@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3766891705972592807}
   - component: {fileID: 5601318625127556665}
   - component: {fileID: 4088684033504819942}
+  - component: {fileID: 6414399420090978784}
   m_Layer: 0
   m_Name: Digicode
   m_TagString: Untagged
@@ -90,6 +91,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6414399420090978784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878708179647520333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 405dcec3a6438844bbc5a233adfc4895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &582258182240086071
 PrefabInstance:
   m_ObjectHideFlags: 0
