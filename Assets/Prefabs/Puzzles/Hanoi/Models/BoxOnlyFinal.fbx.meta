@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1d188f203af37ca49817254273352a1a
+guid: 8a9b29f919179bd459f71c280a959c63
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: TopHanoiColor
-    second: {fileID: 2100000, guid: b67a4a1cdcecd6a4895158da74967194, type: 2}
+      name: HanoiBoxText
+    second: {fileID: 2100000, guid: e9bc98f6a995de047997a143fcaeee4e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: InsideBox
+    second: {fileID: 2100000, guid: ad000a469f4569e4e8745f51cf39a2a1, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -35,7 +40,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1

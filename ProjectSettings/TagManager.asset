@@ -5,11 +5,12 @@ TagManager:
   serializedVersion: 3
   tags:
   - HanoiController
+  - NetworkManager
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Hanoi Game Plane
   - Water
   - UI
   - whatIsGround

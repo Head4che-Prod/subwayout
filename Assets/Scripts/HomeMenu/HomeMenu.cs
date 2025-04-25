@@ -1,4 +1,6 @@
+using System.Linq;
 using System.Threading.Tasks;
+using Prefabs.Player;
 using TMPro;
 using Unity.Netcode;
 using Unity.Services.Authentication;
@@ -51,9 +53,12 @@ namespace HomeMenu
             _isCursorActive = true;
             SceneManager.activeSceneChanged += (from, to) =>
             {
-                _isCursorActive = to.name =="HomeMenu" || to.name=="PlayerSelection";
+                _isCursorActive = to.name == "HomeMenu" || to.name == "PlayerSelection";
                 Cursor.lockState = _isCursorActive ? CursorLockMode.None : CursorLockMode.Locked;
                 Cursor.visible = _isCursorActive;
+
+                foreach (GameObject networkManager in GameObject.FindGameObjectsWithTag("NetworkManager").Skip(1))
+                    Destroy(networkManager);
             };
         }
 
@@ -80,14 +85,16 @@ namespace HomeMenu
             // Start server / Lobby
             _sessionManager.AddOnClientConnectedCallback((id) =>
             {
+                if (this == null || this.gameObject == null) return;
                 SetInteractibleStartButtons(0);
                 _disableOnSpawn.SetActive(false);
             });
             _sessionManager.StartSessionAsHost().ContinueWith((task) =>
             {
+                if (this == null || this.gameObject == null) return;
                 SetInteractibleStartButtons(0);
-                _sessionManager.AddOnPlayerJoined((_) => SetInteractibleStartButtons(0));
-                _sessionManager.AddOnPlayerLeft((_) => SetInteractibleStartButtons(-1));
+                _sessionManager.AddOnPlayerJoined((_) => { if (this != null && this.gameObject != null) SetInteractibleStartButtons(0); });
+                _sessionManager.AddOnPlayerLeft((_) => { if (this != null && this.gameObject != null) SetInteractibleStartButtons(-1); });
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
@@ -137,28 +144,41 @@ namespace HomeMenu
             _isCursorActive = false;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            
+            PlayerSkinManager.Singleton.ApplySkinsInstruction();
+            
             NetworkManager.Singleton.SceneManager.LoadScene("Scenes/DemoScene", LoadSceneMode.Single);
         }
 
+        
         public void PlayAlone()
         {
             SetInteractibleStartButtons(-10);
-
-            _sessionManager.KickPlayer().ContinueWith((_) => Play(), TaskScheduler.FromCurrentSynchronizationContext());
+            HandlePlayAlone();
         }
 
+        private async void HandlePlayAlone()
+        {
+            await _sessionManager.KickPlayer();
+            Play();
+        }
+        
         public void Join()
         {
-            _sessionManager.AddOnClientConnectedCallback((id) => { _disableOnSpawn.SetActive(false); });
+            _sessionManager.AddOnClientConnectedCallback((id) => { if (this != null && this.gameObject != null) _disableOnSpawn.SetActive(false); });
             _sessionManager.AddOnClientDisconnectedCallback((id) =>
             {
                 if (id == NetworkManager.Singleton.LocalClientId)
                 {
                     Debug.Log("Local player disconnected!");
                     SceneManager.LoadScene("Scenes/HomeMenu", LoadSceneMode.Single);
-                    CloseStart();
-                    CloseWaitingForHostScreen();
-                    CloseJoin();
+                    try
+                    {
+                        CloseStart();
+                        CloseWaitingForHostScreen();
+                        CloseJoin();
+                    }
+                    catch { }
                 }
             });
 
