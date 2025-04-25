@@ -44,13 +44,7 @@ namespace Objects
         }
         
         protected ObjectOutline Outline;
-
-        /// <summary>
-        /// This method ask the server to set grabbability of an object over the Network.
-        /// </summary>
-        /// <param name="value">Boolean of Grabbable.</param>
-        [Rpc(SendTo.Server, RequireOwnership = false)]
-        private void SetGrabbableServerRpc(bool value) => Grabbable = value;
+        
 
         public void Awake()
         {
@@ -68,7 +62,24 @@ namespace Objects
             
             Outline = GetComponent<ObjectOutline>();
             Outline.enabled = false;
+
+            Rb.isKinematic = !IsHost;
+            IsGrabbable.OnValueChanged += HandleGravity;
         }
+        
+        /// <summary>
+        /// This method ask the server to set grabbability of an object over the Network.
+        /// </summary>
+        /// <param name="value">Boolean of Grabbable.</param>
+        [Rpc(SendTo.Server, RequireOwnership = false)]
+        private void SetGrabbableServerRpc(bool value) => Grabbable = value;
+
+        /// <summary>
+        /// Sets gravity on all clients when an object is grabbed, used when <see cref="IsGrabbable"/>'s value is changed.
+        /// </summary>
+        /// <param name="_">Old value of IsGrabbable</param>
+        /// <param name="isGrabbable">New value of IsGrabbable</param>
+        private void HandleGravity(bool _, bool isGrabbable) => Rb.useGravity = isGrabbable && affectedByGravity;
         
         /// <returns><see cref="Vector3"/> of the difference between player's <see cref="GrabPointPosition"/> and the current grabbed object positions.</returns>
         public virtual Vector3 CalculateMovementForce()
@@ -119,7 +130,6 @@ namespace Objects
 
             // Debug.Log($"Owner {OwnerClientId} attempted grabbing {name}");
             SetGrabbableServerRpc(false);
-            Rb.useGravity = false;
             
             if (canBeHighlighted)
             {
@@ -136,8 +146,12 @@ namespace Objects
             Owner.Interaction.GrabbedObject = null;
             Owner = null;
             SetGrabbableServerRpc(true);
-            Rb.useGravity =
-                affectedByGravity; // For object that may not be affected by gravity in puzzles in the future
+        }
+        
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+            IsGrabbable.OnValueChanged -= HandleGravity;
         }
         
         // Position reset interface
@@ -152,5 +166,6 @@ namespace Objects
             transform.position = InitialPosition;
             transform.rotation = InitialRotation;
         }
+
     }
 }
