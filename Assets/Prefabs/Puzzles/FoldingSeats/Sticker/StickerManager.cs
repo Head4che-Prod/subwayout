@@ -1,5 +1,6 @@
 using Objects;
 using Prefabs.Player;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Prefabs.Puzzles.FoldingSeats.Sticker
@@ -22,10 +23,16 @@ namespace Prefabs.Puzzles.FoldingSeats.Sticker
         {
             if (_stickerGrabbable.Owner == player)
             {
-                sticker.Deactivate();
-                halfSticker.SetActive(false);
-                wholeStickerPrefab.SetActive(true);
+                DisableStickerRpc();
             }
+        }
+
+        [Rpc(SendTo.Everyone)]
+        public void DisableStickerRpc()
+        {
+            sticker.Deactivate();
+            halfSticker.SetActive(false);
+            wholeStickerPrefab.SetActive(true);
         }
     }
 }
