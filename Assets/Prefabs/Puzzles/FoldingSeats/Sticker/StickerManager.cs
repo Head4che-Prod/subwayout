@@ -27,7 +27,7 @@ namespace Prefabs.Puzzles.FoldingSeats.Sticker
             }
         }
 
-        [Rpc(SendTo.Everyone)]
+        [Rpc(SendTo.Server, RequireOwnership = false)]
         public void DisableStickerRpc()
         {
             sticker.Deactivate();
