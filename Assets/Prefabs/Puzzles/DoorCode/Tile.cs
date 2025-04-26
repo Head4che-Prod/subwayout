@@ -12,7 +12,7 @@ public class Tile : Objects.ObjectActionable
 
 
     private Text TextField;
-    public NetworkVariable<byte> value = new NetworkVariable<byte>(0);
+    public NetworkVariable<byte> value = new NetworkVariable<byte>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public int Coef { get; set; }
 
     void Start()
