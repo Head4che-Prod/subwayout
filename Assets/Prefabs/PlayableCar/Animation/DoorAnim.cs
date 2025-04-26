@@ -13,7 +13,6 @@ namespace Prefabs.PlayableCar.Animation
         [FormerlySerializedAs("_animDoor")] [SerializeField] private Animator animDoor;
         protected override void Action(PlayerObject player)
         {
-            Debug.Log("Closed Door");
             if (Digicode.CanDoorOpen)
                 OpenDoorRpc();
         }
