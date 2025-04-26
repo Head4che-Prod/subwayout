@@ -16,6 +16,8 @@ namespace Prefabs.Puzzles.DoorCode
         public static bool Active = true;
         public void Start()
         {
+            Active = true;
+            _enteredPassword = 0;
             int[] ordersOfMagnitude = { 1000, 100, 10, 1 };
             for (int i = 0; i < 4; i++)
             {
