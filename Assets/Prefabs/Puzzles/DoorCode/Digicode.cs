@@ -29,14 +29,5 @@ namespace Prefabs.Puzzles.DoorCode
                 };
             }
         }
-
-        /// <summary>
-        /// Destroys the code after the door is successfully opened.
-        /// </summary>
-        public void OnDoorOpened() 
-        {
-            foreach (Tile tile in transform.GetComponentsInChildren<Tile>())
-                Destroy(tile);
-        }
     }
 }
