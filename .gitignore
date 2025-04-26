@@ -77,3 +77,4 @@ crashlytics-build.properties
 
 # System-specific font changes
 *SDF.asset
+*.ttf
