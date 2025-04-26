@@ -1,5 +1,6 @@
 using Objects;
 using Prefabs.Player;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -12,7 +13,16 @@ namespace Prefabs.PlayableCar.Animation
         protected override void Action(PlayerObject player)
         {
             Debug.Log("Closed Door");
-            animDoor.SetBool(OpenCabinDoor, Digicode.CanDoorOpen && !animDoor.GetBool(OpenCabinDoor));
+            OpenDoorRpc();
+        }
+
+        [Rpc(SendTo.Everyone)]
+        private void OpenDoorRpc() {
+            if (!Digicode.CanDoorOpen)
+                return;
+            
+            animDoor.SetBool(OpenCabinDoor, true);
+            Digicode.active = false;
         }
     }
 }

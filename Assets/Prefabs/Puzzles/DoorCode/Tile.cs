@@ -14,7 +14,8 @@ public class Tile : Objects.ObjectActionable
 
     protected override void Action(PlayerObject player)
     {
-        UpdateValueRpc();
+        if (Digicode.active)
+            UpdateValueRpc();
     }
 
     private Text TextField;

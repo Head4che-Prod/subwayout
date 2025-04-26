@@ -9,6 +9,7 @@ public class Digicode : MonoBehaviour
     private const int password = 7642;
     private static int EnteredPassword = 0;
     public static bool CanDoorOpen { get => EnteredPassword == password; }
+    public static bool active = true;
     public void Start()
     {
         for (int i = 0; i < 4; i++)
@@ -20,5 +21,10 @@ public class Digicode : MonoBehaviour
                 EnteredPassword += (newVal - oldVal) * tile.Coef;
             };
         }
+    }
+
+    public void OnDoorOpened() {
+        foreach (Tile tile in transform.GetComponentsInChildren<Tile>())
+            Destroy(tile);
     }
 }
