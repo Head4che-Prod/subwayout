@@ -12,6 +12,8 @@ public class Digicode : MonoBehaviour
     public static bool active = true;
     public void Start()
     {
+        active = true;
+        EnteredPassword = 0;
         for (int i = 0; i < 4; i++)
         {
             Tile tile = transform.GetChild(i).GetComponent<Tile>();
