@@ -9,11 +9,6 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: wholeSticker
     second: {fileID: 2100000, guid: cb8251c0076352a4685ebbeaebae9bd7, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: blueprint background
-    second: {fileID: 2800000, guid: 1b0b34541cccdbf4485ce8037cac5f03, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
