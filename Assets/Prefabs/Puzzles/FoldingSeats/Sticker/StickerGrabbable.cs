@@ -1,4 +1,5 @@
 using Objects;
+using Prefabs.GameManagers;
 using Unity.Netcode;
 
 namespace Prefabs.Puzzles.FoldingSeats.Sticker

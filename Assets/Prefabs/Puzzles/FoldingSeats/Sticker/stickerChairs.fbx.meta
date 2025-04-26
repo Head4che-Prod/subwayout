@@ -1,19 +1,9 @@
 fileFormatVersion: 2
-guid: 9ec49a5754ae1414b862f4a0546b0fd3
+guid: 191eaa127be0eb24da3c4d94ac0684c7
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: wholeSticker
-    second: {fileID: 2100000, guid: cb8251c0076352a4685ebbeaebae9bd7, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: blueprint background
-    second: {fileID: 2800000, guid: 1b0b34541cccdbf4485ce8037cac5f03, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -40,7 +30,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1
