@@ -13,14 +13,12 @@ namespace Prefabs.PlayableCar.Animation
         protected override void Action(PlayerObject player)
         {
             Debug.Log("Closed Door");
-            OpenDoorRpc();
+            if (Digicode.CanDoorOpen)
+                OpenDoorRpc();
         }
 
         [Rpc(SendTo.Everyone)]
         private void OpenDoorRpc() {
-            if (!Digicode.CanDoorOpen)
-                return;
-            
             animDoor.SetBool(OpenCabinDoor, true);
             Digicode.active = false;
         }
