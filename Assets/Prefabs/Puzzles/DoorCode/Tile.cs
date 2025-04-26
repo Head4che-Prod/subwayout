@@ -5,11 +5,17 @@ using UnityEngine.UI;
 
 public class Tile : Objects.ObjectActionable
 {
-    protected override void Action(PlayerObject player)
+
+    [Rpc(SendTo.Server)]
+    public void UpdateValueRpc()
     {
         value.Value = (byte)((value.Value + 1) % 10);
     }
 
+    protected override void Action(PlayerObject player)
+    {
+        UpdateValueRpc();
+    }
 
     private Text TextField;
     public NetworkVariable<byte> value = new NetworkVariable<byte>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
