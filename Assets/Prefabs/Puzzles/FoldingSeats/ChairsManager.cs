@@ -28,7 +28,11 @@ public class ChairsManager : MonoBehaviour
 
     public void CheckChairs()
     {
-        if (_chairsBool[0].Value && _chairsBool[1].Value && _chairsBool[2].Value && _chairsBool[3].Value)
+        if (_chairsBool[0].Value && _chairsBool[1].Value
+                                 && _chairsBool[6].Value && _chairsBool[7].Value 
+                                 && _chairsBool[8].Value && _chairsBool[12].Value 
+                                 && _chairsBool[17].Value && _chairsBool[19].Value 
+                                 && _chairsBool[22].Value)
         {
             Debug.Log("Win Chairs");
         }

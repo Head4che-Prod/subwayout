@@ -16,6 +16,8 @@ namespace Prefabs.Puzzles.FoldingSeats.Sticker
         [Rpc(SendTo.Server, RequireOwnership = false)]
         public void DisableStickerRpc()
         {
+            ObjectPositionManager.ForgetResettableObjectClientRpc(this);
+            ObjectHighlightManager.ForgetHighlightableObjectClientRpc(Outline);
             NetworkObject.Despawn();
         }
     

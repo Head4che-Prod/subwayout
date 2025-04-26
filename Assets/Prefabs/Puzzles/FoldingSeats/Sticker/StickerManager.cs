@@ -10,11 +10,9 @@ namespace Prefabs.Puzzles.FoldingSeats.Sticker
         [SerializeField] private GameObject  wholeStickerPrefab;
         [SerializeField] private StickerGrabbable sticker;
         private ObjectGrabbable _stickerGrabbable;
-        //private bool _stickerClicked;
 
         void Start()
         {
-            //_stickerClicked = false;
             halfSticker.SetActive(true);
             wholeStickerPrefab.SetActive(false);
             _stickerGrabbable = sticker.GetComponent<ObjectGrabbable>();
