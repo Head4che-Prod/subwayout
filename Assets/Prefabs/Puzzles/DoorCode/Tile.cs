@@ -1,34 +1,45 @@
+using System;
 using Prefabs.Player;
 using Unity.Netcode;
-using UnityEngine;
 using UnityEngine.UI;
 
-public class Tile : Objects.ObjectActionable
+namespace Prefabs.Puzzles.DoorCode
 {
-
-    [Rpc(SendTo.Server)]
-    public void UpdateValueRpc()
+    public class Tile : Objects.ObjectActionable
     {
-        value.Value = (byte)((value.Value + 1) % 10);
-    }
-
-    protected override void Action(PlayerObject player)
-    {
-        if (Digicode.active)
-            UpdateValueRpc();
-    }
-
-    private Text TextField;
-    public NetworkVariable<byte> value = new NetworkVariable<byte>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-    public int Coef { get; set; }
-
-    void Start()
-    {
-        TextField = transform.GetChild(0).GetChild(0).GetComponent<Text>();
-        TextField.text = $"{value.Value}";
-        value.OnValueChanged += (prev, newVal) =>
+        /// <summary>
+        /// Requests server to update the code's internal value.
+        /// </summary>
+        [Rpc(SendTo.Server)]
+        private void UpdateValueRpc()
         {
-            TextField.text = $"{newVal}";
-        };
+            value.Value = (byte)((value.Value + 1) % 10);
+        }
+
+        protected override void Action(PlayerObject player)
+        {
+            if (Digicode.Active)
+                UpdateValueRpc();
+        }
+
+        private Text _textField;
+        /// <summary>
+        /// The current value of the tile.
+        /// </summary>
+        public NetworkVariable<byte> value = new NetworkVariable<byte>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        /// <summary>
+        /// Order of magnitude of the tile's value relative to the code.
+        /// </summary>
+        [NonSerialized] public int Order;
+
+        void Start()
+        {
+            _textField = transform.GetChild(0).GetChild(0).GetComponent<Text>();
+            _textField.text = $"{value.Value}";
+            value.OnValueChanged += (prev, newVal) =>
+            {
+                _textField.text = $"{newVal}";
+            };
+        }
     }
 }

@@ -1,5 +1,6 @@
 using Objects;
 using Prefabs.Player;
+using Prefabs.Puzzles.DoorCode;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -20,7 +21,7 @@ namespace Prefabs.PlayableCar.Animation
         [Rpc(SendTo.Everyone)]
         private void OpenDoorRpc() {
             animDoor.SetBool(OpenCabinDoor, true);
-            Digicode.active = false;
+            Digicode.Active = false;
         }
     }
 }
