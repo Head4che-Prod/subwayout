@@ -46,12 +46,13 @@ namespace Objects
         protected ObjectOutline Outline;
         
 
-        public void Awake()
+        public override void Awake()
         {
+            base.Awake();
             IsGrabbable = new NetworkVariable<bool>(true);
         }
         
-        public void Start()
+        public virtual void Start()
         {
             ((IResettablePosition)this).RegisterInitialState(transform.position, transform.rotation);
             SetGrabbableServerRpc(true);
@@ -109,6 +110,13 @@ namespace Objects
             Rb.linearVelocity = move;
         }
 
+        /// <summary>
+        /// Sets the local position of an object.
+        /// </summary>
+        /// <param name="pos">Vector3 New local position of the object.</param>
+        [Rpc(SendTo.Server, RequireOwnership = false)]
+        protected void SetLocalPositionServerRpc(Vector3 pos) => transform.localPosition = pos;
+        
         /// <summary>
         /// Make players grab the targeted object.
         /// </summary>

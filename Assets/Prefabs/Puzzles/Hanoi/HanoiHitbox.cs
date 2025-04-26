@@ -17,7 +17,7 @@ namespace Prefabs.Puzzles.Hanoi
         /// <summary>
         /// Ball currently stored in the collider.
         /// </summary>
-        [CanBeNull] public HanoiBall containedBall;
+        [CanBeNull] public HanoiPiece containedBall;
         
         
         private void Start()
@@ -29,28 +29,11 @@ namespace Prefabs.Puzzles.Hanoi
         /// Removes a ball from the grid.
         /// </summary>
         /// <param name="ball"><see cref="HanoiBall"/> to remove from the grid.</param>
-        public static void RemoveBall(HanoiBall ball)
+        public static void RemoveBall(HanoiPiece ball)
         {
             foreach (HanoiHitbox hitbox in HanoiTowers.Instance.ColliderGrid)
                 if (hitbox.containedBall == ball)
                     hitbox.containedBall = null;
-        }
-        
-        /// <summary>
-        /// Reset a ball object's position to its internal position.
-        /// </summary>
-        /// <param name="ballTransform"><see cref="Transform"/> of the ball whose position is reset.</param>
-        public static void ResetBall(Transform ballTransform)
-        {
-            foreach (HanoiHitbox hitbox in HanoiTowers.Instance.ColliderGrid)
-                if (ballTransform == hitbox.containedBall?.gameObject.transform)
-                {
-                    ballTransform.localPosition = new Vector3(
-                        hitbox.gameObject.transform.localPosition.x,
-                        0.0135f,
-                        hitbox.gameObject.transform.localPosition.z
-                    );
-                }
         }
         
         private void OnTriggerEnter(Collider collisionInfo)
