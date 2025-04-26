@@ -89,7 +89,7 @@ namespace Prefabs.Player
             foreach (KeyValuePair<ulong, NetworkClient> client in NetworkManager.Singleton.ConnectedClients)
             {
                 Transform models = client.Value.PlayerObject.transform.Find("Character");
-                byte skin = playerSkins.Dictionary[client.Key];
+                byte skin = playerSkins.Dictionary.GetValueOrDefault(client.Key, (byte)1);
                 for (int i = 1; i < models.childCount; i++)     // First child in unused
                 {
                     models.GetChild(i).gameObject.SetActive(skin == i);
