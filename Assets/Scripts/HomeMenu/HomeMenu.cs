@@ -75,6 +75,7 @@ namespace HomeMenu
 
         public void OpenStart()
         {
+            PlayerSkinManager.Singleton.ResetSkinRegistry();
             transform.Find("MainMenu").gameObject.SetActive(false);
             transform.Find("StartMenu").gameObject.SetActive(true);
             SetInteractibleStartButtons(0);

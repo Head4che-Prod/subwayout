@@ -76,6 +76,10 @@ namespace Prefabs.Player
         /// Requests all clients to apply the skins in <see cref="PlayerSkins"/>. Must be called by the server.
         /// </summary>
         public void ApplySkinsInstruction() => ApplySkinsInstructionRpc(new DictUlongByteWrapper(PlayerSkins));
+        /// <summary>
+        /// Resets the internal skin registry upon pressing "Start".
+        /// </summary>
+        public void ResetSkinRegistry() => PlayerSkins.Clear();
         
         /// <summary>
         /// Applies the skins on all the <see cref="PlayerObject"/> clones.
