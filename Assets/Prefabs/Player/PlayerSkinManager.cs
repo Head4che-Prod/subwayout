@@ -68,8 +68,8 @@ namespace Prefabs.Player
         [Rpc(SendTo.Server, RequireOwnership = false)]
         private void SetSkinServerRpc(ulong clientId, byte skinId)
         {
-            if (PlayerSkins.TryAdd(clientId, skinId))
-                Debug.Log($"Logging clients {clientId}'s skin.");
+            PlayerSkins[clientId] = skinId;
+            Debug.Log($"Logging clients {clientId}'s skin.");
         }
 
         /// <summary>
