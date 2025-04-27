@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using Prefabs.GameManagers;
 using Prefabs.Player;
 using Unity.Netcode;
@@ -36,6 +37,9 @@ namespace Objects
 
         private Vector3 GrabPointPosition => Owner.grabPointTransform.position;
         protected NetworkVariable<bool> IsGrabbable;
+        
+        [SerializeField] [CanBeNull] AudioClip soundEffect;
+
         
         public virtual bool Grabbable // This can be overridden
         {
@@ -120,6 +124,9 @@ namespace Objects
             // Debug.Log($"Owner {OwnerClientId} attempted grabbing {name}");
             SetGrabbableServerRpc(false);
             Rb.useGravity = false;
+            
+            if(soundEffect is not null)
+                SoundManager.singleton.PlaySoundRpc(soundEffect, transform, 1f); // Play a sound on grab
             
             if (canBeHighlighted)
             {

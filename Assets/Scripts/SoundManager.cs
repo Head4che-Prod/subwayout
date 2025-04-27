@@ -14,10 +14,11 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    [Rpc(SendTo.NotServer)]
-    public void PlaySoundRpc(AudioClip audioClip, Transform spawnTansform, float volume)
+    [Rpc(SendTo.ClientsAndHost)]
+    public void PlaySoundRpc(AudioClip audioClip, Transform spawnTransform, float volume)
     {
-        AudioSource audioSource = Instantiate(soundFXObject, spawnTansform.position, Quaternion.identity);
+        AudioSource audioSource = Instantiate(soundFXObject, spawnTransform.position, Quaternion.identity);
+        
         
         audioSource.clip = audioClip;
         
