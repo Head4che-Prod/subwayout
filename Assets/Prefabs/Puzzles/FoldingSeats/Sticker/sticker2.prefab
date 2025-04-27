@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 5606237265485240471}
   - component: {fileID: 8818752323590362930}
   - component: {fileID: 6739205603279889400}
-  - component: {fileID: -7400235604331066579}
   - component: {fileID: -8729126268637541799}
   - component: {fileID: -2207514808827702324}
+  - component: {fileID: 3071228773031256756}
   m_Layer: 0
   m_Name: sticker2
   m_TagString: Untagged
@@ -89,28 +89,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &-7400235604331066579
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5081902862217134637}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -471842844632894875, guid: e41bca2264f5ac14aae4ffa72ef976ac, type: 3}
 --- !u!114 &-8729126268637541799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 120254354
+  GlobalObjectIdHash: 2928640020
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -154,3 +132,24 @@ MonoBehaviour:
   halfSticker: {fileID: 0}
   wholeStickerPrefab: {fileID: 0}
   sticker: {fileID: 0}
+--- !u!65 &3071228773031256756
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5081902862217134637}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.011034487, y: 0.02, z: 0.0003}
+  m_Center: {x: 0.0044827564, y: -2.0717561e-11, z: 0.00017379157}
