@@ -1,41 +1,48 @@
-using System;
-using System.Collections.Generic;
-using Prefabs.Puzzles.FoldingSeats;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 
-public class ChairsManager : MonoBehaviour
+namespace Prefabs.Puzzles.FoldingSeats
 {
-    private NetworkVariable<bool>[] _chairsBool = new NetworkVariable<bool>[24];
-    private static ChairsManager _singleton;
-
-    public static ChairsManager Singleton
+    public class ChairsManager : MonoBehaviour
     {
-        get
-        {
-            return _singleton;
-        }
-    }
+        private readonly SingleChair[] _chairsBool = new SingleChair[24];
+        private static ChairsManager _singleton;
 
-    void Start()
-    {
-        _singleton = this;
-        for (int i = 0; i < 24; i++)
+        public static ChairsManager Singleton
         {
-            _chairsBool[i] =   transform.GetChild(i).GetChild(0).GetChild(0).GetComponent<SingleChair>().isUp; //GetChild(0) 2 times because we search for "bottom" and the Find("bottom" doesn't work
+            get
+            {
+                if (_singleton != null)
+                    return _singleton;
+                Debug.LogError("ChairsManager singleton no set");
+                return null;
+            }
+            private set
+            {
+                if (_singleton == null)
+                    _singleton = value;
+                else 
+                    Debug.LogError("ChairsManager singleton already set!");
+            }
         }
-    }
 
-    public void CheckChairs()
-    {
-        if (_chairsBool[0].Value && _chairsBool[1].Value
-                                 && _chairsBool[6].Value && _chairsBool[7].Value 
-                                 && _chairsBool[8].Value && _chairsBool[12].Value 
-                                 && _chairsBool[17].Value && _chairsBool[19].Value 
-                                 && _chairsBool[22].Value)
+        void Start()
         {
-            Debug.Log("Win Chairs");
+            Singleton = this;
+            for (int i = 0; i < 24; i++)
+            {
+                _chairsBool[i] = transform.GetChild(i).GetChild(0).GetChild(0).GetComponent<SingleChair>(); //GetChild(0) 2 times because we search for "bottom" and the Find("bottom" doesn't work
+            }
         }
+
+        public void CheckChairs()
+        {
+            if (_chairsBool.All(c => c.IsInRightPosition))
+            {
+                Debug.Log("Win Chairs");
+            }
         
+        }
     }
 }

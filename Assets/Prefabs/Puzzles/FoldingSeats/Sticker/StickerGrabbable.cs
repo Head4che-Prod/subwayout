@@ -12,9 +12,11 @@ namespace Prefabs.Puzzles.FoldingSeats.Sticker
             DisableStickerRpc();
         }
 
-
+        /// <summary>
+        /// Destroys the grabbable sticker, removing it from the game managers.
+        /// </summary>
         [Rpc(SendTo.Server, RequireOwnership = false)]
-        public void DisableStickerRpc()
+        private void DisableStickerRpc()
         {
             ObjectPositionManager.ForgetResettableObjectClientRpc(this);
             ObjectHighlightManager.ForgetHighlightableObjectClientRpc(Outline);

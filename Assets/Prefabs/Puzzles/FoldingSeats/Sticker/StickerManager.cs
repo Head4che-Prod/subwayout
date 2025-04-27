@@ -27,8 +27,11 @@ namespace Prefabs.Puzzles.FoldingSeats.Sticker
             }
         }
 
+        /// <summary>
+        /// Combines the two parts of the sticker.
+        /// </summary>
         [Rpc(SendTo.ClientsAndHost)]
-        public void DisableStickerRpc()
+        private void DisableStickerRpc()
         {
             sticker.Deactivate();
             halfSticker.SetActive(false);

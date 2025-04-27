@@ -3,23 +3,30 @@ using Objects;
 using UnityEngine;
 using Prefabs.Player;
 using Unity.Netcode;
-using UnityEngine.Serialization;
 
 namespace Prefabs.Puzzles.FoldingSeats
 {
     public class SingleChair : ObjectActionable
     {
         private static readonly int ChairUp = Animator.StringToHash("activateUp");
+        [Header("Chair Settings")]
         [SerializeField] private Animator chairAnimator;
-        public NetworkVariable<bool> isUp = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone);
+        [SerializeField] private bool shouldBeUp = false;
+        public bool IsInRightPosition => _isUp.Value == shouldBeUp;
+        private readonly NetworkVariable<bool> _isUp = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone);
         
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
-            isUp.OnValueChanged += OnValueChanged;
+            _isUp.OnValueChanged += UpdatePosition;
         }
-
-        private void OnValueChanged(bool _, bool newValue)
+        
+        /// <summary>
+        /// Changes the chair's position and checks the win condition.
+        /// </summary>
+        /// <param name="_">(unused) If the chair was up.</param>
+        /// <param name="newValue">If the chair if now up.</param>
+        private void UpdatePosition(bool _, bool newValue)
         {
             chairAnimator.SetBool(ChairUp, newValue);
             ChairsManager.Singleton.CheckChairs(); // we call CheckChairs here so that when only one value changes we check, no need to check at every frame
@@ -30,13 +37,13 @@ namespace Prefabs.Puzzles.FoldingSeats
         [Rpc(SendTo.Server, RequireOwnership = false)]
         private void ChangedServerRpc(bool isUpValChanged)
         {
-            isUp.Value = isUpValChanged;
+            _isUp.Value = isUpValChanged;
         }
         
         public override void OnNetworkDespawn()
         {
             base.OnNetworkDespawn();
-            isUp.OnValueChanged -= OnValueChanged;
+            _isUp.OnValueChanged -= UpdatePosition;
         }
     }
 }

@@ -351,5 +351,4 @@ MonoBehaviour:
   canBeOffStage: 0
   startOnStage: 0
   chairAnimator: {fileID: 8630826995086415091}
-  isUp:
-    m_InternalValue: 0
+  shouldBeUp: 0

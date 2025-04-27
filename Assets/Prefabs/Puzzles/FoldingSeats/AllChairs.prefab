@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3529281708
+  GlobalObjectIdHash: 1254099839
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -108,7 +108,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4165061310539310123, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3450477585
+      value: 1254099839
       objectReference: {fileID: 0}
     - target: {fileID: 5991387142976712279, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -168,13 +168,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6941685068905140184}
     m_Modifications:
+    - target: {fileID: 1312209998848174536, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
+      propertyPath: shouldBeUp
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2263052092976639986, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_Name
       value: Chair (23)
       objectReference: {fileID: 0}
     - target: {fileID: 4165061310539310123, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3587385566
+      value: 1254099839
       objectReference: {fileID: 0}
     - target: {fileID: 5991387142976712279, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -240,7 +244,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4165061310539310123, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2684562784
+      value: 1254099839
       objectReference: {fileID: 0}
     - target: {fileID: 5991387142976712279, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -306,7 +310,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4165061310539310123, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2725382169
+      value: 1254099839
       objectReference: {fileID: 0}
     - target: {fileID: 5991387142976712279, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -372,7 +376,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4165061310539310123, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2381383265
+      value: 1254099839
       objectReference: {fileID: 0}
     - target: {fileID: 5991387142976712279, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -432,13 +436,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6941685068905140184}
     m_Modifications:
+    - target: {fileID: 1312209998848174536, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
+      propertyPath: shouldBeUp
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2263052092976639986, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_Name
       value: Chair (13)
       objectReference: {fileID: 0}
     - target: {fileID: 4165061310539310123, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2769465793
+      value: 1254099839
       objectReference: {fileID: 0}
     - target: {fileID: 5991387142976712279, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -504,7 +512,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4165061310539310123, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 941594037
+      value: 1254099839
       objectReference: {fileID: 0}
     - target: {fileID: 5991387142976712279, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -570,7 +578,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4165061310539310123, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 724717391
+      value: 1254099839
       objectReference: {fileID: 0}
     - target: {fileID: 5991387142976712279, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -636,7 +644,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4165061310539310123, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1118643390
+      value: 1254099839
       objectReference: {fileID: 0}
     - target: {fileID: 5991387142976712279, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -696,13 +704,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6941685068905140184}
     m_Modifications:
+    - target: {fileID: 1312209998848174536, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
+      propertyPath: shouldBeUp
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2263052092976639986, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_Name
       value: Chair (7)
       objectReference: {fileID: 0}
     - target: {fileID: 4165061310539310123, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3101078619
+      value: 1254099839
       objectReference: {fileID: 0}
     - target: {fileID: 5991387142976712279, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -762,13 +774,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6941685068905140184}
     m_Modifications:
+    - target: {fileID: 1312209998848174536, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
+      propertyPath: shouldBeUp
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2263052092976639986, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_Name
       value: Chair (1)
       objectReference: {fileID: 0}
     - target: {fileID: 4165061310539310123, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2293845233
+      value: 1254099839
       objectReference: {fileID: 0}
     - target: {fileID: 5991387142976712279, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -834,7 +850,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4165061310539310123, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 4080859111
+      value: 1254099839
       objectReference: {fileID: 0}
     - target: {fileID: 5991387142976712279, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -900,7 +916,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4165061310539310123, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3262731660
+      value: 1254099839
       objectReference: {fileID: 0}
     - target: {fileID: 5991387142976712279, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -960,13 +976,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6941685068905140184}
     m_Modifications:
+    - target: {fileID: 1312209998848174536, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
+      propertyPath: shouldBeUp
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2263052092976639986, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_Name
       value: Chair (9)
       objectReference: {fileID: 0}
     - target: {fileID: 4165061310539310123, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1357544786
+      value: 1254099839
       objectReference: {fileID: 0}
     - target: {fileID: 5991387142976712279, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1032,7 +1052,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4165061310539310123, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2797823417
+      value: 1254099839
       objectReference: {fileID: 0}
     - target: {fileID: 5991387142976712279, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1092,13 +1112,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6941685068905140184}
     m_Modifications:
+    - target: {fileID: 1312209998848174536, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
+      propertyPath: shouldBeUp
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2263052092976639986, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_Name
       value: Chair (18)
       objectReference: {fileID: 0}
     - target: {fileID: 4165061310539310123, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 259757630
+      value: 1254099839
       objectReference: {fileID: 0}
     - target: {fileID: 5991387142976712279, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1158,13 +1182,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6941685068905140184}
     m_Modifications:
+    - target: {fileID: 1312209998848174536, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
+      propertyPath: shouldBeUp
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2263052092976639986, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_Name
       value: Chair (8)
       objectReference: {fileID: 0}
     - target: {fileID: 4165061310539310123, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 964911146
+      value: 1254099839
       objectReference: {fileID: 0}
     - target: {fileID: 5991387142976712279, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1230,7 +1258,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4165061310539310123, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1838438718
+      value: 1254099839
       objectReference: {fileID: 0}
     - target: {fileID: 5991387142976712279, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1296,7 +1324,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4165061310539310123, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2697236199
+      value: 1254099839
       objectReference: {fileID: 0}
     - target: {fileID: 5991387142976712279, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1362,7 +1390,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4165061310539310123, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2399191064
+      value: 1254099839
       objectReference: {fileID: 0}
     - target: {fileID: 5991387142976712279, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1422,13 +1450,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6941685068905140184}
     m_Modifications:
+    - target: {fileID: 1312209998848174536, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
+      propertyPath: shouldBeUp
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2263052092976639986, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_Name
       value: Chair (2)
       objectReference: {fileID: 0}
     - target: {fileID: 4165061310539310123, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1740350028
+      value: 1254099839
       objectReference: {fileID: 0}
     - target: {fileID: 5991387142976712279, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1494,7 +1526,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4165061310539310123, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1797157151
+      value: 1254099839
       objectReference: {fileID: 0}
     - target: {fileID: 5991387142976712279, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1554,13 +1586,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6941685068905140184}
     m_Modifications:
+    - target: {fileID: 1312209998848174536, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
+      propertyPath: shouldBeUp
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2263052092976639986, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_Name
       value: Chair (20)
       objectReference: {fileID: 0}
     - target: {fileID: 4165061310539310123, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3665676223
+      value: 1254099839
       objectReference: {fileID: 0}
     - target: {fileID: 5991387142976712279, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1626,7 +1662,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4165061310539310123, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2483087336
+      value: 1254099839
       objectReference: {fileID: 0}
     - target: {fileID: 5991387142976712279, guid: d7d03428dd4b0d04bbebe95ba56799dc, type: 3}
       propertyPath: m_LocalPosition.x
