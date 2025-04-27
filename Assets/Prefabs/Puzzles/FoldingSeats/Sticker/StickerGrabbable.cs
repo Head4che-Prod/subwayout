@@ -6,6 +6,8 @@ namespace Prefabs.Puzzles.FoldingSeats.Sticker
 {
     public class StickerGrabbable : ObjectGrabbable
     {
+
+        public ObjectOutline StickerOutline => Outline;
         public void Deactivate()
         {
             Drop();
@@ -18,8 +20,6 @@ namespace Prefabs.Puzzles.FoldingSeats.Sticker
         [Rpc(SendTo.Server, RequireOwnership = false)]
         private void DisableStickerRpc()
         {
-            ObjectPositionManager.ForgetResettableObjectClientRpc(this);
-            ObjectHighlightManager.ForgetHighlightableObjectClientRpc(Outline);
             NetworkObject.Despawn();
         }
     
