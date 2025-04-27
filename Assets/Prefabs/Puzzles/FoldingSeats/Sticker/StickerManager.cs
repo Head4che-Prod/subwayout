@@ -23,15 +23,15 @@ namespace Prefabs.Puzzles.FoldingSeats.Sticker
         {
             if (_stickerGrabbable.Owner == player)
             {
-                DisableStickerRpc();
+                AssembleStickersRpc();
             }
         }
 
         /// <summary>
         /// Combines the two parts of the sticker.
         /// </summary>
-        [Rpc(SendTo.ClientsAndHost)]
-        private void DisableStickerRpc()
+        [Rpc(SendTo.Everyone)]
+        private void AssembleStickersRpc()
         {
             sticker.Deactivate();
             halfSticker.SetActive(false);
