@@ -10,6 +10,28 @@ namespace Prefabs.Player
 {
     public class PlayerInteract : NetworkBehaviour
     {
+        private static PlayerInteract _instance;
+        public static PlayerInteract Instance
+        {
+            get 
+            {
+                if (!_instance)
+                    Debug.LogError("No PlayerInteract instance found.");
+                return _instance;
+            }
+            set
+            {
+                if (!_instance)
+                {
+                    if (value.IsLocalPlayer)
+                        _instance = value;
+                }
+                else
+                    Debug.LogError("Attempting to create a new PlayerInteract, but one already exists.");
+            }
+        }
+        
+        
         [Header("Player")]
         [SerializeField] private PlayerObject player;
         [SerializeField] private float reach;
@@ -22,6 +44,8 @@ namespace Prefabs.Player
 
         private void Start()
         {
+            Instance = this;
+            
             _actionInput = InputSystem.actions.FindAction("Gameplay/Interact");
             _grabInput = InputSystem.actions.FindAction("Gameplay/Grab");
             
@@ -105,7 +129,7 @@ namespace Prefabs.Player
                 if (grabbable is { Grabbable: true } && GrabbedObject is null)
                 {
                     GrabbedObject = grabbable;
-                    GrabbedObject.Grab(player);
+                    GrabbedObject.Grab();
                 }
                 // Drop grabbed pointed grabbed object
                 else if (grabbable == GrabbedObject)

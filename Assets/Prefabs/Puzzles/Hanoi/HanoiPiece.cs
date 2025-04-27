@@ -35,9 +35,9 @@ namespace Prefabs.Puzzles.Hanoi
             HanoiTowers.Instance.ColliderGrid[0, 2 - weight].containedBall = this;
         }
         
-        public override void Grab(PlayerObject player)
+        public override void Grab()
         {
-            base.Grab(player);
+            base.Grab();
             HanoiTowers.Instance.SetUsageState(true);
         }
         public override void Drop()
@@ -69,7 +69,7 @@ namespace Prefabs.Puzzles.Hanoi
         /// <param name="hitbox">The hitbox to go to.</param>
         private IEnumerator SendBallToHitbox(HanoiHitbox hitbox)
         {
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.3f);
             SetLocalPositionServerRpc(new Vector3(
                 hitbox.gameObject.transform.localPosition.x,
                 0.0135f,
@@ -77,9 +77,9 @@ namespace Prefabs.Puzzles.Hanoi
             ));
         }
         
-        public override Vector3 CalculateMovementForce()
+        public override Vector3 CalculateMovementForce(PlayerObject playerGrabbing)
         {
-            if (Physics.Raycast(Owner.playerCamera.transform.position, Owner.playerCamera.transform.forward,
+            if (Physics.Raycast(playerGrabbing.playerCamera.transform.position, playerGrabbing.playerCamera.transform.forward,
                     out RaycastHit hit, 12f, 1 << 3))  // Only let layer 3 pass
             {
                 // Put vector in local space (to access data relative to the gamed plane)

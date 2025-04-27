@@ -1,5 +1,7 @@
 using Objects;
+using Prefabs.GameManagers;
 using Prefabs.Player;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Prefabs.Puzzles.HintSystem
@@ -9,19 +11,26 @@ namespace Prefabs.Puzzles.HintSystem
         [SerializeField] private InsertableTrigger insertableTrigger;
         [SerializeField] private EmergencyCallTrigger callTrigger;
         private ObjectGrabbable _triggerGrabbable;
-        private bool _triggerInserted;
+        private readonly NetworkVariable<bool> _isAwaitingTrigger = new NetworkVariable<bool>(true);
 
         private void Start()
         {
-            _triggerInserted = false;
             _triggerGrabbable = insertableTrigger.GetComponent<ObjectGrabbable>();
         }
         protected override void Action(PlayerObject player)
         {
-            if (!_triggerInserted && _triggerGrabbable?.Owner == player)
+            if (_isAwaitingTrigger.Value)
+                HandleActionServerRpc(NetworkManager.Singleton.LocalClientId);
+        }
+
+        [Rpc(SendTo.Server, RequireOwnership = false)]
+        private void HandleActionServerRpc(ulong clientId)
+        {
+            if (GrabbedObjectManager.IsHolding(clientId, _triggerGrabbable))
             {
                 callTrigger.Activate();
-                insertableTrigger.Deactivate();
+                insertableTrigger.Deactivate(clientId);
+                _isAwaitingTrigger.Value = true;
             }
         }
     }
