@@ -161,7 +161,7 @@ Transform:
   m_GameObject: {fileID: 1263021392532692121}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -522,7 +522,6 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   sensX: 50
   sensY: 50
-  orientation: {fileID: 0}
 --- !u!1 &4957522455835016799
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,7 +635,6 @@ MonoBehaviour:
   sprintSpeed: 10
   groundDrag: 5
   airMultiplier: 0.4
-  orientation: {fileID: 0}
   PlayerCollider: {fileID: 3936763041024648637}
   whatIsGround:
     serializedVersion: 2
@@ -668,7 +666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_Actions: {fileID: 0}
   m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -793,8 +791,8 @@ Transform:
   m_GameObject: {fileID: 7305760799034490760}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 1.4238696, y: 3.155149, z: 1.5007641}
+  m_LocalPosition: {x: 0, y: 2, z: -0.2}
+  m_LocalScale: {x: 1.5, y: 3.155149, z: 1.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8111653412326118833}
@@ -957,7 +955,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 625354579372595316, guid: 7298a9afbabd9ee4b8bedb58208a57bd, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1222430529036938627, guid: 7298a9afbabd9ee4b8bedb58208a57bd, type: 3}
       propertyPath: m_Layer
