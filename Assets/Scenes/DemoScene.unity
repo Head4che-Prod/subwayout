@@ -4487,17 +4487,33 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1172381911526040758, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3630746089
+      objectReference: {fileID: 0}
     - target: {fileID: 3215219833302001142, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167142297934830781, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3365448627
       objectReference: {fileID: 0}
     - target: {fileID: 5433590110859860504, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1826613305
       objectReference: {fileID: 0}
+    - target: {fileID: 5809592580967962439, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4068462042
+      objectReference: {fileID: 0}
     - target: {fileID: 7307204354449825426, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: m_Name
       value: PlayableCar
+      objectReference: {fileID: 0}
+    - target: {fileID: 7609774785319710519, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2102067863
       objectReference: {fileID: 0}
     - target: {fileID: 7995667631896176052, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -12836,7 +12852,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 625380591803945200, guid: d971b60a2b2c2524bbd5f140f0c0729b, type: 3}
 --- !u!95 &1852392415
