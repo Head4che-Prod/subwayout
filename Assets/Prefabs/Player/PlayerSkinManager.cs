@@ -27,7 +27,7 @@ namespace Prefabs.Player
             get
             {
                 if (_singleton != null)
-                    return _singleton; 
+                    return _singleton;
                 Debug.LogWarning("PlayerSkinManager not initialized");
                 return null;
             }
@@ -37,19 +37,19 @@ namespace Prefabs.Player
                     _singleton = value;
             }
         }
-        
-        
+
+
         public void Start()
         {
             Singleton = this;
             NetworkManager.Singleton.OnClientConnectedCallback += SetPlayerSkin;
         }
 
-        public override void OnNetworkSpawn()   // Do to wonky Network management on our side, this is called whenever a client connects.
+        public override void OnNetworkSpawn() // Do to wonky Network management on our side, this is called whenever a client connects.
         {
             SetPlayerSkin(NetworkManager.Singleton.LocalClientId);
         }
-        
+
         /// <summary>
         /// If <paramref name="clientId"/> matches the client's ID, requests the server to log the client's skin. Called when a player connects to the network.
         /// </summary>
@@ -57,9 +57,10 @@ namespace Prefabs.Player
         private void SetPlayerSkin(ulong clientId)
         {
             if (NetworkManager.Singleton.LocalClientId == clientId)
-                SetSkinServerRpc(NetworkManager.Singleton.LocalClientId, (byte)(PlayerSelection.CurrentPlayerSkin + 1));
+                SetSkinServerRpc(NetworkManager.Singleton.LocalClientId,
+                    (byte)(PlayerSelection.CurrentPlayerSkin + 1));
         }
-        
+
         /// <summary>
         /// Logs a player's skin to the server's <see cref="PlayerSkins"/> dictionary.
         /// </summary>
@@ -75,12 +76,14 @@ namespace Prefabs.Player
         /// <summary>
         /// Requests all clients to apply the skins in <see cref="PlayerSkins"/>. Must be called by the server.
         /// </summary>
-        public void ApplySkinsInstruction() => ApplySkinsInstructionRpc(new DictUlongByteWrapper(PlayerSkins));
+        public void ApplySkinsInstruction() =>
+            ApplySkinsInstructionRpc(new DictUlongByteWrapper(PlayerSkins));
+
         /// <summary>
         /// Resets the internal skin registry upon pressing "Start".
         /// </summary>
-        public void ResetSkinRegistry() => PlayerSkins.Clear();
-        
+        public static void ResetSkinRegistry() => PlayerSkins.Clear();
+
         /// <summary>
         /// Applies the skins on all the <see cref="PlayerObject"/> clones.
         /// </summary>
@@ -89,15 +92,16 @@ namespace Prefabs.Player
         private void ApplySkinsInstructionRpc(DictUlongByteWrapper playerSkins)
         {
             Debug.Log("Received request to apply skins.");
-            
+
             foreach (KeyValuePair<ulong, NetworkClient> client in NetworkManager.Singleton.ConnectedClients)
             {
                 Transform models = client.Value.PlayerObject.transform.Find("Character");
                 byte skin = playerSkins.Dictionary.GetValueOrDefault(client.Key, (byte)1);
-                for (int i = 1; i < models.childCount; i++)     // First child in unused
+                for (int i = 1; i < models.childCount; i++) // First child in unused
                 {
                     models.GetChild(i).gameObject.SetActive(skin == i);
                 }
+
                 Debug.Log($"Applied skin of client {client.Key} on client {NetworkManager.Singleton.LocalClientId}.");
             }
         }
