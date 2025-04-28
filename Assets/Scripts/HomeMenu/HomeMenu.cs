@@ -155,12 +155,21 @@ namespace HomeMenu
 
         public void Join()
         {
-            _sessionManager.AddOnClientConnectedCallback((id) => { _disableOnSpawn.SetActive(false); });
+            _sessionManager.AddOnClientConnectedCallback((id) => {
+                try
+                {
+                    _disableOnSpawn.SetActive(false); 
+                }
+                catch
+                {
+                    // The game already started
+                }
+                
+            });
             _sessionManager.AddOnClientDisconnectedCallback((id) =>
             {
                 if (id == NetworkManager.Singleton.LocalClientId)
                 {
-                    Debug.Log("Local player disconnected!");
                     SceneManager.LoadScene("Scenes/HomeMenu", LoadSceneMode.Single);
                     CloseStart();
                     CloseWaitingForHostScreen();
