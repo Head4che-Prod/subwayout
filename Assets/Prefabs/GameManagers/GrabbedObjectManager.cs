@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Objects;
 using Prefabs.Player;
+using Prefabs.Player.PlayerUI.DebugConsole;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -9,18 +10,20 @@ namespace Prefabs.GameManagers
 {
     public class GrabbedObjectManager : NetworkBehaviour
     {
-        private readonly Dictionary<PlayerObject, ObjectGrabbable> _grabbedObjects = new Dictionary<PlayerObject, ObjectGrabbable>();
+        private readonly Dictionary<PlayerObject, ObjectGrabbable> _grabbedObjects =
+            new Dictionary<PlayerObject, ObjectGrabbable>();
 
         private static GrabbedObjectManager _instance;
 
         private static GrabbedObjectManager Instance
         {
-            get 
+            get
             {
                 if (!_instance)
                     Debug.LogError("No GrabbedObjectManager found.");
                 else if (!_instance.IsServer)
-                    Debug.LogWarning($"Non-server client {NetworkManager.Singleton.LocalClientId} is trying to access grabbed object manager.");
+                    Debug.LogWarning(
+                        $"Non-server client {NetworkManager.Singleton.LocalClientId} is trying to access grabbed object manager.");
                 return _instance;
             }
             set
@@ -31,10 +34,10 @@ namespace Prefabs.GameManagers
                     Debug.LogError("Attempting to create a new GrabbedObjectManager.");
             }
         }
-        
+
         private static PlayerObject GetPlayer(ulong clientId) => NetworkManager.Singleton.ConnectedClients
             .First(pair => pair.Key == clientId).Value.PlayerObject.GetComponent<PlayerObject>();
-        
+
         private static NetworkObject GetObject(ulong objectNetworkId)
         {
             if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(objectNetworkId,
@@ -46,21 +49,21 @@ namespace Prefabs.GameManagers
 
         public void Start()
         {
-            Instance = this;
+            DebugConsole.AddCommand("listCurrentlyHolding", ListCurrentlyHolding);
+            if (IsHost)
+            {
+                Instance = this;
+                Instance._grabbedObjects.Clear();
+                foreach (NetworkClient client in NetworkManager.Singleton.ConnectedClientsList)
+                    Instance._grabbedObjects.Add(client.PlayerObject.GetComponent<PlayerObject>(), null);
+            }
         }
-
-        public static void Initialize()
-        {
-            Instance._grabbedObjects.Clear();
-            foreach (NetworkClient client in NetworkManager.Singleton.ConnectedClientsList)
-                Instance._grabbedObjects.Add(client.PlayerObject.GetComponent<PlayerObject>(), null);
-        }
-
+        
         public static void PlayerGrab(ulong clientId, ulong objectNetworkId)
         {
             Instance._grabbedObjects[GetPlayer(clientId)] = GetObject(objectNetworkId).GetComponent<ObjectGrabbable>();
         }
-        
+
         public static void PlayerDrop(ulong clientId)
         {
             Instance._grabbedObjects[GetPlayer(clientId)] = null;
@@ -75,23 +78,30 @@ namespace Prefabs.GameManagers
                     break;
                 }
         }
-        
-        public static bool IsHolding(ulong clientId, ObjectGrabbable obj) =>
-            Instance._grabbedObjects[GetPlayer(clientId)] == obj;
-        
-        
-        
+
         private void FixedUpdate()
         {
             if (!IsServer)
                 return;
 
-            foreach (PlayerObject player in _grabbedObjects.Keys.ToArray())     // ToArray is order to not modify collection while iterating
+            foreach (PlayerObject player in
+                     _grabbedObjects.Keys.ToArray()) // ToArray is order to not modify collection while iterating
             {
                 ObjectGrabbable obj = _grabbedObjects[player];
                 if (obj)
                     obj.Rb.linearVelocity = obj.CalculateMovementForce(player) * obj.moveSpeed;
             }
+
+        }
+
+        private static void ListCurrentlyHolding()
+        {
+            if (!NetworkManager.Singleton.IsHost)
+                DebugConsole.Singleton.Log("Only the host know which objects players are holding.");
+            else
+                foreach (KeyValuePair<PlayerObject, ObjectGrabbable> pair in Instance._grabbedObjects)
+                    DebugConsole.Singleton.Log(
+                        $"Player {pair.Key.GetComponent<NetworkObject>().OwnerClientId} - {pair.Value?.gameObject.name ?? "nothing"}");
         }
     }
 }

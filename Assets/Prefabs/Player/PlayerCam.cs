@@ -21,6 +21,8 @@ namespace Prefabs.Player
         
         private bool _isActive;
 
+        private NetworkVariable<Quaternion> _rotation = new NetworkVariable<Quaternion>();
+        
         public override void OnNetworkSpawn()
         {
             _isActive = IsLocalPlayer;
@@ -52,10 +54,17 @@ namespace Prefabs.Player
                 _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
 
                 _player.transform.rotation = Quaternion.Euler(0, _yRotation, 0);
-                transform.rotation = Quaternion.Euler(_xRotation, _yRotation, 0);
+                RotateServerRpc(Quaternion.Euler(_xRotation, _yRotation, 0));
             }
+            transform.rotation = _rotation.Value;
         }
-    
+
+        [Rpc(SendTo.Server, RequireOwnership = false)]
+        private void RotateServerRpc(Quaternion rotation)
+        {
+            _rotation.Value = rotation;
+        }
+        
         private void SetLayerAllChildren(Transform root, int layer)
         {
             Transform[] children = root.GetComponentsInChildren<Transform>(includeInactive: true);

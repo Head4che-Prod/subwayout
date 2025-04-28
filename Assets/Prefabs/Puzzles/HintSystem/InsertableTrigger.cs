@@ -27,7 +27,7 @@ namespace Prefabs.Puzzles.HintSystem
         {
             GrabbedObjectManager.PlayerDrop(clientId);
             ObjectPositionManager.ForgetResettableObjectClientRpc(this);
-            ObjectHighlightManager.ForgetHighlightableObjectClientRpc(Outline);
+            ObjectHighlightManager.ForgetHighlightableObject(NetworkObjectId);
             StartCoroutine(DelayedDestroy());
         }
         

@@ -138,7 +138,6 @@ namespace HomeMenu
             _isCursorActive = false;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            GrabbedObjectManager.Initialize();
             NetworkManager.Singleton.SceneManager.LoadScene("Scenes/DemoScene", LoadSceneMode.Single);
         }
 

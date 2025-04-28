@@ -99,7 +99,7 @@ namespace Objects
             
             if (canBeHighlighted)
             {
-                ObjectHighlightManager.RegisterHighlightableObject(Outline);
+                ObjectHighlightManager.RegisterHighlightableObject(NetworkObjectId);
                 Outline.enabled = ObjectHighlightManager.HighlightEnabled;
             }
         }
