@@ -91,6 +91,10 @@ MonoBehaviour:
     m_Localized: "Selecci\xF3n del car\xE1cter"
     m_Metadata:
       m_Items: []
+  - m_Id: 20636075313332224
+    m_Localized: 'Sensibilidad '
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

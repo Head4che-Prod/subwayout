@@ -87,6 +87,10 @@ MonoBehaviour:
     m_Key: HomeMenu.button.SelectSkin
     m_Metadata:
       m_Items: []
+  - m_Id: 20636075313332224
+    m_Key: Sensitivity
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
