@@ -85,11 +85,12 @@ namespace Prefabs.GameManagers
         {
             if (!IsServer)
                 return;
-            
-            foreach (KeyValuePair<PlayerObject, ObjectGrabbable> pair in _grabbedObjects)
+
+            foreach (PlayerObject player in _grabbedObjects.Keys.ToArray())     // ToArray is order to not modify collection while iterating
             {
-                if (pair.Value)
-                    pair.Value.Rb.linearVelocity = pair.Value.CalculateMovementForce(pair.Key) * pair.Value.moveSpeed;
+                ObjectGrabbable obj = _grabbedObjects[player];
+                if (obj)
+                    obj.Rb.linearVelocity = obj.CalculateMovementForce(player) * obj.moveSpeed;
             }
         }
     }

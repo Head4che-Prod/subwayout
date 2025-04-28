@@ -13,7 +13,7 @@ namespace Objects
     /// </summary>
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(NetworkRigidbody))]
-    [RequireComponent(typeof(NetworkObject))]
+    //[RequireComponent(typeof(NetworkObject))]
     [RequireComponent(typeof(ObjectOutline))]
     public class ObjectGrabbable : ObjectInteractable, IResettablePosition
     {
