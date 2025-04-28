@@ -12,7 +12,7 @@ namespace Prefabs.Puzzles.HintSystem
         private static readonly int PullTrigger = Animator.StringToHash("TriggerDown");
         private static readonly int InsertTrigger = Animator.StringToHash("InsertTrigger");
         private AudioSource _source;
-        private NetworkVariable<bool> _cooldownFinished = new NetworkVariable<bool>(true);
+        private readonly NetworkVariable<bool> _cooldownFinished = new NetworkVariable<bool>(true);
 
         public void Start()
         {

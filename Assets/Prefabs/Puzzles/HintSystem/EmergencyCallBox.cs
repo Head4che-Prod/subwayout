@@ -19,17 +19,10 @@ namespace Prefabs.Puzzles.HintSystem
         }
         protected override void Action(PlayerObject player)
         {
-            if (_isAwaitingTrigger.Value)
-                HandleActionServerRpc(NetworkManager.Singleton.LocalClientId);
-        }
-
-        [Rpc(SendTo.Server, RequireOwnership = false)]
-        private void HandleActionServerRpc(ulong clientId)
-        {
-            if (GrabbedObjectManager.IsHolding(clientId, _triggerGrabbable))
+            if (_isAwaitingTrigger.Value && PlayerInteract.Singleton.GrabbedObject == _triggerGrabbable)
             {
                 callTrigger.Activate();
-                insertableTrigger.Deactivate(clientId);
+                insertableTrigger.Deactivate();
                 _isAwaitingTrigger.Value = true;
             }
         }

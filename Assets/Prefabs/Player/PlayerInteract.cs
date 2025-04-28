@@ -10,24 +10,26 @@ namespace Prefabs.Player
 {
     public class PlayerInteract : NetworkBehaviour
     {
-        private static PlayerInteract _instance;
-        public static PlayerInteract Instance
+        private static PlayerInteract _singleton;
+        public static PlayerInteract Singleton
         {
             get 
             {
-                if (!_instance)
+                if (!_singleton)
                     Debug.LogError("No PlayerInteract instance found.");
-                return _instance;
+                return _singleton;
             }
-            set
+            private set
             {
-                if (!_instance)
+                if (!value)
+                    _singleton = null;
+                else if (value.IsLocalPlayer)
                 {
-                    if (value.IsLocalPlayer)
-                        _instance = value;
+                    if (!_singleton)
+                        _singleton = value;
+                    else 
+                        Debug.LogError("Attempting to create a new PlayerInteract, but one already exists.");
                 }
-                else
-                    Debug.LogError("Attempting to create a new PlayerInteract, but one already exists.");
             }
         }
         
@@ -44,7 +46,7 @@ namespace Prefabs.Player
 
         private void Start()
         {
-            Instance = this;
+            Singleton = this;
             
             _actionInput = InputSystem.actions.FindAction("Gameplay/Interact");
             _grabInput = InputSystem.actions.FindAction("Gameplay/Grab");
@@ -143,6 +145,8 @@ namespace Prefabs.Player
             
             if (_actionInput != null) _actionInput.performed -= HandleAction;
             if (_grabInput != null) _grabInput.performed -= HandleGrab;
+            
+            Singleton = null;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Objects
     /// </summary>
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(NetworkRigidbody))]
-    //[RequireComponent(typeof(NetworkObject))]
+    [RequireComponent(typeof(NetworkObject))]
     [RequireComponent(typeof(ObjectOutline))]
     public class ObjectGrabbable : ObjectInteractable, IResettablePosition
     {
@@ -94,8 +94,6 @@ namespace Objects
         /// <param name="player"><see cref="PlayerObject"/> holding the item".</param>
         public virtual void Grab()
         {
-            GrabbedObjectManager.PlayerGrab(NetworkManager.Singleton.LocalClientId, NetworkObjectId);
-
             // Debug.Log($"Owner {OwnerClientId} attempted grabbing {name}");
             GrabServerRpc(NetworkManager.Singleton.LocalClientId, NetworkObjectId);
             
@@ -123,7 +121,7 @@ namespace Objects
         /// </summary>
         public virtual void Drop()
         {
-            PlayerInteract.Instance.GrabbedObject = null;
+            PlayerInteract.Singleton.GrabbedObject = null;
             DropServerRpc(NetworkManager.Singleton.LocalClientId);
         }
         
