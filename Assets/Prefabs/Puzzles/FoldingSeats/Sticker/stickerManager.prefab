@@ -123,8 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 128554601
-  InScenePlacedSourceGlobalObjectIdHash: 0
+  GlobalObjectIdHash: 1874930363
+  InScenePlacedSourceGlobalObjectIdHash: 65650809
   DeferredDespawnTick: 0
   Ownership: 1
   AlwaysReplicateAsRoot: 0
@@ -201,8 +201,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
-  InScenePlacedSourceGlobalObjectIdHash: 0
+  GlobalObjectIdHash: 2695005879
+  InScenePlacedSourceGlobalObjectIdHash: 65650809
   DeferredDespawnTick: 0
   Ownership: 1
   AlwaysReplicateAsRoot: 0
@@ -248,7 +248,7 @@ Transform:
   m_GameObject: {fileID: 7105460841004778024}
   serializedVersion: 2
   m_LocalRotation: {x: -0.00000005338508, y: 0.7071068, z: -0.7071067, w: 0.000000053385072}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 1.825, y: 1.229, z: 0.16}
   m_LocalScale: {x: 60.000004, y: 30.000002, z: 60.000004}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -368,8 +368,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3535198340
-  InScenePlacedSourceGlobalObjectIdHash: 0
+  GlobalObjectIdHash: 3913707301
+  InScenePlacedSourceGlobalObjectIdHash: 65650809
   DeferredDespawnTick: 0
   Ownership: 1
   AlwaysReplicateAsRoot: 0

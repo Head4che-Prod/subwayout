@@ -1449,21 +1449,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 563462849021007798, guid: 10dc8244071daf64c8a4750109f4257a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.854
-      objectReference: {fileID: 0}
-    - target: {fileID: 563462849021007798, guid: 10dc8244071daf64c8a4750109f4257a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.521
-      objectReference: {fileID: 0}
-    - target: {fileID: 563462849021007798, guid: 10dc8244071daf64c8a4750109f4257a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.18
+    - target: {fileID: -6748557375414710210, guid: 10dc8244071daf64c8a4750109f4257a, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2695005879
       objectReference: {fileID: 0}
     - target: {fileID: 591761551798283567, guid: 10dc8244071daf64c8a4750109f4257a, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3913707301
+      objectReference: {fileID: 0}
+    - target: {fileID: 747617822313712859, guid: 10dc8244071daf64c8a4750109f4257a, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1874930363
       objectReference: {fileID: 0}
     - target: {fileID: 980879079724032355, guid: 10dc8244071daf64c8a4750109f4257a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1505,37 +1501,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 5281014033324505505, guid: 10dc8244071daf64c8a4750109f4257a, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 3292325885
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281014033324505505, guid: 10dc8244071daf64c8a4750109f4257a, type: 3}
-      propertyPath: InScenePlacedSourceGlobalObjectIdHash
-      value: 3883117075
-      objectReference: {fileID: 0}
     - target: {fileID: 5934398173721442199, guid: 10dc8244071daf64c8a4750109f4257a, type: 3}
       propertyPath: m_Name
       value: stickerManager (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6943476718500319158, guid: 10dc8244071daf64c8a4750109f4257a, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 1961936892
-      objectReference: {fileID: 0}
-    - target: {fileID: 6943476718500319158, guid: 10dc8244071daf64c8a4750109f4257a, type: 3}
-      propertyPath: InScenePlacedSourceGlobalObjectIdHash
-      value: 3883117075
-      objectReference: {fileID: 0}
-    - target: {fileID: 7624728659784997010, guid: 10dc8244071daf64c8a4750109f4257a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.825
-      objectReference: {fileID: 0}
-    - target: {fileID: 7624728659784997010, guid: 10dc8244071daf64c8a4750109f4257a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.229
-      objectReference: {fileID: 0}
-    - target: {fileID: 7624728659784997010, guid: 10dc8244071daf64c8a4750109f4257a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
