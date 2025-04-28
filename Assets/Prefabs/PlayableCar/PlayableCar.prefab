@@ -8695,6 +8695,7 @@ Transform:
   - {fileID: 2112691965665514837}
   - {fileID: 2792721662618759937}
   - {fileID: 6464422734596639542}
+  - {fileID: 8784529731761929725}
   m_Father: {fileID: 3870070280419035862}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6845997892250173470
@@ -12915,6 +12916,84 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2381927017599007227, guid: b6988424da8817642a1e00cb2f65fd19, type: 3}
   m_PrefabInstance: {fileID: 5035064682058054186}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5597511665183255898
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 9070788898650049073}
+    m_Modifications:
+    - target: {fileID: 878708179647520333, guid: 187cfbff762223c47a4dcbc04a36efab, type: 3}
+      propertyPath: m_Name
+      value: Digicode
+      objectReference: {fileID: 0}
+    - target: {fileID: 3766891705972592807, guid: 187cfbff762223c47a4dcbc04a36efab, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 15.000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3766891705972592807, guid: 187cfbff762223c47a4dcbc04a36efab, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 60.000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 3766891705972592807, guid: 187cfbff762223c47a4dcbc04a36efab, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 30.000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3766891705972592807, guid: 187cfbff762223c47a4dcbc04a36efab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3766891705972592807, guid: 187cfbff762223c47a4dcbc04a36efab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.553
+      objectReference: {fileID: 0}
+    - target: {fileID: 3766891705972592807, guid: 187cfbff762223c47a4dcbc04a36efab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3766891705972592807, guid: 187cfbff762223c47a4dcbc04a36efab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3766891705972592807, guid: 187cfbff762223c47a4dcbc04a36efab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3766891705972592807, guid: 187cfbff762223c47a4dcbc04a36efab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3766891705972592807, guid: 187cfbff762223c47a4dcbc04a36efab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3766891705972592807, guid: 187cfbff762223c47a4dcbc04a36efab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3766891705972592807, guid: 187cfbff762223c47a4dcbc04a36efab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3766891705972592807, guid: 187cfbff762223c47a4dcbc04a36efab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3766891705972592807, guid: 187cfbff762223c47a4dcbc04a36efab, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 187cfbff762223c47a4dcbc04a36efab, type: 3}
+--- !u!4 &8784529731761929725 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3766891705972592807, guid: 187cfbff762223c47a4dcbc04a36efab, type: 3}
+  m_PrefabInstance: {fileID: 5597511665183255898}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5781979318708249323
 PrefabInstance:
