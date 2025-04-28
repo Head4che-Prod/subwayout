@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Threading.Tasks;
 using TMPro;
 using Unity.Netcode;
@@ -7,6 +8,7 @@ using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 namespace HomeMenu
 {
@@ -51,7 +53,7 @@ namespace HomeMenu
             _isCursorActive = true;
             SceneManager.activeSceneChanged += (from, to) =>
             {
-                _isCursorActive = to.name == "HomeMenu" || to.name == "PlayerSelection";
+                _isCursorActive = to.name =="HomeMenu" || to.name=="PlayerSelection";
                 Cursor.lockState = _isCursorActive ? CursorLockMode.None : CursorLockMode.Locked;
                 Cursor.visible = _isCursorActive;
             };
@@ -65,7 +67,11 @@ namespace HomeMenu
 
         public void Quit()
         {
+            #if UNITY_EDITOR
+                return;
+            #endif
             Application.Quit();
+            Process.GetCurrentProcess().Kill();
         }
 
         public void OpenStart()
@@ -80,16 +86,14 @@ namespace HomeMenu
             // Start server / Lobby
             _sessionManager.AddOnClientConnectedCallback((id) =>
             {
-                if (this == null || this.gameObject == null) return;
                 SetInteractibleStartButtons(0);
                 _disableOnSpawn.SetActive(false);
             });
             _sessionManager.StartSessionAsHost().ContinueWith((task) =>
             {
-                if (this == null || this.gameObject == null) return;
                 SetInteractibleStartButtons(0);
-                _sessionManager.AddOnPlayerJoined((_) => { if (this != null && this.gameObject != null) SetInteractibleStartButtons(0); });
-                _sessionManager.AddOnPlayerLeft((_) => { if (this != null && this.gameObject != null) SetInteractibleStartButtons(-1); });
+                _sessionManager.AddOnPlayerJoined((_) => SetInteractibleStartButtons(0));
+                _sessionManager.AddOnPlayerLeft((_) => SetInteractibleStartButtons(-1));
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
@@ -151,14 +155,17 @@ namespace HomeMenu
 
         public void Join()
         {
-            _sessionManager.AddOnClientConnectedCallback((id) => { if (this != null && this.gameObject != null) _disableOnSpawn.SetActive(false); });
+            _sessionManager.AddOnClientConnectedCallback((id) => { _disableOnSpawn.SetActive(false); });
             _sessionManager.AddOnClientDisconnectedCallback((id) =>
             {
-                Debug.Log("Local player disconnected!");
-                SceneManager.LoadScene("Scenes/HomeMenu", LoadSceneMode.Single);
-                CloseStart();
-                CloseWaitingForHostScreen();
-                CloseJoin();
+                if (id == NetworkManager.Singleton.LocalClientId)
+                {
+                    Debug.Log("Local player disconnected!");
+                    SceneManager.LoadScene("Scenes/HomeMenu", LoadSceneMode.Single);
+                    CloseStart();
+                    CloseWaitingForHostScreen();
+                    CloseJoin();
+                }
             });
 
             string joinCode = transform.Find("JoinMenu/JoinCodeInput").GetComponent<TMP_InputField>().text.ToUpper();
