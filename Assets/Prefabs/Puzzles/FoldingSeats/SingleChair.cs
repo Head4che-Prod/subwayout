@@ -12,7 +12,7 @@ namespace Prefabs.Puzzles.FoldingSeats
         [Header("Chair Settings")]
         [SerializeField] private Animator chairAnimator;
         [SerializeField] private bool shouldBeUp = false;
-        public bool IsInRightPosition => _isUp.Value == shouldBeUp;
+        public bool IsInRightPosition => _isUp.Value != shouldBeUp;
         private readonly NetworkVariable<bool> _isUp = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone);
         
         public override void OnNetworkSpawn()
@@ -25,7 +25,7 @@ namespace Prefabs.Puzzles.FoldingSeats
         /// Changes the chair's position and checks the win condition.
         /// </summary>
         /// <param name="_">(unused) If the chair was up.</param>
-        /// <param name="newValue">If the chair if now up.</param>
+        /// <param name="newValue">If the chair is now up.</param>
         private void UpdatePosition(bool _, bool newValue)
         {
             chairAnimator.SetBool(ChairUp, newValue);
