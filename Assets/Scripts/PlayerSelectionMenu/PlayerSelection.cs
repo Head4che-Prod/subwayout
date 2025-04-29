@@ -8,8 +8,8 @@ namespace Prefabs.UI
 {
     public class PlayerSelection : MonoBehaviour
     {
-        public static int CurrentPlayer { get; private set; } = 0;
-        public static GameObject[] PlayerModels { get; private set; }
+        public static byte CurrentPlayerSkin { get; private set; } = 0;
+        private static GameObject[] PlayerModels { get; set; }
         [SerializeField] private Button previousPlayerButton;
         [SerializeField] private Button nextPlayerButton;
 
@@ -20,16 +20,19 @@ namespace Prefabs.UI
             for (int i = 0; i < childCount; i++)
             {
                 PlayerModels[i] = transform.GetChild(i).gameObject;
-                PlayerModels[i].SetActive(i == CurrentPlayer);
+                PlayerModels[i].SetActive(i == CurrentPlayerSkin);
             }
         }
     
+        /// <summary>
+        /// Changes player skin locally.
+        /// </summary>
+        /// <param name="change">By what offset the skins should be switched. Is 1 or -1.</param>
         public void ChangeMyPlayer(int change) //for my buttons < and >
         {
-            PlayerModels[CurrentPlayer].SetActive(false);
-            CurrentPlayer += change + transform.childCount; //will set the index to + change 
-            CurrentPlayer %= transform.childCount;
-            PlayerModels[CurrentPlayer].SetActive(true);
+            PlayerModels[CurrentPlayerSkin].SetActive(false);
+            CurrentPlayerSkin = (byte)((CurrentPlayerSkin + change + transform.childCount) % transform.childCount); // Changes the current skin and ensures no overflow
+            PlayerModels[CurrentPlayerSkin].SetActive(true);
         }
 
         public void ChangeScene(string sceneName)

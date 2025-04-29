@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Threading.Tasks;
 using TMPro;
 using Unity.Netcode;
@@ -7,6 +8,7 @@ using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 namespace HomeMenu
 {
@@ -65,7 +67,11 @@ namespace HomeMenu
 
         public void Quit()
         {
+            #if UNITY_EDITOR
+                return;
+            #endif
             Application.Quit();
+            Process.GetCurrentProcess().Kill();
         }
 
         public void OpenStart()
@@ -149,12 +155,21 @@ namespace HomeMenu
 
         public void Join()
         {
-            _sessionManager.AddOnClientConnectedCallback((id) => { _disableOnSpawn.SetActive(false); });
+            _sessionManager.AddOnClientConnectedCallback((id) => {
+                try
+                {
+                    _disableOnSpawn.SetActive(false); 
+                }
+                catch
+                {
+                    // The game already started
+                }
+                
+            });
             _sessionManager.AddOnClientDisconnectedCallback((id) =>
             {
                 if (id == NetworkManager.Singleton.LocalClientId)
                 {
-                    Debug.Log("Local player disconnected!");
                     SceneManager.LoadScene("Scenes/HomeMenu", LoadSceneMode.Single);
                     CloseStart();
                     CloseWaitingForHostScreen();
