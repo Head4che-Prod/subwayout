@@ -30,8 +30,7 @@ namespace Prefabs.Player
             {
                 transform.Find("UI").gameObject.SetActive(false);
                 transform.Find("Canvas").gameObject.SetActive(false);
-                transform.Find("CameraPos").gameObject.SetActive(false);
-                transform.Find("CameraHolder").gameObject.SetActive(false);
+                transform.Find("PlayerCamera").gameObject.SetActive(false);
             }
 
         }
