@@ -123,7 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   height: 1
   bar: 0
-  containedBall: {fileID: 7029362708068778588}
+  containedBall: {fileID: 0}
 --- !u!1 &43833442771577604
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,7 +334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3547f518425c2a44a00b4578d2a0332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 7029362708068778588}
+  parent: {fileID: 2873841041859609692}
 --- !u!64 &2934805689848870113
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -615,7 +615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3547f518425c2a44a00b4578d2a0332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 4944842209243708975}
+  parent: {fileID: 6631059129065459361}
 --- !u!64 &5546503968060358179
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1313,7 +1313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 443209098
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -1676,7 +1676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3547f518425c2a44a00b4578d2a0332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 2807084494974347788}
+  parent: {fileID: 111033654724552817}
 --- !u!1 &4230439506055483187
 GameObject:
   m_ObjectHideFlags: 0
@@ -2881,7 +2881,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   height: 2
   bar: 0
-  containedBall: {fileID: 2807084494974347788}
+  containedBall: {fileID: 0}
 --- !u!1 &7309277217445042357
 GameObject:
   m_ObjectHideFlags: 0
@@ -3223,7 +3223,6 @@ GameObject:
   - component: {fileID: 7484059947477701321}
   - component: {fileID: 6156760683002833162}
   - component: {fileID: 2873841041859609692}
-  - component: {fileID: 7029362708068778588}
   - component: {fileID: 6587641659237137333}
   m_Layer: 0
   m_Name: MiddlePiece
@@ -3340,7 +3339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 78375533
+  GlobalObjectIdHash: 443209098
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -3371,18 +3370,6 @@ MonoBehaviour:
   moveSpeed: 10
   affectedByGravity: 1
   canBeHighlighted: 0
---- !u!114 &7029362708068778588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8212785696297785526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3947fba0fd424c8da054bba43489fd3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   weight: 1
 --- !u!114 &6587641659237137333
 MonoBehaviour:
@@ -3525,7 +3512,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   height: 0
   bar: 0
-  containedBall: {fileID: 4944842209243708975}
+  containedBall: {fileID: 0}
 --- !u!1 &8296183580863650448
 GameObject:
   m_ObjectHideFlags: 0
@@ -3540,7 +3527,6 @@ GameObject:
   - component: {fileID: 7414460891388657901}
   - component: {fileID: 4927992562717126572}
   - component: {fileID: 111033654724552817}
-  - component: {fileID: 2807084494974347788}
   - component: {fileID: 5978893820570998078}
   m_Layer: 0
   m_Name: TopPiece
@@ -3604,7 +3590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1334298019
+  GlobalObjectIdHash: 443209098
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -3688,18 +3674,6 @@ MonoBehaviour:
   moveSpeed: 10
   affectedByGravity: 1
   canBeHighlighted: 0
---- !u!114 &2807084494974347788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8296183580863650448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3947fba0fd424c8da054bba43489fd3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   weight: 0
 --- !u!114 &5978893820570998078
 MonoBehaviour:
@@ -3733,7 +3707,6 @@ GameObject:
   - component: {fileID: 7604845142363848932}
   - component: {fileID: 5066629958883494709}
   - component: {fileID: 6631059129065459361}
-  - component: {fileID: 4944842209243708975}
   - component: {fileID: 3010917517631029723}
   m_Layer: 0
   m_Name: BasePiece
@@ -3850,7 +3823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1053159341
+  GlobalObjectIdHash: 443209098
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -3881,18 +3854,6 @@ MonoBehaviour:
   moveSpeed: 10
   affectedByGravity: 1
   canBeHighlighted: 0
---- !u!114 &4944842209243708975
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8560694226868619178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3947fba0fd424c8da054bba43489fd3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   weight: 2
 --- !u!114 &3010917517631029723
 MonoBehaviour:
