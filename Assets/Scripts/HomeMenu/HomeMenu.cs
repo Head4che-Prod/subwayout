@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Prefabs.GameManagers;
@@ -39,13 +40,17 @@ namespace HomeMenu
             {
                 AuthenticationService.Instance.SignOut();
             }
-            catch { }
+            catch
+            {
+            }
 
             try
             {
                 GameObject.Find("DisableOnSpawn").gameObject.SetActive(true);
             }
-            catch { }
+            catch
+            {
+            }
 
 
             SetLang();
@@ -54,7 +59,7 @@ namespace HomeMenu
             _isCursorActive = true;
             SceneManager.activeSceneChanged += (from, to) =>
             {
-                _isCursorActive = to.name =="HomeMenu" || to.name=="PlayerSelection";
+                _isCursorActive = to.name == "HomeMenu" || to.name == "PlayerSelection";
                 Cursor.lockState = _isCursorActive ? CursorLockMode.None : CursorLockMode.Locked;
                 Cursor.visible = _isCursorActive;
             };
@@ -68,9 +73,9 @@ namespace HomeMenu
 
         public void Quit()
         {
-            #if UNITY_EDITOR
-                return;
-            #endif
+#if UNITY_EDITOR
+            return;
+#endif
             Application.Quit();
             Process.GetCurrentProcess().Kill();
         }
@@ -87,8 +92,12 @@ namespace HomeMenu
             // Start server / Lobby
             _sessionManager.AddOnClientConnectedCallback((id) =>
             {
-                SetInteractibleStartButtons(0);
-                _disableOnSpawn.SetActive(false);
+                try
+                {
+                    SetInteractibleStartButtons(0);
+                    _disableOnSpawn.SetActive(false);
+                }
+                catch { }
             });
             _sessionManager.StartSessionAsHost().ContinueWith((task) =>
             {
@@ -156,16 +165,16 @@ namespace HomeMenu
 
         public void Join()
         {
-            _sessionManager.AddOnClientConnectedCallback((id) => {
+            _sessionManager.AddOnClientConnectedCallback((id) =>
+            {
                 try
                 {
-                    _disableOnSpawn.SetActive(false); 
+                    _disableOnSpawn.SetActive(false);
                 }
                 catch
                 {
                     // The game already started
                 }
-                
             });
             _sessionManager.AddOnClientDisconnectedCallback((id) =>
             {
