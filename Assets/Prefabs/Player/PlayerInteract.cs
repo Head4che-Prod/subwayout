@@ -17,9 +17,9 @@ namespace Prefabs.Player
         [NonSerialized] public ObjectGrabbable GrabbedObject;
         private InputAction _actionInput;
         private InputAction _grabInput;
-        [Header("Raycasting")]
-        [SerializeField] private int allocationSize;
         
+        private const int AllocationSize = 6;
+
         private void Start()
         {
             _actionInput = InputSystem.actions.FindAction("Gameplay/Interact");
@@ -34,7 +34,7 @@ namespace Prefabs.Player
             ObjectActionable actionable = null;
             try
             {
-                RaycastHit[] hits = new RaycastHit[allocationSize];
+                RaycastHit[] hits = new RaycastHit[AllocationSize];
                 Physics.RaycastNonAlloc(
                     player.playerCamera.transform.position, 
                     player.playerCamera.transform.forward,
@@ -70,7 +70,7 @@ namespace Prefabs.Player
             ObjectGrabbable grabbable = null;
             try
             {
-                RaycastHit[] hits = new RaycastHit[allocationSize];
+                RaycastHit[] hits = new RaycastHit[AllocationSize];
                 Physics.RaycastNonAlloc(
                     player.playerCamera.transform.position,
                     player.playerCamera.transform.forward,
