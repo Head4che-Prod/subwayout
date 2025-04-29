@@ -35,7 +35,7 @@ namespace Prefabs.Puzzles.HintSystem
             SetStageStateServerRpc(true);
         }
         
-        protected override void Action(PlayerObject _)
+        protected override void Action()
         {
             if (_cooldownFinished.Value)
             {

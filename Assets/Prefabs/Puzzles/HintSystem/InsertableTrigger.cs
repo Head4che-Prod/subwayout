@@ -14,7 +14,7 @@ namespace Prefabs.Puzzles.HintSystem
         /// </summary>
         public void Deactivate()
         {
-            PlayerInteract.Singleton.GrabbedObject = null;
+            PlayerInteract.LocalPlayerInteract.GrabbedObject = null;
             DeactivateServerRpc(NetworkManager.Singleton.LocalClientId);
         }
 

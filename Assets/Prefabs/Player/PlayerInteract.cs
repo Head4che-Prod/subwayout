@@ -11,7 +11,7 @@ namespace Prefabs.Player
     public class PlayerInteract : NetworkBehaviour
     {
         private static PlayerInteract _singleton;
-        public static PlayerInteract Singleton
+        public static PlayerInteract LocalPlayerInteract
         {
             get 
             {
@@ -46,7 +46,7 @@ namespace Prefabs.Player
 
         private void Start()
         {
-            Singleton = this;
+            LocalPlayerInteract = this;
             
             _actionInput = InputSystem.actions.FindAction("Gameplay/Interact");
             _grabInput = InputSystem.actions.FindAction("Gameplay/Grab");
@@ -87,7 +87,7 @@ namespace Prefabs.Player
 
             if (actionable != null)
             {
-                actionable.HandleAction(player);
+                actionable.HandleAction();
             }
         }
         
@@ -146,7 +146,7 @@ namespace Prefabs.Player
             if (_actionInput != null) _actionInput.performed -= HandleAction;
             if (_grabInput != null) _grabInput.performed -= HandleGrab;
             
-            Singleton = null;
+            LocalPlayerInteract = null;
         }
     }
 }

@@ -121,7 +121,7 @@ namespace Objects
         /// </summary>
         public virtual void Drop()
         {
-            PlayerInteract.Singleton.GrabbedObject = null;
+            PlayerInteract.LocalPlayerInteract.GrabbedObject = null;
             DropServerRpc(NetworkManager.Singleton.LocalClientId);
         }
         

@@ -20,9 +20,9 @@ namespace Prefabs.Puzzles.FoldingSeats.Sticker
             _stickerGrabbable = sticker.GetComponent<ObjectGrabbable>();
         }
     
-        protected override void Action(PlayerObject player)
+        protected override void Action()
         {
-            if (_stickerGrabbable.Owner == player)
+            if (PlayerInteract.LocalPlayerInteract.GrabbedObject == _stickerGrabbable)
             {
                 sticker.Deactivate();
                 AssembleStickersRpc();
@@ -38,7 +38,7 @@ namespace Prefabs.Puzzles.FoldingSeats.Sticker
             halfSticker.SetActive(false);
             wholeStickerPrefab.SetActive(true);
             ObjectPositionManager.ForgetResettableObjectClientRpc(sticker);
-            ObjectHighlightManager.ForgetHighlightableObjectClientRpc(sticker.StickerOutline);
+            ObjectHighlightManager.ForgetHighlightableObject(NetworkObjectId);
         }
     }
 }

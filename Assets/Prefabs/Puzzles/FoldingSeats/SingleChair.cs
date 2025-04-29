@@ -31,7 +31,7 @@ namespace Prefabs.Puzzles.FoldingSeats
             chairAnimator.SetBool(ChairUp, newValue);
             ChairsManager.Singleton.CheckChairs(); // we call CheckChairs here so that when only one value changes we check, no need to check at every frame
         }
-        protected override void Action(PlayerObject player)
+        protected override void Action()
             => ChangedServerRpc(!chairAnimator.GetBool(ChairUp));
         
         [Rpc(SendTo.Server, RequireOwnership = false)]

@@ -17,9 +17,9 @@ namespace Prefabs.Puzzles.HintSystem
         {
             _triggerGrabbable = insertableTrigger.GetComponent<ObjectGrabbable>();
         }
-        protected override void Action(PlayerObject player)
+        protected override void Action()
         {
-            if (_isAwaitingTrigger.Value && PlayerInteract.Singleton.GrabbedObject == _triggerGrabbable)
+            if (_isAwaitingTrigger.Value && PlayerInteract.LocalPlayerInteract.GrabbedObject == _triggerGrabbable)
             {
                 callTrigger.Activate();
                 insertableTrigger.Deactivate();
