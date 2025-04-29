@@ -6,11 +6,11 @@ using UnityEngine.InputSystem;
 
 namespace Prefabs.GameManagers
 {
-    public class ObjectHighlightManager : MonoBehaviour
+    public class ObjectHighlightManager : NetworkBehaviour
     {
         private static ObjectHighlightManager _singleton;
 
-        public static ObjectHighlightManager Singleton
+        private static ObjectHighlightManager Singleton
         {
             get
             {
@@ -20,7 +20,7 @@ namespace Prefabs.GameManagers
                 }
                 return _singleton;
             }
-            private set
+            set
             {
                 if (_singleton == null)
                 {
@@ -62,6 +62,9 @@ namespace Prefabs.GameManagers
 
         private readonly HashSet<ObjectOutline> _foundObjects = new HashSet<ObjectOutline>();
 
+        private ObjectOutline GetOutline(ulong objectId) => NetworkManager.Singleton.SpawnManager
+            .SpawnedObjects[objectId].GetComponent<ObjectOutline>();
+        
         public void Awake()
         {
             Singleton = this;
@@ -87,26 +90,23 @@ namespace Prefabs.GameManagers
                 outline.enabled = highlight;
         }
 
-        public static void RegisterHighlightableObject(ObjectOutline outline)
-        {
-            if (!Singleton._foundObjects.Contains(outline))
-                RegisterHighlightableObjectClientRpc(outline);
-        }
+        public static void RegisterHighlightableObject(ulong objectId) => Singleton.RegisterHighlightableObjectClientRpc(objectId);
 
         [Rpc(SendTo.ClientsAndHost)]
-        private static void RegisterHighlightableObjectClientRpc(ObjectOutline outline)
+        private void RegisterHighlightableObjectClientRpc(ulong objectId)
         {
-            Singleton._foundObjects.Add(outline);
+            Singleton._foundObjects.Add(GetOutline(objectId));
         }
 
-
+        public static void ForgetHighlightableObject(ulong objectId) => Singleton.ForgetHighlightableObjectClientRpc(objectId);
+        
         [Rpc(SendTo.ClientsAndHost)]
-        public static void ForgetHighlightableObjectClientRpc(ObjectOutline outline)
+        private void ForgetHighlightableObjectClientRpc(ulong objectId)
         {
-            Singleton._foundObjects.Remove(outline);
+            Singleton._foundObjects.Remove(GetOutline(objectId));
         }
 
-        public void OnDestroy()
+        public override void OnDestroy()
         {
             _actionHighlightHold.started -= _handleHighlightHoldStart;
             _actionHighlightHold.canceled -= _handleHighlightHoldEnd;

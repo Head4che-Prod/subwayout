@@ -11,6 +11,6 @@ namespace Prefabs.Puzzles.Hanoi
         /// <summary>
         /// The piece the HanoiPieceBall is part of.
         /// </summary>
-        public HanoiBall parent;
+        public HanoiPiece parent;
     }
 }

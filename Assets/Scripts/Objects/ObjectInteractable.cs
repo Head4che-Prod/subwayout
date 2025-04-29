@@ -16,7 +16,7 @@ namespace Objects
         private Collider Collider { get; set; }
 
 
-        public void Awake()
+        public virtual void Awake()
         {
             if (canBeOffStage)
             {

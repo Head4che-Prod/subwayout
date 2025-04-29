@@ -11,7 +11,7 @@ namespace Prefabs.PlayableCar.Animation
     {
         private static readonly int OpenCabinDoor = Animator.StringToHash("OpenCabinDoor");
         [FormerlySerializedAs("_animDoor")] [SerializeField] private Animator animDoor;
-        protected override void Action(PlayerObject player)
+        protected override void Action()
         {
             if (Digicode.CanDoorOpen)
                 OpenDoorRpc();

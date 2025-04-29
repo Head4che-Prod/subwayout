@@ -16,7 +16,7 @@ namespace Prefabs.Puzzles.DoorCode
             value.Value = (byte)((value.Value + 1) % 10);
         }
 
-        protected override void Action(PlayerObject player)
+        protected override void Action()
         {
             if (Digicode.Active)
                 UpdateValueRpc();

@@ -10,6 +10,30 @@ namespace Prefabs.Player
 {
     public class PlayerInteract : NetworkBehaviour
     {
+        private static PlayerInteract _singleton;
+        public static PlayerInteract LocalPlayerInteract
+        {
+            get 
+            {
+                if (!_singleton)
+                    Debug.LogError("No PlayerInteract instance found.");
+                return _singleton;
+            }
+            private set
+            {
+                if (!value)
+                    _singleton = null;
+                else if (value.IsLocalPlayer)
+                {
+                    if (!_singleton)
+                        _singleton = value;
+                    else 
+                        Debug.LogError("Attempting to create a new PlayerInteract, but one already exists.");
+                }
+            }
+        }
+        
+        
         [Header("Player")]
         [SerializeField] private PlayerObject player;
         [SerializeField] private float reach;
@@ -22,6 +46,8 @@ namespace Prefabs.Player
 
         private void Start()
         {
+            LocalPlayerInteract = this;
+            
             _actionInput = player.Input.actions.FindAction("Gameplay/Interact");
             _grabInput = player.Input.actions.FindAction("Gameplay/Grab");
             
@@ -61,7 +87,7 @@ namespace Prefabs.Player
 
             if (actionable != null)
             {
-                actionable.HandleAction(player);
+                actionable.HandleAction();
             }
         }
         
@@ -105,7 +131,7 @@ namespace Prefabs.Player
                 if (grabbable is { Grabbable: true } && GrabbedObject is null)
                 {
                     GrabbedObject = grabbable;
-                    GrabbedObject.Grab(player);
+                    GrabbedObject.Grab();
                 }
                 // Drop grabbed pointed grabbed object
                 else if (grabbable == GrabbedObject)
@@ -119,6 +145,8 @@ namespace Prefabs.Player
             
             if (_actionInput != null) _actionInput.performed -= HandleAction;
             if (_grabInput != null) _grabInput.performed -= HandleGrab;
+            
+            LocalPlayerInteract = null;
         }
     }
 }
