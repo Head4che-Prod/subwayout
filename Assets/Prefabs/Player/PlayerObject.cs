@@ -32,6 +32,10 @@ namespace Prefabs.Player
                 transform.Find("Canvas").gameObject.SetActive(false);
                 transform.Find("CameraPos").gameObject.SetActive(false);
                 transform.Find("CameraHolder").gameObject.SetActive(false);
+                InputManager.enabled = false;
+                Movement.enabled = false;
+                Interaction.enabled = false;
+                Input.enabled = false;
             }
 
         }

@@ -22,8 +22,8 @@ namespace Prefabs.Player
 
         private void Start()
         {
-            _actionInput = InputSystem.actions.FindAction("Gameplay/Interact");
-            _grabInput = InputSystem.actions.FindAction("Gameplay/Grab");
+            _actionInput = player.Input.actions.FindAction("Gameplay/Interact");
+            _grabInput = player.Input.actions.FindAction("Gameplay/Grab");
             
             _actionInput.performed += HandleAction;
             _grabInput.performed += HandleGrab;
