@@ -48,8 +48,8 @@ namespace Prefabs.Player
         {
             LocalPlayerInteract = this;
             
-            _actionInput = InputSystem.actions.FindAction("Gameplay/Interact");
-            _grabInput = InputSystem.actions.FindAction("Gameplay/Grab");
+            _actionInput = player.Input.actions.FindAction("Gameplay/Interact");
+            _grabInput = player.Input.actions.FindAction("Gameplay/Grab");
             
             _actionInput.performed += HandleAction;
             _grabInput.performed += HandleGrab;

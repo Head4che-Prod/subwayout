@@ -30,9 +30,17 @@ namespace Prefabs.Player
             {
                 transform.Find("UI").gameObject.SetActive(false);
                 transform.Find("Canvas").gameObject.SetActive(false);
+                InputManager.enabled = false;
+                Movement.enabled = false;
+                Interaction.enabled = false;
+                Input.enabled = false;
             }
-
         }
 
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+            PlayerSkinManager.ResetSkinRegistry();
+        }
     }
 }
