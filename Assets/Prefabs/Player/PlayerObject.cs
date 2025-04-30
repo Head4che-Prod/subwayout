@@ -36,11 +36,5 @@ namespace Prefabs.Player
                 Input.enabled = false;
             }
         }
-
-        public override void OnDestroy()
-        {
-            base.OnDestroy();
-            PlayerSkinManager.ResetSkinRegistry();
-        }
     }
 }
