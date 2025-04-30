@@ -181,9 +181,12 @@ namespace HomeMenu
                 if (id == NetworkManager.Singleton.LocalClientId)
                 {
                     SceneManager.LoadScene("Scenes/HomeMenu", LoadSceneMode.Single);
-                    CloseStart();
-                    CloseWaitingForHostScreen();
-                    CloseJoin();
+                    try
+                    {
+                        CloseStart();
+                        CloseWaitingForHostScreen();
+                        CloseJoin();
+                    } catch { }
                 }
             });
 
