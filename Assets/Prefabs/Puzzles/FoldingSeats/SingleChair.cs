@@ -1,7 +1,5 @@
-using System;
 using Objects;
 using UnityEngine;
-using Prefabs.Player;
 using Unity.Netcode;
 
 namespace Prefabs.Puzzles.FoldingSeats
