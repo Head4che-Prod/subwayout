@@ -29,7 +29,7 @@ public class BagManager: ObjectActionable
     }
     protected void ImpulsionObjets()
     {
-        Instantiate(objectsInBag[0], _bagOpen.transform.position + new Vector3(0, 0.25f, 0), Quaternion.identity);
+        Instantiate(objectsInBag[0], _bagOpen.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
         objectsInBag[0].GetComponent<Rigidbody>().AddForce(new Vector3(0.1f,0.1f,0.1f), ForceMode.Impulse);
     }
     
