@@ -41,6 +41,7 @@ namespace Prefabs.Player.PlayerUI.PauseMenu
 
         public void Resume()
         {
+            if (!gameObject.activeInHierarchy) return;
             _pauseMenuUI.SetActive(false);
             _player.InputManager.SetPlayerInputMap("Gameplay");
             Cursor.lockState = CursorLockMode.Locked;
@@ -49,6 +50,7 @@ namespace Prefabs.Player.PlayerUI.PauseMenu
 
         public void Pause()
         {
+            if (!gameObject.activeInHierarchy) return;
             _pauseMenuUI.SetActive(true);
             _player.InputManager.SetPlayerInputMap("UI");
             Cursor.lockState = CursorLockMode.None;

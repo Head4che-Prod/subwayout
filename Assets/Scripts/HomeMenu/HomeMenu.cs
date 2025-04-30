@@ -1,4 +1,7 @@
+using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
+using Prefabs.GameManagers;
 using TMPro;
 using Unity.Netcode;
 using Unity.Services.Authentication;
@@ -7,6 +10,7 @@ using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 namespace HomeMenu
 {
@@ -36,13 +40,17 @@ namespace HomeMenu
             {
                 AuthenticationService.Instance.SignOut();
             }
-            catch { }
+            catch
+            {
+            }
 
             try
             {
                 GameObject.Find("DisableOnSpawn").gameObject.SetActive(true);
             }
-            catch { }
+            catch
+            {
+            }
 
 
             SetLang();
@@ -51,7 +59,7 @@ namespace HomeMenu
             _isCursorActive = true;
             SceneManager.activeSceneChanged += (from, to) =>
             {
-                _isCursorActive = to.name =="HomeMenu" || to.name=="PlayerSelection";
+                _isCursorActive = to.name == "HomeMenu" || to.name == "PlayerSelection";
                 Cursor.lockState = _isCursorActive ? CursorLockMode.None : CursorLockMode.Locked;
                 Cursor.visible = _isCursorActive;
             };
@@ -65,7 +73,11 @@ namespace HomeMenu
 
         public void Quit()
         {
+#if UNITY_EDITOR
+            return;
+#endif
             Application.Quit();
+            Process.GetCurrentProcess().Kill();
         }
 
         public void OpenStart()
@@ -80,8 +92,12 @@ namespace HomeMenu
             // Start server / Lobby
             _sessionManager.AddOnClientConnectedCallback((id) =>
             {
-                SetInteractibleStartButtons(0);
-                _disableOnSpawn.SetActive(false);
+                try
+                {
+                    SetInteractibleStartButtons(0);
+                    _disableOnSpawn.SetActive(false);
+                }
+                catch { }
             });
             _sessionManager.StartSessionAsHost().ContinueWith((task) =>
             {
@@ -149,12 +165,21 @@ namespace HomeMenu
 
         public void Join()
         {
-            _sessionManager.AddOnClientConnectedCallback((id) => { _disableOnSpawn.SetActive(false); });
+            _sessionManager.AddOnClientConnectedCallback((id) =>
+            {
+                try
+                {
+                    _disableOnSpawn.SetActive(false);
+                }
+                catch
+                {
+                    // The game already started
+                }
+            });
             _sessionManager.AddOnClientDisconnectedCallback((id) =>
             {
                 if (id == NetworkManager.Singleton.LocalClientId)
                 {
-                    Debug.Log("Local player disconnected!");
                     SceneManager.LoadScene("Scenes/HomeMenu", LoadSceneMode.Single);
                     CloseStart();
                     CloseWaitingForHostScreen();

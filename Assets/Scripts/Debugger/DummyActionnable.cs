@@ -6,7 +6,7 @@ namespace Debugger
 {
     public class DummyActionnable : ObjectActionable
     {
-        protected override void Action(PlayerObject player)
+        protected override void Action()
         {
             Debug.Log($"i'm {gameObject.name} dummy!");
         }
