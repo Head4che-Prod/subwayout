@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using Objects;
+using Prefabs.Player;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,7 +12,7 @@ namespace Prefabs.GameManagers
     {
         private static ObjectHighlightManager _singleton;
 
-        private static ObjectHighlightManager Singleton
+        public static ObjectHighlightManager Singleton
         {
             get
             {
@@ -72,8 +74,8 @@ namespace Prefabs.GameManagers
 
         public void Start()
         {
-            _actionHighlightHold = InputSystem.actions.FindAction("HighlightHold");
-            _actionHighlightToggle = InputSystem.actions.FindAction("HighlightToggle");
+            _actionHighlightHold = PlayerObject.LocalPlayer.Input.actions.FindAction("HighlightHold");
+            _actionHighlightToggle = PlayerObject.LocalPlayer.Input.actions.FindAction("HighlightToggle");
 
             _handleHighlightHoldStart = _ => HighlightHeld = true;
             _actionHighlightHold.started += _handleHighlightHoldStart;

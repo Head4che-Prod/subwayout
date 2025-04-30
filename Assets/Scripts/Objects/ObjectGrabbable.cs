@@ -100,8 +100,14 @@ namespace Objects
             if (canBeHighlighted)
             {
                 ObjectHighlightManager.RegisterHighlightableObject(NetworkObjectId);
-                Outline.enabled = ObjectHighlightManager.HighlightEnabled;
+                EnableHighlightRpc(ObjectHighlightManager.HighlightEnabled);
             }
+        }
+
+        [Rpc(SendTo.ClientsAndHost, RequireOwnership = false)]
+        private void EnableHighlightRpc(bool isActivated)
+        {
+            Outline.enabled = isActivated;
         }
         
         /// <summary>

@@ -16,7 +16,8 @@ namespace Prefabs.Player
         public Transform grabPointTransform;
         public GameObject playerCharacter;
         public GameObject debugConsolePrefab;
-
+        public static PlayerObject LocalPlayer { get; private set; }
+        
         public void Awake()
         {
             InputManager = GetComponent<PlayerInputManager>();
@@ -39,6 +40,7 @@ namespace Prefabs.Player
             }
             else
             {
+                LocalPlayer = this;
                 Instantiate(debugConsolePrefab, transform.Find("UI"));
             }
         }
