@@ -141,12 +141,12 @@ namespace Prefabs.Player
 
         public override void OnDestroy()
         {
-            base.OnDestroy();
-            
             if (_actionInput != null) _actionInput.performed -= HandleAction;
             if (_grabInput != null) _grabInput.performed -= HandleGrab;
             
-            LocalPlayerInteract = null;
+            if (LocalPlayerInteract == this) LocalPlayerInteract = null;
+            
+            base.OnDestroy();
         }
     }
 }
