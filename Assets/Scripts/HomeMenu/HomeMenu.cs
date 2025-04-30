@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Prefabs.GameManagers;
+using Prefabs.Player;
 using TMPro;
 using Unity.Netcode;
 using Unity.Services.Authentication;
@@ -298,6 +299,11 @@ namespace HomeMenu
         public void OpenSkinSelector()
         {
             SceneManager.LoadScene("Scenes/PlayerSelection", LoadSceneMode.Single);
+        }
+
+        public void SetSensi(Single n)
+        {
+            PlayerCam.Sensi = n;
         }
     }
 }

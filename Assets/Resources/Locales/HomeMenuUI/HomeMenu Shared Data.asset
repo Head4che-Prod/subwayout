@@ -91,6 +91,10 @@ MonoBehaviour:
     m_Key: Sensitivity
     m_Metadata:
       m_Items: []
+  - m_Id: 21720867735863296
+    m_Key: New Entry
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
