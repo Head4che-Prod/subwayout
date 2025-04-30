@@ -64,6 +64,13 @@ namespace Prefabs.GameManagers
             Instance._grabbedObjects[GetPlayer(clientId)] = GetObject(objectNetworkId).GetComponent<ObjectGrabbable>();
         }
 
+        public static void ForgetPlayer(PlayerObject player)
+        {
+            ObjectGrabbable? obj = Instance._grabbedObjects[player];
+            if (obj != null) obj.Grabbable = true;
+            Instance._grabbedObjects.Remove(player);
+        }
+
         public static void PlayerDrop(ulong clientId)
         {
             Instance._grabbedObjects[GetPlayer(clientId)] = null;

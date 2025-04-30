@@ -1,3 +1,4 @@
+using Prefabs.GameManagers;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -40,6 +41,12 @@ namespace Prefabs.Player
             {
                 Instantiate(debugConsolePrefab, transform.Find("UI"));
             }
+        }
+
+        public override void OnDestroy()
+        {
+            GrabbedObjectManager.ForgetPlayer(this);
+            base.OnDestroy();
         }
     }
 }

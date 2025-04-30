@@ -37,7 +37,7 @@ namespace Objects
         public virtual bool Grabbable // This can be overridden
         {
             get => IsGrabbable.Value;
-            private set => IsGrabbable.Value = value;
+            set => IsGrabbable.Value = value;
         }
         
         protected ObjectOutline Outline;
@@ -130,7 +130,7 @@ namespace Objects
         /// </summary>
         /// <param name="clientId">Player that grabbed the object.</param>
         [Rpc(SendTo.Server, RequireOwnership = false)]
-        private void DropServerRpc(ulong clientId)
+        public void DropServerRpc(ulong clientId)
         {
             GrabbedObjectManager.PlayerDrop(clientId);
             Grabbable = true;
