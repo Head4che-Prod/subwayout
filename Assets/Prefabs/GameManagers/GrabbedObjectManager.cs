@@ -13,7 +13,7 @@ namespace Prefabs.GameManagers
         private readonly Dictionary<PlayerObject, ObjectGrabbable> _grabbedObjects =
             new Dictionary<PlayerObject, ObjectGrabbable>();
 
-        private static GrabbedObjectManager _instance;
+        private static GrabbedObjectManager _instance = null;
         public static bool Exists => _instance is not null;
         
         private static GrabbedObjectManager Instance
