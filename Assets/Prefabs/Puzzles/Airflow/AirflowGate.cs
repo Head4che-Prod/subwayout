@@ -29,13 +29,14 @@ namespace Prefabs.Puzzles.Airflow
             }
         }
         
-        private readonly GameObject[] _flaps = new GameObject[5];
+        private readonly Flap[] _flaps = new Flap[5];
+        private bool _isVisible = false;
 
         public void Start()
         {
             Singleton = this;
             for (int i = 0; i < _flaps.Length; i++)
-                _flaps[i] = transform.GetChild(i).gameObject;
+                _flaps[i] = transform.GetChild(i).GetComponent<Flap>();
         }
         
         /// <summary>
@@ -43,9 +44,17 @@ namespace Prefabs.Puzzles.Airflow
         /// </summary>
         public void CheckWin()
         {
-            if (windows.All(window => window.IsClosed))
+            if (!_isVisible && windows.All(w => w.IsClosed))
             {
-                Debug.Log("Win Chairs");
+                _isVisible = true;
+                foreach (Flap flap in _flaps)
+                    flap.ChangeRotation(true);
+            }
+            else if (_isVisible && windows.Any(w => !w.IsClosed))
+            {
+                _isVisible = false;
+                foreach (Flap flap in _flaps)
+                    flap.ChangeRotation(false);
             }
         }
     }
