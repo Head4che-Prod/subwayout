@@ -14,6 +14,7 @@ namespace Prefabs.Player
         public Camera playerCamera;
         public Transform grabPointTransform;
         public GameObject playerCharacter;
+        public static bool DisplayHints = true;
 
         public void Awake()
         {
@@ -34,6 +35,10 @@ namespace Prefabs.Player
                 Movement.enabled = false;
                 Interaction.enabled = false;
                 Input.enabled = false;
+            }
+            else
+            {
+                transform.Find("Canvas").GetChild(1).gameObject.SetActive(DisplayHints);
             }
         }
 

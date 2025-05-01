@@ -74,9 +74,9 @@ namespace HomeMenu
 
         public void Quit()
         {
-#if UNITY_EDITOR
-            return;
-#endif
+            #if UNITY_EDITOR
+                return;
+            #endif
             Application.Quit();
             Process.GetCurrentProcess().Kill();
         }
@@ -304,6 +304,11 @@ namespace HomeMenu
         public void SetSensi(Single n)
         {
             PlayerCam.Sensi = n;
+        }
+
+        public void ChangeDisplayHints(bool activate)
+        {
+            PlayerObject.DisplayHints = activate;
         }
     }
 }

@@ -95,6 +95,10 @@ MonoBehaviour:
     m_Localized: 'Sensibilidad '
     m_Metadata:
       m_Items: []
+  - m_Id: 22095987180568576
+    m_Localized: "Mostrar c\xF3mo jugar"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
