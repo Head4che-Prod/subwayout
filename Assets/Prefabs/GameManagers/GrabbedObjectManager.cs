@@ -13,8 +13,9 @@ namespace Prefabs.GameManagers
         private readonly Dictionary<PlayerObject, ObjectGrabbable> _grabbedObjects =
             new Dictionary<PlayerObject, ObjectGrabbable>();
 
-        private static GrabbedObjectManager _instance;
-
+        private static GrabbedObjectManager _instance = null;
+        public static bool Exists => _instance is not null;
+        
         private static GrabbedObjectManager Instance
         {
             get
@@ -62,6 +63,13 @@ namespace Prefabs.GameManagers
         public static void PlayerGrab(ulong clientId, ulong objectNetworkId)
         {
             Instance._grabbedObjects[GetPlayer(clientId)] = GetObject(objectNetworkId).GetComponent<ObjectGrabbable>();
+        }
+
+        public static void ForgetPlayer(PlayerObject player)
+        {
+            ObjectGrabbable obj = Instance._grabbedObjects[player];
+            if (obj != null) obj.Grabbable = true;
+            Instance._grabbedObjects.Remove(player);
         }
 
         public static void PlayerDrop(ulong clientId)
