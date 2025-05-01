@@ -153,7 +153,7 @@ namespace HomeMenu
             _isCursorActive = false;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            NetworkManager.Singleton.SceneManager.LoadScene("Scenes/DemoScene", LoadSceneMode.Single);
+            NetworkManager.Singleton.SceneManager.LoadScene("Scenes/AiDebug", LoadSceneMode.Single);
         }
 
         public void PlayAlone()
