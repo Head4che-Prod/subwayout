@@ -105,6 +105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 446389551699317175}
   - component: {fileID: 2471292113319327684}
+  - component: {fileID: 2964155094802399814}
   m_Layer: 0
   m_Name: Rat_ADAM
   m_TagString: Untagged
@@ -150,6 +151,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.1, y: 0.096396066, z: 0.25525126}
   m_Center: {x: 0, y: 0.043207128, z: -0.02230972}
+--- !u!95 &2964155094802399814
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971146128777775885}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: df57d58c4728eaa44955fdc49818495e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1162829896472417139
 GameObject:
   m_ObjectHideFlags: 0
