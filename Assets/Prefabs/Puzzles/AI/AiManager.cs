@@ -1,9 +1,9 @@
-using System;
-using System.Runtime.Serialization;
+using System.Collections;
 using Objects;
 using UnityEngine;
 using UnityEngine.AI;
 using Prefabs.Player;
+using Random = UnityEngine.Random;
 
 public class AiManager : MonoBehaviour
 {
@@ -40,10 +40,13 @@ public class AiManager : MonoBehaviour
             else
             {
                 _animator.SetInteger(whichAnim, 0);
+                StartCoroutine(WaitStateEnumerator());
             }
         }
     }
-
+    /// <summary>
+    /// Rat moves towards the grabbed cheese.
+    /// </summary>
     private void MoveForwardTarget()
     {
         if (Vector3.Distance(_agent.transform.position, cheese.transform.position) < 2f)
@@ -59,5 +62,27 @@ public class AiManager : MonoBehaviour
             transform.LookAt(new Vector3(cheese.transform.position.x, cheese.transform.position.y, cheese.transform.position.z)); //face the target
         }
     }
+    
+    /// <summary>
+    /// Rat goes to a valid computed random position.
+    /// </summary>
+    private void MoveRandom()
+    {
+        Vector3 randomPosition = transform.position + new Vector3(Random.Range(-2f,2f), 0f, Random.Range(-2f, 2f)); ;
+        if (NavMesh.SamplePosition(randomPosition, out _, 2f, NavMesh.AllAreas)) //find if the randomPos is valid on the navmesh
+        {
+            _animator.SetInteger(whichAnim, -1);
+            _agent.SetDestination(randomPosition);
+        }
+    }
+
+    /// <summary>
+    /// Makes the rat waits in a iddle state for a specific amount of time.
+    /// </summary>
+    private IEnumerator WaitStateEnumerator()
+    {
+        yield return new WaitForSeconds(2.5f);
+    }
+    
     
 }
