@@ -26,6 +26,7 @@ public class AiManager : MonoBehaviour
     {
         if (PlayerInteract.LocalPlayerInteract.GrabbedObject == _cheeseGrabbable)
         {
+            _animator.SetInteger(whichAnim, -1);
             MoveForwardTarget();
         }
         else //will flee 
@@ -56,7 +57,6 @@ public class AiManager : MonoBehaviour
         }
         else
         {
-            _animator.SetInteger(whichAnim, -1);
             _agent.speed = 3f;
             _agent.SetDestination(cheese.transform.position);
             transform.LookAt(new Vector3(cheese.transform.position.x, cheese.transform.position.y, cheese.transform.position.z)); //face the target
