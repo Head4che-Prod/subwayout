@@ -84,7 +84,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 227158242508800
-    m_Localized: Connected ! Waiting for your host to start the game...
+    m_Localized: Connected! Waiting for your host to start the game...
     m_Metadata:
       m_Items: []
   - m_Id: 7624205895614464
@@ -92,11 +92,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 20636075313332224
-    m_Localized: Sensitivity
+    m_Localized: Camera sensitivity
     m_Metadata:
       m_Items: []
   - m_Id: 22095987180568576
-    m_Localized: Show how to play
+    m_Localized: Display controls
     m_Metadata:
       m_Items: []
   references:

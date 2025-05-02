@@ -88,15 +88,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 20636075313332224
-    m_Key: Sensitivity
-    m_Metadata:
-      m_Items: []
-  - m_Id: 21720867735863296
-    m_Key: New Entry
+    m_Key: HomeMenu.setting.sensitivity
     m_Metadata:
       m_Items: []
   - m_Id: 22095987180568576
-    m_Key: Hints
+    m_Key: HomeMenu.setting.displayControls
     m_Metadata:
       m_Items: []
   m_Metadata:

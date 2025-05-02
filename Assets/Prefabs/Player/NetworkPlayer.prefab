@@ -895,9 +895,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8173176246989190710}
     m_Modifications:
+    - target: {fileID: 1220603937757124082, guid: 3bd70216eccab474cb606d6b57fc4eac, type: 3}
+      propertyPath: m_text
+      value: Interagir
+      objectReference: {fileID: 0}
     - target: {fileID: 6783230644658323068, guid: 3bd70216eccab474cb606d6b57fc4eac, type: 3}
       propertyPath: m_Name
       value: IndicatorsLeft
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576140956914140474, guid: 3bd70216eccab474cb606d6b57fc4eac, type: 3}
+      propertyPath: m_text
+      value: Attraper
       objectReference: {fileID: 0}
     - target: {fileID: 7736965681022959006, guid: 3bd70216eccab474cb606d6b57fc4eac, type: 3}
       propertyPath: m_Pivot.x

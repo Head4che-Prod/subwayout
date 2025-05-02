@@ -92,11 +92,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 20636075313332224
-    m_Localized: 'Sensibilidad '
+    m_Localized: "Sensibilidad de la c\xE1mara"
     m_Metadata:
       m_Items: []
   - m_Id: 22095987180568576
-    m_Localized: "Mostrar c\xF3mo jugar"
+    m_Localized: Mostrar controles
     m_Metadata:
       m_Items: []
   references:

@@ -59,7 +59,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 22114888990720
-    m_Localized: "Rejoindre la station de m\xE9tro de votre ami !"
+    m_Localized: "Rejoignez la station de m\xE9tro de votre ami !"
     m_Metadata:
       m_Items: []
   - m_Id: 23305488318464
@@ -92,11 +92,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 20636075313332224
-    m_Localized: "Sensibilit\xE9"
+    m_Localized: "Sensibilit\xE9 de la cam\xE9ra"
     m_Metadata:
       m_Items: []
   - m_Id: 22095987180568576
-    m_Localized: Afficher comment jouer
+    m_Localized: "Afficher les contr\xF4les"
     m_Metadata:
       m_Items: []
   references:
