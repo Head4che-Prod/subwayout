@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Prefabs.GameManagers;
+using Prefabs.Player;
 using TMPro;
 using Unity.Netcode;
 using Unity.Services.Authentication;
@@ -73,9 +74,9 @@ namespace HomeMenu
 
         public void Quit()
         {
-#if UNITY_EDITOR
-            return;
-#endif
+            #if UNITY_EDITOR
+                return;
+            #endif
             Application.Quit();
             Process.GetCurrentProcess().Kill();
         }
@@ -301,6 +302,16 @@ namespace HomeMenu
         public void OpenSkinSelector()
         {
             SceneManager.LoadScene("Scenes/PlayerSelection", LoadSceneMode.Single);
+        }
+
+        public void SetSensi(Single n)
+        {
+            PlayerCam.Sensi = n;
+        }
+
+        public void ChangeDisplayHints(bool activate)
+        {
+            PlayerObject.DisplayHints = activate;
         }
     }
 }

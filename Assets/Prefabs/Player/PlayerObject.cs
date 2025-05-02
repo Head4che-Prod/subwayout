@@ -15,6 +15,7 @@ namespace Prefabs.Player
         public Camera playerCamera;
         public Transform grabPointTransform;
         public GameObject playerCharacter;
+        public static bool DisplayHints = true;
         public GameObject debugConsolePrefab;
         public static PlayerObject LocalPlayer { get; private set; }
         
@@ -40,6 +41,7 @@ namespace Prefabs.Player
             }
             else
             {
+                transform.Find("Canvas").GetChild(1).gameObject.SetActive(DisplayHints);
                 LocalPlayer = this;
                 Instantiate(debugConsolePrefab, transform.Find("UI"));
             }
