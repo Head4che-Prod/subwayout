@@ -621,7 +621,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   canBeOffStage: 0
   startOnStage: 0
-  startClosed: 0
+  startClosed: 1
   windowAnimator: {fileID: 642834815410804956}
 --- !u!114 &579498217236881949
 MonoBehaviour:
@@ -1006,7 +1006,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   canBeOffStage: 0
   startOnStage: 0
-  startClosed: 0
+  startClosed: 1
   windowAnimator: {fileID: 3781564394789634105}
 --- !u!114 &8091369230750696529
 MonoBehaviour:
@@ -1577,7 +1577,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   canBeOffStage: 0
   startOnStage: 0
-  startClosed: 0
+  startClosed: 1
   windowAnimator: {fileID: 7089983665081848199}
 --- !u!1 &5040648423358729289
 GameObject:
@@ -1769,7 +1769,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   canBeOffStage: 0
   startOnStage: 0
-  startClosed: 0
+  startClosed: 1
   windowAnimator: {fileID: 1763513513929194316}
 --- !u!114 &5786641310400355193
 MonoBehaviour:
@@ -2032,7 +2032,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   canBeOffStage: 0
   startOnStage: 0
-  startClosed: 0
+  startClosed: 1
   windowAnimator: {fileID: 5007131303712017637}
 --- !u!114 &2536411565604351570
 MonoBehaviour:
