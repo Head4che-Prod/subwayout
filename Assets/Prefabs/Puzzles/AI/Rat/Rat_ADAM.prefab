@@ -104,8 +104,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 446389551699317175}
+  - component: {fileID: 2471292113319327684}
   m_Layer: 0
-  m_Name: Rat_39_Test
+  m_Name: Rat_ADAM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,6 +129,27 @@ Transform:
   - {fileID: 6993213893713257372}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2471292113319327684
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971146128777775885}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.1, y: 0.096396066, z: 0.25525126}
+  m_Center: {x: 0, y: 0.043207128, z: -0.02230972}
 --- !u!1 &1162829896472417139
 GameObject:
   m_ObjectHideFlags: 0
