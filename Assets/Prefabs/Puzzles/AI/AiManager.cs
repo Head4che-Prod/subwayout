@@ -22,12 +22,15 @@ public class AiManager : MonoBehaviour
         {
             MoveForwardTarget();
         }
-        
-        
-        //if ()
-        //{
-         //   MoveForwardTarget(PlayerInteract.LocalPlayerInteract.gameObject);
-        //}
+        else //will flee 
+        {
+            if (Vector3.Distance(_agent.transform.position, PlayerInteract.LocalPlayerInteract.transform.position) < 5f)
+            {
+                Vector3 direction = (PlayerInteract.LocalPlayerInteract.transform.position - transform.position).normalized;
+                _agent.speed = 5f;
+                _agent.SetDestination(transform.position - (7f*direction)); //moves in the opposite direction
+            }
+        }
     }
 
     private void MoveForwardTarget()
@@ -38,8 +41,10 @@ public class AiManager : MonoBehaviour
         }
         else
         {
+            _agent.speed = 3f;
             _agent.SetDestination(cheese.transform.position);
             transform.LookAt(new Vector3(cheese.transform.position.x, cheese.transform.position.y, cheese.transform.position.z)); //face the target
         }
     }
+    
 }
