@@ -955,7 +955,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8863579749600340387}
-  - component: {fileID: 3901433153339781361}
+  - component: {fileID: 8193990561851569261}
   - component: {fileID: 803677008145045399}
   m_Layer: 0
   m_Name: Windows
@@ -988,7 +988,7 @@ Transform:
   - {fileID: 7083373427937627238}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3901433153339781361
+--- !u!114 &8193990561851569261
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1026,6 +1026,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  airflowGate: {fileID: 7829219374129684724}
   windows:
   - {fileID: 6978809086891756267}
   - {fileID: 460504648855926382}
@@ -1035,7 +1036,6 @@ MonoBehaviour:
   - {fileID: 4796847524320258745}
   - {fileID: 6273356689469661594}
   - {fileID: 3273664225131631794}
-  airflowGate: {fileID: 7829219374129684724}
 --- !u!1 &4222857515948152881
 GameObject:
   m_ObjectHideFlags: 0
