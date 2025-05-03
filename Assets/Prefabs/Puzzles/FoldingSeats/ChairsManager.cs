@@ -36,6 +36,9 @@ namespace Prefabs.Puzzles.FoldingSeats
             }
         }
 
+        /// <summary>
+        /// Checks the puzzle's wind condition.
+        /// </summary>
         public void CheckChairs()
         {
             if (_chairsBool.All(c => c.IsInRightPosition))
