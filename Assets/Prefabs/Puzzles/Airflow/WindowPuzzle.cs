@@ -1,19 +1,18 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Prefabs.Puzzles.Airflow
 {
-    public class AirflowGate : NetworkBehaviour
+    public class WindowPuzzle : NetworkBehaviour
     {
+        [SerializeField] private GameObject airflowGate;
         [SerializeField] private Window[] windows;
-        
-        private static AirflowGate _singleton;
-        
-        public static AirflowGate Singleton
+
+        private static WindowPuzzle _singleton;
+
+        public static WindowPuzzle Singleton
         {
             get
             {
@@ -26,12 +25,12 @@ namespace Prefabs.Puzzles.Airflow
             {
                 if (_singleton == null)
                     _singleton = value;
-                else 
+                else
                     Debug.LogError("AirflowGate singleton already set!");
             }
         }
-        
-        private readonly Flap[] _flaps = new Flap[5];
+
+        private Flap[] _flaps;
         private bool _isVisible = false;
 
         private bool[] _windowsClosed;
@@ -40,14 +39,16 @@ namespace Prefabs.Puzzles.Airflow
         public void Start()
         {
             Singleton = this;
+
+            _flaps = new Flap[airflowGate.transform.childCount];
             for (ushort i = 0; i < _flaps.Length; i++)
-                _flaps[i] = transform.GetChild(i).GetComponent<Flap>();
-            
+                _flaps[i] = airflowGate.transform.GetChild(i).GetComponent<Flap>();
+
             // Initialise window Ids on all clients.
             // Due to being serialized the same way, these will be identical on all clients.
             for (ushort i = 0; i < windows.Length; i++)
                 _windowIds.Add(windows[i], i);
-            
+
             // Initialize NetworkVariables on host
             if (IsHost)
             {
@@ -69,14 +70,14 @@ namespace Prefabs.Puzzles.Airflow
             _windowsClosed[windowId] = windowIsNowClosed;
             ChangeWindowPositionClientRpc(windowId, windowIsNowClosed);
         }
-        
+
         [Rpc(SendTo.ClientsAndHost)]
         private void ChangeWindowPositionClientRpc(ushort windowId, bool isClosed)
         {
             windows[windowId].ChangePosition(isClosed);
             CheckWin();
         }
-        
+
         /// <summary>
         /// Checks the puzzle's win condition.
         /// </summary>

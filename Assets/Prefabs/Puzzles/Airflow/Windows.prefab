@@ -355,7 +355,6 @@ GameObject:
   - component: {fileID: 5007467308817816143}
   - component: {fileID: 8725824413312087430}
   - component: {fileID: 4796847524320258745}
-  - component: {fileID: 4252352344112139802}
   m_Layer: 0
   m_Name: glass6
   m_TagString: Untagged
@@ -465,36 +464,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b5b76c8b6840f6a34fef1dee69855d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  canBeOffStage: 0
-  startOnStage: 0
   startClosed: 0
   windowAnimator: {fileID: 858857557750919462}
---- !u!114 &4252352344112139802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2425669075421618205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
 --- !u!1 &2974733425468335530
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,7 +479,6 @@ GameObject:
   - component: {fileID: 5514376181013335684}
   - component: {fileID: 6466571849162286252}
   - component: {fileID: 3282072802638940746}
-  - component: {fileID: 579498217236881949}
   m_Layer: 0
   m_Name: glass4
   m_TagString: Untagged
@@ -618,36 +588,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b5b76c8b6840f6a34fef1dee69855d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  canBeOffStage: 0
-  startOnStage: 0
   startClosed: 1
   windowAnimator: {fileID: 642834815410804956}
---- !u!114 &579498217236881949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2974733425468335530}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
 --- !u!1 &3015784083915724005
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,7 +835,6 @@ GameObject:
   - component: {fileID: 8372745591345431913}
   - component: {fileID: 8534293363847374477}
   - component: {fileID: 6273356689469661594}
-  - component: {fileID: 8091369230750696529}
   m_Layer: 0
   m_Name: glass7
   m_TagString: Untagged
@@ -1003,36 +944,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b5b76c8b6840f6a34fef1dee69855d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  canBeOffStage: 0
-  startOnStage: 0
   startClosed: 1
   windowAnimator: {fileID: 3781564394789634105}
---- !u!114 &8091369230750696529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3759535106099112667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
 --- !u!1 &4165455326442047903
 GameObject:
   m_ObjectHideFlags: 0
@@ -1043,6 +956,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8863579749600340387}
   - component: {fileID: 3901433153339781361}
+  - component: {fileID: 803677008145045399}
   m_Layer: 0
   m_Name: Windows
   m_TagString: Untagged
@@ -1086,7 +1000,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 99498952
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -1099,6 +1013,29 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
+--- !u!114 &803677008145045399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4165455326442047903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1168cd0ca188d504b9c14ea417cf5f9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  windows:
+  - {fileID: 6978809086891756267}
+  - {fileID: 460504648855926382}
+  - {fileID: 2925180379417157755}
+  - {fileID: 3282072802638940746}
+  - {fileID: 7214984112384761026}
+  - {fileID: 4796847524320258745}
+  - {fileID: 6273356689469661594}
+  - {fileID: 3273664225131631794}
+  airflowGate: {fileID: 7829219374129684724}
 --- !u!1 &4222857515948152881
 GameObject:
   m_ObjectHideFlags: 0
@@ -1112,7 +1049,6 @@ GameObject:
   - component: {fileID: 4922277496505699520}
   - component: {fileID: 3768973448314115124}
   - component: {fileID: 3273664225131631794}
-  - component: {fileID: 3015110035215447012}
   m_Layer: 0
   m_Name: glass8
   m_TagString: Untagged
@@ -1222,36 +1158,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b5b76c8b6840f6a34fef1dee69855d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  canBeOffStage: 0
-  startOnStage: 0
   startClosed: 0
   windowAnimator: {fileID: 7893994381435511605}
---- !u!114 &3015110035215447012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4222857515948152881}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
 --- !u!1 &4572773552529558599
 GameObject:
   m_ObjectHideFlags: 0
@@ -1464,7 +1372,6 @@ GameObject:
   - component: {fileID: 4783748122312542785}
   - component: {fileID: 6903573106955238187}
   - component: {fileID: 1524477910241780265}
-  - component: {fileID: 8074060755401613399}
   - component: {fileID: 6978809086891756267}
   m_Layer: 0
   m_Name: glass1
@@ -1563,31 +1470,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4602356720338410404, guid: d971b60a2b2c2524bbd5f140f0c0729b, type: 3}
---- !u!114 &8074060755401613399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4877171214725093392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
 --- !u!114 &6978809086891756267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1600,9 +1482,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b5b76c8b6840f6a34fef1dee69855d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  canBeOffStage: 0
-  startOnStage: 0
   startClosed: 1
   windowAnimator: {fileID: 7089983665081848199}
 --- !u!1 &5040648423358729289
@@ -1682,7 +1561,6 @@ GameObject:
   - component: {fileID: 1084951837273476851}
   - component: {fileID: 6432498812366358718}
   - component: {fileID: 7214984112384761026}
-  - component: {fileID: 5786641310400355193}
   m_Layer: 0
   m_Name: glass5
   m_TagString: Untagged
@@ -1792,36 +1670,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b5b76c8b6840f6a34fef1dee69855d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  canBeOffStage: 0
-  startOnStage: 0
   startClosed: 1
   windowAnimator: {fileID: 1763513513929194316}
---- !u!114 &5786641310400355193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5148112503702415065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
 --- !u!1 &5427132244677621358
 GameObject:
   m_ObjectHideFlags: 0
@@ -1945,7 +1795,6 @@ GameObject:
   - component: {fileID: 4646018834394723701}
   - component: {fileID: 5262781001780525709}
   - component: {fileID: 2925180379417157755}
-  - component: {fileID: 2536411565604351570}
   m_Layer: 0
   m_Name: glass3
   m_TagString: Untagged
@@ -2055,36 +1904,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b5b76c8b6840f6a34fef1dee69855d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  canBeOffStage: 0
-  startOnStage: 0
   startClosed: 1
   windowAnimator: {fileID: 5007131303712017637}
---- !u!114 &2536411565604351570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6251684276807381240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
 --- !u!1 &6516287770700401296
 GameObject:
   m_ObjectHideFlags: 0
@@ -2153,7 +1974,6 @@ GameObject:
   - component: {fileID: 2918773752186035058}
   - component: {fileID: 6764967230617501968}
   - component: {fileID: 460504648855926382}
-  - component: {fileID: 4470470078487706035}
   m_Layer: 0
   m_Name: glass2
   m_TagString: Untagged
@@ -2263,36 +2083,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b5b76c8b6840f6a34fef1dee69855d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  canBeOffStage: 0
-  startOnStage: 0
   startClosed: 0
   windowAnimator: {fileID: 3859034895106697643}
---- !u!114 &4470470078487706035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6547397949010604081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
 --- !u!1 &6897007137565283044
 GameObject:
   m_ObjectHideFlags: 0
@@ -2449,7 +2241,6 @@ GameObject:
   - component: {fileID: 7083373427937627238}
   - component: {fileID: 3767874254688679609}
   - component: {fileID: 2690546678578032409}
-  - component: {fileID: 6999999456053513641}
   m_Layer: 0
   m_Name: AirflowGate
   m_TagString: Untagged
@@ -2531,27 +2322,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6999999456053513641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7829219374129684724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1168cd0ca188d504b9c14ea417cf5f9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  windows:
-  - {fileID: 6978809086891756267}
-  - {fileID: 460504648855926382}
-  - {fileID: 2925180379417157755}
-  - {fileID: 3282072802638940746}
-  - {fileID: 7214984112384761026}
-  - {fileID: 4796847524320258745}
-  - {fileID: 6273356689469661594}
-  - {fileID: 3273664225131631794}
 --- !u!1 &8638338262183723294
 GameObject:
   m_ObjectHideFlags: 0

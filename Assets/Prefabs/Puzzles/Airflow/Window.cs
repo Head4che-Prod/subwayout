@@ -1,6 +1,5 @@
 using System;
 using Objects;
-using Unity.Netcode;
 using UnityEngine;
 
 namespace Prefabs.Puzzles.Airflow
@@ -17,11 +16,12 @@ namespace Prefabs.Puzzles.Airflow
 
         public void Awake()
         {
-            IsClosed = startClosed;
+            ChangePosition(startClosed);
         }
+
         public void Action()
         {
-            AirflowGate.Singleton.ChangeWindowPosition(this);
+            WindowPuzzle.Singleton.ChangeWindowPosition(this);
         }
 
         public void ChangePosition(bool isClosed)
