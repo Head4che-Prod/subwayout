@@ -1,12 +1,11 @@
 using Objects;
-using Prefabs.GameManagers;
 using Prefabs.Player;
 using Unity.Netcode;
 using UnityEngine;
 
 namespace Prefabs.Puzzles.HintSystem
 {
-    public class EmergencyCallBox : ObjectActionable
+    public class EmergencyCallBox : MonoBehaviour, IObjectActionable
     {
         [SerializeField] private InsertableTrigger insertableTrigger;
         [SerializeField] private EmergencyCallTrigger callTrigger;
@@ -17,7 +16,7 @@ namespace Prefabs.Puzzles.HintSystem
         {
             _triggerGrabbable = insertableTrigger.GetComponent<ObjectGrabbable>();
         }
-        protected override void Action()
+        public void Action()
         {
             if (_isAwaitingTrigger.Value && PlayerInteract.LocalPlayerInteract.GrabbedObject == _triggerGrabbable)
             {

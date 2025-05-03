@@ -4,9 +4,9 @@ using UnityEngine;
 namespace Objects
 {
     /// <summary>
-    /// Class of interactive objects. 
+    /// Network behaviors that can be put offstage (deactivated).
     /// </summary>
-    public abstract class ObjectInteractable : NetworkBehaviour
+    public abstract class OffstageNetworkBehaviour : NetworkBehaviour
     {
         [Header("Offstage system")]
         [SerializeField] protected bool canBeOffStage;

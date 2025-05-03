@@ -4,7 +4,7 @@ using Unity.Netcode;
 
 namespace Prefabs.Puzzles.FoldingSeats
 {
-    public class SingleChair : ObjectActionable
+    public class SingleChair : NetworkBehaviour, IObjectActionable
     {
         private static readonly int ChairUp = Animator.StringToHash("activateUp");
         [Header("Chair Settings")]
@@ -29,7 +29,7 @@ namespace Prefabs.Puzzles.FoldingSeats
             chairAnimator.SetBool(ChairUp, newValue);
             ChairsManager.Singleton.CheckChairs(); // we call CheckChairs here so that when only one value changes we check, no need to check at every frame
         }
-        protected override void Action()
+        public void Action()
             => ChangedServerRpc(!chairAnimator.GetBool(ChairUp));
         
         [Rpc(SendTo.Server, RequireOwnership = false)]

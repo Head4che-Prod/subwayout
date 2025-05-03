@@ -7,11 +7,11 @@ using UnityEngine.Serialization;
 
 namespace Prefabs.PlayableCar.Animation
 {
-    public class DoorAnim : ObjectActionable
+    public class DoorAnim : NetworkBehaviour, IObjectActionable
     {
         private static readonly int OpenCabinDoor = Animator.StringToHash("OpenCabinDoor");
         [FormerlySerializedAs("_animDoor")] [SerializeField] private Animator animDoor;
-        protected override void Action()
+        public void Action()
         {
             if (Digicode.Active && Digicode.CanDoorOpen)
                 OpenDoorRpc();

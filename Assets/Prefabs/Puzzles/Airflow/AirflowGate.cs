@@ -1,11 +1,13 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Prefabs.Puzzles.Airflow
 {
-    public class AirflowGate : MonoBehaviour
+    public class AirflowGate : NetworkBehaviour
     {
         [SerializeField] private Window[] windows;
         
@@ -32,15 +34,51 @@ namespace Prefabs.Puzzles.Airflow
         private readonly Flap[] _flaps = new Flap[5];
         private bool _isVisible = false;
 
+        private bool[] _windowsClosed;
+        private readonly Dictionary<Window, ushort> _windowIds = new Dictionary<Window, ushort>();
+
         public void Start()
         {
             Singleton = this;
-            for (int i = 0; i < _flaps.Length; i++)
+            for (ushort i = 0; i < _flaps.Length; i++)
                 _flaps[i] = transform.GetChild(i).GetComponent<Flap>();
+            
+            // Initialise window Ids on all clients.
+            // Due to being serialized the same way, these will be identical on all clients.
+            for (ushort i = 0; i < windows.Length; i++)
+                _windowIds.Add(windows[i], i);
+            
+            // Initialize NetworkVariables on host
+            if (IsHost)
+            {
+                _windowsClosed = new bool[windows.Length];
+                for (ushort i = 0; i < windows.Length; i++)
+                    _windowsClosed[i] = windows[i].IsClosed;
+            }
+        }
+
+        public void ChangeWindowPosition(Window window)
+        {
+            ChangeWindowPositionServerRpc(_windowIds[window]);
+        }
+
+        [Rpc(SendTo.Server, RequireOwnership = false)]
+        private void ChangeWindowPositionServerRpc(ushort windowId)
+        {
+            bool windowIsNowClosed = !_windowsClosed[windowId];
+            _windowsClosed[windowId] = windowIsNowClosed;
+            ChangeWindowPositionClientRpc(windowId, windowIsNowClosed);
+        }
+        
+        [Rpc(SendTo.ClientsAndHost)]
+        private void ChangeWindowPositionClientRpc(ushort windowId, bool isClosed)
+        {
+            windows[windowId].ChangePosition(isClosed);
+            CheckWin();
         }
         
         /// <summary>
-        /// Checks the puzzle's wind condition.
+        /// Checks the puzzle's win condition.
         /// </summary>
         public void CheckWin()
         {

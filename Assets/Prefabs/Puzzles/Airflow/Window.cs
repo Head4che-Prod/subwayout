@@ -1,44 +1,33 @@
+using System;
 using Objects;
 using Unity.Netcode;
 using UnityEngine;
 
 namespace Prefabs.Puzzles.Airflow
 {
-    public class Window : ObjectActionable
+    public class Window : MonoBehaviour, IObjectActionable
     {
         private static readonly int ClosedAnimationBoolean = Animator.StringToHash("IsClosed");
 
         [Header("Window Settings")]
         [SerializeField] private bool startClosed;
         [SerializeField] private Animator windowAnimator;
-        
-        private readonly NetworkVariable<bool> _isClosed = new NetworkVariable<bool>(false);
-        public bool IsClosed => _isClosed.Value;
 
-        public void Start()
+        public bool IsClosed { get; private set; }
+
+        public void Awake()
         {
-            if (IsServer)
-                _isClosed.Value = startClosed;
+            IsClosed = startClosed;
+        }
+        public void Action()
+        {
+            AirflowGate.Singleton.ChangeWindowPosition(this);
         }
 
-        public override void OnNetworkSpawn()
+        public void ChangePosition(bool isClosed)
         {
-            base.OnNetworkSpawn();
-            _isClosed.OnValueChanged += UpdatePosition;
-        }
-
-        private void UpdatePosition(bool wasClosed, bool isClosed)
-        {
+            IsClosed = isClosed;
             windowAnimator.SetBool(ClosedAnimationBoolean, isClosed);
-            AirflowGate.Singleton.CheckWin();
-        }
-        
-        protected override void Action() => ChangeWindowPositionServerRpc(!windowAnimator.GetBool(ClosedAnimationBoolean));
-
-        [Rpc(SendTo.Server, RequireOwnership = false)]
-        private void ChangeWindowPositionServerRpc(bool isClosed)
-        {
-            _isClosed.Value = isClosed;
         }
     }
 }
