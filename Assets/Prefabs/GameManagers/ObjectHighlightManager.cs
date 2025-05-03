@@ -36,13 +36,13 @@ namespace Prefabs.GameManagers
         }
 
 
-        private bool _highlightHeld = false;
-        private bool _highlightToggled = false;
-        private System.Action<InputAction.CallbackContext> _handleHighlightHoldEnd;
-        private System.Action<InputAction.CallbackContext> _handleHighlightHoldStart;
-        private System.Action<InputAction.CallbackContext> _handleHighlightToggle;
+        private static bool _highlightHeld = false;
+        private static bool _highlightToggled = false;
+        private static System.Action<InputAction.CallbackContext> _handleHighlightHoldEnd;
+        private static System.Action<InputAction.CallbackContext> _handleHighlightHoldStart;
+        private static System.Action<InputAction.CallbackContext> _handleHighlightToggle;
 
-        private bool HighlightHeld
+        private static bool HighlightHeld
         {
             set
             {
@@ -51,18 +51,18 @@ namespace Prefabs.GameManagers
             }
         }
 
-        private void HighlightToggle()
+        private static void HighlightToggle()
         {
             _highlightToggled = !_highlightToggled;
             UpdateHighlight();
         }
 
-        public static bool HighlightEnabled => Singleton._highlightHeld ^ Singleton._highlightToggled;
+        public static bool HighlightEnabled => _highlightHeld ^ _highlightToggled;
 
-        private InputAction _actionHighlightHold;
-        private InputAction _actionHighlightToggle;
+        private static InputAction _actionHighlightHold;
+        private static InputAction _actionHighlightToggle;
 
-        private readonly HashSet<ObjectOutline> _foundObjects = new HashSet<ObjectOutline>();
+        private static readonly HashSet<ObjectOutline> _foundObjects = new HashSet<ObjectOutline>();
 
         private ObjectOutline GetOutline(ulong objectId) => NetworkManager.Singleton.SpawnManager
             .SpawnedObjects[objectId].GetComponent<ObjectOutline>();
@@ -72,7 +72,7 @@ namespace Prefabs.GameManagers
             Singleton = this;
         }
 
-        public void Start()
+        public static void Init()
         {
             _actionHighlightHold = PlayerObject.LocalPlayer.Input.actions.FindAction("HighlightHold");
             _actionHighlightToggle = PlayerObject.LocalPlayer.Input.actions.FindAction("HighlightToggle");
@@ -85,7 +85,7 @@ namespace Prefabs.GameManagers
             _actionHighlightToggle.performed += _handleHighlightToggle;
         }
 
-        private void UpdateHighlight()
+        private static void UpdateHighlight()
         {
             bool highlight = HighlightEnabled;
             foreach (ObjectOutline outline in _foundObjects)
@@ -97,7 +97,7 @@ namespace Prefabs.GameManagers
         [Rpc(SendTo.ClientsAndHost)]
         private void RegisterHighlightableObjectClientRpc(ulong objectId)
         {
-            Singleton._foundObjects.Add(GetOutline(objectId));
+            _foundObjects.Add(GetOutline(objectId));
         }
 
         public static void ForgetHighlightableObject(ulong objectId) => Singleton.ForgetHighlightableObjectClientRpc(objectId);
@@ -105,7 +105,7 @@ namespace Prefabs.GameManagers
         [Rpc(SendTo.ClientsAndHost)]
         private void ForgetHighlightableObjectClientRpc(ulong objectId)
         {
-            Singleton._foundObjects.Remove(GetOutline(objectId));
+            _foundObjects.Remove(GetOutline(objectId));
         }
 
         public override void OnDestroy()
