@@ -9,9 +9,7 @@ namespace Prefabs.Player
         [Header("Camera")]
         public GameObject playerCamera;
         
-        [Header("Sensibility")]
-        public float sensX;
-        public float sensY;
+        public static float Sensi = 30;
 
         private float _xRotation;
         private float _yRotation;
@@ -46,8 +44,8 @@ namespace Prefabs.Player
             if (_isActive)
             {
                 Vector2 lookVector2 = _lookAction.ReadValue<Vector2>();
-                float lookX = lookVector2.x * Time.deltaTime * sensX;
-                float lookY = lookVector2.y * Time.deltaTime * sensY;
+                float lookX = lookVector2.x * Time.deltaTime * Sensi;
+                float lookY = lookVector2.y * Time.deltaTime * Sensi;
 
                 _yRotation += lookX;
                 _xRotation -= lookY;

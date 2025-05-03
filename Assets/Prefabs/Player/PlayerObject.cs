@@ -1,3 +1,4 @@
+using Prefabs.GameManagers;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,7 +15,10 @@ namespace Prefabs.Player
         public Camera playerCamera;
         public Transform grabPointTransform;
         public GameObject playerCharacter;
-
+        public static bool DisplayHints = true;
+        public GameObject debugConsolePrefab;
+        public static PlayerObject LocalPlayer { get; private set; }
+        
         public void Awake()
         {
             InputManager = GetComponent<PlayerInputManager>();
@@ -35,12 +39,18 @@ namespace Prefabs.Player
                 Interaction.enabled = false;
                 Input.enabled = false;
             }
+            else
+            {
+                transform.Find("Canvas").GetChild(1).gameObject.SetActive(DisplayHints);
+                LocalPlayer = this;
+                Instantiate(debugConsolePrefab, transform.Find("UI"));
+            }
         }
 
         public override void OnDestroy()
         {
+            if (GrabbedObjectManager.Exists) GrabbedObjectManager.ForgetPlayer(this);
             base.OnDestroy();
-            PlayerSkinManager.ResetSkinRegistry();
         }
     }
 }
