@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7950994463112472050}
+  - component: {fileID: 7271617555039028164}
   m_Layer: 0
   m_Name: lidRotationPoint
   m_TagString: Untagged
@@ -32,6 +33,28 @@ Transform:
   - {fileID: 240869183860603730}
   m_Father: {fileID: 5817559314736642529}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &7271617555039028164
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512971511327744567}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: aebba9fd31e1d924b9ed39a8a0b651af, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2595657238556209436
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,7 +175,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2285701421314177716, guid: e02548dd249512640ac92a612ca32f51, type: 3}
 --- !u!1 &6589583888080276108
@@ -262,7 +285,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 7978826998388685229, guid: e02548dd249512640ac92a612ca32f51, type: 3}
 --- !u!114 &7717865151966427840
@@ -278,7 +301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blackBox: {fileID: 4034001567787519343}
-  lidOpenAnimator: {fileID: 0}
+  lidOpenAnimator: {fileID: 7271617555039028164}
 --- !u!1 &6626994019888276315
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,4 +398,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  slideAnimator: {fileID: 266334513777384540}

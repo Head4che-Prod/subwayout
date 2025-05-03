@@ -1,5 +1,5 @@
 using System.Linq;
-using Unity.Netcode;
+using Prefabs.Blackbox;
 using UnityEngine;
 
 namespace Prefabs.Puzzles.FoldingSeats
@@ -42,10 +42,7 @@ namespace Prefabs.Puzzles.FoldingSeats
         public void CheckChairs()
         {
             if (_chairsBool.All(c => c.IsInRightPosition))
-            {
-                Debug.Log("Win Chairs");
-            }
-        
+                BlackBoxLid.RaiseLid();
         }
     }
 }

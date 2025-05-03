@@ -1,22 +1,21 @@
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Prefabs.Blackbox
 {
     public class BlackBox : NetworkBehaviour
     {
-        [SerializeField] private Animator slideAnimator;
-        private bool _isPulledOut = false;
+        private Animator _slideAnimator;
+        public bool IsPulledOut { get; private set; } = false;
 
         public void Start()
         {
-            slideAnimator = GetComponent<Animator>();
+            _slideAnimator = GetComponent<Animator>();
         }
-        
+
         public void Action()
         {
-            if (!_isPulledOut)
+            if (!IsPulledOut)
             {
                 Debug.Log("Action");
                 PullOutClientRpc();
@@ -26,9 +25,9 @@ namespace Prefabs.Blackbox
         [Rpc(SendTo.ClientsAndHost)]
         private void PullOutClientRpc()
         {
-            _isPulledOut = true; 
+            IsPulledOut = true;
             // Only ever called once, no need to hash.
-            slideAnimator.SetTrigger("slideBox");
+            _slideAnimator.SetTrigger("slideBox");
         }
     }
 }
