@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Prefabs.Puzzles.HintSystem
 {
-    public class EmergencyCallTrigger : ObjectActionable
+    public class EmergencyCallTrigger : OffstageNetworkBehaviour, IObjectActionable
     {
         private Animator _triggerAnimator;
         private static readonly int PullTrigger = Animator.StringToHash("TriggerDown");
@@ -35,7 +35,7 @@ namespace Prefabs.Puzzles.HintSystem
             SetStageStateServerRpc(true);
         }
         
-        protected override void Action()
+        public void Action()
         {
             if (_cooldownFinished.Value)
             {

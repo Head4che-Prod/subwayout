@@ -44,6 +44,7 @@ namespace Prefabs.Player
                 transform.Find("Canvas").GetChild(1).gameObject.SetActive(DisplayHints);
                 LocalPlayer = this;
                 Instantiate(debugConsolePrefab, transform.Find("UI"));
+                ObjectHighlightManager.Init();
             }
         }
 

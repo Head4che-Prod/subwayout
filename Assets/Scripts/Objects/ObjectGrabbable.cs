@@ -15,7 +15,7 @@ namespace Objects
     [RequireComponent(typeof(NetworkRigidbody))]
     [RequireComponent(typeof(NetworkObject))]
     [RequireComponent(typeof(ObjectOutline))]
-    public class ObjectGrabbable : ObjectInteractable, IResettablePosition
+    public class ObjectGrabbable : OffstageNetworkBehaviour, IResettablePosition, IRaycastResponsive
     {
         [Header("Physics")] [FormerlySerializedAs("lerpSpeed")]
         public float moveSpeed = 2.0f;

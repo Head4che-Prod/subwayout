@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Prefabs.Puzzles.FoldingSeats.Sticker
 {
-    public class StickerManager : ObjectActionable
+    public class StickerManager : NetworkBehaviour, IObjectActionable
     {
         [SerializeField] private GameObject halfSticker;
         [SerializeField] private GameObject  wholeStickerPrefab;
@@ -20,7 +20,7 @@ namespace Prefabs.Puzzles.FoldingSeats.Sticker
             _stickerGrabbable = sticker.GetComponent<ObjectGrabbable>();
         }
     
-        protected override void Action()
+        public void Action()
         {
             if (PlayerInteract.LocalPlayerInteract.GrabbedObject == _stickerGrabbable)
             {
