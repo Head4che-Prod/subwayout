@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using Objects;
 using Prefabs.Player;
 using Unity.Netcode;
@@ -8,7 +9,7 @@ namespace Prefabs.Puzzles.AI
     public class CageManager : ObjectGrabbable, IObjectActionable
     {
         
-        private ObjectGrabbable cheeseGrabbable;
+        [CanBeNull] private ObjectGrabbable cheeseGrabbable;
         [SerializeField] private GameObject cheeseInCage; 
         private Animator animator;
         private static readonly int animCageDoor = Animator.StringToHash("animCageDoor");
