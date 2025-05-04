@@ -4374,6 +4374,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
+--- !u!1 &775381948 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2750824189790318554, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
+  m_PrefabInstance: {fileID: 775381947}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &781701311
 GameObject:
   m_ObjectHideFlags: 0
@@ -14060,6 +14065,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 204402163000553466, guid: 009d64ad1a573c84a8540adee9c16a39, type: 3}
+      propertyPath: cheeseInCage
+      value: 
+      objectReference: {fileID: 775381948}
     - target: {fileID: 446389551699317175, guid: 009d64ad1a573c84a8540adee9c16a39, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -11,14 +11,12 @@ namespace Prefabs.Puzzles.AI
     {
         private static readonly int whichAnim = Animator.StringToHash("whichAnim");
         [SerializeField] private NavMeshAgent _agent;
-        private GameObject cheese;
-        //private ObjectGrabbable _cheeseGrabbable;
+        [SerializeField] private GameObject cheeseInCage;
         private Animator _animator;
     
 
         void Start()
         {
-            //_cheeseGrabbable = cheese.GetComponent<ObjectGrabbable>();
             _animator = GetComponent<Animator>();
             _animator.SetInteger(whichAnim, 0);
         
@@ -26,9 +24,9 @@ namespace Prefabs.Puzzles.AI
 
         private void Update()
         {
-            if (PlayerInteract.LocalPlayerInteract.GrabbedObject !=null && PlayerInteract.LocalPlayerInteract.GrabbedObject.name == "cheese(Clone)")
+            //if (PlayerInteract.LocalPlayerInteract.GrabbedObject !=null && PlayerInteract.LocalPlayerInteract.GrabbedObject.name == "cheese(Clone)")
+            if(cheeseInCage.activeInHierarchy)
             {
-                cheese = PlayerInteract.LocalPlayerInteract.GrabbedObject.gameObject;
                 _animator.SetInteger(whichAnim, -1);
                 MoveForwardTarget();
             }
@@ -53,7 +51,7 @@ namespace Prefabs.Puzzles.AI
         /// </summary>
         private void MoveForwardTarget()
         {
-            if (Vector3.Distance(_agent.transform.position, cheese.transform.position) < 2f)
+            if (Vector3.Distance(_agent.transform.position, cheeseInCage.transform.position) < 2f)
             {
                 _animator.SetInteger(whichAnim, 0);
                 _agent.destination = transform.position;
@@ -61,8 +59,8 @@ namespace Prefabs.Puzzles.AI
             else
             {
                 _agent.speed = 3f;
-                _agent.SetDestination(cheese.transform.position);
-                transform.LookAt(new Vector3(cheese.transform.position.x, cheese.transform.position.y, cheese.transform.position.z)); //face the target
+                _agent.SetDestination(cheeseInCage.transform.position);
+                transform.LookAt(new Vector3(cheeseInCage.transform.position.x, cheeseInCage.transform.position.y, cheeseInCage.transform.position.z)); //face the target
             }
         }
     
