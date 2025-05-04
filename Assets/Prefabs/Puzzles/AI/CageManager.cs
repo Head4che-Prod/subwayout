@@ -1,6 +1,6 @@
-using System;
 using Objects;
 using Prefabs.Player;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Prefabs.Puzzles.AI
@@ -16,19 +16,36 @@ namespace Prefabs.Puzzles.AI
         void Start()
         {
             cheeseInCage.SetActive(false);
-            animator = GetComponent<Animator>();
+            animator = transform.GetChild(0).GetComponent<Animator>();
         }
         
         public void Action()
         {
             animator.SetBool(animCageDoor, !animator.GetBool(animCageDoor));
             cheeseGrabbable = PlayerInteract.LocalPlayerInteract.GrabbedObject;
-            if ( cheeseGrabbable.name == "cheese(Clone)" && animator.GetBool(animCageDoor))
+            if (cheeseGrabbable !=null && cheeseGrabbable.name == "cheese(Clone)" && animator.GetBool(animCageDoor))
             {
-                cheeseGrabbable.gameObject.SetActive(false);
+                DeactivateCheese();
                 cheeseInCage.SetActive(true);
             }
-            
         }
+        
+        /// <summary>
+        /// Drops the cheese and call DisableCheeseRpc.
+        /// </summary>
+        public void DeactivateCheese()
+        {
+            Drop();
+            DisableCheeseRpc();
+        }
+        /// <summary>
+        /// Removes the grabbableCheese.
+        /// </summary>
+        [Rpc(SendTo.Server, RequireOwnership = false)]
+        private void DisableCheeseRpc()
+        {
+            cheeseGrabbable.NetworkObject.Despawn();
+        }
+        
     }
 }

@@ -12314,18 +12314,6 @@ PrefabInstance:
       value: catCage
       objectReference: {fileID: 0}
     - target: {fileID: 4579610474627439259, guid: 035f73a0af7ce734aa55e742e62bef59, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4579610474627439259, guid: 035f73a0af7ce734aa55e742e62bef59, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4579610474627439259, guid: 035f73a0af7ce734aa55e742e62bef59, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4579610474627439259, guid: 035f73a0af7ce734aa55e742e62bef59, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.091174
       objectReference: {fileID: 0}

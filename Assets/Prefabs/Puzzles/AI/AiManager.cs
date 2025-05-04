@@ -12,13 +12,13 @@ namespace Prefabs.Puzzles.AI
         private static readonly int whichAnim = Animator.StringToHash("whichAnim");
         [SerializeField] private NavMeshAgent _agent;
         [SerializeField] GameObject cheese;
-        private ObjectGrabbable _cheeseGrabbable;
+        //private ObjectGrabbable _cheeseGrabbable;
         private Animator _animator;
     
 
         void Start()
         {
-            _cheeseGrabbable = cheese.GetComponent<ObjectGrabbable>();
+            //_cheeseGrabbable = cheese.GetComponent<ObjectGrabbable>();
             _animator = GetComponent<Animator>();
             _animator.SetInteger(whichAnim, 0);
         
@@ -26,8 +26,9 @@ namespace Prefabs.Puzzles.AI
 
         private void Update()
         {
-            if (PlayerInteract.LocalPlayerInteract.GrabbedObject == _cheeseGrabbable)
+            if (PlayerInteract.LocalPlayerInteract.GrabbedObject.name == "cheese(Clone)")
             {
+                cheese = PlayerInteract.LocalPlayerInteract.GrabbedObject.gameObject;
                 _animator.SetInteger(whichAnim, -1);
                 MoveForwardTarget();
             }
