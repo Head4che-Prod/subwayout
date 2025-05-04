@@ -1,4 +1,5 @@
 using Objects;
+using Prefabs.GameManagers;
 using Prefabs.Player;
 using UnityEngine;
 
@@ -22,6 +23,7 @@ namespace Prefabs.Puzzles.HintSystem
             {
                 callTrigger.Activate();
                 insertableTrigger.Deactivate();
+                TutorialManager.Instance.State = TutorialState.HintSystemUnlocked;
             }
         }
     }
