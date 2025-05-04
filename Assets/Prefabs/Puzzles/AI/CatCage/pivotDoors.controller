@@ -9,7 +9,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: boolCageDoor
+    m_ConditionEvent: animCageDoor
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7994927757658576751}
@@ -143,7 +143,7 @@ AnimatorController:
   m_Name: pivotDoors
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: boolCageDoor
+  - m_Name: animCageDoor
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -171,7 +171,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: boolCageDoor
+    m_ConditionEvent: animCageDoor
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7994927757658576751}
@@ -196,7 +196,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: boolCageDoor
+    m_ConditionEvent: animCageDoor
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -112945109146700375}
