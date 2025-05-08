@@ -1,16 +1,16 @@
 ﻿using System;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Prefabs.GameManagers
 {
-    public sealed class EndGameManager : MonoBehaviour
+    public sealed class EndGameManager : NetworkBehaviour
     {
-        private static EndGameManager _instance;
-        
         /// <summary>
         /// Instance of EndGameManager. Must be unique.
         /// </summary>
+        private static EndGameManager _instance;
         public static EndGameManager Instance
         {
             get
@@ -31,43 +31,67 @@ namespace Prefabs.GameManagers
         [Header("Train")]
         [SerializeField] private Animator tunnelAnimator;
         
+        private NetworkVariable<EndGameState> _state;
         
-        private EndGameState _state;
-
-        /// <summary>
-        /// Update the current manager state, and run co-routines related to the action performed.
-        /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException">Input EndGameState don't exist.</exception>
         public EndGameState State
         {
-            get => _state;
+            get => _state.Value;
             set
             {
-                switch (value)
-                {
-                    case EndGameState.WaitingHanoi:
-                        break;
+                UpdateStateServerRpc(value);
+                UpdateStateClientRpc(value);
+            }
+        }
+        
+        [Rpc(SendTo.Server, RequireOwnership = false)]
+        private void UpdateStateServerRpc(EndGameState newState)
+        {
+            switch (newState)
+            {
+                case EndGameState.WaitingHanoi:
+                    break;
+                case EndGameState.HanoiResolved:
+                    break;
+                case EndGameState.UnlockDoors:
+                    break;
+                case EndGameState.FinishGame:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
+            }
+            
+            if (!this.IsDestroyed()) _state.Value = newState;
+        }
+
+        [Rpc(SendTo.Everyone, RequireOwnership = false)]
+        private void UpdateStateClientRpc(EndGameState newState)
+        {
+            switch (newState)
+            {
+                case EndGameState.WaitingHanoi:
+                    break;
                     
-                    case EndGameState.HanoiResolved:
-                        tunnelAnimator.SetBool(Animator.StringToHash("Onboarding"), true);
-                        // Waiting for onboard...
-                        break;
+                case EndGameState.HanoiResolved:
+                    tunnelAnimator.SetBool(Animator.StringToHash("Onboarding"), true);
+                    // Waiting for onboard...
+                    break;
+                
+                case EndGameState.UnlockDoors:
+                    break;
                     
-                    case EndGameState.FinishGame:
-                        Destroy(this);
-                        break;
+                case EndGameState.FinishGame:
+                    Destroy(this);
+                    break;
                     
-                    default:
-                        throw new ArgumentOutOfRangeException(nameof(value), value, null);
-                }
-                _state = value;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
             }
         }
         
         private void Awake()
         {
             Instance = this;
-            _state = EndGameState.WaitingHanoi;
+            if (IsHost) _state.Value = EndGameState.WaitingHanoi;
         }
     }
     

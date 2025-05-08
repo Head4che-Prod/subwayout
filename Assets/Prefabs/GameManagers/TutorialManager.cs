@@ -1,14 +1,15 @@
 ﻿using System;
 using Objects;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Prefabs.GameManagers
 {
-    public sealed class TutorialManager : MonoBehaviour
+    public sealed class TutorialManager : NetworkBehaviour
     {
         /// <summary>
-        /// Instance of EndGameManager. Must be unique.
+        /// Instance of TutorialManager. Must be unique.
         /// </summary>
         private static TutorialManager _instance;
         public static TutorialManager Instance
@@ -34,38 +35,65 @@ namespace Prefabs.GameManagers
         [Header("EmergencyTrigger")]
         [SerializeField] private ObjectOutline triggerOutline;
         
-        private TutorialState _state;
+        private NetworkVariable<TutorialState> _state;
         
         public TutorialState State
         {
-            get => _state;
+            get => _state.Value;
             set
             {
-                switch (value)
-                {
-                    case TutorialState.TrainStopped:
-                        break;
-                    
-                    case TutorialState.TrainMoving:
-                        tunnelAnimator.SetBool(Animator.StringToHash("Move"), true);
-                        triggerOutline.enabled = true;
-                        break;
-                    
-                    case TutorialState.HintSystemUnlocked:
-                        Destroy(this);
-                        break;
-                    
-                    default:
-                        throw new ArgumentOutOfRangeException(nameof(value), value, null);
-                }
-                _state = value;
+                UpdateStateServerRpc(value);
+                UpdateStateClientRpc(value);
+            }
+        }
+        
+        [Rpc(SendTo.Server, RequireOwnership = false)]
+        private void UpdateStateServerRpc(TutorialState newState)
+        {
+            switch (newState)
+            {
+                case TutorialState.TrainStopped:
+                    break;
+
+                case TutorialState.TrainMoving:
+                    break;
+
+                case TutorialState.HintSystemUnlocked:
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
+            }
+            
+            if (!this.IsDestroyed()) _state.Value = newState;
+        }
+        
+        [Rpc(SendTo.Everyone, RequireOwnership = false)]
+        private void UpdateStateClientRpc(TutorialState newState)
+        {
+            switch (newState)
+            {
+                case TutorialState.TrainStopped:
+                    break;
+
+                case TutorialState.TrainMoving:
+                    tunnelAnimator.SetBool(Animator.StringToHash("Move"), true);
+                    triggerOutline.enabled = true;
+                    break;
+
+                case TutorialState.HintSystemUnlocked:
+                    Destroy(this);
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
             }
         }
 
         private void Awake()
         {
             Instance = this;
-            _state = TutorialState.TrainStopped;
+            if (IsHost) _state.Value = TutorialState.TrainStopped;
         }
     }
     
