@@ -16,6 +16,7 @@ namespace Prefabs.Puzzles.AI
         
         void Start()
         {
+            base.Start();
             cheeseInCage.SetActive(false);
             animator = transform.GetChild(0).GetComponent<Animator>();
         }
