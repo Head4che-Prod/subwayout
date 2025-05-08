@@ -43,6 +43,12 @@ namespace Prefabs.GameManagers
             }
         }
         
+        /// <summary>
+        /// This method ask the server to update the state of the puzzle.
+        /// Used to perform network-authority based actions.
+        /// </summary>
+        /// <param name="newState">New state that must be applied.</param>
+        /// <exception cref="ArgumentOutOfRangeException">The given state doesn't exist.</exception>
         [Rpc(SendTo.Server, RequireOwnership = false)]
         private void UpdateStateServerRpc(EndGameState newState)
         {
@@ -62,7 +68,13 @@ namespace Prefabs.GameManagers
             
             if (!this.IsDestroyed()) _state.Value = newState;
         }
-
+        
+        /// <summary>
+        /// This method ask all clients to apply changes related to new state.
+        /// Used to perform graphic and UI based actions.
+        /// </summary>
+        /// <param name="newState">New state that must be applied.</param>
+        /// <exception cref="ArgumentOutOfRangeException">The given state doesn't exist.</exception>
         [Rpc(SendTo.Everyone, RequireOwnership = false)]
         private void UpdateStateClientRpc(EndGameState newState)
         {
