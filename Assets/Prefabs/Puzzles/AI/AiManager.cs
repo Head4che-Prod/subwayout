@@ -24,13 +24,17 @@ namespace Prefabs.Puzzles.AI
 
         private void Update()
         {
-            //if (PlayerInteract.LocalPlayerInteract.GrabbedObject !=null && PlayerInteract.LocalPlayerInteract.GrabbedObject.name == "cheese(Clone)")
-            if(cheeseInCage.activeInHierarchy)
+            if(cheeseInCage.gameObject.activeSelf && Vector3.Distance(_agent.transform.position, PlayerInteract.LocalPlayerInteract.transform.position)> 5f)
             {
                 _animator.SetInteger(whichAnim, -1);
                 MoveForwardTarget();
             }
-            else //will flee 
+            else if (Vector3.Distance(_agent.transform.position,
+                         PlayerInteract.LocalPlayerInteract.transform.position) > 5f) //will wait at the limit distance to avoid having the rat continuing to go forward whereas it's not possible
+            {
+                _animator.SetInteger(whichAnim, 0);
+            }
+            else //will flee or wait
             {
                 if (Vector3.Distance(_agent.transform.position, PlayerInteract.LocalPlayerInteract.transform.position) < 5f)
                 {
@@ -43,11 +47,12 @@ namespace Prefabs.Puzzles.AI
                 {
                     _animator.SetInteger(whichAnim, 0);
                     StartCoroutine(WaitStateEnumerator());
+                    //MoveRandom();
                 }
             }
         }
         /// <summary>
-        /// Rat moves towards the grabbed cheese.
+        /// Rat moves towards the cheese in cage.
         /// </summary>
         private void MoveForwardTarget()
         {
@@ -60,7 +65,7 @@ namespace Prefabs.Puzzles.AI
             {
                 _agent.speed = 3f;
                 _agent.SetDestination(cheeseInCage.transform.position);
-                transform.LookAt(new Vector3(cheeseInCage.transform.position.x, cheeseInCage.transform.position.y, cheeseInCage.transform.position.z)); //face the target
+                transform.LookAt(new Vector3(cheeseInCage.transform.position.x, 0, cheeseInCage.transform.position.z)); //face the target but not on the y axis
             }
         }
     
@@ -69,8 +74,8 @@ namespace Prefabs.Puzzles.AI
         /// </summary>
         private void MoveRandom()
         {
-            Vector3 randomPosition = transform.position + new Vector3(Random.Range(-2f,2f), 0f, Random.Range(-2f, 2f)); ;
-            if (NavMesh.SamplePosition(randomPosition, out _, 2f, NavMesh.AllAreas)) //find if the randomPos is valid on the navmesh
+            Vector3 randomPosition = transform.position + new Vector3(Random.Range(-10f,10f), 0f, Random.Range(-10f, 10f)); ;
+            if (NavMesh.SamplePosition(randomPosition, out _, 10f, NavMesh.AllAreas)) //find if the randomPos is valid on the navmesh
             {
                 _animator.SetInteger(whichAnim, -1);
                 _agent.SetDestination(randomPosition);
@@ -78,11 +83,11 @@ namespace Prefabs.Puzzles.AI
         }
 
         /// <summary>
-        /// Makes the rat waits in a iddle state for a specific amount of time.
+        /// Makes the rat waits in an iddle state for a specific amount of time.
         /// </summary>
         private IEnumerator WaitStateEnumerator()
         {
-            yield return new WaitForSeconds(2.5f);
+            yield return new WaitForSeconds(10f);
         }
     
     
