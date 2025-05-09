@@ -46,7 +46,7 @@ namespace Prefabs.Puzzles.AI
         [Rpc(SendTo.Server, RequireOwnership = false)]
         private void DisableCheeseRpc()
         {
-            cheeseGrabbable.NetworkObject.Despawn();
+            cheeseGrabbable!.NetworkObject.Despawn();
         }
         
     }

@@ -4277,6 +4277,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.02
       objectReference: {fileID: 0}
+    - target: {fileID: 4890512870965805272, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 939928740
+      objectReference: {fileID: 0}
     - target: {fileID: 5255867247493319126, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1267451606
@@ -4376,7 +4380,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
 --- !u!1 &775381948 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 2750824189790318554, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
+  m_CorrespondingSourceObject: {fileID: 6870991979325704989, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
   m_PrefabInstance: {fileID: 775381947}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &781701311
