@@ -1,7 +1,7 @@
 using Objects;
 using UnityEngine;
 
-namespace Prefabs.Blackbox
+namespace Prefabs.Blackbox.Box
 {
     public class BlackBoxPart : MonoBehaviour, IObjectActionable
     {

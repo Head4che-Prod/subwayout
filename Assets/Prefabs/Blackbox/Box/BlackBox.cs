@@ -1,7 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 
-namespace Prefabs.Blackbox
+namespace Prefabs.Blackbox.Box
 {
     public class BlackBox : NetworkBehaviour
     {

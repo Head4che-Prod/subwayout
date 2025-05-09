@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Prefabs.Blackbox
+namespace Prefabs.Blackbox.Box
 {
     public class BlackBoxLid : BlackBoxPart
     {
