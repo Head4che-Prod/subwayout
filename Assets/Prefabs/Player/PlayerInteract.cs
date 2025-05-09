@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Objects;
+using Prefabs.GameManagers;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,6 +11,30 @@ namespace Prefabs.Player
 {
     public class PlayerInteract : NetworkBehaviour
     {
+        private static PlayerInteract _singleton;
+        public static PlayerInteract LocalPlayerInteract
+        {
+            get 
+            {
+                if (!_singleton)
+                    Debug.LogError("No PlayerInteract instance found.");
+                return _singleton;
+            }
+            private set
+            {
+                if (!value)
+                    _singleton = null;
+                else if (value.IsLocalPlayer)
+                {
+                    if (!_singleton)
+                        _singleton = value;
+                    else 
+                        Debug.LogError("Attempting to create a new PlayerInteract, but one already exists.");
+                }
+            }
+        }
+        
+        
         [Header("Player")]
         [SerializeField] private PlayerObject player;
         [SerializeField] private float reach;
@@ -17,13 +42,15 @@ namespace Prefabs.Player
         [NonSerialized] public ObjectGrabbable GrabbedObject;
         private InputAction _actionInput;
         private InputAction _grabInput;
-        [Header("Raycasting")]
-        [SerializeField] private int allocationSize;
         
+        private const int AllocationSize = 6;
+
         private void Start()
         {
-            _actionInput = InputSystem.actions.FindAction("Gameplay/Interact");
-            _grabInput = InputSystem.actions.FindAction("Gameplay/Grab");
+            LocalPlayerInteract = this;
+            
+            _actionInput = player.Input.actions.FindAction("Gameplay/Interact");
+            _grabInput = player.Input.actions.FindAction("Gameplay/Grab");
             
             _actionInput.performed += HandleAction;
             _grabInput.performed += HandleGrab;
@@ -31,10 +58,10 @@ namespace Prefabs.Player
 
         private void HandleAction(InputAction.CallbackContext context)
         {
-            ObjectActionable actionable = null;
+            IObjectActionable actionable = null;
             try
             {
-                RaycastHit[] hits = new RaycastHit[allocationSize];
+                RaycastHit[] hits = new RaycastHit[AllocationSize];
                 Physics.RaycastNonAlloc(
                     player.playerCamera.transform.position, 
                     player.playerCamera.transform.forward,
@@ -44,8 +71,8 @@ namespace Prefabs.Player
                 
                 float distance = hits
                     .OrderBy(hit => hit.distance > 0 ? hit.distance : float.MaxValue)
-                    .TakeWhile(hit => hit.transform != null && hit.transform.TryGetComponent<ObjectInteractable>(out _))
-                    .First(hit => hit.transform.TryGetComponent<ObjectActionable>(out actionable)).distance;
+                    .TakeWhile(hit => hit.transform != null && hit.transform.TryGetComponent<IRaycastResponsive>(out _))
+                    .First(hit => hit.transform.TryGetComponent<IObjectActionable>(out actionable)).distance;
                 
                 Debug.DrawRay(
                     player.playerCamera.transform.position, 
@@ -61,7 +88,7 @@ namespace Prefabs.Player
 
             if (actionable != null)
             {
-                actionable.HandleAction(player);
+                actionable.Action();
             }
         }
         
@@ -70,7 +97,7 @@ namespace Prefabs.Player
             ObjectGrabbable grabbable = null;
             try
             {
-                RaycastHit[] hits = new RaycastHit[allocationSize];
+                RaycastHit[] hits = new RaycastHit[AllocationSize];
                 Physics.RaycastNonAlloc(
                     player.playerCamera.transform.position,
                     player.playerCamera.transform.forward,
@@ -80,7 +107,7 @@ namespace Prefabs.Player
                 
                 float distance = hits
                     .OrderBy(hit => hit.distance > 0 ? hit.distance : float.MaxValue)
-                    .TakeWhile(hit => hit.transform != null && hit.transform.TryGetComponent<ObjectInteractable>(out _))
+                    .TakeWhile(hit => hit.transform != null && hit.transform.TryGetComponent<IRaycastResponsive>(out _))
                     .First(hit => hit.transform.TryGetComponent<ObjectGrabbable>(out grabbable)).distance;
                 
                 Debug.DrawRay(
@@ -105,7 +132,7 @@ namespace Prefabs.Player
                 if (grabbable is { Grabbable: true } && GrabbedObject is null)
                 {
                     GrabbedObject = grabbable;
-                    GrabbedObject.Grab(player);
+                    GrabbedObject.Grab();
                 }
                 // Drop grabbed pointed grabbed object
                 else if (grabbable == GrabbedObject)
@@ -115,10 +142,12 @@ namespace Prefabs.Player
 
         public override void OnDestroy()
         {
-            base.OnDestroy();
-            
             if (_actionInput != null) _actionInput.performed -= HandleAction;
             if (_grabInput != null) _grabInput.performed -= HandleGrab;
+            
+            if (LocalPlayerInteract == this) LocalPlayerInteract = null;
+            
+            base.OnDestroy();
         }
     }
 }

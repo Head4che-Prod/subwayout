@@ -77,3 +77,7 @@ crashlytics-build.properties
 
 # System-specific font changes
 *SDF.asset
+
+# Useless files
+ProjectSettings/ShaderGraphSettings.asset
+ProjectSettings/Packages/com.unity.probuilder/Settings.json

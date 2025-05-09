@@ -1,3 +1,4 @@
+using Prefabs.GameManagers;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,7 +15,10 @@ namespace Prefabs.Player
         public Camera playerCamera;
         public Transform grabPointTransform;
         public GameObject playerCharacter;
-
+        public static bool DisplayHints = true;
+        public GameObject debugConsolePrefab;
+        public static PlayerObject LocalPlayer { get; private set; }
+        
         public void Awake()
         {
             InputManager = GetComponent<PlayerInputManager>();
@@ -30,11 +34,24 @@ namespace Prefabs.Player
             {
                 transform.Find("UI").gameObject.SetActive(false);
                 transform.Find("Canvas").gameObject.SetActive(false);
-                transform.Find("CameraPos").gameObject.SetActive(false);
-                transform.Find("CameraHolder").gameObject.SetActive(false);
+                InputManager.enabled = false;
+                Movement.enabled = false;
+                Interaction.enabled = false;
+                Input.enabled = false;
             }
-
+            else
+            {
+                transform.Find("Canvas").GetChild(1).gameObject.SetActive(DisplayHints);
+                LocalPlayer = this;
+                Instantiate(debugConsolePrefab, transform.Find("UI"));
+                ObjectHighlightManager.Init();
+            }
         }
 
+        public override void OnDestroy()
+        {
+            if (GrabbedObjectManager.Exists) GrabbedObjectManager.ForgetPlayer(this);
+            base.OnDestroy();
+        }
     }
 }

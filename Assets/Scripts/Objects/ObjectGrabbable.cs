@@ -16,10 +16,10 @@ namespace Objects
     [RequireComponent(typeof(NetworkRigidbody))]
     [RequireComponent(typeof(NetworkObject))]
     [RequireComponent(typeof(ObjectOutline))]
-    public class ObjectGrabbable : ObjectInteractable, IResettablePosition
+    public class ObjectGrabbable : OffstageNetworkBehaviour, IResettablePosition, IRaycastResponsive
     {
-        [Header("Physics")] [FormerlySerializedAs("lerpSpeed")] [SerializeField]
-        private float moveSpeed = 2.0f;
+        [Header("Physics")] [FormerlySerializedAs("lerpSpeed")]
+        public float moveSpeed = 2.0f;
         
         /// <summary>
         /// How strict the collision detection is for the grabbed object. Use lower for objects that need to be moved precisely, and higher for objects that can be moved fast.
@@ -31,12 +31,9 @@ namespace Objects
         [Header("Visuals")]
         [SerializeField] private bool canBeHighlighted = true;
         
-        private Rigidbody Rb { get; set; }
-        
-        public PlayerObject Owner { get; private set; }
+        public Rigidbody Rb { get; private set; }
 
-        private Vector3 GrabPointPosition => Owner.grabPointTransform.position;
-        protected NetworkVariable<bool> IsGrabbable;
+        protected NetworkVariable<bool> IsGrabbable = new NetworkVariable<bool>(true);
         
         [SerializeField] [CanBeNull] string soundEffectName = null;
 
@@ -44,27 +41,21 @@ namespace Objects
         public virtual bool Grabbable // This can be overridden
         {
             get => IsGrabbable.Value;
-            private set => IsGrabbable.Value = value;
+            set => IsGrabbable.Value = value;
         }
         
         protected ObjectOutline Outline;
+        
 
-        /// <summary>
-        /// This method ask the server to set grabbability of an object over the Network.
-        /// </summary>
-        /// <param name="value">Boolean of Grabbable.</param>
-        [Rpc(SendTo.Server, RequireOwnership = false)]
-        private void SetGrabbableServerRpc(bool value) => Grabbable = value;
-
-        public void Awake()
+        public override void Awake()
         {
+            base.Awake();
             IsGrabbable = new NetworkVariable<bool>(true);
         }
         
-        public void Start()
+        public virtual void Start()
         {
             ((IResettablePosition)this).RegisterInitialState(transform.position, transform.rotation);
-            SetGrabbableServerRpc(true);
             // Warning: All rigidbody settings in this section must be copied / adapted for HanoiGrabbable
             Rb = GetComponent<NetworkRigidbody>().Rigidbody;
             Rb.interpolation = RigidbodyInterpolation.Extrapolate;
@@ -72,67 +63,70 @@ namespace Objects
             
             Outline = GetComponent<ObjectOutline>();
             Outline.enabled = false;
-        }
-        
-        /// <returns><see cref="Vector3"/> of the difference between player's <see cref="GrabPointPosition"/> and the current grabbed object positions.</returns>
-        public virtual Vector3 CalculateMovementForce()
-        {
-            return new Vector3(
-                GrabPointPosition.x - transform.position.x,
-                GrabPointPosition.y - transform.position.y,
-                GrabPointPosition.z - transform.position.z);
-        }
 
-        private void FixedUpdate()
-        {
-            if (Owner)
-            {
-                Vector3 force = CalculateMovementForce();
-                MoveGrabbedObjectServerRpc(force * moveSpeed); // todo: Speed need to be modified!
-            }
+            Rb.isKinematic = !IsHost;
+            IsGrabbable.OnValueChanged += HandleGravity;
         }
 
         /// <summary>
-        /// This method ask the server to apply a velocity to a grabbed object.
+        /// Sets gravity on all clients when an object is grabbed, used when <see cref="IsGrabbable"/>'s value is changed.
         /// </summary>
-        /// <param name="move">Vector3 velocity of grabbed object.</param>
-        [Rpc(SendTo.Server, RequireOwnership = false)]
-        private void MoveGrabbedObjectServerRpc(Vector3 move)
+        /// <param name="_">Old value of IsGrabbable</param>
+        /// <param name="isGrabbable">New value of IsGrabbable</param>
+        private void HandleGravity(bool _, bool isGrabbable) => Rb.useGravity = isGrabbable && affectedByGravity;
+        
+        /// <returns><see cref="Vector3"/> of the difference between player's <see cref="GrabPointPosition"/> and the current grabbed object positions.</returns>
+        public virtual Vector3 CalculateMovementForce(PlayerObject playerGrabbing)
         {
-            Rb.linearVelocity = move;
+            return new Vector3(
+                playerGrabbing.grabPointTransform.position.x - transform.position.x,
+                playerGrabbing.grabPointTransform.position.y - transform.position.y,
+                playerGrabbing.grabPointTransform.position.z - transform.position.z);
         }
+        
 
+        /// <summary>
+        /// Sets the local position of an object.
+        /// </summary>
+        /// <param name="pos">Vector3 New local position of the object.</param>
+        [Rpc(SendTo.Server, RequireOwnership = false)]
+        protected void SetLocalPositionServerRpc(Vector3 pos) => transform.localPosition = pos;
+        
         /// <summary>
         /// Make players grab the targeted object.
         /// </summary>
         /// <param name="player"><see cref="PlayerObject"/> holding the item".</param>
-        public virtual void Grab(PlayerObject player)
+        public virtual void Grab()
         {
-            Owner = player;
-            if (Owner.grabPointTransform is null)
-            {
-                Debug.LogError("objectGrabPointTransform is null");
-                return;
-            }
-
-            if (Owner.playerCamera is null)
-            {
-                Debug.LogError("playerCamera is null");
-                return;
-            }
-
             // Debug.Log($"Owner {OwnerClientId} attempted grabbing {name}");
-            SetGrabbableServerRpc(false);
-            Rb.useGravity = false;
+            GrabServerRpc(NetworkManager.Singleton.LocalClientId, NetworkObjectId);
             
             if(soundEffectName is not null and not "")
                 SoundManager.Singleton.PlaySoundRpc(soundEffectName, transform.position, 1f); // Play a sound on grab
             
             if (canBeHighlighted)
             {
-                ObjectHighlightManager.RegisterHighlightableObject(Outline);
-                Outline.enabled = ObjectHighlightManager.HighlightEnabled;
+                ObjectHighlightManager.RegisterHighlightableObject(NetworkObjectId);
+                EnableHighlightRpc(ObjectHighlightManager.HighlightEnabled);
             }
+        }
+
+        [Rpc(SendTo.ClientsAndHost, RequireOwnership = false)]
+        private void EnableHighlightRpc(bool isActivated)
+        {
+            Outline.enabled = isActivated;
+        }
+        
+        /// <summary>
+        /// Asks the host to register an object as grabbed.
+        /// </summary>
+        /// <param name="clientId">Player that grabbed the object.</param>
+        /// <param name="objectId">Network id of the object grabbed.</param>
+        [Rpc(SendTo.Server, RequireOwnership = false)]
+        private void GrabServerRpc(ulong clientId, ulong objectId)
+        {
+            GrabbedObjectManager.PlayerGrab(clientId, objectId);
+            Grabbable = false;
         }
 
         /// <summary>
@@ -140,11 +134,25 @@ namespace Objects
         /// </summary>
         public virtual void Drop()
         {
-            Owner.Interaction.GrabbedObject = null;
-            Owner = null;
-            SetGrabbableServerRpc(true);
-            Rb.useGravity =
-                affectedByGravity; // For object that may not be affected by gravity in puzzles in the future
+            PlayerInteract.LocalPlayerInteract.GrabbedObject = null;
+            DropServerRpc(NetworkManager.Singleton.LocalClientId);
+        }
+        
+        /// <summary>
+        /// Asks the host to register an object as dropped.
+        /// </summary>
+        /// <param name="clientId">Player that grabbed the object.</param>
+        [Rpc(SendTo.Server, RequireOwnership = false)]
+        public void DropServerRpc(ulong clientId)
+        {
+            GrabbedObjectManager.PlayerDrop(clientId);
+            Grabbable = true;
+        }
+        
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+            IsGrabbable.OnValueChanged -= HandleGravity;
         }
         
         // Position reset interface
@@ -153,11 +161,11 @@ namespace Objects
 
         public virtual void ResetPosition()
         {
-            if (Owner != null)
-                Drop();
+            Drop();
             
             transform.position = InitialPosition;
             transform.rotation = InitialRotation;
         }
+
     }
 }

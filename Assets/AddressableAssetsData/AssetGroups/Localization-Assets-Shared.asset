@@ -20,6 +20,11 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 704a4c1f9483f044e920e3908ef43f28
+    m_Address: Assets/Resources/Locales/ControlHints/ControlHints Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 85eb8582dbcadfb42b96e667f1a61fc8
     m_Address: Assets/Resources/Locales/NetworkDebugUI/NetworkDebugUI Shared Data.asset
     m_ReadOnly: 1
