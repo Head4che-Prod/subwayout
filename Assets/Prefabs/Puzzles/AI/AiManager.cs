@@ -19,20 +19,15 @@ namespace Prefabs.Puzzles.AI
         {
             _animator = GetComponent<Animator>();
             _animator.SetInteger(whichAnim, 0);
-        
         }
 
         private void Update()
         {
+            
             if(cheeseInCage.gameObject.activeSelf && Vector3.Distance(_agent.transform.position, PlayerInteract.LocalPlayerInteract.transform.position)> 5f)
             {
                 _animator.SetInteger(whichAnim, -1);
                 MoveForwardTarget();
-            }
-            else if (Vector3.Distance(_agent.transform.position,
-                         PlayerInteract.LocalPlayerInteract.transform.position) > 5f) //will wait at the limit distance to avoid having the rat continuing to go forward whereas it's not possible
-            {
-                _animator.SetInteger(whichAnim, 0);
             }
             else //will flee or wait
             {
