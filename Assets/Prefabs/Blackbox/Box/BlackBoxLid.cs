@@ -1,13 +1,12 @@
 using System.Collections;
 using Prefabs.Player.PlayerUI.DebugConsole;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Prefabs.Blackbox.Box
 {
     public class BlackBoxLid : BlackBoxPart
     {
-        [FormerlySerializedAs("_lidOpenAnimator")] [SerializeField] private Animator lidOpenAnimator;
+        [SerializeField] private Animator lidOpenAnimator;
         private static BlackBoxLid _singleton;
 
         public void Start()
