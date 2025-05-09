@@ -88,7 +88,7 @@ namespace Prefabs.Player
 
             if (actionable != null)
             {
-                actionable.Action();
+                actionable.HandleAction();
             }
         }
         
