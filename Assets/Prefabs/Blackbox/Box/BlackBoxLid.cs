@@ -1,4 +1,5 @@
 using System.Collections;
+using Prefabs.Player.PlayerUI.DebugConsole;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -12,8 +13,9 @@ namespace Prefabs.Blackbox.Box
         public void Start()
         {
             _singleton = this;
+            DebugConsole.AddCommand("openBlackBox", RaiseLid);
         }
-
+        
         public static void RaiseLid()
         {
             _singleton.StartCoroutine(_singleton.OpenLidWhenAble());

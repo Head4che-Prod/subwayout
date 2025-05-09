@@ -71,8 +71,8 @@ namespace Prefabs.Player
                 
                 float distance = hits
                     .OrderBy(hit => hit.distance > 0 ? hit.distance : float.MaxValue)
-                    .TakeWhile(hit => hit.transform != null && hit.transform.TryGetComponent<IRaycastResponsive>(out _))
-                    .First(hit => hit.transform.TryGetComponent<IObjectActionable>(out actionable)).distance;
+                    .TakeWhile(hit => hit.collider.transform != null && hit.collider.transform.TryGetComponent<IRaycastResponsive>(out _))
+                    .First(hit => hit.collider.transform.TryGetComponent<IObjectActionable>(out actionable)).distance;
                 
                 Debug.DrawRay(
                     player.playerCamera.transform.position, 
@@ -107,8 +107,8 @@ namespace Prefabs.Player
                 
                 float distance = hits
                     .OrderBy(hit => hit.distance > 0 ? hit.distance : float.MaxValue)
-                    .TakeWhile(hit => hit.transform != null && hit.transform.TryGetComponent<IRaycastResponsive>(out _))
-                    .First(hit => hit.transform.TryGetComponent<ObjectGrabbable>(out grabbable)).distance;
+                    .TakeWhile(hit => hit.collider.transform != null && hit.collider.transform.TryGetComponent<IRaycastResponsive>(out _))
+                    .First(hit => hit.collider.transform.TryGetComponent<ObjectGrabbable>(out grabbable)).distance;
                 
                 Debug.DrawRay(
                     player.playerCamera.transform.position, 
