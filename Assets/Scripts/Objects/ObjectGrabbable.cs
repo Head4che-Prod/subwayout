@@ -15,7 +15,7 @@ namespace Objects
     [RequireComponent(typeof(NetworkRigidbody))]
     [RequireComponent(typeof(NetworkObject))]
     [RequireComponent(typeof(ObjectOutline))]
-    public class ObjectGrabbable : OffstageNetworkBehaviour, IResettablePosition, IRaycastResponsive
+    public class ObjectGrabbable : OffstageNetworkBehaviour, IResettablePosition, IObjectGrabbable
     {
         [Header("Physics")] [FormerlySerializedAs("lerpSpeed")]
         public float moveSpeed = 2.0f;
@@ -88,10 +88,6 @@ namespace Objects
         [Rpc(SendTo.Server, RequireOwnership = false)]
         protected void SetLocalPositionServerRpc(Vector3 pos) => transform.localPosition = pos;
         
-        /// <summary>
-        /// Make players grab the targeted object.
-        /// </summary>
-        /// <param name="player"><see cref="PlayerObject"/> holding the item".</param>
         public virtual void Grab()
         {
             // Debug.Log($"Owner {OwnerClientId} attempted grabbing {name}");
@@ -122,9 +118,6 @@ namespace Objects
             Grabbable = false;
         }
 
-        /// <summary>
-        /// Make players drop the grabbed object.
-        /// </summary>
         public virtual void Drop()
         {
             PlayerInteract.LocalPlayerInteract.GrabbedObject = null;
