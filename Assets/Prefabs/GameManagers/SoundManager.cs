@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Prefabs.GameManagers
 {
-    public class SoundManager : MonoBehaviour
+    public class SoundManager : NetworkBehaviour
     {
         private class JSONSoundData
         {
