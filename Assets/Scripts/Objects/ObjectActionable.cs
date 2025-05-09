@@ -1,4 +1,6 @@
-﻿using Prefabs.Player;
+﻿using JetBrains.Annotations;
+using Prefabs.GameManagers;
+using Prefabs.Player;
 using UnityEngine;
 namespace Objects
 {
@@ -7,7 +9,7 @@ namespace Objects
     /// </summary>
     public abstract class ObjectActionable : ObjectInteractable
     {
-        [SerializeField] AudioClip soundEffect;
+        [SerializeField] [CanBeNull] public string soundEffectName = null;
         
         /// <summary>
         /// This function handles the <see cref="Action"/> function with the animation.
@@ -16,8 +18,8 @@ namespace Objects
         {
             Action(player);
             
-            if (soundEffect != null)
-                SoundManager.singleton.PlaySoundRpc(soundEffect, transform, 1f); // Modified to be an RPC
+            if (soundEffectName is not null and not "")
+                SoundManager.Singleton.PlaySoundRpc(soundEffectName, transform.position, 1f); // Modified to be an RPC
         }
 
         /// <summary>

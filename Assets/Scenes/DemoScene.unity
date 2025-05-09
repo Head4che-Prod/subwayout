@@ -4823,7 +4823,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   canBeOffStage: 0
   startOnStage: 0
-  soundEffect: {fileID: 0}
+  soundEffectName: 
   animDoor: {fileID: 775381952}
 --- !u!64 &775381958
 MeshCollider:
@@ -6156,7 +6156,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   canBeOffStage: 0
   startOnStage: 0
-  soundEffect: {fileID: 8300000, guid: bc6ce5f5cc9c2d64aadcafcabeac3abf, type: 3}
+  soundEffectName: test
 --- !u!114 &946286416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10909,7 +10909,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   canBeOffStage: 0
   startOnStage: 0
-  soundEffect: {fileID: 0}
+  soundEffectName: 
   animDoor: {fileID: 775381952}
 --- !u!64 &1550928081
 MeshCollider:

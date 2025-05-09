@@ -38,7 +38,7 @@ namespace Objects
         private Vector3 GrabPointPosition => Owner.grabPointTransform.position;
         protected NetworkVariable<bool> IsGrabbable;
         
-        [SerializeField] [CanBeNull] AudioClip soundEffect;
+        [SerializeField] [CanBeNull] string soundEffectName = null;
 
         
         public virtual bool Grabbable // This can be overridden
@@ -125,8 +125,8 @@ namespace Objects
             SetGrabbableServerRpc(false);
             Rb.useGravity = false;
             
-            if(soundEffect is not null)
-                SoundManager.singleton.PlaySoundRpc(soundEffect, transform, 1f); // Play a sound on grab
+            if(soundEffectName is not null and not "")
+                SoundManager.Singleton.PlaySoundRpc(soundEffectName, transform.position, 1f); // Play a sound on grab
             
             if (canBeHighlighted)
             {
