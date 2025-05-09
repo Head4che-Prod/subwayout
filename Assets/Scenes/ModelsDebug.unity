@@ -276,6 +276,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 3889177295
       objectReference: {fileID: 0}
+    - target: {fileID: 4890512870965805272, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1095714755
+      objectReference: {fileID: 0}
     - target: {fileID: 5255867247493319126, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 2535821266
@@ -1201,6 +1205,10 @@ PrefabInstance:
     - target: {fileID: 3802687193615679521, guid: 035f73a0af7ce734aa55e742e62bef59, type: 3}
       propertyPath: m_Name
       value: catCage
+      objectReference: {fileID: 0}
+    - target: {fileID: 4294147126242239866, guid: 035f73a0af7ce734aa55e742e62bef59, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2093563671
       objectReference: {fileID: 0}
     - target: {fileID: 4579610474627439259, guid: 035f73a0af7ce734aa55e742e62bef59, type: 3}
       propertyPath: m_LocalPosition.x

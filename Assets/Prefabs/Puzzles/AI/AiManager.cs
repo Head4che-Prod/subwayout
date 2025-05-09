@@ -23,6 +23,12 @@ namespace Prefabs.Puzzles.AI
 
         private void Update()
         {
+            if (Vector3.Distance(_agent.transform.position, cheeseInCage.gameObject.transform.position) < 5f)
+            {
+                
+                
+            }
+            
             
             if(cheeseInCage.gameObject.activeSelf && Vector3.Distance(_agent.transform.position, PlayerInteract.LocalPlayerInteract.transform.position)> 5f)
             {
