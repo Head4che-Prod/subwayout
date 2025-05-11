@@ -4,7 +4,7 @@ using Prefabs.Player;
 using Unity.Netcode;
 using UnityEngine;
 
-namespace Prefabs.Puzzles.FoldingSeats.Sticker
+namespace Prefabs.Blackbox.Box.Sticker
 {
     public class StickerManager : NetworkBehaviour, IObjectActionable
     {
