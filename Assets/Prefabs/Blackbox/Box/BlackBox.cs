@@ -70,8 +70,14 @@ namespace Prefabs.Blackbox.Box
             _state = State.Open;
         }
 
+        /// <summary>
+        /// Opens the box's lid as soon as it gets pulled out.
+        /// </summary>
         public void Open() => StartCoroutine(OpenBoxWhenAble());
 
+        /// <summary>
+        /// Waits for the box to get pulled out before opening the lid
+        /// </summary>
         private IEnumerator OpenBoxWhenAble()
         {
             while (_state != State.Open)

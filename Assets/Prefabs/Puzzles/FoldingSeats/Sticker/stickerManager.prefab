@@ -149,8 +149,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  canBeOffStage: 0
-  startOnStage: 0
   halfSticker: {fileID: 1443052516621495307}
   wholeStickerPrefab: {fileID: 9070232733894831781}
   sticker: {fileID: 3726547655287747494}
