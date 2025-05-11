@@ -13,7 +13,7 @@ namespace Prefabs.Puzzles.AI
         [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private GameObject cheeseInCage;
         private Animator _animator;
-        [SerializeField] private GameObject key;
+        [SerializeField] private GameObject keyRat;
     
 
         void Start()
@@ -24,9 +24,14 @@ namespace Prefabs.Puzzles.AI
 
         private void Update()
         {
-            if (Vector3.Distance(_agent.transform.position, cheeseInCage.gameObject.transform.position) < 2f)
+            if (Vector3.Distance(_agent.transform.position, cheeseInCage.gameObject.transform.position) < 1f)
             {
-                key.SetActive(false);
+                keyRat.SetActive(false);
+                GameObject spawnedObj = Instantiate(keyRat, cheeseInCage.transform.position + new Vector3(2, 0, 0),
+                    Quaternion.identity);
+                spawnedObj.transform.localScale = keyRat.transform.localScale;
+                spawnedObj.SetActive(true);
+
             }
             
             

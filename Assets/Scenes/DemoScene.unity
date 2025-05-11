@@ -14260,6 +14260,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 775381949}
     - target: {fileID: 204402163000553466, guid: 009d64ad1a573c84a8540adee9c16a39, type: 3}
+      propertyPath: keyRat
+      value: 
+      objectReference: {fileID: 2065353463}
+    - target: {fileID: 204402163000553466, guid: 009d64ad1a573c84a8540adee9c16a39, type: 3}
       propertyPath: cheeseInCage
       value: 
       objectReference: {fileID: 775381948}
@@ -14312,6 +14316,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 009d64ad1a573c84a8540adee9c16a39, type: 3}
+--- !u!1 &2065353463 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3803346992364702472, guid: 009d64ad1a573c84a8540adee9c16a39, type: 3}
+  m_PrefabInstance: {fileID: 2065353462}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2071632881
 GameObject:
   m_ObjectHideFlags: 0
