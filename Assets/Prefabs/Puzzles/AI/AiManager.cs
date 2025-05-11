@@ -13,6 +13,7 @@ namespace Prefabs.Puzzles.AI
         [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private GameObject cheeseInCage;
         private Animator _animator;
+        [SerializeField] private GameObject key;
     
 
         void Start()
@@ -23,10 +24,9 @@ namespace Prefabs.Puzzles.AI
 
         private void Update()
         {
-            if (Vector3.Distance(_agent.transform.position, cheeseInCage.gameObject.transform.position) < 5f)
+            if (Vector3.Distance(_agent.transform.position, cheeseInCage.gameObject.transform.position) < 2f)
             {
-                
-                
+                key.SetActive(false);
             }
             
             
