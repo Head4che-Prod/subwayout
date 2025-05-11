@@ -4424,7 +4424,7 @@ PrefabInstance:
       objectReference: {fileID: 330493002}
     - target: {fileID: 2797590678246599743, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: m_VersionIndex
-      value: 669
+      value: 672
       objectReference: {fileID: 0}
     - target: {fileID: 2797821076632707586, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: m_Mesh
@@ -4441,6 +4441,10 @@ PrefabInstance:
     - target: {fileID: 3484860664258874721, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3265340826
+      objectReference: {fileID: 0}
+    - target: {fileID: 3558707730319180067, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
+      propertyPath: m_NavMeshData
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4101935078126872430, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: GlobalObjectIdHash
