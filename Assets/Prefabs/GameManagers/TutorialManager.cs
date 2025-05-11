@@ -56,6 +56,7 @@ namespace Prefabs.GameManagers
         [Rpc(SendTo.Server, RequireOwnership = false)]
         private void UpdateStateServerRpc(TutorialState newState)
         {
+            Debug.Log($"TutorialManager/Server: {newState}");
             switch (newState)
             {
                 case TutorialState.TrainStopped:
@@ -83,6 +84,7 @@ namespace Prefabs.GameManagers
         [Rpc(SendTo.Everyone, RequireOwnership = false)]
         private void UpdateStateClientRpc(TutorialState newState)
         {
+            Debug.Log($"TutorialManager/Client: {newState}");
             switch (newState)
             {
                 case TutorialState.TrainStopped:

@@ -52,6 +52,7 @@ namespace Prefabs.GameManagers
         [Rpc(SendTo.Server, RequireOwnership = false)]
         private void UpdateStateServerRpc(EndGameState newState)
         {
+            Debug.Log($"EndGameManager/Server: {newState}");
             switch (newState)
             {
                 case EndGameState.WaitingHanoi:
@@ -78,6 +79,7 @@ namespace Prefabs.GameManagers
         [Rpc(SendTo.Everyone, RequireOwnership = false)]
         private void UpdateStateClientRpc(EndGameState newState)
         {
+            Debug.Log($"EndGameManager/Client: {newState}");
             switch (newState)
             {
                 case EndGameState.WaitingHanoi:
