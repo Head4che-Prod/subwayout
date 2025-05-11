@@ -1,4 +1,5 @@
 using Objects;
+using Prefabs.Blackbox.Box;
 using UnityEngine;
 using Unity.Netcode;
 
@@ -27,7 +28,8 @@ namespace Prefabs.Puzzles.FoldingSeats
         private void UpdatePosition(bool _, bool newValue)
         {
             chairAnimator.SetBool(ChairUp, newValue);
-            ChairsManager.Singleton.CheckChairs(); // we call CheckChairs here so that when only one value changes we check, no need to check at every frame
+            if (IsServer && ChairsManager.Singleton.CheckChairs())
+                BlackBox.Singleton.Open();
         }
         public void Action()
             => ChangedServerRpc(!chairAnimator.GetBool(ChairUp));

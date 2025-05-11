@@ -400,6 +400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  lid: {fileID: 7717865151966427840}
 --- !u!54 &6097240608349104031
 Rigidbody:
   m_ObjectHideFlags: 0
