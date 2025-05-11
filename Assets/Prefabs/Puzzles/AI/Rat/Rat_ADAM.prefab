@@ -212,6 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent: {fileID: 6119329655582676964}
   cheeseInCage: {fileID: 0}
+  key: {fileID: 3803346992364702472}
 --- !u!1 &1162829896472417139
 GameObject:
   m_ObjectHideFlags: 0
