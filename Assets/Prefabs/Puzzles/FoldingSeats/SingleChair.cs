@@ -28,7 +28,7 @@ namespace Prefabs.Puzzles.FoldingSeats
         private void UpdatePosition(bool _, bool newValue)
         {
             chairAnimator.SetBool(ChairUp, newValue);
-            if (IsServer && ChairsManager.Singleton.CheckChairs())
+            if (ChairsManager.Singleton.CheckChairs())
                 BlackBox.Singleton.Open();
         }
         public void Action()

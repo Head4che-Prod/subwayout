@@ -21,6 +21,8 @@ namespace Prefabs.Blackbox.Box
 
         [SerializeField] private BlackBoxLid lid;
         [SerializeField] private GameObject wholeSticker;
+        [SerializeField] private Transform contentsLocation;
+        [SerializeField] private NetworkObject contents;
 
 
         private Animator _slideAnimator;
@@ -104,7 +106,7 @@ namespace Prefabs.Blackbox.Box
         }
 
         /// <summary>
-        /// Opens the box's lid as soon as it gets pulled out.
+        /// Opens the box's lid as soon as it gets pulled out, and spawn its contents.
         /// </summary>
         public void Open() => StartCoroutine(OpenBoxWhenAble());
 
@@ -115,6 +117,8 @@ namespace Prefabs.Blackbox.Box
         {
             while (_state != State.PulledOut)
                 yield return null;
+            if (IsServer)
+                Instantiate(contents, contentsLocation).Spawn();
             lid.RaiseLid();
         }
     }
