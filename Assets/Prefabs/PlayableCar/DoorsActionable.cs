@@ -1,11 +1,11 @@
-﻿using Prefabs.GameManagers;
-using Prefabs.Player;
+﻿using Objects;
+using Prefabs.GameManagers;
 
 namespace Prefabs.PlayableCar
 {
-    public class DoorsActionable : Objects.ObjectActionable
+    public class DoorsActionable : IObjectActionable
     {
-        protected override void Action(PlayerObject player)
+        public void Action()
         {
             if (TutorialManager.Instance.State == TutorialState.TrainStopped)
                 TutorialManager.Instance.State = TutorialState.TrainMoving;
