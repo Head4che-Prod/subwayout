@@ -22,7 +22,7 @@ namespace Prefabs.Puzzles.FoldingSeats.Sticker
     
         public void Action()
         {
-            if (PlayerInteract.LocalPlayerInteract.GrabbedObject == _stickerGrabbable)
+            if ((ObjectGrabbable)PlayerInteract.LocalPlayerInteract.GrabbedObject == _stickerGrabbable)
             {
                 sticker.Deactivate();
                 AssembleStickersRpc();
