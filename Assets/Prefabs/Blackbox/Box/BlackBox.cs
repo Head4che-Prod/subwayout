@@ -1,7 +1,12 @@
 using System.Collections;
+using Objects;
+using Prefabs.Blackbox.Box.Sticker;
+using Prefabs.GameManagers;
+using Prefabs.Player;
 using Prefabs.Player.PlayerUI.DebugConsole;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Prefabs.Blackbox.Box
 {
@@ -9,24 +14,28 @@ namespace Prefabs.Blackbox.Box
     {
         private enum State
         {
-            Closed,
-            Opening,
-            Open
+            Hidden,
+            PullingOut,
+            PulledOut
         }
-        
+
         [SerializeField] private BlackBoxLid lid;
-        
+        [SerializeField] private GameObject wholeSticker;
+
+
         private Animator _slideAnimator;
         private State _state;
+        private bool _stickersCombined = false;
 
         private static BlackBox _singleton;
+
         public static BlackBox Singleton
         {
             get
             {
                 if (_singleton != null)
                     return _singleton;
-                Debug.LogError("Black box singleton no set");
+                Debug.LogError("Black box singleton not set");
                 return null;
             }
             private set
@@ -37,25 +46,37 @@ namespace Prefabs.Blackbox.Box
                     Debug.LogError("Black box singleton already set!");
             }
         }
-        
+
         public void Start()
         {
             Singleton = this;
             _slideAnimator = GetComponent<Animator>();
-            _state = State.Closed;
+            _state = State.Hidden;
+            wholeSticker.SetActive(false);
             DebugConsole.AddCommand("openBlackBox", Open);
         }
 
         public void Action()
         {
-            if (_state == State.Closed)
+            if (_state == State.Hidden)
             {
                 Debug.Log("Action");
                 PullOutClientRpc();
             }
+            else if (_state == State.PulledOut
+                     && !_stickersCombined
+                     && PlayerInteract.LocalPlayerInteract.GrabbedObject as StickerGrabbable ==
+                     StickerGrabbable.Singleton)
+            {
+                StickerGrabbable.Singleton.Deactivate();
+                AssembleStickersRpc();
+            }
         }
 
-        [Rpc(SendTo.ClientsAndHost)]
+        /// <summary>
+        /// Requests clients to pull out the black box.
+        /// </summary>
+        [Rpc(SendTo.ClientsAndHost, RequireOwnership = false)]
         private void PullOutClientRpc() => StartCoroutine(RunOpenSequence());
 
         /// <summary>
@@ -64,10 +85,22 @@ namespace Prefabs.Blackbox.Box
         private IEnumerator RunOpenSequence()
         {
             // Only ever called once, no need to hash.
-            _state = State.Opening;
+            _state = State.PullingOut;
             _slideAnimator.SetTrigger("slideBox");
             yield return new WaitForSeconds(1.5f);
-            _state = State.Open;
+            _state = State.PulledOut;
+        }
+
+        /// <summary>
+        /// Combines the two parts of the sticker.
+        /// </summary>
+        [Rpc(SendTo.ClientsAndHost, RequireOwnership = false)]
+        private void AssembleStickersRpc()
+        {
+            _stickersCombined = true;
+            wholeSticker.SetActive(true);
+            ObjectPositionManager.ForgetResettableObjectClientRpc(StickerGrabbable.Singleton);
+            ObjectHighlightManager.ForgetHighlightableObject(NetworkObjectId);
         }
 
         /// <summary>
@@ -80,7 +113,7 @@ namespace Prefabs.Blackbox.Box
         /// </summary>
         private IEnumerator OpenBoxWhenAble()
         {
-            while (_state != State.Open)
+            while (_state != State.PulledOut)
                 yield return null;
             lid.RaiseLid();
         }
