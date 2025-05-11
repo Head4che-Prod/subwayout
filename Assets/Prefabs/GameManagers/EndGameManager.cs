@@ -31,7 +31,7 @@ namespace Prefabs.GameManagers
         [Header("Train")]
         [SerializeField] private Animator tunnelAnimator;
         
-        private NetworkVariable<EndGameState> _state;
+        private NetworkVariable<EndGameState> _state = new ();
         
         public EndGameState State
         {
@@ -105,7 +105,6 @@ namespace Prefabs.GameManagers
         private void Awake()
         {
             Instance = this;
-            if (IsHost) _state.Value = EndGameState.WaitingHanoi;
         }
     }
     

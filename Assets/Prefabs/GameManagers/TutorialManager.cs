@@ -34,14 +34,15 @@ namespace Prefabs.GameManagers
 
         [Header("EmergencyTrigger")]
         [SerializeField] private ObjectOutline triggerOutline;
-        
-        private NetworkVariable<TutorialState> _state;
+
+        private NetworkVariable<TutorialState> _state = new ();
         
         public TutorialState State
         {
             get => _state.Value;
             set
             {
+                Debug.Log($"TutorialManager/Local: {value}");
                 UpdateStateServerRpc(value);
                 UpdateStateClientRpc(value);
             }
@@ -107,7 +108,6 @@ namespace Prefabs.GameManagers
         private void Awake()
         {
             Instance = this;
-            if (IsHost) _state.Value = TutorialState.TrainStopped;
         }
     }
     
