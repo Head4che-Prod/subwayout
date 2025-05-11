@@ -143,24 +143,20 @@ namespace HomeMenu
 
             AddOnPlayerJoined((id) =>
             {
-                try
+                GameObject textObject = GameObject.Find("StartMenu/ConnectedPlayersText");
+                if (textObject != null)
                 {
                     GameObject.Find("StartMenu/ConnectedPlayersText").GetComponent<TextMeshProUGUI>().text =
-                        GameObject.Find("StartMenu/ConnectedPlayersText").GetComponent<TextMeshProUGUI>().text[..^3] + $"{ActiveSession.PlayerCount}/2";
-                }
-                catch
-                {
+                    GameObject.Find("StartMenu/ConnectedPlayersText").GetComponent<TextMeshProUGUI>().text[..^3] + $"{ActiveSession.PlayerCount}/2";
                 }
             });
             AddOnPlayerLeft((id) =>
             {
-                try
+                GameObject textObject = GameObject.Find("StartMenu/ConnectedPlayersText");
+                if (textObject != null)
                 {
-                    GameObject.Find("StartMenu/ConnectedPlayersText").GetComponent<TextMeshProUGUI>().text =
+                    textObject.GetComponent<TextMeshProUGUI>().text =
                         GameObject.Find("StartMenu/ConnectedPlayersText").GetComponent<TextMeshProUGUI>().text[..^3] + $"{ActiveSession.PlayerCount - 1}/2";
-                }
-                catch
-                {
                 }
             });
         }
@@ -179,7 +175,7 @@ namespace HomeMenu
 
         public async Task KickPlayer()
         {
-            if (!_isHost) return;
+            if (!_isHost || ActiveSession.Players.Count == 1) return;
             string idToKick = ActiveSession.Players[1].Id;
             await ActiveSession.AsHost().RemovePlayerAsync(idToKick);
             Debug.Log($"Player {idToKick} kicked !");

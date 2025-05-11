@@ -27,6 +27,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-fr-FR
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5e1d1a3153167d547b37ee2196422cf0
+    m_Address: ControlHints_fr-FR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr-FR
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 87ca0693c0c5a584f9c20d8672359f11
     m_Address: PlayerSelectionMenu_fr-FR
     m_ReadOnly: 1

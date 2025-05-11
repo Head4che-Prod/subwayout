@@ -1,11 +1,12 @@
 using System;
-using Prefabs.Player;
+using Objects;
 using Unity.Netcode;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Prefabs.Puzzles.DoorCode
 {
-    public class Tile : Objects.ObjectActionable
+    public class Tile : NetworkBehaviour, IObjectActionable
     {
         /// <summary>
         /// Requests server to update the code's internal value.
@@ -16,7 +17,7 @@ namespace Prefabs.Puzzles.DoorCode
             value.Value = (byte)((value.Value + 1) % 10);
         }
 
-        protected override void Action(PlayerObject player)
+        public void Action()
         {
             if (Digicode.Active)
                 UpdateValueRpc();
