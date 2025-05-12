@@ -284,17 +284,19 @@ namespace HomeMenu
             LocalizationSettings.SelectedLocale = Locale.CreateLocale("en-US");
         }
 
+        /*
         public void SetLangEs()
         {
             LocalizationSettings.SelectedLocale = Locale.CreateLocale("es-ES");
         }
+        */
 
         private void SetLang()
         {
             if (LocalizationSettings.SelectedLocale.Identifier.Code.Contains("fr"))
                 SetLangFr();
-            else if (LocalizationSettings.SelectedLocale.Identifier.Code.Contains("es"))
-                SetLangEs();
+            // else if (LocalizationSettings.SelectedLocale.Identifier.Code.Contains("es"))
+            //     SetLangEs();
             else
                 SetLangEn();
         }
