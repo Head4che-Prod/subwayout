@@ -39,7 +39,7 @@ namespace Prefabs.Player
         [SerializeField] private PlayerObject player;
         [SerializeField] private float reach;
 
-        [NonSerialized] public ObjectGrabbable GrabbedObject;
+        [NonSerialized] public IObjectGrabbable GrabbedObject;
         private InputAction _actionInput;
         private InputAction _grabInput;
         
@@ -71,8 +71,8 @@ namespace Prefabs.Player
                 
                 float distance = hits
                     .OrderBy(hit => hit.distance > 0 ? hit.distance : float.MaxValue)
-                    .TakeWhile(hit => hit.transform != null && hit.transform.TryGetComponent<IRaycastResponsive>(out _))
-                    .First(hit => hit.transform.TryGetComponent<IObjectActionable>(out actionable)).distance;
+                    .TakeWhile(hit => hit.collider.transform != null && hit.collider.transform.TryGetComponent<IRaycastResponsive>(out _))
+                    .First(hit => hit.collider.transform.TryGetComponent<IObjectActionable>(out actionable)).distance;
                 
                 Debug.DrawRay(
                     player.playerCamera.transform.position, 
@@ -94,7 +94,7 @@ namespace Prefabs.Player
         
         private void HandleGrab(InputAction.CallbackContext context)
         {
-            ObjectGrabbable grabbable = null;
+            IObjectGrabbable grabbable = null;
             try
             {
                 RaycastHit[] hits = new RaycastHit[AllocationSize];
@@ -107,8 +107,8 @@ namespace Prefabs.Player
                 
                 float distance = hits
                     .OrderBy(hit => hit.distance > 0 ? hit.distance : float.MaxValue)
-                    .TakeWhile(hit => hit.transform != null && hit.transform.TryGetComponent<IRaycastResponsive>(out _))
-                    .First(hit => hit.transform.TryGetComponent<ObjectGrabbable>(out grabbable)).distance;
+                    .TakeWhile(hit => hit.collider.transform != null && hit.collider.transform.TryGetComponent<IRaycastResponsive>(out _))
+                    .First(hit => hit.collider.transform.TryGetComponent<IObjectGrabbable>(out grabbable)).distance;
                 
                 Debug.DrawRay(
                     player.playerCamera.transform.position, 
@@ -131,7 +131,7 @@ namespace Prefabs.Player
                 // Grab an object
                 if (grabbable is { Grabbable: true } && GrabbedObject is null)
                 {
-                    GrabbedObject = grabbable;
+                    GrabbedObject = grabbable.GrabbedObject;
                     GrabbedObject.Grab();
                 }
                 // Drop grabbed pointed grabbed object
