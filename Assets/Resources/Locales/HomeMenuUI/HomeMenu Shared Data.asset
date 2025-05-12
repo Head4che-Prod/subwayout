@@ -95,6 +95,10 @@ MonoBehaviour:
     m_Key: HomeMenu.setting.displayControls
     m_Metadata:
       m_Items: []
+  - m_Id: 26061788589850624
+    m_Key: Volume
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

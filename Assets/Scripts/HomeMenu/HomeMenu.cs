@@ -310,6 +310,11 @@ namespace HomeMenu
         {
             PlayerCam.Sensi = n;
         }
+        
+        public void SetVol(Single n)
+        {
+            // Todo
+        }
 
         public void ChangeDisplayHints(bool activate)
         {
