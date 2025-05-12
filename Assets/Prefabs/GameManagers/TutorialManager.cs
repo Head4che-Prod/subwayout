@@ -92,7 +92,7 @@ namespace Prefabs.GameManagers
                     break;
 
                 case TutorialState.TrainMoving:
-                    tunnelAnimator.SetBool(Animator.StringToHash("Move"), true);
+                    tunnelAnimator.SetTrigger(Animator.StringToHash("Move"));
                     triggerOutline.enabled = true;
                     break;
 

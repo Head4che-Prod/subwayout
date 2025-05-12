@@ -86,7 +86,7 @@ namespace Prefabs.GameManagers
                     break;
                     
                 case EndGameState.HanoiResolved:
-                    tunnelAnimator.SetBool(Animator.StringToHash("Onboarding"), true);
+                    tunnelAnimator.SetTrigger(Animator.StringToHash("Onboard"));
                     // Waiting for onboard...
                     break;
                 
