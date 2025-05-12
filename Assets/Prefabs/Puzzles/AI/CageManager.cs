@@ -1,5 +1,6 @@
 using JetBrains.Annotations;
 using Objects;
+using Prefabs.GameManagers;
 using Prefabs.Player;
 using Unity.Netcode;
 using UnityEngine;
@@ -56,6 +57,7 @@ namespace Prefabs.Puzzles.AI
         [Rpc(SendTo.Server, RequireOwnership = false)]
         private void DisableCheeseRpc()
         {
+            ObjectHighlightManager.ForgetHighlightableObject(cheeseGrabbable!.NetworkObjectId);
             cheeseGrabbable!.NetworkObject.Despawn();
         }
         
