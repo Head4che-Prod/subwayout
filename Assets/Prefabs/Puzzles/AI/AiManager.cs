@@ -1,6 +1,7 @@
 using System.Collections;
 using Objects;
 using Prefabs.Player;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
@@ -32,10 +33,11 @@ namespace Prefabs.Puzzles.AI
             if (Vector3.Distance(_agent.transform.position, cheeseInCage.gameObject.transform.position) < 1f)
             {
                 keyModelInMouthRat.SetActive(false);
-                keyGrabbable.SetActive(true);
-                keyGrabbable.transform.position = cheeseInCage.gameObject.transform.position+ new Vector3(1.5f, 0.5f, 0);
-                
-                gameObject.SetActive(false);
+                GameObject spawnedObj = Instantiate(keyGrabbable, cheeseInCage.transform.position + new Vector3(2, 0.25f, 0),
+                    transform.rotation);
+                spawnedObj.GetComponent<NetworkObject>().Spawn(); //only done once so okay for expensive method invocation
+                spawnedObj.SetActive(true);
+                this.gameObject.SetActive(false);
                 ClonedRat.SetActive(true);
                 _clonedRatAnimator.Play("Idle");
                 return;
