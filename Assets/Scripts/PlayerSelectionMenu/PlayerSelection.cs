@@ -1,10 +1,9 @@
-using Prefabs.Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 //useful for the buttons
-namespace Prefabs.UI
+namespace PlayerSelectionMenu
 {
     public class PlayerSelection : MonoBehaviour
     {
@@ -20,7 +19,7 @@ namespace Prefabs.UI
             for (int i = 0; i < childCount; i++)
             {
                 PlayerModels[i] = transform.GetChild(i).GetComponent<PlayerSelectionAnimation>();
-                if (i == CurrentPlayerSkin) PlayerModels[i].ShowStart();
+                if (i == CurrentPlayerSkin) PlayerModels[i].ShowAtStart();
             }
         }
     
@@ -30,9 +29,9 @@ namespace Prefabs.UI
         /// <param name="change">By what offset the skins should be switched. Is 1 or -1.</param>
         public void ChangeMyPlayer(int change) //for my buttons < and >
         {
-            PlayerModels[CurrentPlayerSkin].Replace(change == -1);
+            PlayerModels[CurrentPlayerSkin].MoveOut(change == -1);
             CurrentPlayerSkin = (byte)((CurrentPlayerSkin + change + transform.childCount) % transform.childCount); // Changes the current skin and ensures no overflow
-            PlayerModels[CurrentPlayerSkin].Show(change == 1);
+            PlayerModels[CurrentPlayerSkin].MoveIn(change == 1);
         }
 
         public void ChangeScene(string sceneName)
