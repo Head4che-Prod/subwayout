@@ -131,7 +131,7 @@ namespace Prefabs.Player
                 // Grab an object
                 if (grabbable is { Grabbable: true } && GrabbedObject is null)
                 {
-                    GrabbedObject = grabbable;
+                    GrabbedObject = grabbable.GrabbedObject;
                     GrabbedObject.Grab();
                 }
                 // Drop grabbed pointed grabbed object

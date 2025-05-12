@@ -1,7 +1,14 @@
+using Prefabs.Player;
+
 namespace Objects
 {
     public interface IObjectGrabbable : IRaycastResponsive
     {
+        /// <summary>
+        /// The object that will be tracked by the <see cref="PlayerInteract"/>.
+        /// </summary>
+        public IObjectGrabbable GrabbedObject { get; }
+        
         /// <summary>
         /// Whether the object is currently able to be grabbed.
         /// </summary>

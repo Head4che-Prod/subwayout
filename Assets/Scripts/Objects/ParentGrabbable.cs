@@ -9,6 +9,8 @@ namespace Objects
     {
         [SerializeField] private ObjectGrabbable parent;
 
+        public IObjectGrabbable GrabbedObject => parent.GrabbedObject;
+        
         public bool Grabbable
         {
             get => parent.Grabbable;

@@ -102,7 +102,7 @@ namespace Prefabs.Blackbox.Box
             _stickersCombined = true;
             wholeSticker.SetActive(true);
             ObjectPositionManager.ForgetResettableObjectClientRpc(StickerGrabbable.Singleton);
-            ObjectHighlightManager.ForgetHighlightableObject(NetworkObjectId);
+            ObjectHighlightManager.ForgetHighlightableObject(StickerGrabbable.Singleton.NetworkObjectId);
         }
 
         /// <summary>

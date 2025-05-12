@@ -39,8 +39,10 @@ namespace Objects
             get => IsGrabbable.Value;
             set => IsGrabbable.Value = value;
         }
-        
-        protected ObjectOutline Outline;
+
+        public IObjectGrabbable GrabbedObject => this;
+
+        private ObjectOutline _outline;
         
 
         public override void Awake()
@@ -57,8 +59,8 @@ namespace Objects
             Rb.interpolation = RigidbodyInterpolation.Extrapolate;
             Rb.collisionDetectionMode = CollisionDetectionMode;
             
-            Outline = GetComponent<ObjectOutline>();
-            Outline.enabled = false;
+            _outline = GetComponent<ObjectOutline>();
+            _outline.enabled = false;
 
             Rb.isKinematic = !IsHost;
             IsGrabbable.OnValueChanged += HandleGravity;
@@ -103,7 +105,7 @@ namespace Objects
         [Rpc(SendTo.ClientsAndHost, RequireOwnership = false)]
         private void EnableHighlightRpc(bool isActivated)
         {
-            Outline.enabled = isActivated;
+            _outline.enabled = isActivated;
         }
         
         /// <summary>
