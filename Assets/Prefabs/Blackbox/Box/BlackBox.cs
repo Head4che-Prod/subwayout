@@ -23,7 +23,7 @@ namespace Prefabs.Blackbox.Box
         [SerializeField] private GameObject wholeSticker;
         [SerializeField] private Transform contentsLocation;
         [SerializeField] private NetworkObject contents;
-
+        private StickerGrabbable GrabbableSticker => StickerGrabbable.Singleton;
 
         private Animator _slideAnimator;
         private State _state;
@@ -61,18 +61,11 @@ namespace Prefabs.Blackbox.Box
         public void Action()
         {
             if (_state == State.Hidden)
-            {
-                Debug.Log("Action");
                 PullOutClientRpc();
-            }
             else if (_state == State.PulledOut
                      && !_stickersCombined
-                     && PlayerInteract.LocalPlayerInteract.GrabbedObject as StickerGrabbable ==
-                     StickerGrabbable.Singleton)
-            {
-                StickerGrabbable.Singleton.Deactivate();
-                AssembleStickersRpc();
-            }
+                     && PlayerInteract.LocalPlayerInteract.GrabbedObject as StickerGrabbable == GrabbableSticker)
+                AssembleStickersClientRpc();
         }
 
         /// <summary>
@@ -94,15 +87,17 @@ namespace Prefabs.Blackbox.Box
         }
 
         /// <summary>
-        /// Combines the two parts of the sticker.
+        /// Combines the two parts of the sticker, removing the grabbable part from the game.
         /// </summary>
         [Rpc(SendTo.ClientsAndHost, RequireOwnership = false)]
-        private void AssembleStickersRpc()
+        private void AssembleStickersClientRpc()
         {
             _stickersCombined = true;
             wholeSticker.SetActive(true);
-            ObjectPositionManager.ForgetResettableObjectClientRpc(StickerGrabbable.Singleton);
-            ObjectHighlightManager.ForgetHighlightableObject(StickerGrabbable.Singleton.NetworkObjectId);
+            ObjectPositionManager.ForgetResettableObjectClientRpc(GrabbableSticker);
+            ObjectHighlightManager.ForgetHighlightableObject(GrabbableSticker.NetworkObjectId);
+            GrabbableSticker.Drop();
+            GrabbableSticker.gameObject.SetActive(false);
         }
 
         /// <summary>

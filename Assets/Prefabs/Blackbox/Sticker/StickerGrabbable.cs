@@ -31,24 +31,5 @@ namespace Prefabs.Blackbox.Box.Sticker
             base.Start();
             Singleton = this;
         }
-        
-        /// <summary>
-        /// Deactivates the sticker on the network.
-        /// </summary>
-        public void Deactivate()
-        {
-            Drop();
-            DisableStickerRpc();
-        }
-
-        /// <summary>
-        /// Destroys the grabbable sticker, removing it from the game managers.
-        /// </summary>
-        [Rpc(SendTo.Server, RequireOwnership = false)]
-        private void DisableStickerRpc()
-        {
-            NetworkObject.Despawn();
-        }
-    
     }
 }
