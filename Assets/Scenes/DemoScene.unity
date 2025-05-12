@@ -14582,6 +14582,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5afb63c7f6b2a4b458455bde00bd105a, type: 3}
+--- !u!114 &2114934215 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6176269157882568297, guid: 5afb63c7f6b2a4b458455bde00bd105a, type: 3}
+  m_PrefabInstance: {fileID: 2114934214}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2119528408
 GameObject:
   m_ObjectHideFlags: 0
@@ -14732,7 +14743,7 @@ PrefabInstance:
     - target: {fileID: 3173108435034441743, guid: ef50728f52ab4bc4294f4081cce31c6d, type: 3}
       propertyPath: triggerOutline
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2114934215}
     - target: {fileID: 3173108435034441743, guid: ef50728f52ab4bc4294f4081cce31c6d, type: 3}
       propertyPath: tunnelAnimator
       value: 
@@ -14740,10 +14751,6 @@ PrefabInstance:
     - target: {fileID: 3538536383108545922, guid: ef50728f52ab4bc4294f4081cce31c6d, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1789454035
-      objectReference: {fileID: 0}
-    - target: {fileID: 3538536383108545922, guid: ef50728f52ab4bc4294f4081cce31c6d, type: 3}
-      propertyPath: InScenePlacedSourceGlobalObjectIdHash
-      value: 2481168953
       objectReference: {fileID: 0}
     - target: {fileID: 4659821117883930749, guid: ef50728f52ab4bc4294f4081cce31c6d, type: 3}
       propertyPath: m_Name

@@ -62,8 +62,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2111048271
-  InScenePlacedSourceGlobalObjectIdHash: 0
+  GlobalObjectIdHash: 1789454035
+  InScenePlacedSourceGlobalObjectIdHash: 2481168953
   DeferredDespawnTick: 0
   Ownership: 1
   AlwaysReplicateAsRoot: 0
@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c1fbd846c64b5fb219643f08d4e30d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   tunnelAnimator: {fileID: 0}
   triggerOutline: {fileID: 0}
 --- !u!114 &8294252900829056459
@@ -139,4 +140,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 520927cd0adf458da318cf6fd4697c87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   tunnelAnimator: {fileID: 0}
