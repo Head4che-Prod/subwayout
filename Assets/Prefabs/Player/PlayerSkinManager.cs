@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-using Prefabs.UI;
+using PlayerSelectionMenu;
 using Unity.Netcode;
 using UnityEngine;
-using Wrappers;
 
 namespace Prefabs.Player
 {
