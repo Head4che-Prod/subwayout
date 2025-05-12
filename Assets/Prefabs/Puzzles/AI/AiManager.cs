@@ -24,7 +24,7 @@ namespace Prefabs.Puzzles.AI
 
         private void Update()
         {
-            if (Vector3.Distance(_agent.transform.position, cheeseInCage.gameObject.transform.position) < 1f)
+            if (Vector3.Distance(_agent.transform.position, cheeseInCage.gameObject.transform.position) < 2f)
             {
                 keyRat.SetActive(false);
                 GameObject spawnedObj = Instantiate(keyRat, cheeseInCage.transform.position + new Vector3(2, 0, 0),
@@ -62,7 +62,7 @@ namespace Prefabs.Puzzles.AI
         /// </summary>
         private void MoveForwardTarget()
         {
-            if (Vector3.Distance(_agent.transform.position, cheeseInCage.transform.position) < 2f)
+            if (Vector3.Distance(_agent.transform.position, cheeseInCage.transform.position)== 0f)
             {
                 _animator.SetInteger(whichAnim, 0);
                 _agent.destination = transform.position;
