@@ -27,7 +27,6 @@ namespace Prefabs.Puzzles.AI
         {
             if (clonedRat.activeSelf)
             {
-                animator.SetBool(animCageDoor, !animator.GetBool(animCageDoor));
                 return;
             }
             

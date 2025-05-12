@@ -19,6 +19,8 @@ namespace Prefabs.Puzzles.AI
         [SerializeField] private GameObject keyGrabbable;
         [SerializeField] private GameObject ClonedRat;
         private Animator _clonedRatAnimator;
+        [SerializeField] private CageManager _cageManager;
+        private Animator _cageAnimator;
     
 
         void Start()
@@ -26,6 +28,7 @@ namespace Prefabs.Puzzles.AI
             _animator = GetComponent<Animator>();
             _animator.SetInteger(whichAnim, 0);
             _clonedRatAnimator = ClonedRat.GetComponent<Animator>();
+            _cageAnimator = _cageManager.gameObject.GetComponentInChildren<Animator>();
         }
 
         private void Update()
@@ -40,6 +43,7 @@ namespace Prefabs.Puzzles.AI
                 this.gameObject.SetActive(false);
                 ClonedRat.SetActive(true);
                 _clonedRatAnimator.Play("Idle");
+                _cageAnimator.SetBool("animCageDoor", !_cageAnimator.GetBool("animCageDoor"));
                 return;
             }
             
