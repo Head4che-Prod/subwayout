@@ -106,6 +106,12 @@ namespace Prefabs.GameManagers
         {
             Instance = this;
         }
+
+        public override void OnDestroy()
+        {
+            if (_instance == this) _instance = null;
+            base.OnDestroy();
+        }
     }
     
     public enum EndGameState
