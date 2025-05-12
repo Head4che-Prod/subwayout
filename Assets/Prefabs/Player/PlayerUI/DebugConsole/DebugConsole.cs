@@ -232,6 +232,8 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
                 _upAction.performed -= NavigateUpHistory;
             if (_downAction != null)
                 _downAction.performed -= NavigateDownHistory;
+            if (Singleton == this)
+                Singleton = null;
         }
     }
 }

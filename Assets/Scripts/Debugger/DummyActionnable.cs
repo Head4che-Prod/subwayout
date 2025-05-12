@@ -4,9 +4,10 @@ using UnityEngine;
 
 namespace Debugger
 {
-    public class DummyActionnable : ObjectActionable
+    public class DummyActionnable : MonoBehaviour, IObjectActionable
     {
-        protected override void Action(PlayerObject player)
+        public string soundEffectName => "test";
+        public void Action()
         {
             Debug.Log($"i'm {gameObject.name} dummy!");
         }

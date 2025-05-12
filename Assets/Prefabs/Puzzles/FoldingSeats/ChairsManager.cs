@@ -1,21 +1,51 @@
-using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 
-public class ChairsManager : MonoBehaviour
+namespace Prefabs.Puzzles.FoldingSeats
 {
-    private NetworkVariable<bool> _isUp= new NetworkVariable<bool>();
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class ChairsManager : MonoBehaviour
     {
-        foreach (GameObject child in this.transform)
+        private readonly SingleChair[] _chairsBool = new SingleChair[24];
+        private static ChairsManager _singleton;
+
+        public static ChairsManager Singleton
         {
-            NetworkVariable<bool> mybool = child.GetComponent<NetworkVariable<bool>>();
+            get
+            {
+                if (_singleton != null)
+                    return _singleton;
+                Debug.LogError("ChairsManager singleton no set");
+                return null;
+            }
+            private set
+            {
+                if (_singleton == null)
+                    _singleton = value;
+                else 
+                    Debug.LogError("ChairsManager singleton already set!");
+            }
         }
-    }
-    // Update is called once per frame
-    void Update()
-    {
+
+        void Start()
+        {
+            Singleton = this;
+            for (int i = 0; i < 24; i++)
+            {
+                _chairsBool[i] = transform.GetChild(i).GetChild(0).GetChild(0).GetComponent<SingleChair>(); //GetChild(0) 2 times because we search for "bottom" and the Find("bottom" doesn't work
+            }
+        }
+
+        /// <summary>
+        /// Checks the puzzle's wind condition.
+        /// </summary>
+        public void CheckChairs()
+        {
+            if (_chairsBool.All(c => c.IsInRightPosition))
+            {
+                Debug.Log("Win Chairs");
+            }
+        
+        }
     }
 }

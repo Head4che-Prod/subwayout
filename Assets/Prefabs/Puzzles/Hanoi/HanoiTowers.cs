@@ -20,7 +20,7 @@ namespace Prefabs.Puzzles.Hanoi
         /// <summary>
         /// Whether a player is currently using the puzzle.
         /// </summary>
-        public NetworkVariable<bool> InUse { get; private set; }
+        private NetworkVariable<bool> InUse { get; set; }
         /// <summary>
         /// Internal grid the game uses to store the positions of the balls.
         /// </summary>
@@ -54,6 +54,8 @@ namespace Prefabs.Puzzles.Hanoi
             IsInDebugMode = false;
             DebugConsole.AddCommand("hanoiToggleDebug", ToggleDebug);
             DebugConsole.AddCommand("hanoiGrid", () => DebugConsole.Singleton.Log(DebugGrid()));
+
+            NetworkManager.Singleton.OnClientDisconnectCallback += HandleDisconnection;
         }
 
 
@@ -62,9 +64,9 @@ namespace Prefabs.Puzzles.Hanoi
         /// </summary>
         /// <param name="ball"><see cref="HanoiBall"/> that entered the hitbox.</param>
         /// <param name="box"><see cref="HanoiHitbox"/> that was entered.</param>
-        public void RepositionBall(HanoiBall ball, HanoiHitbox box)
+        public void RepositionBall(HanoiPiece ball, HanoiHitbox box)
         {
-            // Debug.Log($"{ballObject.name} entered {box.gameObject.name}");
+            Debug.Log($"{ball.name} entered {box.gameObject.name}");
             if (box.containedBall == null
                 && (box.height == 0 ||
                     Instance.ColliderGrid[box.bar, box.height - 1].containedBall?.weight > ball.weight))
@@ -85,13 +87,13 @@ namespace Prefabs.Puzzles.Hanoi
         }
 
         
-        private void FinishGame(HanoiBall ball)
+        private void FinishGame(HanoiPiece ball)
         {
-            ball.GetComponent<HanoiGrabbable>().Drop();
+            ball.GetComponent<HanoiPiece>().Drop();
             Debug.Log("Game won!");
-            InUse.Value = true;
+            SetUsageState(true);
             foreach (HanoiHitbox box in ColliderGrid)
-                    ObjectPositionManager.ForgetResettableObjectClientRpc(box.containedBall?.GetComponent<HanoiGrabbable>());
+                    ObjectPositionManager.ForgetResettableObjectClientRpc(box.containedBall?.GetComponent<HanoiPiece>());
         }
         
         /// <summary>
@@ -102,7 +104,7 @@ namespace Prefabs.Puzzles.Hanoi
             for (int bar = 0; bar < 3; bar++)
             for (int level = 0; level  < 3; level++)
             {
-                HanoiBall ball = ColliderGrid[bar, level].containedBall;
+                HanoiPiece ball = ColliderGrid[bar, level].containedBall;
                 if (ball != null)
                 {
                     ColliderGrid[bar, level].containedBall = null;
@@ -116,7 +118,7 @@ namespace Prefabs.Puzzles.Hanoi
         /// </summary>
         private string DebugGrid()
         {
-            return "<mspace=0.55em>|------------|------------|------------|\n" +
+            return "<mspace=0.45em>|------------|------------|------------|\n" +
                    $"|{ColliderGrid[0, 2].containedBall?.gameObject.name,12}|{ColliderGrid[1, 2].containedBall?.gameObject.name,12}|{ColliderGrid[2, 2].containedBall?.gameObject.name,12}|\n" +
                    "|------------|------------|------------|\n" +
                    $"|{ColliderGrid[0, 1].containedBall?.gameObject.name,12}|{ColliderGrid[1, 1].containedBall?.gameObject.name,12}|{ColliderGrid[2, 1].containedBall?.gameObject.name,12}|\n" +
@@ -125,6 +127,30 @@ namespace Prefabs.Puzzles.Hanoi
                    "|------------|------------|------------|</mspace>";
         }
 
+        /// <summary>
+        /// Returns whether the puzzle is <see cref="InUse"/>.
+        /// </summary>
+        /// <returns></returns>
+        public bool GetUsageState() => InUse.Value;
+        
+        /// <summary>
+        /// Publicly accessible request to set <see cref="InUse"/> on the server.
+        /// </summary>
+        /// <param name="state">Whether the puzzle is being used.</param>
+        public void SetUsageState(bool state) => SetUsageStateServerRpc(state);
+        
+        /// <summary>
+        /// Sets <see cref="InUse"/>. Runs on the server.
+        /// </summary>
+        /// <param name="state">Whether the puzzle is being used.</param>
+        [Rpc(SendTo.Server)]
+        private void SetUsageStateServerRpc(bool state) => InUse.Value = state;
+        
         private void InUseDebugger(bool a, bool b) => Debug.Log($"In use: {InUse.Value}");
+
+        /// <summary>
+        /// Sets <see cref="InUse"/> to false when a client disconnects in order to avoid soft-locking.
+        /// </summary>
+        private void HandleDisconnection(ulong _) => SetUsageState(false);
     }
 }
