@@ -3,6 +3,7 @@ using Objects;
 using Prefabs.Player;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Prefabs.Puzzles.AI
@@ -14,12 +15,15 @@ namespace Prefabs.Puzzles.AI
         [SerializeField] private GameObject cheeseInCage;
         private Animator _animator;
         [SerializeField] private GameObject keyRat;
+        [SerializeField] private GameObject ClonedRat;
+        private Animator _clonedRatAnimator;
     
 
         void Start()
         {
             _animator = GetComponent<Animator>();
             _animator.SetInteger(whichAnim, 0);
+            _clonedRatAnimator = ClonedRat.GetComponent<Animator>();
         }
 
         private void Update()
@@ -31,7 +35,9 @@ namespace Prefabs.Puzzles.AI
                     Quaternion.identity);
                 spawnedObj.transform.localScale = keyRat.transform.localScale;
                 spawnedObj.SetActive(true);
-
+                this.gameObject.SetActive(false);
+                ClonedRat.SetActive(true);
+                _clonedRatAnimator.Play("Idle");
             }
             
             

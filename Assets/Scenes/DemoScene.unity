@@ -4418,6 +4418,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5515973164236645763, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
   m_PrefabInstance: {fileID: 775381947}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &775381950 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 11276017085719348, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
+  m_PrefabInstance: {fileID: 775381947}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &781701311
 GameObject:
   m_ObjectHideFlags: 0
@@ -14112,6 +14117,10 @@ PrefabInstance:
       propertyPath: keyRat
       value: 
       objectReference: {fileID: 2065353463}
+    - target: {fileID: 204402163000553466, guid: 009d64ad1a573c84a8540adee9c16a39, type: 3}
+      propertyPath: ClonedRat
+      value: 
+      objectReference: {fileID: 775381950}
     - target: {fileID: 204402163000553466, guid: 009d64ad1a573c84a8540adee9c16a39, type: 3}
       propertyPath: cheeseInCage
       value: 
