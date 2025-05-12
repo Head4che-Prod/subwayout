@@ -4229,6 +4229,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 1496567014
       objectReference: {fileID: 0}
+    - target: {fileID: 1141289693478233783, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
+      propertyPath: clonedRat
+      value: 
+      objectReference: {fileID: 775381950}
     - target: {fileID: 1172381911526040758, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3630746089
@@ -14169,6 +14173,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rat_ADAM
       objectReference: {fileID: 0}
+    - target: {fileID: 6625920326547060430, guid: 009d64ad1a573c84a8540adee9c16a39, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1927086734
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14176,7 +14184,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 009d64ad1a573c84a8540adee9c16a39, type: 3}
 --- !u!1 &2065353463 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 3803346992364702472, guid: 009d64ad1a573c84a8540adee9c16a39, type: 3}
+  m_CorrespondingSourceObject: {fileID: 6529975247844362509, guid: 009d64ad1a573c84a8540adee9c16a39, type: 3}
   m_PrefabInstance: {fileID: 2065353462}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2071632881

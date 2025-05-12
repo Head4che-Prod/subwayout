@@ -13,6 +13,7 @@ namespace Prefabs.Puzzles.AI
         [SerializeField] private GameObject cheeseInCage; 
         private Animator animator;
         private static readonly int animCageDoor = Animator.StringToHash("animCageDoor");
+        [SerializeField] private GameObject clonedRat;
         
         void Start()
         {
@@ -23,12 +24,21 @@ namespace Prefabs.Puzzles.AI
         
         public void Action()
         {
-            animator.SetBool(animCageDoor, !animator.GetBool(animCageDoor));
+            if (clonedRat.activeSelf)
+            {
+                animator.SetBool(animCageDoor, !animator.GetBool(animCageDoor));
+                return;
+            }
+            
             cheeseGrabbable = PlayerInteract.LocalPlayerInteract.GrabbedObject;
             if (cheeseGrabbable !=null && cheeseGrabbable.name == "cheese(Clone)" && animator.GetBool(animCageDoor))
             {
                 DeactivateCheese();
                 cheeseInCage.SetActive(true);
+            }
+            else
+            {
+                animator.SetBool(animCageDoor, !animator.GetBool(animCageDoor));
             }
         }
         
