@@ -7,8 +7,6 @@ namespace PlayerSelectionMenu
     {
         private Vector3 _startPosition;
         private Vector3 _midPosition;
-
-        [FormerlySerializedAs("finalPosition")] [SerializeField]
         public Vector3 targetPosition = new Vector3(0, 0, 0);
 
         private void Awake()
