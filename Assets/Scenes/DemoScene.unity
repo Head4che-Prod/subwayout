@@ -4734,7 +4734,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1726768678532961891, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: m_AdditionalLightsShadowResolutionTier
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2148352073783891610, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -4742,7 +4742,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2277347134142957323, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: m_AdditionalLightsShadowResolutionTier
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2537145936594803155, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -4792,6 +4792,10 @@ PrefabInstance:
       propertyPath: m_Shadows.m_Strength
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: 2825781537334984690, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
+      propertyPath: m_Shadows.m_Resolution
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 2943588914747883932, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 261517684
@@ -4818,7 +4822,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3783215797892981902, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: m_AdditionalLightsShadowResolutionTier
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4101935078126872430, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -4863,6 +4867,10 @@ PrefabInstance:
     - target: {fileID: 4767945912936993582, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: m_Shadows.m_Strength
       value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4767945912936993582, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
+      propertyPath: m_Shadows.m_Resolution
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 5006230781304722404, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4936,13 +4944,17 @@ PrefabInstance:
       propertyPath: m_Shadows.m_Strength
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: 6033785643233515727, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
+      propertyPath: m_Shadows.m_Resolution
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 6057464610743135141, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 827391753
       objectReference: {fileID: 0}
     - target: {fileID: 6192571290927925746, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: m_AdditionalLightsShadowResolutionTier
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6252004664321733794, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -4950,7 +4962,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6354893678790091440, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: m_AdditionalLightsShadowResolutionTier
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6469310626093801554, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -4995,6 +5007,10 @@ PrefabInstance:
     - target: {fileID: 7078999598508385036, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: m_Shadows.m_Strength
       value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7078999598508385036, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
+      propertyPath: m_Shadows.m_Resolution
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 7165093706278284930, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -5056,13 +5072,17 @@ PrefabInstance:
       propertyPath: m_Shadows.m_Strength
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: 7612890731876492887, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
+      propertyPath: m_Shadows.m_Resolution
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 7621474781600407335, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1875324361
       objectReference: {fileID: 0}
     - target: {fileID: 7753523770331721615, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: m_AdditionalLightsShadowResolutionTier
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7772008183691567637, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5135,6 +5155,10 @@ PrefabInstance:
     - target: {fileID: 9127429265257877075, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: m_Shadows.m_Strength
       value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9127429265257877075, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
+      propertyPath: m_Shadows.m_Resolution
+      value: 128
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
