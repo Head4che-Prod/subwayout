@@ -909,7 +909,7 @@ GameObject:
   - component: {fileID: 7044546528646721466}
   - component: {fileID: 8324724627006805836}
   - component: {fileID: 6816951161933875104}
-  - component: {fileID: 5272138840836334721}
+  - component: {fileID: 7138791240923145727}
   m_Layer: 0
   m_Name: navmeshCage
   m_TagString: Untagged
@@ -1248,7 +1248,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!114 &5272138840836334721
+--- !u!114 &7138791240923145727
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1270,7 +1270,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_UseGeometry: 0
   m_DefaultArea: 0
-  m_GenerateLinks: 0
+  m_GenerateLinks: 1
   m_IgnoreNavMeshAgent: 1
   m_IgnoreNavMeshObstacle: 1
   m_OverrideTileSize: 0
@@ -1278,5 +1278,5 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: b0d7822894d8c604299dfd055daf653a, type: 2}
+  m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0

@@ -4424,7 +4424,7 @@ PrefabInstance:
       objectReference: {fileID: 330493002}
     - target: {fileID: 2797590678246599743, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: m_VersionIndex
-      value: 672
+      value: 702
       objectReference: {fileID: 0}
     - target: {fileID: 2797821076632707586, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: m_Mesh
@@ -4558,7 +4558,8 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 22133704
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6139010259727092865, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -7827,7 +7828,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_UseGeometry: 0
   m_DefaultArea: 0
-  m_GenerateLinks: 0
+  m_GenerateLinks: 1
   m_IgnoreNavMeshAgent: 1
   m_IgnoreNavMeshObstacle: 1
   m_OverrideTileSize: 0
@@ -7835,7 +7836,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 6c309ce35d791054b8f979bd64805678, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: c3c2195292c54d643ae867189621ce33, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &1209372728
 Transform:
