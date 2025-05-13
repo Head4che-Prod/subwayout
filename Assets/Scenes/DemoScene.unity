@@ -4385,6 +4385,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 736763625
       objectReference: {fileID: 0}
+    - target: {fileID: 8522324440545050361, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8526598094675881530, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1480218707
@@ -4410,10 +4414,7 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 2834042170861798065, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 152755491950758248, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 775381952}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
 --- !u!1 &775381948 stripped
 GameObject:
@@ -4436,27 +4437,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 11276017085719348, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
   m_PrefabInstance: {fileID: 775381947}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &775381951 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 152755491950758248, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
-  m_PrefabInstance: {fileID: 775381947}
-  m_PrefabAsset: {fileID: 0}
---- !u!208 &775381952
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 775381951}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.984, y: 1, z: 0.019000001}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: -0.002, y: -0.0050000004, z: -0.040000003}
-  m_TimeToStationary: 0.5
 --- !u!1 &781701311
 GameObject:
   m_ObjectHideFlags: 0
@@ -7717,7 +7697,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 1
-  m_VoxelSize: 0.022
+  m_VoxelSize: 0.0375
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 735ba94c418796d419a4660d687745f3, type: 2}
   m_BuildHeightMesh: 0
@@ -7729,10 +7709,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1209372726}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.22476876, y: -4.5161448, z: 9.376743}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.22476876, y: 0, z: 9.376743}
+  m_LocalScale: {x: 3, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
