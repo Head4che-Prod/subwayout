@@ -50,6 +50,8 @@ namespace Prefabs.Puzzles.AI
 
         private void Update()
         {
+            GameObject nearestPlayer = FindNearestPlayer();
+
             // Rat enters cage
             if (Vector3.Distance(_agent.transform.position, cheeseInCage.gameObject.transform.position) < 0.5f &&
                 cheeseInCage.gameObject.activeInHierarchy)
@@ -69,17 +71,17 @@ namespace Prefabs.Puzzles.AI
             }
 
             // Rat goes towards cage
-            if (cheeseInCage.gameObject.activeSelf && Vector3.Distance(_agent.transform.position,
-                    FindNearestPlayer().transform.position) > 5f)
+            if (nearestPlayer is not null && cheeseInCage.gameObject.activeSelf && Vector3.Distance(_agent.transform.position,
+                    nearestPlayer.transform.position) > 5f)
             {
                 MoveTowardsCheeseInCage();
             }
             else // Rat will flee or wait
             {
-                if (Vector3.Distance(_agent.transform.position, FindNearestPlayer().transform.position) <
+                if (nearestPlayer is not null && Vector3.Distance(_agent.transform.position, nearestPlayer.transform.position) <
                     5f)
                 {
-                    Flee();
+                    Flee(nearestPlayer);
                 }
                 else
                 {
@@ -96,10 +98,10 @@ namespace Prefabs.Puzzles.AI
         /// Makes rat flee from the player.
         /// </summary>
 
-        private void Flee()
+        private void Flee(GameObject nearestPlayer)
         {
             _state = State.Fleeing;
-            Vector3 dirAway = (transform.position - FindNearestPlayer().transform.position)
+            Vector3 dirAway = (transform.position - nearestPlayer.transform.position)
                 .normalized;
             dirAway = Quaternion.AngleAxis(Random.Range(-90, 90), Vector3.up) *
                       dirAway; // we add a random angle because else it gets stuck at the end of the navmesh instead of turning 
@@ -180,11 +182,6 @@ namespace Prefabs.Puzzles.AI
                     closestDist = distance;
                     closestPlayer = player;
                 }
-            }
-
-            if (closestPlayer is null)
-            {
-                _agent.isStopped = true;
             }
             
             return closestPlayer;
