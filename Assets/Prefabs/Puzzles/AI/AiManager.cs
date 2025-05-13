@@ -1,17 +1,15 @@
 using System.Collections;
-using Objects;
 using Prefabs.Player;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Prefabs.Puzzles.AI
 {
     public class AiManager : MonoBehaviour
     {
-        private static readonly int whichAnim = Animator.StringToHash("whichAnim");
+        private static readonly int WhichAnim = Animator.StringToHash("whichAnim");
         [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private GameObject cheeseInCage;
         private Animator _animator;
@@ -21,24 +19,39 @@ namespace Prefabs.Puzzles.AI
         private Animator _clonedRatAnimator;
         [SerializeField] private CageManager _cageManager;
         private Animator _cageAnimator;
-    
+
+
+        private enum State
+        {
+            Idle,
+            Fleeing,
+            Baited
+        }
+
+        private State _state;
 
         void Start()
         {
             _animator = GetComponent<Animator>();
-            _animator.SetInteger(whichAnim, 0);
+            _animator.SetInteger(WhichAnim, 0);
             _clonedRatAnimator = ClonedRat.GetComponent<Animator>();
             _cageAnimator = _cageManager.gameObject.GetComponentInChildren<Animator>();
+            _state = State.Idle;
+            StartCoroutine(IdleCoroutine());
         }
 
         private void Update()
         {
-            if (Vector3.Distance(_agent.transform.position, cheeseInCage.gameObject.transform.position) < 1f && cheeseInCage.gameObject.activeInHierarchy)
+            // Rat enters cage
+            if (Vector3.Distance(_agent.transform.position, cheeseInCage.gameObject.transform.position) < 1f &&
+                cheeseInCage.gameObject.activeInHierarchy)
             {
                 keyModelInMouthRat.SetActive(false);
-                GameObject spawnedObj = Instantiate(keyGrabbable, cheeseInCage.transform.position + new Vector3(2, 0.25f, 0),
+                GameObject spawnedObj = Instantiate(keyGrabbable,
+                    cheeseInCage.transform.position + new Vector3(2, 0.25f, 0),
                     transform.rotation);
-                spawnedObj.GetComponent<NetworkObject>().Spawn(); //only done once so okay for expensive method invocation
+                spawnedObj.GetComponent<NetworkObject>()
+                    .Spawn(); //only done once so okay for expensive method invocation
                 spawnedObj.SetActive(true);
                 this.gameObject.SetActive(false);
                 ClonedRat.SetActive(true);
@@ -46,86 +59,100 @@ namespace Prefabs.Puzzles.AI
                 _cageAnimator.SetBool("animCageDoor", !_cageAnimator.GetBool("animCageDoor"));
                 return;
             }
-            
-            if(cheeseInCage.gameObject.activeSelf && Vector3.Distance(_agent.transform.position, PlayerInteract.LocalPlayerInteract.transform.position)> 5f)
+
+            // Rat goes towards cage
+            if (cheeseInCage.gameObject.activeSelf && Vector3.Distance(_agent.transform.position,
+                    PlayerInteract.LocalPlayerInteract.transform.position) > 5f)
             {
-                _animator.SetInteger(whichAnim, -1);
-                MoveForwardTarget();
+                MoveTowardsCheeseInCage();
             }
-            else //will flee or wait
+            else // Rat will flee or wait
             {
-                if (Vector3.Distance(_agent.transform.position, PlayerInteract.LocalPlayerInteract.transform.position) < 5f)
+                if (Vector3.Distance(_agent.transform.position, PlayerInteract.LocalPlayerInteract.transform.position) <
+                    5f)
                 {
-                    _animator.SetInteger(whichAnim, 1);
-                    
-                    //Vector3 direction = (PlayerInteract.LocalPlayerInteract.transform.position - transform.position).normalized;
-                    //direction = Quaternion.AngleAxis(Random.Range(0,40), Vector3.up) * direction; // we add a random angle to the right because else it gets stuck at the end of the navmesh instead of turning 
-                    //_agent.speed = 5f;
-                    //_agent.SetDestination(transform.position - (7f*direction)); //moves in the opposite direction
-                    
-                    
-                    Vector3 dirAway =(transform.position-PlayerInteract.LocalPlayerInteract.transform.position).normalized;
-                    dirAway = Quaternion.AngleAxis(Random.Range(0, 90), Vector3.up) * dirAway;
-                    Vector3 finalDirection = transform.position + dirAway * 5f;
-                    
-                    NavMeshHit hit;
-                    if (NavMesh.SamplePosition(finalDirection, out hit, 2.0f, NavMesh.AllAreas)) //check if it's on the navmesh
-                    {
-                        if (Vector3.Distance(_agent.destination, hit.position) > 0.5f)
-                        {
-                            _agent.speed = 5f;
-                            _agent.SetDestination(hit.position);
-                        }
-                    }
-                    
+                    Flee();
                 }
                 else
                 {
-                    _animator.SetInteger(whichAnim, 0);
-                    StartCoroutine(WaitStateEnumerator());
-                    //MoveRandom();
+                    if (_state != State.Idle)
+                    {
+                        _state = State.Idle;
+                        StartCoroutine(IdleCoroutine());
+                    }
                 }
             }
         }
+        
         /// <summary>
-        /// Rat moves towards the cheese in cage.
+        /// Makes rat flee from the player.
         /// </summary>
-        private void MoveForwardTarget()
+
+        private void Flee()
         {
-            if (Vector3.Distance(_agent.transform.position, cheeseInCage.transform.position)== 0f)
+            _state = State.Fleeing;
+            Vector3 dirAway = (transform.position - PlayerInteract.LocalPlayerInteract.transform.position)
+                .normalized;
+            dirAway = Quaternion.AngleAxis(Random.Range(-90, 90), Vector3.up) *
+                      dirAway; // we add a random angle because else it gets stuck at the end of the navmesh instead of turning 
+            Vector3 finalDirection = transform.position + dirAway * 5f;
+            if (NavMesh.SamplePosition(finalDirection, out NavMeshHit hit, 2.0f,
+                    NavMesh.AllAreas)) //check if it's on the navmesh
             {
-                _animator.SetInteger(whichAnim, 0);
-                _agent.destination = transform.position;
-            }
-            else
-            {
-                _agent.speed = 3f;
-                _agent.SetDestination(cheeseInCage.transform.position);
-                transform.LookAt(new Vector3(cheeseInCage.transform.position.x, 0, cheeseInCage.transform.position.z)); //face the target but not on the y axis
+                if (Vector3.Distance(_agent.destination, hit.position) > 0.5f)
+                {
+                    _animator.SetInteger(WhichAnim, 1);
+                    _agent.speed = 5f;
+                    _agent.SetDestination(hit.position);
+                }
             }
         }
-    
+        
+        
         /// <summary>
-        /// Rat goes to a valid computed random position.
+        /// Moves the rat towards the cheese in the cage.
         /// </summary>
-        private void MoveRandom()
+        private void MoveTowardsCheeseInCage()
         {
-            Vector3 randomPosition = transform.position + new Vector3(Random.Range(-10f,10f), 0f, Random.Range(-10f, 10f)); ;
-            if (NavMesh.SamplePosition(randomPosition, out _, 10f, NavMesh.AllAreas)) //find if the randomPos is valid on the navmesh
-            {
-                _animator.SetInteger(whichAnim, -1);
-                _agent.SetDestination(randomPosition);
-            }
+             //If just under the cage but can't reach it
+             if (Mathf.Approximately(_agent.transform.position.x, cheeseInCage.transform.position.x) && Mathf.Approximately(_agent.transform.position.z, cheeseInCage.transform.position.z) ) // approximately calculate if they're equal
+             {
+                 _animator.SetInteger(WhichAnim, 0);
+             }
+             else
+             {
+                 _animator.SetInteger(WhichAnim, -1);
+                 _agent.speed = 3f;
+                 _agent.SetDestination(cheeseInCage.transform.position);
+             }
         }
 
         /// <summary>
-        /// Makes the rat waits in an iddle state for a specific amount of time.
+        /// Coroutine that manages the rat's movement in idle state.
         /// </summary>
-        private IEnumerator WaitStateEnumerator()
+        private IEnumerator IdleCoroutine()
         {
-            yield return new WaitForSeconds(10f);
+            while (_state == State.Idle) // continue while we are in an idle state
+            {
+                _animator.SetInteger(WhichAnim, 0);
+                yield return new WaitForSeconds(5);
+
+                if (_state is State.Idle) // check if we are still in an idle state
+                {
+                    Vector3 dirAway = new Vector3(Random.Range(-1.5f, 1.5f), 0f, Random.Range(-1.5f, 1.5f));
+
+                    NavMeshHit hit;
+                    while (!NavMesh.SamplePosition(dirAway, out hit, 5.0f, NavMesh.AllAreas))
+                    {
+                        yield return null; // wait 1 frame
+                    } //check if it's on the navmesh and if not will wait 1 frame before valid pos
+
+                    _animator.SetInteger(WhichAnim, -1);
+                    _agent.speed = 1.5f;
+                    _agent.SetDestination(hit.position);
+                    yield return new WaitUntil(() => transform.position - hit.position == Vector3.zero);
+                }
+            }
         }
-    
-    
     }
 }
