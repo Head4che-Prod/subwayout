@@ -20,7 +20,7 @@ namespace Prefabs.Puzzles.AI
         private Animator _clonedRatAnimator;
         [SerializeField] private CageManager _cageManager;
         private Animator _cageAnimator;
-        private readonly GameObject[] _playersArray = GameObject.FindGameObjectsWithTag("Player");
+        private GameObject[] _playersArray;
 
 
         private enum State
@@ -34,6 +34,7 @@ namespace Prefabs.Puzzles.AI
 
         void Start()
         {
+            _playersArray = GameObject.FindGameObjectsWithTag("Player");
             if (!IsServer)
             {
                 return;
