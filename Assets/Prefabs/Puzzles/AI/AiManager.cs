@@ -56,17 +56,13 @@ namespace Prefabs.Puzzles.AI
             if (Vector3.Distance(_agent.transform.position, cheeseInCage.gameObject.transform.position) < 0.5f &&
                 cheeseInCage.gameObject.activeInHierarchy)
             {
-                keyModelInMouthRat.SetActive(false);
                 GameObject spawnedObj = Instantiate(keyGrabbable,
                     cheeseInCage.transform.position + new Vector3(2, 0.25f, 0),
                     transform.rotation);
                 spawnedObj.GetComponent<NetworkObject>()
                     .Spawn(); //only done once so okay for expensive method invocation
                 spawnedObj.SetActive(true);
-                this.gameObject.SetActive(false);
-                ClonedRat.SetActive(true);
-                _clonedRatAnimator.Play("Idle");
-                _cageAnimator.SetBool("animCageDoor", !_cageAnimator.GetBool("animCageDoor"));
+                DisableRat();
                 return;
             }
 
@@ -93,6 +89,18 @@ namespace Prefabs.Puzzles.AI
                 }
             }
         }
+
+        [Rpc(SendTo.Everyone)]
+        private void DisableRat()
+        {
+            keyModelInMouthRat.SetActive(false);
+            this.gameObject.SetActive(false);
+            
+            ClonedRat.SetActive(true);
+            _clonedRatAnimator.Play("Idle");
+            _cageAnimator.SetBool("animCageDoor", !_cageAnimator.GetBool("animCageDoor"));
+        }
+        
         
         /// <summary>
         /// Makes rat flee from the player.
@@ -117,7 +125,6 @@ namespace Prefabs.Puzzles.AI
                 }
             }
         }
-        
         
         /// <summary>
         /// Moves the rat towards the cheese in the cage.
@@ -164,7 +171,11 @@ namespace Prefabs.Puzzles.AI
                 }
             }
         }
-
+        
+        /// <summary>
+        /// Finds the nearest player and returns its gameObject
+        /// </summary>
+        /// <returns>GameObject nearestPlayer</returns>
         private GameObject FindNearestPlayer()
         {
             if (_playersArray.Length != NetworkManager.Singleton.ConnectedClients.Count)
