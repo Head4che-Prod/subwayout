@@ -165,18 +165,24 @@ namespace Prefabs.Puzzles.AI
 
         private GameObject FindNearestPlayer()
         {
-           float closestDist = Mathf.Infinity; 
-           GameObject closestPlayer = null;
-           foreach (GameObject player in _playersArray)
-           {
-               float distance = Vector3.Distance(transform.position, player.transform.position);
-               if (distance < closestDist)
-               {
-                   closestDist = distance;
-                   closestPlayer = player;
-               }
-           }
-           return closestPlayer;
+            if (_playersArray.Length != NetworkManager.Singleton.ConnectedClients.Count)
+            {
+                _playersArray = GameObject.FindGameObjectsWithTag("Player");
+            }
+            
+            float closestDist = Mathf.Infinity;
+            GameObject closestPlayer = null;
+            foreach (GameObject player in _playersArray)
+            {
+                float distance = Vector3.Distance(transform.position, player.transform.position);
+                if (distance < closestDist)
+                {
+                    closestDist = distance;
+                    closestPlayer = player;
+                }
+            }
+
+            return closestPlayer;
         }
         
         
