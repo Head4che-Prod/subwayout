@@ -43,7 +43,7 @@ namespace Prefabs.Puzzles.AI
         private void Update()
         {
             // Rat enters cage
-            if (Vector3.Distance(_agent.transform.position, cheeseInCage.gameObject.transform.position) < 1f &&
+            if (Vector3.Distance(_agent.transform.position, cheeseInCage.gameObject.transform.position) < 0.5f &&
                 cheeseInCage.gameObject.activeInHierarchy)
             {
                 keyModelInMouthRat.SetActive(false);
@@ -142,7 +142,7 @@ namespace Prefabs.Puzzles.AI
                     Vector3 dirAway = new Vector3(Random.Range(-1.5f, 1.5f), 0f, Random.Range(-1.5f, 1.5f));
 
                     NavMeshHit hit;
-                    while (!NavMesh.SamplePosition(dirAway, out hit, 5.0f, NavMesh.AllAreas))
+                    while (!NavMesh.SamplePosition(dirAway, out hit, 2.0f, NavMesh.AllAreas))
                     {
                         yield return null; // wait 1 frame
                     } //check if it's on the navmesh and if not will wait 1 frame before valid pos
