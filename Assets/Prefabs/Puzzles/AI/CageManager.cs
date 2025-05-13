@@ -34,7 +34,6 @@ namespace Prefabs.Puzzles.AI
             if (cheeseGrabbable !=null && cheeseGrabbable.name == "cheese(Clone)" && animator.GetBool(animCageDoor))
             {
                 DeactivateCheese();
-                cheeseInCage.SetActive(true);
             }
             else
             {
@@ -47,7 +46,7 @@ namespace Prefabs.Puzzles.AI
         /// </summary>
         public void DeactivateCheese()
         {
-            Drop();
+            cheeseGrabbable!.Drop();
             DisableCheeseRpc();
         }
         /// <summary>
@@ -58,6 +57,7 @@ namespace Prefabs.Puzzles.AI
         {
             ObjectHighlightManager.ForgetHighlightableObject(cheeseGrabbable!.NetworkObjectId);
             cheeseGrabbable!.NetworkObject.Despawn();
+            cheeseInCage.SetActive(true);
         }
         
     }

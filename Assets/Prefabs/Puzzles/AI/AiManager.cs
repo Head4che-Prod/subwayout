@@ -62,7 +62,7 @@ namespace Prefabs.Puzzles.AI
                 spawnedObj.GetComponent<NetworkObject>()
                     .Spawn(); //only done once so okay for expensive method invocation
                 spawnedObj.SetActive(true);
-                DisableRat();
+                DisableRatRpc();
                 return;
             }
 
@@ -91,7 +91,7 @@ namespace Prefabs.Puzzles.AI
         }
 
         [Rpc(SendTo.Everyone)]
-        private void DisableRat()
+        private void DisableRatRpc()
         {
             keyModelInMouthRat.SetActive(false);
             this.gameObject.SetActive(false);
