@@ -35,15 +35,16 @@ namespace Prefabs.Puzzles.AI
         void Start()
         {
             _playersArray = GameObject.FindGameObjectsWithTag("Player");
-            if (!IsServer)
-            {
-                return;
-            }
             _animator = GetComponent<Animator>();
+            
             _animator.SetInteger(WhichAnim, 0);
             _clonedRatAnimator = ClonedRat.GetComponent<Animator>();
             _cageAnimator = _cageManager.gameObject.GetComponentInChildren<Animator>();
             _state = State.Idle;
+            if (!IsServer)
+            {
+                return;
+            }
             StartCoroutine(IdleCoroutine());
         }
 
