@@ -33,7 +33,7 @@ namespace Prefabs.Puzzles.AI
 
         private void Update()
         {
-            if (Vector3.Distance(_agent.transform.position, cheeseInCage.gameObject.transform.position) < 1f)
+            if (Vector3.Distance(_agent.transform.position, cheeseInCage.gameObject.transform.position) < 1f && cheeseInCage.gameObject.activeInHierarchy)
             {
                 keyModelInMouthRat.SetActive(false);
                 GameObject spawnedObj = Instantiate(keyGrabbable, cheeseInCage.transform.position + new Vector3(2, 0.25f, 0),
