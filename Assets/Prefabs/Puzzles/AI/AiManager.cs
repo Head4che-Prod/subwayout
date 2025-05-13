@@ -182,6 +182,11 @@ namespace Prefabs.Puzzles.AI
                 }
             }
 
+            if (closestPlayer is null)
+            {
+                _agent.isStopped = true;
+            }
+            
             return closestPlayer;
         }
         
