@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Prefabs.Player;
 using Unity.Netcode;
 using UnityEngine;
@@ -7,7 +8,7 @@ using Random = UnityEngine.Random;
 
 namespace Prefabs.Puzzles.AI
 {
-    public class AiManager : MonoBehaviour
+    public class AiManager : NetworkBehaviour
     {
         private static readonly int WhichAnim = Animator.StringToHash("whichAnim");
         [SerializeField] private NavMeshAgent _agent;
@@ -19,6 +20,7 @@ namespace Prefabs.Puzzles.AI
         private Animator _clonedRatAnimator;
         [SerializeField] private CageManager _cageManager;
         private Animator _cageAnimator;
+        private GameObject[] playersArray;
 
 
         private enum State
@@ -32,12 +34,17 @@ namespace Prefabs.Puzzles.AI
 
         void Start()
         {
+            if (!IsServer)
+            {
+                return;
+            }
             _animator = GetComponent<Animator>();
             _animator.SetInteger(WhichAnim, 0);
             _clonedRatAnimator = ClonedRat.GetComponent<Animator>();
             _cageAnimator = _cageManager.gameObject.GetComponentInChildren<Animator>();
             _state = State.Idle;
             StartCoroutine(IdleCoroutine());
+            playersArray = GameObject.FindGameObjectsWithTag("Player");
         }
 
         private void Update()
@@ -62,13 +69,13 @@ namespace Prefabs.Puzzles.AI
 
             // Rat goes towards cage
             if (cheeseInCage.gameObject.activeSelf && Vector3.Distance(_agent.transform.position,
-                    PlayerInteract.LocalPlayerInteract.transform.position) > 5f)
+                    FindNearestPlayer().transform.position) > 5f)
             {
                 MoveTowardsCheeseInCage();
             }
             else // Rat will flee or wait
             {
-                if (Vector3.Distance(_agent.transform.position, PlayerInteract.LocalPlayerInteract.transform.position) <
+                if (Vector3.Distance(_agent.transform.position, FindNearestPlayer().transform.position) <
                     5f)
                 {
                     Flee();
@@ -91,7 +98,7 @@ namespace Prefabs.Puzzles.AI
         private void Flee()
         {
             _state = State.Fleeing;
-            Vector3 dirAway = (transform.position - PlayerInteract.LocalPlayerInteract.transform.position)
+            Vector3 dirAway = (transform.position - FindNearestPlayer().transform.position)
                 .normalized;
             dirAway = Quaternion.AngleAxis(Random.Range(-90, 90), Vector3.up) *
                       dirAway; // we add a random angle because else it gets stuck at the end of the navmesh instead of turning 
@@ -154,5 +161,24 @@ namespace Prefabs.Puzzles.AI
                 }
             }
         }
+
+        private GameObject FindNearestPlayer()
+        {
+           float closestDist = Mathf.Infinity; 
+           GameObject closestPlayer = null;
+           foreach (GameObject player in playersArray)
+           {
+               float distance = Vector3.Distance(transform.position, player.transform.position);
+               if (distance < closestDist)
+               {
+                   closestDist = distance;
+                   closestPlayer = player;
+               }
+           }
+           return closestPlayer;
+        }
+        
+        
+        
     }
 }

@@ -14127,6 +14127,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2717741036139441635, guid: 009d64ad1a573c84a8540adee9c16a39, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2078223133
+      objectReference: {fileID: 0}
+    - target: {fileID: -2717741036139441635, guid: 009d64ad1a573c84a8540adee9c16a39, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 3488983057
+      objectReference: {fileID: 0}
     - target: {fileID: 204402163000553466, guid: 009d64ad1a573c84a8540adee9c16a39, type: 3}
       propertyPath: ClonedRat
       value: 
