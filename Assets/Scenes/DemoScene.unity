@@ -14183,6 +14183,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rat_ADAM
       objectReference: {fileID: 0}
+    - target: {fileID: 6119329655582676964, guid: 009d64ad1a573c84a8540adee9c16a39, type: 3}
+      propertyPath: m_AngularSpeed
+      value: 360
+      objectReference: {fileID: 0}
     - target: {fileID: 6625920326547060430, guid: 009d64ad1a573c84a8540adee9c16a39, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1927086734

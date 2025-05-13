@@ -57,9 +57,27 @@ namespace Prefabs.Puzzles.AI
                 if (Vector3.Distance(_agent.transform.position, PlayerInteract.LocalPlayerInteract.transform.position) < 5f)
                 {
                     _animator.SetInteger(whichAnim, 1);
-                    Vector3 direction = (PlayerInteract.LocalPlayerInteract.transform.position - transform.position).normalized;
-                    _agent.speed = 5f;
-                    _agent.SetDestination(transform.position - (7f*direction)); //moves in the opposite direction
+                    
+                    //Vector3 direction = (PlayerInteract.LocalPlayerInteract.transform.position - transform.position).normalized;
+                    //direction = Quaternion.AngleAxis(Random.Range(0,40), Vector3.up) * direction; // we add a random angle to the right because else it gets stuck at the end of the navmesh instead of turning 
+                    //_agent.speed = 5f;
+                    //_agent.SetDestination(transform.position - (7f*direction)); //moves in the opposite direction
+                    
+                    
+                    Vector3 dirAway =(transform.position-PlayerInteract.LocalPlayerInteract.transform.position).normalized;
+                    dirAway = Quaternion.AngleAxis(Random.Range(0, 90), Vector3.up) * dirAway;
+                    Vector3 finalDirection = transform.position + dirAway * 5f;
+                    
+                    NavMeshHit hit;
+                    if (NavMesh.SamplePosition(finalDirection, out hit, 2.0f, NavMesh.AllAreas)) //check if it's on the navmesh
+                    {
+                        if (Vector3.Distance(_agent.destination, hit.position) > 0.5f)
+                        {
+                            _agent.speed = 5f;
+                            _agent.SetDestination(hit.position);
+                        }
+                    }
+                    
                 }
                 else
                 {
