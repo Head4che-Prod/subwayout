@@ -20,7 +20,7 @@ namespace Prefabs.Puzzles.AI
         private Animator _clonedRatAnimator;
         [SerializeField] private CageManager _cageManager;
         private Animator _cageAnimator;
-        private GameObject[] playersArray;
+        private readonly GameObject[] _playersArray = GameObject.FindGameObjectsWithTag("Player");
 
 
         private enum State
@@ -44,7 +44,6 @@ namespace Prefabs.Puzzles.AI
             _cageAnimator = _cageManager.gameObject.GetComponentInChildren<Animator>();
             _state = State.Idle;
             StartCoroutine(IdleCoroutine());
-            playersArray = GameObject.FindGameObjectsWithTag("Player");
         }
 
         private void Update()
@@ -166,7 +165,7 @@ namespace Prefabs.Puzzles.AI
         {
            float closestDist = Mathf.Infinity; 
            GameObject closestPlayer = null;
-           foreach (GameObject player in playersArray)
+           foreach (GameObject player in _playersArray)
            {
                float distance = Vector3.Distance(transform.position, player.transform.position);
                if (distance < closestDist)
