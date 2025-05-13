@@ -1,0 +1,139 @@
+﻿using System;
+using Unity.Netcode;
+using Unity.VisualScripting;
+using UnityEngine;
+
+namespace Prefabs.GameManagers
+{
+    public sealed class EndGameManager : NetworkBehaviour
+    {
+        /// <summary>
+        /// Instance of EndGameManager. Must be unique.
+        /// </summary>
+        private static EndGameManager _instance;
+        public static EndGameManager Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    Debug.LogWarning("EndGameManager has not been initialized.");
+                return _instance;
+            }
+            set
+            {
+                if (_instance == null)
+                    _instance = value;
+                else
+                    Debug.LogError("EndGameManager is already initialized.");
+            }
+        }
+        
+        [Header("Train")]
+        [SerializeField] private Animator tunnelAnimator;
+        
+        private NetworkVariable<EndGameState> _state = new ();
+        
+        public EndGameState State
+        {
+            get => _state.Value;
+            set
+            {
+                UpdateStateServerRpc(value);
+                UpdateStateClientRpc(value);
+            }
+        }
+        
+        /// <summary>
+        /// This method ask the server to update the state of the puzzle.
+        /// Used to perform network-authority based actions.
+        /// </summary>
+        /// <param name="newState">New state that must be applied.</param>
+        /// <exception cref="ArgumentOutOfRangeException">The given state doesn't exist.</exception>
+        [Rpc(SendTo.Server, RequireOwnership = false)]
+        private void UpdateStateServerRpc(EndGameState newState)
+        {
+            Debug.Log($"EndGameManager/Server: {newState}");
+            switch (newState)
+            {
+                case EndGameState.WaitingHanoi:
+                    break;
+                case EndGameState.HanoiResolved:
+                    break;
+                case EndGameState.UnlockDoors:
+                    break;
+                case EndGameState.FinishGame:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
+            }
+            
+            if (!this.IsDestroyed()) _state.Value = newState;
+        }
+        
+        /// <summary>
+        /// This method ask all clients to apply changes related to new state.
+        /// Used to perform graphic and UI based actions.
+        /// </summary>
+        /// <param name="newState">New state that must be applied.</param>
+        /// <exception cref="ArgumentOutOfRangeException">The given state doesn't exist.</exception>
+        [Rpc(SendTo.Everyone, RequireOwnership = false)]
+        private void UpdateStateClientRpc(EndGameState newState)
+        {
+            Debug.Log($"EndGameManager/Client: {newState}");
+            switch (newState)
+            {
+                case EndGameState.WaitingHanoi:
+                    break;
+                    
+                case EndGameState.HanoiResolved:
+                    tunnelAnimator.SetTrigger(Animator.StringToHash("Onboard"));
+                    // Waiting for onboard...
+                    break;
+                
+                case EndGameState.UnlockDoors:
+                    break;
+                    
+                case EndGameState.FinishGame:
+                    Destroy(this);
+                    break;
+                    
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
+            }
+        }
+        
+        private void Awake()
+        {
+            Instance = this;
+        }
+
+        public override void OnDestroy()
+        {
+            if (_instance == this) _instance = null;
+            base.OnDestroy();
+        }
+    }
+    
+    public enum EndGameState
+    {
+        /// <summary>
+        /// This initial state wait Hanoi puzzle for being resolved.
+        /// </summary>
+        WaitingHanoi,
+        
+        /// <summary>
+        /// This state must be active when the player have resolved Hanoi puzzle
+        /// </summary>
+        HanoiResolved,
+        
+        /// <summary>
+        /// This state allow players to open metro's doors.
+        /// </summary>
+        UnlockDoors,
+        
+        /// <summary>
+        /// This state must be active when the player have open the doors, and execute the endgame cinematic and destroy this.
+        /// </summary>
+        FinishGame
+    }
+}
