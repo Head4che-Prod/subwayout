@@ -77,8 +77,8 @@ namespace Prefabs.Puzzles.AI
         private void DisableCheeseRpc()
         {
             ObjectHighlightManager.ForgetHighlightableObject(cheeseGrabbable!.NetworkObjectId);
-            cheeseGrabbable!.NetworkObject.Despawn();
             cheeseInCage.SetActive(true);
+            cheeseGrabbable!.NetworkObject.Despawn();
         }
         
         public override void OnNetworkDespawn()
