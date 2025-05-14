@@ -1,8 +1,7 @@
 using Objects;
-using Unity.Netcode;
 using UnityEngine;
 
-namespace Prefabs.Blackbox.Box.Sticker
+namespace Prefabs.Blackbox.Sticker
 {
     public class StickerGrabbable : ObjectGrabbable
     {
