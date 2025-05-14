@@ -759,6 +759,7 @@ GameObject:
   - component: {fileID: 9161346181543368070}
   - component: {fileID: 8084702174390755374}
   - component: {fileID: 1753169598855831684}
+  - component: {fileID: 4919819825866121877}
   m_Layer: 0
   m_Name: MiddleTrap5
   m_TagString: Untagged
@@ -856,6 +857,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1166584587640812793, guid: 592fbb915b88d2941b75993cae4e2345, type: 3}
+--- !u!114 &4919819825866121877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189145370467485183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fe27e38e094b84a809e3ddf7b28100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 2873841041859609692}
 --- !u!1 &1240690441155971678
 GameObject:
   m_ObjectHideFlags: 0
@@ -868,6 +882,7 @@ GameObject:
   - component: {fileID: 2490895439119176131}
   - component: {fileID: 6340556405966854475}
   - component: {fileID: 8006438779074559768}
+  - component: {fileID: 8337807433295300312}
   m_Layer: 0
   m_Name: MiddleTrap2
   m_TagString: Untagged
@@ -965,6 +980,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4778818404066160751, guid: 592fbb915b88d2941b75993cae4e2345, type: 3}
+--- !u!114 &8337807433295300312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240690441155971678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fe27e38e094b84a809e3ddf7b28100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 2873841041859609692}
 --- !u!1 &1644184214852526738
 GameObject:
   m_ObjectHideFlags: 0
@@ -977,6 +1005,7 @@ GameObject:
   - component: {fileID: 2261921859968733515}
   - component: {fileID: 8014885995828754905}
   - component: {fileID: 1846673921144141566}
+  - component: {fileID: 7264803143487802549}
   m_Layer: 0
   m_Name: BaseTrap2
   m_TagString: Untagged
@@ -1074,6 +1103,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -4209078087609909030, guid: 592fbb915b88d2941b75993cae4e2345, type: 3}
+--- !u!114 &7264803143487802549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644184214852526738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fe27e38e094b84a809e3ddf7b28100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 6631059129065459361}
 --- !u!1 &1833697049676511869
 GameObject:
   m_ObjectHideFlags: 0
@@ -1457,6 +1499,7 @@ GameObject:
   - component: {fileID: 2615799359034323674}
   - component: {fileID: 6009027562008726675}
   - component: {fileID: 3366993794424427444}
+  - component: {fileID: 2622481665184281660}
   m_Layer: 0
   m_Name: MiddleTrap4
   m_TagString: Untagged
@@ -1554,6 +1597,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8181835543713412454, guid: 592fbb915b88d2941b75993cae4e2345, type: 3}
+--- !u!114 &2622481665184281660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4165027991070351169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fe27e38e094b84a809e3ddf7b28100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 2873841041859609692}
 --- !u!1 &4184977283845171724
 GameObject:
   m_ObjectHideFlags: 0
@@ -2552,6 +2608,7 @@ GameObject:
   - component: {fileID: 5582624293569356649}
   - component: {fileID: 2644425062861855461}
   - component: {fileID: 3128551784915645372}
+  - component: {fileID: 3792634328649666351}
   m_Layer: 0
   m_Name: BaseHanoi
   m_TagString: Untagged
@@ -2649,6 +2706,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4321065198672444090, guid: 592fbb915b88d2941b75993cae4e2345, type: 3}
+--- !u!114 &3792634328649666351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6795144816070240840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fe27e38e094b84a809e3ddf7b28100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 6631059129065459361}
 --- !u!1 &6952960478364664948
 GameObject:
   m_ObjectHideFlags: 0
@@ -2661,6 +2731,7 @@ GameObject:
   - component: {fileID: 8381182174428118938}
   - component: {fileID: 2560052488872959528}
   - component: {fileID: 9082796558323731858}
+  - component: {fileID: 3628394818210336638}
   m_Layer: 0
   m_Name: TopFlatPiece
   m_TagString: Untagged
@@ -2758,6 +2829,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1685767862680446178, guid: 592fbb915b88d2941b75993cae4e2345, type: 3}
+--- !u!114 &3628394818210336638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6952960478364664948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fe27e38e094b84a809e3ddf7b28100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 111033654724552817}
 --- !u!1 &7219751108839971476
 GameObject:
   m_ObjectHideFlags: 0
@@ -2894,6 +2978,7 @@ GameObject:
   - component: {fileID: 6132642524893577332}
   - component: {fileID: 3478589030132167070}
   - component: {fileID: 1402370746615546556}
+  - component: {fileID: 247778967902680226}
   m_Layer: 0
   m_Name: MiddleTrap1
   m_TagString: Untagged
@@ -2991,6 +3076,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 7627433637137973417, guid: 592fbb915b88d2941b75993cae4e2345, type: 3}
+--- !u!114 &247778967902680226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7309277217445042357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fe27e38e094b84a809e3ddf7b28100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 2873841041859609692}
 --- !u!1 &7364437177566377130
 GameObject:
   m_ObjectHideFlags: 0
@@ -3003,6 +3101,7 @@ GameObject:
   - component: {fileID: 3157141939653805588}
   - component: {fileID: 3821058146840264755}
   - component: {fileID: 7796898840967378871}
+  - component: {fileID: 6526200866980054280}
   m_Layer: 0
   m_Name: MiddleTrap3
   m_TagString: Untagged
@@ -3100,6 +3199,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1523189146791930164, guid: 592fbb915b88d2941b75993cae4e2345, type: 3}
+--- !u!114 &6526200866980054280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7364437177566377130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fe27e38e094b84a809e3ddf7b28100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 2873841041859609692}
 --- !u!1 &7825274982026398974
 GameObject:
   m_ObjectHideFlags: 0
@@ -3112,6 +3224,7 @@ GameObject:
   - component: {fileID: 8924253788149373936}
   - component: {fileID: 4470238095561224513}
   - component: {fileID: 5488955074119858446}
+  - component: {fileID: 1412533011533067174}
   m_Layer: 0
   m_Name: BaseTrap1
   m_TagString: Untagged
@@ -3209,6 +3322,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1269418244636567481, guid: 592fbb915b88d2941b75993cae4e2345, type: 3}
+--- !u!114 &1412533011533067174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7825274982026398974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fe27e38e094b84a809e3ddf7b28100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 6631059129065459361}
 --- !u!1 &8212785696297785526
 GameObject:
   m_ObjectHideFlags: 0
@@ -4078,6 +4204,7 @@ GameObject:
   - component: {fileID: 2385082136255232767}
   - component: {fileID: 195327997094916048}
   - component: {fileID: 342181313895268359}
+  - component: {fileID: 3168936184035535281}
   m_Layer: 0
   m_Name: BaseTrap3
   m_TagString: Untagged
@@ -4175,6 +4302,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 5596053655841011784, guid: 592fbb915b88d2941b75993cae4e2345, type: 3}
+--- !u!114 &3168936184035535281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8976903304451669275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fe27e38e094b84a809e3ddf7b28100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 6631059129065459361}
 --- !u!1 &9116171605062398321
 GameObject:
   m_ObjectHideFlags: 0
