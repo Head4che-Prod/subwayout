@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.025
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 1}
+  m_AmbientSkyColor: {r: 0.27058825, g: 0.27058825, b: 0.27058825, a: 1}
   m_AmbientEquatorColor: {r: 0, g: 0, b: 0, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 0.5
@@ -5860,6 +5860,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 3630746089
       objectReference: {fileID: 0}
+    - target: {fileID: 1439109997039488506, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1529263219133503388, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3231972336
@@ -5887,6 +5891,10 @@ PrefabInstance:
     - target: {fileID: 3276597111804895724, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 2734347649
+      objectReference: {fileID: 0}
+    - target: {fileID: 3387750702219802421, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3484860664258874721, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -5928,6 +5936,14 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 4068462042
       objectReference: {fileID: 0}
+    - target: {fileID: 6033785643233515727, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
+      propertyPath: m_Lightmapping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6033785643233515727, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
+      propertyPath: m_BounceIntensity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6057464610743135141, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 827391753
@@ -5955,6 +5971,10 @@ PrefabInstance:
     - target: {fileID: 7307204354449825426, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: m_Name
       value: PlayableCar
+      objectReference: {fileID: 0}
+    - target: {fileID: 7428255293721518754, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
+      propertyPath: m_ReceiveGI
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7609774785319710519, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: GlobalObjectIdHash
