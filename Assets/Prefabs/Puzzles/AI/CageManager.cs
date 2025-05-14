@@ -15,12 +15,20 @@ namespace Prefabs.Puzzles.AI
         private Animator animator;
         private static readonly int animCageDoor = Animator.StringToHash("animCageDoor");
         [SerializeField] private GameObject clonedRat;
+        private readonly NetworkVariable<bool> _isOpen = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone);
+
         
         void Start()
         {
             base.Start();
             cheeseInCage.SetActive(false);
             animator = transform.GetChild(0).GetComponent<Animator>();
+        }
+        
+        public override void OnNetworkSpawn()
+        {
+            base.OnNetworkSpawn();
+            _isOpen.OnValueChanged += UpdatePosition;
         }
         
         public void Action()
@@ -37,8 +45,21 @@ namespace Prefabs.Puzzles.AI
             }
             else
             {
-                animator.SetBool(animCageDoor, !animator.GetBool(animCageDoor));
+                ChangeCageDoorServerRpc(!animator.GetBool(animCageDoor));
             }
+        }
+        
+        [Rpc(SendTo.Server, RequireOwnership = false)]
+        private void ChangeCageDoorServerRpc(bool isOpenValChanged)
+        {
+            _isOpen.Value = isOpenValChanged;
+        }
+        /// <summary>
+        /// Changes the door's position.
+        /// </summary>
+        private void UpdatePosition(bool _, bool newValue)
+        {
+            animator.SetBool(animCageDoor, newValue);
         }
         
         /// <summary>
@@ -58,6 +79,12 @@ namespace Prefabs.Puzzles.AI
             ObjectHighlightManager.ForgetHighlightableObject(cheeseGrabbable!.NetworkObjectId);
             cheeseGrabbable!.NetworkObject.Despawn();
             cheeseInCage.SetActive(true);
+        }
+        
+        public override void OnNetworkDespawn()
+        {
+            base.OnNetworkDespawn();
+            _isOpen.OnValueChanged -= UpdatePosition;
         }
         
     }
