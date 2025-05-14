@@ -38,7 +38,7 @@ namespace Prefabs.Puzzles.AI
                 return;
             }
             
-            cheeseGrabbable = PlayerInteract.LocalPlayerInteract.GrabbedObject;
+            cheeseGrabbable = (ObjectGrabbable)PlayerInteract.LocalPlayerInteract.GrabbedObject;
             if (cheeseGrabbable !=null && cheeseGrabbable.name == "cheese(Clone)" && animator.GetBool(animCageDoor))
             {
                 DeactivateCheese();
