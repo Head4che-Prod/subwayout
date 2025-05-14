@@ -1,7 +1,4 @@
 using System.Linq;
-using Prefabs.Blackbox;
-using Prefabs.Blackbox.Box;
-using Unity.Netcode;
 using UnityEngine;
 
 namespace Prefabs.Puzzles.FoldingSeats

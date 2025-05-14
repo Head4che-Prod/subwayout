@@ -82,14 +82,6 @@ namespace Objects
                 playerGrabbing.grabPointTransform.position.z - transform.position.z);
         }
         
-
-        /// <summary>
-        /// Sets the local position of an object.
-        /// </summary>
-        /// <param name="pos">Vector3 New local position of the object.</param>
-        [Rpc(SendTo.Server, RequireOwnership = false)]
-        protected void SetLocalPositionServerRpc(Vector3 pos) => transform.localPosition = pos;
-        
         public virtual void Grab()
         {
             // Debug.Log($"Owner {OwnerClientId} attempted grabbing {name}");
@@ -125,18 +117,23 @@ namespace Objects
             PlayerInteract.LocalPlayerInteract.GrabbedObject = null;
             DropServerRpc(NetworkManager.Singleton.LocalClientId);
         }
-        
+
         /// <summary>
         /// Asks the host to register an object as dropped.
         /// </summary>
         /// <param name="clientId">Player that grabbed the object.</param>
         [Rpc(SendTo.Server, RequireOwnership = false)]
-        public void DropServerRpc(ulong clientId)
+        private void DropServerRpc(ulong clientId) => DropServerLogic(clientId);
+
+        /// <summary>
+        /// Handles the logic used by the host to register an object as dropped.
+        /// </summary>
+        /// <param name="clientId">Player that grabbed the object.</param>
+        protected virtual void DropServerLogic(ulong clientId)
         {
             GrabbedObjectManager.PlayerDrop(clientId);
             Grabbable = true;
         }
-        
         public override void OnDestroy()
         {
             base.OnDestroy();
