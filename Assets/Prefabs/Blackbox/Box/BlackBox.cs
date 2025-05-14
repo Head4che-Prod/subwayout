@@ -1,6 +1,6 @@
 using System.Collections;
 using Objects;
-using Prefabs.Blackbox.Box.Sticker;
+using Prefabs.Blackbox.Sticker;
 using Prefabs.GameManagers;
 using Prefabs.Player;
 using Prefabs.Player.PlayerUI.DebugConsole;
