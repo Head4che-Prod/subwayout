@@ -324,5 +324,13 @@ namespace HomeMenu
                 _tick = GameObject.Find("ShowHintsSettings/Toggle/Background/Checkmark");
             _tick.SetActive(activate);
         }
+        
+        public void ChangeDisplayHints(bool activate)
+                {
+                    PlayerObject.DisplayHints = activate;
+                    if (_tick is null)
+                        _tick = GameObject.Find("ShowHintsSettings/Toggle/Background/Checkmark");
+                    _tick.SetActive(activate);
+                }
     }
 }
