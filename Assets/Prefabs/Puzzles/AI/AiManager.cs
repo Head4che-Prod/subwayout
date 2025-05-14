@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Prefabs.Player;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.AI;
@@ -10,41 +9,50 @@ namespace Prefabs.Puzzles.AI
 {
     public class AiManager : NetworkBehaviour
     {
-        private static readonly int WhichAnim = Animator.StringToHash("whichAnim");
-        [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private GameObject cheeseInCage;
-        private Animator _animator;
         [SerializeField] private GameObject keyModelInMouthRat;
         [SerializeField] private GameObject keyGrabbable;
-        [SerializeField] private GameObject ClonedRat;
-        private Animator _clonedRatAnimator;
-        [SerializeField] private CageManager _cageManager;
-        private Animator _cageAnimator;
+        [SerializeField] private GameObject clonedRat;
+        [SerializeField] private CageManager cageManager;
+        
+        private NavMeshAgent _agent;
         private GameObject[] _playersArray;
+        
+        private static readonly int WhichAnim = Animator.StringToHash("whichAnim");
+        private Animator _animator;
+        private Animator _clonedRatAnimator;
+        private Animator _cageAnimator;
 
-
+        /// <summary>
+        /// In what state the rat's AI is in. <br/>
+        /// The integers correspond to the animation to default to when pathfinding finished.
+        /// </summary>
         private enum State
         {
-            Idle,
-            Fleeing,
-            Baited
+            Idle = 0,
+            Fleeing = 1,
+            Baited = -1
         }
-
+        
         private State _state;
 
-        void Start()
+        private void Start()
         {
-            _playersArray = GameObject.FindGameObjectsWithTag("Player");
-            _animator = GetComponent<Animator>();
-            
-            _animator.SetInteger(WhichAnim, 0);
-            _clonedRatAnimator = ClonedRat.GetComponent<Animator>();
-            _cageAnimator = _cageManager.gameObject.GetComponentInChildren<Animator>();
-            _state = State.Idle;
             if (!IsServer)
             {
+                enabled = false;
                 return;
             }
+            
+            _agent = GetComponent<NavMeshAgent>();
+            _playersArray = GameObject.FindGameObjectsWithTag("Player");
+            _animator = GetComponent<Animator>();
+
+            _animator.SetInteger(WhichAnim, 0);
+            _clonedRatAnimator = clonedRat.GetComponent<Animator>();
+            _cageAnimator = cageManager.gameObject.GetComponentInChildren<Animator>();
+            _state = State.Idle;
+
             StartCoroutine(IdleCoroutine());
         }
 
@@ -59,22 +67,25 @@ namespace Prefabs.Puzzles.AI
                 GameObject spawnedObj = Instantiate(keyGrabbable,
                     cheeseInCage.transform.position + new Vector3(2, 0.25f, 0),
                     transform.rotation);
-                spawnedObj.GetComponent<NetworkObject>()
-                    .Spawn(); //only done once so okay for expensive method invocation
+                // ReSharper disable once Unity.PerformanceCriticalCodeInvocation - only done once so okay for expensive method invocation
+                spawnedObj.GetComponent<NetworkObject>().Spawn();
                 spawnedObj.SetActive(true);
                 DisableRatRpc();
                 return;
             }
 
             // Rat goes towards cage
-            if (nearestPlayer is not null && cheeseInCage.gameObject.activeSelf && Vector3.Distance(_agent.transform.position,
+            if (nearestPlayer is not null && cheeseInCage.gameObject.activeSelf && Vector3.Distance(
+                    _agent.transform.position,
                     nearestPlayer.transform.position) > 5f)
             {
+                _state = State.Baited;
                 MoveTowardsCheeseInCage();
             }
             else // Rat will flee or wait
             {
-                if (nearestPlayer is not null && Vector3.Distance(_agent.transform.position, nearestPlayer.transform.position) <
+                if (nearestPlayer is not null &&
+                    Vector3.Distance(_agent.transform.position, nearestPlayer.transform.position) <
                     5f)
                 {
                     Flee(nearestPlayer);
@@ -95,17 +106,16 @@ namespace Prefabs.Puzzles.AI
         {
             keyModelInMouthRat.SetActive(false);
             this.gameObject.SetActive(false);
-            
-            ClonedRat.SetActive(true);
+
+            clonedRat.SetActive(true);
             _clonedRatAnimator.Play("Idle");
             _cageAnimator.SetBool("animCageDoor", !_cageAnimator.GetBool("animCageDoor"));
         }
-        
-        
+
+
         /// <summary>
         /// Makes rat flee from the player.
         /// </summary>
-
         private void Flee(GameObject nearestPlayer)
         {
             _state = State.Fleeing;
@@ -125,23 +135,25 @@ namespace Prefabs.Puzzles.AI
                 }
             }
         }
-        
+
         /// <summary>
         /// Moves the rat towards the cheese in the cage.
         /// </summary>
         private void MoveTowardsCheeseInCage()
         {
-             //If just under the cage but can't reach it
-             if (Mathf.Approximately(_agent.transform.position.x, cheeseInCage.transform.position.x) && Mathf.Approximately(_agent.transform.position.z, cheeseInCage.transform.position.z) ) // approximately calculate if they're equal
-             {
-                 _animator.SetInteger(WhichAnim, 0);
-             }
-             else
-             {
-                 _animator.SetInteger(WhichAnim, -1);
-                 _agent.speed = 3f;
-                 _agent.SetDestination(cheeseInCage.transform.position);
-             }
+            //If just under the cage but can't reach it
+            if (Mathf.Approximately(_agent.transform.position.x, cheeseInCage.transform.position.x) &&
+                Mathf.Approximately(_agent.transform.position.z,
+                    cheeseInCage.transform.position.z)) // approximately calculate if they're equal
+            {
+                _animator.SetInteger(WhichAnim, 0);
+            }
+            else
+            {
+                _animator.SetInteger(WhichAnim, -1);
+                _agent.speed = 3f;
+                _agent.SetDestination(cheeseInCage.transform.position);
+            }
         }
 
         /// <summary>
@@ -151,7 +163,7 @@ namespace Prefabs.Puzzles.AI
         {
             while (_state == State.Idle) // continue while we are in an idle state
             {
-                _animator.SetInteger(WhichAnim, 0);
+                StartCoroutine(AnimateUntilDestinationCoroutine());
                 yield return new WaitForSeconds(5);
 
                 if (_state is State.Idle) // check if we are still in an idle state
@@ -171,18 +183,29 @@ namespace Prefabs.Puzzles.AI
                 }
             }
         }
+
+        /// <summary>
+        /// Keep animating until the target destination changes or is reached.
+        /// </summary>
+        private IEnumerator AnimateUntilDestinationCoroutine()
+        {
+            Vector3 target = _agent.destination;
+            while (_agent.destination == target && transform.position != target)
+                yield return null;
+            _animator.SetInteger(WhichAnim, (int)_state);
+        }
         
         /// <summary>
         /// Finds the nearest player and returns its gameObject
         /// </summary>
-        /// <returns>GameObject nearestPlayer</returns>
+        /// <returns>The nearest player's <see cref="GameObject"/>.</returns>
         private GameObject FindNearestPlayer()
         {
             if (_playersArray.Length != NetworkManager.Singleton.ConnectedClients.Count)
             {
                 _playersArray = GameObject.FindGameObjectsWithTag("Player");
             }
-            
+
             float closestDist = Mathf.Infinity;
             GameObject closestPlayer = null;
             foreach (GameObject player in _playersArray)
@@ -194,11 +217,8 @@ namespace Prefabs.Puzzles.AI
                     closestPlayer = player;
                 }
             }
-            
+
             return closestPlayer;
         }
-        
-        
-        
     }
 }

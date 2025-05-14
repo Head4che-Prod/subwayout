@@ -4236,6 +4236,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 2447522098
       objectReference: {fileID: 0}
+    - target: {fileID: 6451135509196865622, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
+      propertyPath: m_Carve
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6469310626093801554, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3904953990
@@ -4247,6 +4251,10 @@ PrefabInstance:
     - target: {fileID: 6614860329148173162, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 248655160
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097687004226575227, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
+      propertyPath: m_Carve
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7165093706278284930, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -4267,6 +4275,10 @@ PrefabInstance:
     - target: {fileID: 7621474781600407335, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1875324361
+      objectReference: {fileID: 0}
+    - target: {fileID: 7837619277623118679, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
+      propertyPath: m_Carve
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7995667631896176052, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -14079,6 +14091,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 775381950}
     - target: {fileID: 204402163000553466, guid: 009d64ad1a573c84a8540adee9c16a39, type: 3}
+      propertyPath: clonedRat
+      value: 
+      objectReference: {fileID: 775381950}
+    - target: {fileID: 204402163000553466, guid: 009d64ad1a573c84a8540adee9c16a39, type: 3}
+      propertyPath: cageManager
+      value: 
+      objectReference: {fileID: 775381949}
+    - target: {fileID: 204402163000553466, guid: 009d64ad1a573c84a8540adee9c16a39, type: 3}
       propertyPath: _cageManager
       value: 
       objectReference: {fileID: 775381949}
@@ -14133,6 +14153,18 @@ PrefabInstance:
     - target: {fileID: 971146128777775885, guid: 009d64ad1a573c84a8540adee9c16a39, type: 3}
       propertyPath: m_Name
       value: Rat_ADAM
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664012340453329914, guid: 009d64ad1a573c84a8540adee9c16a39, type: 3}
+      propertyPath: SyncScaleX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664012340453329914, guid: 009d64ad1a573c84a8540adee9c16a39, type: 3}
+      propertyPath: SyncScaleY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664012340453329914, guid: 009d64ad1a573c84a8540adee9c16a39, type: 3}
+      propertyPath: SyncScaleZ
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6119329655582676964, guid: 009d64ad1a573c84a8540adee9c16a39, type: 3}
       propertyPath: m_AngularSpeed

@@ -2615,6 +2615,7 @@ GameObject:
   - component: {fileID: 8171178446551586731}
   - component: {fileID: 4001642612073304854}
   - component: {fileID: 5512965156252189785}
+  - component: {fileID: 7837619277623118679}
   m_Layer: 0
   m_Name: pole Middle.001
   m_TagString: Untagged
@@ -2712,6 +2713,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 1148677445353969115, guid: d971b60a2b2c2524bbd5f140f0c0729b, type: 3}
+--- !u!208 &7837619277623118679
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207204024947788967}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 1.7930001, y: 1.355, z: 1.7930001}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.22500001, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &1429394965845173898
 GameObject:
   m_ObjectHideFlags: 0
@@ -5733,6 +5750,7 @@ GameObject:
   - component: {fileID: 4934251693200446359}
   - component: {fileID: 7177275707190782409}
   - component: {fileID: 3058284171668225992}
+  - component: {fileID: 6451135509196865622}
   m_Layer: 0
   m_Name: pole Right.001
   m_TagString: Untagged
@@ -5830,6 +5848,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5741059091856308300, guid: d971b60a2b2c2524bbd5f140f0c0729b, type: 3}
+--- !u!208 &6451135509196865622
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4565025016722971331}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 1.7930001, y: 1.355, z: 1.7930001}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.22500001, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &4629228050651528544
 GameObject:
   m_ObjectHideFlags: 0
@@ -9583,6 +9617,7 @@ GameObject:
   - component: {fileID: 72661414083789478}
   - component: {fileID: 5373764669176939121}
   - component: {fileID: 8935813574360751363}
+  - component: {fileID: 7097687004226575227}
   m_Layer: 0
   m_Name: pole Left.001
   m_TagString: Untagged
@@ -9680,6 +9715,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3594576572166163961, guid: d971b60a2b2c2524bbd5f140f0c0729b, type: 3}
+--- !u!208 &7097687004226575227
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7149951557965153308}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 1.7930001, y: 1.355, z: 1.7930001}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.22500001, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &7164830311450867778
 GameObject:
   m_ObjectHideFlags: 0
