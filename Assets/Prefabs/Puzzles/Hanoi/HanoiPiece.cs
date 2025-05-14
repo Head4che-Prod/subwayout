@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using Objects;
+using Prefabs.GameManagers;
 using Prefabs.Player;
 using Prefabs.Puzzles.Hanoi.Debugs;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Prefabs.Puzzles.Hanoi
@@ -37,48 +39,46 @@ namespace Prefabs.Puzzles.Hanoi
         
         public override void Grab()
         {
-            base.Grab();
             HanoiTowers.Instance.SetUsageState(true);
+            base.Grab();
         }
         public override void Drop()
         {
-            base.Drop();
-            
-            // Debug.Log($"Let go of {name} at ({Rb.position.x}, {Rb.position.y}, {Rb.position.z})");
-            ResetBallPosition();
             HanoiTowers.Instance.SetUsageState(false);
+            base.Drop();
+        }
+        
+        protected override void DropServerLogic(ulong clientId)
+        {
+            base.DropServerLogic(clientId);
+
+            StartCoroutine(ResetPositionCoroutine());
         }
 
-                
-        /// <summary>
-        /// Reset the ball object's position to its internal position.
-        /// </summary>
-        private void ResetBallPosition()
+        private IEnumerator ResetPositionCoroutine()
         {
+            Vector3 position = transform.localPosition;
             foreach (HanoiHitbox hitbox in HanoiTowers.Instance.ColliderGrid)
                 if (hitbox.containedBall?.weight == weight)
                 {
-                    StartCoroutine(SendBallToHitbox(hitbox));
+                    position = new Vector3(
+                        hitbox.gameObject.transform.localPosition.x,
+                        0.0135f,
+                        hitbox.gameObject.transform.localPosition.z
+                    );
                     break;
                 }
-        }
-
-        /// <summary>
-        /// Send ball to specified hitbox after a buffer time enabling other movement orders to be completed.
-        /// </summary>
-        /// <param name="hitbox">The hitbox to go to.</param>
-        private IEnumerator SendBallToHitbox(HanoiHitbox hitbox)
-        {
-            yield return new WaitForSeconds(0.3f);
-            SetLocalPositionServerRpc(new Vector3(
-                hitbox.gameObject.transform.localPosition.x,
-                0.0135f,
-                hitbox.gameObject.transform.localPosition.z
-            ));
+            
+            // transform.localPosition = position;
+            yield return new WaitForFixedUpdate();
+            transform.localPosition = position;
         }
         
         public override Vector3 CalculateMovementForce(PlayerObject playerGrabbing)
         {
+            if (IsGrabbable.Value)
+                return Vector3.zero;
+            
             if (Physics.Raycast(playerGrabbing.playerCamera.transform.position, playerGrabbing.playerCamera.transform.forward,
                     out RaycastHit hit, 12f, 1 << 3))  // Only let layer 3 pass
             {

@@ -94,6 +94,12 @@ namespace Prefabs.Player
         
         private void HandleGrab(InputAction.CallbackContext context)
         {
+            if (GrabbedObject is not null)
+            {
+                GrabbedObject.Drop();
+                return;
+            }
+            
             IObjectGrabbable grabbable = null;
             try
             {
