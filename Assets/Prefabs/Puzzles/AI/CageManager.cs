@@ -69,6 +69,7 @@ namespace Prefabs.Puzzles.AI
         {
             cheeseGrabbable!.Drop();
             DisableCheeseRpc(cheeseGrabbable.NetworkObjectId);
+            ActivateCheeseInCageRpc();
         }
         /// <summary>
         /// Removes the grabbableCheese.
@@ -78,8 +79,14 @@ namespace Prefabs.Puzzles.AI
         {
             ObjectHighlightManager.ForgetHighlightableObject(cheeseId);
             NetworkManager.SpawnManager.SpawnedObjects[cheeseId].Despawn();
+        }
+
+        [Rpc(SendTo.Everyone)]
+        private void ActivateCheeseInCageRpc()
+        {
             cheeseInCage.SetActive(true);
         }
+        
         
         public override void OnNetworkDespawn()
         {
