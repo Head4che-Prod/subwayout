@@ -18,7 +18,7 @@ namespace Prefabs.Puzzles.AI
         private readonly NetworkVariable<bool> _isOpen = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone);
 
         
-        void Start()
+        new void Start()
         {
             base.Start();
             cheeseInCage.SetActive(false);
@@ -61,6 +61,7 @@ namespace Prefabs.Puzzles.AI
         {
             animator.SetBool(animCageDoor, newValue);
         }
+        
         
         /// <summary>
         /// Drops the cheese and call DisableCheeseRpc.
