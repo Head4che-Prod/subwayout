@@ -99,10 +99,6 @@ MonoBehaviour:
     m_Key: Volume
     m_Metadata:
       m_Items: []
-  - m_Id: 26627345416454144
-    m_Key: Brightness
-    m_Metadata:
-      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
