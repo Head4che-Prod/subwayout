@@ -103,6 +103,10 @@ MonoBehaviour:
     m_Localized: Volume
     m_Metadata:
       m_Items: []
+  - m_Id: 26678705767841792
+    m_Localized: Brightness
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
