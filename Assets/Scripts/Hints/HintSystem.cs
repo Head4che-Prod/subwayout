@@ -30,8 +30,8 @@ namespace Hints
         private static readonly Random Random = new Random(69);
         private static bool _firstInteractionPlayed;
         
-        private static readonly List<string> Hints = new List<string>();
-        public static Dictionary<string, HintSystem> HintIndex { get; } = new Dictionary<string, HintSystem>();
+        private static readonly List<Hint> Hints = new List<Hint>();
+        public static Dictionary<Hint, HintSystem> HintIndex { get; } = new Dictionary<Hint, HintSystem>();
 
         private readonly AudioClip _voiceLineEn;
         private readonly AudioClip _voiceLineFr;
@@ -88,15 +88,15 @@ namespace Hints
             _durationEs = _voiceLineEs.length;
         }
 
-        public static string GetRandomVoiceLine()
+        public static Hint GetRandomVoiceLine()
         {
             if (!_firstInteractionPlayed)
             {
                 _firstInteractionPlayed = true;
-                return "HintTutorial";
+                return Hint.HintTutorial;
             }
             if (Hints.Count == 0)
-                return "NoHints";
+                return Hint.NoHints;
             return Hints[Random.Next(Hints.Count)];
         }
 
@@ -107,11 +107,8 @@ namespace Hints
         public static void EnableHints(params Hint[] hints)
         {
             foreach (Hint hint in hints)
-            {
-                string hintId = hint.ToString();
-                if (!Hints.Contains(hintId))
-                    Hints.Add(hintId);
-            }
+                if (!Hints.Contains(hint))
+                    Hints.Add(hint);
         }
 
         /// <summary>
@@ -121,11 +118,8 @@ namespace Hints
         public static void DisableHints(params Hint[] hints)
         {
             foreach (Hint hint in hints)
-            {
-                string hintId = hint.ToString();
-                if (Hints.Contains(hintId))
-                    Hints.Remove(hintId);
-            }
+                if (Hints.Contains(hint))
+                    Hints.Remove(hint);
         }
 
     }

@@ -27,7 +27,7 @@ namespace Prefabs.Puzzles.EmergencyCallBox
                 _triggerAnimator.SetTrigger(InsertTrigger);
                 _source = GetComponent<AudioSource>();
                 VoiceLine.LoadVoiceLines();
-                HintSystem.EnableHints(Hint.BlackboxLocation, Hint.BackPack);
+                HintSystem.EnableHints(Hint.BlackboxLocation, Hint.BackPack, Hint.RatTrap);
             }
         }
         
@@ -47,17 +47,17 @@ namespace Prefabs.Puzzles.EmergencyCallBox
         [Rpc(SendTo.Server, RequireOwnership = false)]
         private void PlayVoiceLinesServerRpc()
         {
-            string line = HintSystem.GetRandomVoiceLine();
+            Hint line = HintSystem.GetRandomVoiceLine();
             PlayVoiceLinesClientRpc(line);
             _cooldownFinished.Value = false;
             StartCoroutine(TriggerCooldown(HintSystem.HintIndex[line].Duration));
         }
 
         [Rpc(SendTo.ClientsAndHost)]
-        private void PlayVoiceLinesClientRpc(string line)
+        private void PlayVoiceLinesClientRpc(Hint line)
         {
             _triggerAnimator.SetTrigger(PullTrigger);
-            _source.clip = Hints.HintSystem.HintIndex[line].VoiceLine;
+            _source.clip = HintSystem.HintIndex[line].VoiceLine;
             _source.Play();
         }
 
