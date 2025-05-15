@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Prefabs.Puzzles.HintSystem
 {
-    public class VoiceLine
+    public abstract class VoiceLine
     {
         public string ID;
         public string PathEn;

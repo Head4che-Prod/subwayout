@@ -6,15 +6,93 @@
     "PathEs": "NoHints/NoHintsES"
   },
   {
-    "ID": "HintTuto",
+    "ID": "HintTutorial",
     "PathEn": "HintTuto/HintTutoEN",
     "PathFr": "HintTuto/HintTutoFR",
     "PathEs": "HintTuto/HintTutoES"
   },
   {
-    "ID": "Map",
-    "PathEn": "Map/MapEN",
-    "PathFr": "Map/MapFR",
-    "PathEs": "Map/MapES"
+    "ID": "BlackboxLocation",
+    "PathEn": "",
+    "PathFr": "",
+    "PathEs": ""
+  },
+  {
+    "ID": "SeatPuzzle",
+    "PathEn": "",
+    "PathFr": "",
+    "PathEs": ""
+  },
+  {
+    "ID": "BlueCode",
+    "PathEn": "",
+    "PathFr": "",
+    "PathEs": ""
+  },
+  {
+    "ID": "CombineSticker",
+    "PathEn": "",
+    "PathFr": "",
+    "PathEs": ""
+  },
+  {
+    "ID": "SeatsSticker",
+    "PathEn": "",
+    "PathFr": "",
+    "PathEs": ""
+  },
+  {
+    "ID": "RedCode",
+    "PathEn": "",
+    "PathFr": "",
+    "PathEs": ""
+  },
+  {
+    "ID": "BackPack",
+    "PathEn": "",
+    "PathFr": "",
+    "PathEs": ""
+  },
+  {
+    "ID": "RatTrap",
+    "PathEn": "",
+    "PathFr": "",
+    "PathEs": ""
+  },
+  {
+    "ID": "RatKey",
+    "PathEn": "",
+    "PathFr": "",
+    "PathEs": ""
+  },
+  {
+    "ID": "Numbers",
+    "PathEn": "",
+    "PathFr": "",
+    "PathEs": ""
+  },
+  {
+    "ID": "Code",
+    "PathEn": "",
+    "PathFr": "",
+    "PathEs": ""
+  },
+  {
+    "ID": "CodeUnlocks",
+    "PathEn": "",
+    "PathFr": "",
+    "PathEs": ""
+  },
+  {
+    "ID": "Hanoi",
+    "PathEn": "",
+    "PathFr": "",
+    "PathEs": ""
+  },
+  {
+    "ID": "GameWon",
+    "PathEn": "",
+    "PathFr": "",
+    "PathEs": ""
   }
 ]
