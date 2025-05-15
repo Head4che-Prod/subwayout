@@ -24,13 +24,15 @@ namespace Hints
         Hanoi,
         GameWon
     }
-    
+
     public class HintSystem
     {
         private static readonly Random Random = new Random(69);
         private static bool _firstInteractionPlayed;
-        
-        private static readonly List<Hint> Hints = new List<Hint>();
+
+        private static readonly List<Hint> Hints = new List<Hint>()
+            { Hint.BlackboxLocation, Hint.BackPack, Hint.RatTrap };
+
         public static Dictionary<Hint, HintSystem> HintIndex { get; } = new Dictionary<Hint, HintSystem>();
 
         private readonly AudioClip _voiceLineEn;
@@ -77,7 +79,7 @@ namespace Hints
                 }
             }
         }
-        
+
         public HintSystem(AudioClip voiceLineEn, AudioClip voiceLineFr, AudioClip voiceLineEs)
         {
             _voiceLineEn = voiceLineEn;
@@ -95,6 +97,7 @@ namespace Hints
                 _firstInteractionPlayed = true;
                 return Hint.HintTutorial;
             }
+
             if (Hints.Count == 0)
                 return Hint.NoHints;
             return Hints[Random.Next(Hints.Count)];
@@ -121,6 +124,5 @@ namespace Hints
                 if (Hints.Contains(hint))
                     Hints.Remove(hint);
         }
-
     }
 }

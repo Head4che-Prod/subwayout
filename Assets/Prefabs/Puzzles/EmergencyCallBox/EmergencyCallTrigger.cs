@@ -27,7 +27,6 @@ namespace Prefabs.Puzzles.EmergencyCallBox
                 _triggerAnimator.SetTrigger(InsertTrigger);
                 _source = GetComponent<AudioSource>();
                 VoiceLine.LoadVoiceLines();
-                HintSystem.EnableHints(Hint.BlackboxLocation, Hint.BackPack, Hint.RatTrap);
             }
         }
         

@@ -20,12 +20,12 @@ namespace Prefabs.Backpack
             bagOpen.SetActive(true);
             bagClose.SetActive(false);
             ImpulsionObjetsRpc();
-            HintSystem.DisableHints(Hint.BackPack);
         }
     
         [Rpc(SendTo.Server, RequireOwnership = false)]
         private void ImpulsionObjetsRpc()
         {
+            HintSystem.DisableHints(Hint.BackPack);
             foreach (GameObject obj in objectsInBag)
             {
                 NetworkObject spawnedObj = Instantiate(obj, bagOpen.transform.position + new Vector3(0, 1, 0),

@@ -114,12 +114,11 @@ namespace Prefabs.Blackbox.Box
         /// </summary>
         public void Open()
         {
-            
-            HintSystem.EnableHints(Hint.BlueCode);
-            HintSystem.DisableHints(Hint.SeatPuzzle, Hint.SeatsSticker, Hint.RedCode);
+            HintSystem.EnableHints(Hint.BlueCode, Hint.RedCode);
+            HintSystem.DisableHints(Hint.SeatPuzzle, Hint.SeatsSticker);
             StartCoroutine(OpenBoxWhenAble());
         }
-
+  
         /// <summary>
         /// Waits for the box to get pulled out before opening the lid
         /// </summary>
@@ -128,7 +127,10 @@ namespace Prefabs.Blackbox.Box
             while (_state != State.PulledOut)
                 yield return null;
             if (IsServer)
+            {
                 Instantiate(contents, contentsLocation).Spawn();
+                Debug.Log("Server spawned airflow instructions");
+            }
             lid.RaiseLid();
         }
     }
