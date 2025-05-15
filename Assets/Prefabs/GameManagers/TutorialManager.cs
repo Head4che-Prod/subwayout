@@ -49,7 +49,11 @@ namespace Prefabs.GameManagers
             }
         }
         
-        public bool CanBeChanged => (State == TutorialState.TrainStopped && tunnelAnimator.GetCurrentAnimatorStateInfo(0).IsName("TunnelOnBoarding")) || (State == TutorialState.TrainMoving && tunnelAnimator.GetCurrentAnimatorStateInfo(0).IsName("TunnelMove"));
+        public static bool CanBeChanged => _instance != null &&
+                                           ((Instance.State == TutorialState.TrainStopped && 
+                                             Instance.tunnelAnimator.GetCurrentAnimatorStateInfo(0).IsName("TunnelOnBoarding")) 
+                                         || (Instance.State == TutorialState.TrainMoving && 
+                                             Instance.tunnelAnimator.GetCurrentAnimatorStateInfo(0).IsName("TunnelMove")));
         
         /// <summary>
         /// This method ask the server to update the state of the puzzle.
