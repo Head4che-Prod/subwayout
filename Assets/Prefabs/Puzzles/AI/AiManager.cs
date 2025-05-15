@@ -65,7 +65,7 @@ namespace Prefabs.Puzzles.AI
                 cheeseInCage.gameObject.activeInHierarchy)
             {
                 GameObject spawnedObj = Instantiate(keyGrabbable,
-                    cheeseInCage.transform.position + new Vector3(2, 0.25f, 0),
+                    transform.position,
                     transform.rotation);
                 // ReSharper disable once Unity.PerformanceCriticalCodeInvocation - only done once so okay for expensive method invocation
                 spawnedObj.GetComponent<NetworkObject>().Spawn();
