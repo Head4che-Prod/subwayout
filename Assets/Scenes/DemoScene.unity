@@ -300,6 +300,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: cheeseAd
       objectReference: {fileID: 0}
+    - target: {fileID: 2859477240249404101, guid: eefd032ea26094f43bc78f65d936a8ee, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 314837712
+      objectReference: {fileID: 0}
+    - target: {fileID: 2859477240249404101, guid: eefd032ea26094f43bc78f65d936a8ee, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2218730526
+      objectReference: {fileID: 0}
     - target: {fileID: 6016781093337917508, guid: eefd032ea26094f43bc78f65d936a8ee, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.3
