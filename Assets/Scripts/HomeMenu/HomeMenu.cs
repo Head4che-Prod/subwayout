@@ -308,7 +308,16 @@ namespace HomeMenu
         {
             PlayerCam.Sensi = n;
         }
-
+        
+        /// <summary>
+        /// Set the value of the gamma, on non-linear scale. 
+        /// </summary>
+        /// <param name="val">Value of gamma</param>
+        public void SetGamma(float val)
+        {
+            RenderSettings.ambientIntensity = val / float.MaxValue;
+        }
+        
         public void ChangeDisplayHints(bool activate)
         {
             PlayerObject.DisplayHints = activate;
