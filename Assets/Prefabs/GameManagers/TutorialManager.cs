@@ -30,8 +30,6 @@ namespace Prefabs.GameManagers
             }
         }
         
-        public static bool Exists => _instance != null;
-        
         [Header("Train")]
         [SerializeField] private Animator tunnelAnimator;
 
@@ -51,6 +49,7 @@ namespace Prefabs.GameManagers
             }
         }
         
+        public static bool Exists => _instance != null;
         public static bool CanBeChanged => Exists &&
                                            ((Instance.State == TutorialState.TrainStopped && 
                                              Instance.tunnelAnimator.GetCurrentAnimatorStateInfo(0).IsName("TunnelOnBoarding")) 

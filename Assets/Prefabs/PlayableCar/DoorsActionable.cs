@@ -11,7 +11,7 @@ namespace Prefabs.PlayableCar
             Debug.Log($"DoorsActionable: {TutorialManager.Instance.State} state");
             if (TutorialManager.CanBeChanged && TutorialManager.Instance.State == TutorialState.TrainStopped)
                 TutorialManager.Instance.State = TutorialState.TrainMoving;
-            if (EndGameManager.Instance.State == EndGameState.HanoiResolved)
+            if (EndGameManager.CanBeChanged && EndGameManager.Instance.State == EndGameState.HanoiResolved)
                 EndGameManager.Instance.State = EndGameState.UnlockDoors;
         }
     }

@@ -43,6 +43,13 @@ namespace Prefabs.GameManagers
             }
         }
         
+        public static bool Exists => _instance != null;
+        public static bool CanBeChanged => Exists &&
+                                           ((Instance.State is EndGameState.WaitingHanoi && 
+                                             Instance.tunnelAnimator.GetCurrentAnimatorStateInfo(0).IsName("TunnelMove")) 
+                                         || (Instance.State is EndGameState.HanoiResolved or EndGameState.UnlockDoors or EndGameState.FinishGame && 
+                                             Instance.tunnelAnimator.GetCurrentAnimatorStateInfo(0).IsName("TunnelOnBoarding")));
+        
         /// <summary>
         /// This method ask the server to update the state of the puzzle.
         /// Used to perform network-authority based actions.
@@ -86,11 +93,12 @@ namespace Prefabs.GameManagers
                     break;
                     
                 case EndGameState.HanoiResolved:
-                    tunnelAnimator.SetTrigger(Animator.StringToHash("Onboard"));
-                    // Waiting for onboard...
+                    tunnelAnimator.ResetTrigger(Animator.StringToHash("Move"));
+                    tunnelAnimator.SetTrigger(Animator.StringToHash("Stop"));
                     break;
                 
                 case EndGameState.UnlockDoors:
+                    // Add animation
                     break;
                     
                 case EndGameState.FinishGame:
