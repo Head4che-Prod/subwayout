@@ -41,8 +41,7 @@ namespace Prefabs.Puzzles.AI.CheeseAd
             {
                 DeactivateGrabbedKey();
             }
-
-            if (_keyInAd.activeInHierarchy)
+            else if (_keyInAd.activeInHierarchy)
             {
                 ChangeAdDoorServerRpc(!animator.GetBool(openCheeseAdAnim));
             }
