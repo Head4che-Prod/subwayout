@@ -15,10 +15,15 @@ ModelImporter:
       name: cheeseAd
     second: {fileID: 2100000, guid: 755f5b5032cd49f4d903783fa4e76abc, type: 2}
   - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glass
+    second: {fileID: 2100000, guid: c6d493970b03c634a9e5f18e482bf068, type: 2}
+  - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Tome-Tome ad
-    second: {fileID: 2800000, guid: 8808faa88144db2408845b50c3c5553c, type: 3}
+    second: {fileID: 2800000, guid: 65c8e6a063ca4dc4884b39870aed5c6f, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
