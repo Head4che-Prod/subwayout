@@ -49,6 +49,8 @@ namespace Prefabs.GameManagers
             }
         }
         
+        public bool CanBeChanged => (State == TutorialState.TrainStopped && tunnelAnimator.GetCurrentAnimatorStateInfo(0).IsName("TunnelOnBoarding")) || (State == TutorialState.TrainMoving && tunnelAnimator.GetCurrentAnimatorStateInfo(0).IsName("TunnelMove"));
+        
         /// <summary>
         /// This method ask the server to update the state of the puzzle.
         /// Used to perform network-authority based actions.

@@ -9,7 +9,8 @@ namespace Prefabs.PlayableCar
         public void Action()
         {
             Debug.Log($"DoorsActionable: {TutorialManager.Instance.State} state");
-            if (TutorialManager.Instance.State == TutorialState.TrainStopped)
+            if (TutorialManager.Instance.State == TutorialState.TrainStopped
+                && TutorialManager.Instance.CanBeChanged)
                 TutorialManager.Instance.State = TutorialState.TrainMoving;
         }
     }
