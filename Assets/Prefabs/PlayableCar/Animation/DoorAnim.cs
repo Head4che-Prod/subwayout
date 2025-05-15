@@ -1,4 +1,5 @@
 using Objects;
+using Prefabs.GameManagers;
 using Prefabs.Player;
 using Prefabs.Puzzles.DoorCode;
 using Unity.Netcode;
@@ -14,7 +15,11 @@ namespace Prefabs.PlayableCar.Animation
         public void Action()
         {
             if (Digicode.Active && Digicode.CanDoorOpen)
+            {
                 OpenDoorRpc();
+                if (TutorialManager.Exists)
+                    TutorialManager.Instance.State = TutorialState.HintSystemUnlocked;  // Fallback
+            }
         }
 
         [Rpc(SendTo.Everyone)]
