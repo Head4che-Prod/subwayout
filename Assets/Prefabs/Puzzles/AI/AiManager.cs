@@ -40,21 +40,21 @@ namespace Prefabs.Puzzles.AI
 
         private void Start()
         {
+            _animator = GetComponent<Animator>();
+            _animator.SetInteger(WhichAnim, 0);
+            _clonedRatAnimator = clonedRat.GetComponent<Animator>();
+            _cageAnimator = cageManager.gameObject.GetComponentInChildren<Animator>();
+            
             if (!IsServer)
             {
                 enabled = false;
                 return;
             }
-            
+
             _agent = GetComponent<NavMeshAgent>();
             _playersArray = GameObject.FindGameObjectsWithTag("Player");
-            _animator = GetComponent<Animator>();
-
-            _animator.SetInteger(WhichAnim, 0);
-            _clonedRatAnimator = clonedRat.GetComponent<Animator>();
-            _cageAnimator = cageManager.gameObject.GetComponentInChildren<Animator>();
             _state = State.Idle;
-
+            
             StartCoroutine(IdleCoroutine());
         }
 
