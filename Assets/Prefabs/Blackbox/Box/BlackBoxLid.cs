@@ -1,8 +1,9 @@
+using Objects;
 using UnityEngine;
 
 namespace Prefabs.Blackbox.Box
 {
-    public class BlackBoxLid : BlackBoxPart
+    public class BlackBoxLid : ParentActionable
     {
         [SerializeField] private Animator lidOpenAnimator;
 

@@ -11,7 +11,7 @@ using UnityEngine.Serialization;
 
 namespace Prefabs.Blackbox.Box
 {
-    public class BlackBox : NetworkBehaviour
+    public class BlackBox : NetworkBehaviour, IObjectActionable
     {
         private enum State
         {
