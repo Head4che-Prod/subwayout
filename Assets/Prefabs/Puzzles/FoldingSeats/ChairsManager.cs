@@ -1,5 +1,4 @@
 using System.Linq;
-using Unity.Netcode;
 using UnityEngine;
 
 namespace Prefabs.Puzzles.FoldingSeats
@@ -37,15 +36,8 @@ namespace Prefabs.Puzzles.FoldingSeats
         }
 
         /// <summary>
-        /// Checks the puzzle's wind condition.
+        /// Returns whether the chairs are in the correct position.
         /// </summary>
-        public void CheckChairs()
-        {
-            if (_chairsBool.All(c => c.IsInRightPosition))
-            {
-                Debug.Log("Win Chairs");
-            }
-        
-        }
+        public bool CheckChairs() => _chairsBool.All(chair => chair.IsInRightPosition);
     }
 }

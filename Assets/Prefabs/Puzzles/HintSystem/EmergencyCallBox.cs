@@ -19,7 +19,7 @@ namespace Prefabs.Puzzles.HintSystem
         }
         public void Action()
         {
-            if (_isAwaitingTrigger.Value && PlayerInteract.LocalPlayerInteract.GrabbedObject == _triggerGrabbable)
+            if (_isAwaitingTrigger.Value && (ObjectGrabbable)PlayerInteract.LocalPlayerInteract.GrabbedObject == _triggerGrabbable)
             {
                 callTrigger.Activate();
                 insertableTrigger.Deactivate();
