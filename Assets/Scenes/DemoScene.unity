@@ -300,6 +300,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: cheeseAd
       objectReference: {fileID: 0}
+    - target: {fileID: 6016781093337917508, guid: eefd032ea26094f43bc78f65d936a8ee, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016781093337917508, guid: eefd032ea26094f43bc78f65d936a8ee, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.9121678
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016781093337917508, guid: eefd032ea26094f43bc78f65d936a8ee, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3.3817396
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016781093337917508, guid: eefd032ea26094f43bc78f65d936a8ee, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.076
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016781093337917508, guid: eefd032ea26094f43bc78f65d936a8ee, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.112
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016781093337917508, guid: eefd032ea26094f43bc78f65d936a8ee, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
