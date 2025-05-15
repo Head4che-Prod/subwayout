@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -49,10 +50,12 @@ namespace Prefabs.Player
                 _isZooming = false;
                 _cameraObject = playerCamera.GetComponent<Camera>();
                 _player.Input.actions["Zoom"].performed += SwitchZoomMode;
+
+                StartCoroutine(ResyncCameraAlignment());
             }
         }
     
-        void Update()
+        private void Update()
         {
             if (_isActive)
             {
@@ -72,6 +75,18 @@ namespace Prefabs.Player
                 transform.rotation = _rotation.Value;
         }
 
+        /// <summary>
+        /// Periodically syncs the client's camera with the server's value. 
+        /// </summary>
+        private IEnumerator ResyncCameraAlignment()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(30f);
+                transform.rotation = _rotation.Value;
+            }
+        }
+
         [Rpc(SendTo.Server, RequireOwnership = false)]
         private void RotateServerRpc(Quaternion rotation)
         {
@@ -85,6 +100,11 @@ namespace Prefabs.Player
             {
                 child.gameObject.layer = layer;
             }
+        }
+
+        public override void OnDestroy()
+        {
+            StopAllCoroutines();
         }
     }
 }
