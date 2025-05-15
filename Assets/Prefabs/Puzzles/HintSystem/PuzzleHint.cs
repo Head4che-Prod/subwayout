@@ -73,6 +73,7 @@ namespace Prefabs.Puzzles.HintSystem
             if (!_firstInteractionPlayed)
             {
                 _firstInteractionPlayed = true;
+                return "HintTutorial";
             }
             if (Hints.Count == 0)
                 return "NoHints";
