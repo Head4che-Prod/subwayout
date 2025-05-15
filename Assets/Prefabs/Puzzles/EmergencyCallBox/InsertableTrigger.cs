@@ -4,7 +4,7 @@ using Prefabs.GameManagers;
 using Prefabs.Player;
 using Unity.Netcode;
 
-namespace Prefabs.Puzzles.HintSystem
+namespace Prefabs.Puzzles.EmergencyCallBox
 {
     public class InsertableTrigger : ObjectGrabbable
     {

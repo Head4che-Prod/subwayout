@@ -5,9 +5,29 @@ using Random = System.Random;
 
 namespace Hints
 {
+    public enum Hint
+    {
+        HintTutorial,
+        NoHints,
+        BlackboxLocation,
+        SeatPuzzle,
+        BlueCode,
+        CombineSticker,
+        SeatsSticker,
+        RedCode,
+        BackPack,
+        RatTrap,
+        RatKey,
+        Numbers,
+        Code,
+        CodeUnlocks,
+        Hanoi,
+        GameWon
+    }
+    
     public class HintSystem
     {
-        private static readonly Random andom = new Random(69);
+        private static readonly Random Random = new Random(69);
         private static bool _firstInteractionPlayed;
         
         private static readonly List<string> Hints = new List<string>();
@@ -77,21 +97,35 @@ namespace Hints
             }
             if (Hints.Count == 0)
                 return "NoHints";
-            return Hints[andom.Next(Hints.Count)];
+            return Hints[Random.Next(Hints.Count)];
         }
 
-        public static void EnableHints(params string[] hints)
+        /// <summary>
+        /// Adds the specified hints to the list of currently available hints.
+        /// </summary>
+        /// <param name="hints"><see cref="Hint"/>s to add.</param>
+        public static void EnableHints(params Hint[] hints)
         {
-            foreach (string hint in hints)
-                if (!Hints.Contains(hint))
-                    Hints.Add(hint);
+            foreach (Hint hint in hints)
+            {
+                string hintId = hint.ToString();
+                if (!Hints.Contains(hintId))
+                    Hints.Add(hintId);
+            }
         }
 
-        public static void DisableHints(params string[] hints)
+        /// <summary>
+        /// Removes the specified hints to the list of currently available hints.
+        /// </summary>
+        /// <param name="hints"><see cref="Hint"/>s to remove.</param>
+        public static void DisableHints(params Hint[] hints)
         {
-            foreach (string hint in hints)
-                if (Hints.Contains(hint))
-                    Hints.Remove(hint);
+            foreach (Hint hint in hints)
+            {
+                string hintId = hint.ToString();
+                if (Hints.Contains(hintId))
+                    Hints.Remove(hintId);
+            }
         }
 
     }

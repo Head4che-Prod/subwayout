@@ -4,7 +4,7 @@ using Objects;
 using Unity.Netcode;
 using UnityEngine;
 
-namespace Prefabs.Puzzles.HintSystem
+namespace Prefabs.Puzzles.EmergencyCallBox
 {
     public class EmergencyCallTrigger : OffstageNetworkBehaviour, IObjectActionable
     {
@@ -27,7 +27,7 @@ namespace Prefabs.Puzzles.HintSystem
                 _triggerAnimator.SetTrigger(InsertTrigger);
                 _source = GetComponent<AudioSource>();
                 VoiceLine.LoadVoiceLines();
-                Hints.HintSystem.EnableHints("BlackboxLocation");
+                HintSystem.EnableHints(Hint.BlackboxLocation, Hint.BackPack);
             }
         }
         
@@ -47,10 +47,10 @@ namespace Prefabs.Puzzles.HintSystem
         [Rpc(SendTo.Server, RequireOwnership = false)]
         private void PlayVoiceLinesServerRpc()
         {
-            string line = Hints.HintSystem.GetRandomVoiceLine();
+            string line = HintSystem.GetRandomVoiceLine();
             PlayVoiceLinesClientRpc(line);
             _cooldownFinished.Value = false;
-            StartCoroutine(TriggerCooldown(Hints.HintSystem.HintIndex[line].Duration));
+            StartCoroutine(TriggerCooldown(HintSystem.HintIndex[line].Duration));
         }
 
         [Rpc(SendTo.ClientsAndHost)]

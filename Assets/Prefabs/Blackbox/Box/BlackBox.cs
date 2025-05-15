@@ -75,8 +75,8 @@ namespace Prefabs.Blackbox.Box
         [Rpc(SendTo.ClientsAndHost, RequireOwnership = false)]
         private void PullOutClientRpc()
         {
-            HintSystem.DisableHints("BlackboxLocation");
-            HintSystem.EnableHints("SeatPuzzle", "CombineSticker");
+            HintSystem.DisableHints(Hint.BlackboxLocation);
+            HintSystem.EnableHints(Hint.SeatPuzzle, Hint.CombineSticker);
             StartCoroutine(RunOpenSequence());
         }
 
@@ -104,9 +104,9 @@ namespace Prefabs.Blackbox.Box
             ObjectHighlightManager.ForgetHighlightableObject(GrabbableSticker.NetworkObjectId);
             GrabbableSticker.Drop();
             GrabbableSticker.gameObject.SetActive(false);
-            HintSystem.DisableHints("CombineSticker");
+            HintSystem.DisableHints(Hint.CombineSticker);
             if (!lid.IsOpen)
-                HintSystem.EnableHints("SeatsSticker");
+                HintSystem.EnableHints(Hint.SeatsSticker);
         }
 
         /// <summary>
@@ -115,8 +115,8 @@ namespace Prefabs.Blackbox.Box
         public void Open()
         {
             
-            HintSystem.EnableHints("BlueCode");
-            HintSystem.DisableHints("SeatPuzzle", "SeatsSticker");
+            HintSystem.EnableHints(Hint.BlueCode);
+            HintSystem.DisableHints(Hint.SeatPuzzle, Hint.SeatsSticker, Hint.RedCode);
             StartCoroutine(OpenBoxWhenAble());
         }
 

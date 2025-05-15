@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Hints;
 using Objects;
 using Unity.Netcode;
 using UnityEngine;
@@ -17,10 +18,11 @@ namespace Prefabs.Backpack
             _bagOpen.SetActive(true);
             _bagClose.SetActive(false);
             ImpulsionObjetsRpc();
+            HintSystem.DisableHints(Hint.BackPack);
         }
     
         [Rpc(SendTo.Server, RequireOwnership = false)]
-        protected void ImpulsionObjetsRpc()
+        private void ImpulsionObjetsRpc()
         {
             foreach (GameObject obj in objectsInBag)
             {
