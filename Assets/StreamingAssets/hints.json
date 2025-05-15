@@ -13,86 +13,86 @@
   },
   {
     "ID": "BlackboxLocation",
-    "PathEn": "",
-    "PathFr": "",
+    "PathEn": "BlackboxLocation/BlackboxLocationEN",
+    "PathFr": "BlackboxLocation/BlackboxLocationFR",
     "PathEs": ""
   },
   {
     "ID": "SeatPuzzle",
-    "PathEn": "",
-    "PathFr": "",
+    "PathEn": "SeatPuzzle/SeatPuzzleEN",
+    "PathFr": "SeatPuzzle/SeatPuzzleFR",
     "PathEs": ""
   },
   {
     "ID": "BlueCode",
-    "PathEn": "",
-    "PathFr": "",
+    "PathEn": "BlueCode/BlueCodeEN",
+    "PathFr": "BlueCode/BlueCodeFR",
     "PathEs": ""
   },
   {
     "ID": "CombineSticker",
-    "PathEn": "",
-    "PathFr": "",
+    "PathEn": "CombineSticker/CombineStickerEN",
+    "PathFr": "CombineSticker/CombineStickerFR",
     "PathEs": ""
   },
   {
     "ID": "SeatsSticker",
-    "PathEn": "",
-    "PathFr": "",
+    "PathEn": "SeatsSticker/SeatsStickerEN",
+    "PathFr": "SeatsSticker/SeatsStickerFR",
     "PathEs": ""
   },
   {
     "ID": "RedCode",
-    "PathEn": "",
-    "PathFr": "",
+    "PathEn": "RedCode/RedCodeEN",
+    "PathFr": "RedCode/RedCodeFR",
     "PathEs": ""
   },
   {
     "ID": "BackPack",
-    "PathEn": "",
-    "PathFr": "",
+    "PathEn": "BackPack/BackPackEN",
+    "PathFr": "BackPack/BackPackFR",
     "PathEs": ""
   },
   {
     "ID": "RatTrap",
-    "PathEn": "",
-    "PathFr": "",
+    "PathEn": "RatTrap/RatTrapEN",
+    "PathFr": "RatTrap/RatTrapFR",
     "PathEs": ""
   },
   {
     "ID": "RatKey",
-    "PathEn": "",
-    "PathFr": "",
+    "PathEn": "RatKey/RatKeyEN",
+    "PathFr": "RatKey/RatKeyFR",
     "PathEs": ""
   },
   {
     "ID": "Numbers",
-    "PathEn": "",
-    "PathFr": "",
+    "PathEn": "Numbers/NumbersEN",
+    "PathFr": "Numbers/NumbersFR",
     "PathEs": ""
   },
   {
     "ID": "Code",
-    "PathEn": "",
-    "PathFr": "",
+    "PathEn": "Code/CodeEN",
+    "PathFr": "Code/CodeFR",
     "PathEs": ""
   },
   {
     "ID": "CodeUnlocks",
-    "PathEn": "",
-    "PathFr": "",
+    "PathEn": "CodeUnlocks/CodeUnlocksEN",
+    "PathFr": "CodeUnlocks/CodeUnlocksFR",
     "PathEs": ""
   },
   {
     "ID": "Hanoi",
-    "PathEn": "",
-    "PathFr": "",
+    "PathEn": "Hanoi/HanoiEN",
+    "PathFr": "Hanoi/HanoiFR",
     "PathEs": ""
   },
   {
     "ID": "GameWon",
-    "PathEn": "",
-    "PathFr": "",
+    "PathEn": "GameWon/GameWonEN",
+    "PathFr": "GameWon/GameWonFR",
     "PathEs": ""
   }
 ]
