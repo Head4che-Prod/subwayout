@@ -45,7 +45,6 @@ namespace Prefabs.Puzzles.AI.CheeseAd
             if (_keyInAd.activeInHierarchy)
             {
                 ChangeAdDoorServerRpc(!animator.GetBool(openCheeseAdAnim));
-                Debug.Log("Cheese Ad anim is played");
             }
         }
         
@@ -69,14 +68,14 @@ namespace Prefabs.Puzzles.AI.CheeseAd
         public void DeactivateGrabbedKey()
         {
             _keyGrabbable!.Drop();
-            DisableCheeseRpc(_keyGrabbable.NetworkObjectId);
+            DisablekeyGrabbableRpc(_keyGrabbable.NetworkObjectId);
             ActivateKeyInAdRpc();
         }
         /// <summary>
         /// Removes the key that was grabbed.
         /// </summary>
         [Rpc(SendTo.Server, RequireOwnership = false)]
-        private void DisableCheeseRpc(ulong keyGrabbedID)
+        private void DisablekeyGrabbableRpc(ulong keyGrabbedID)
         {
             ObjectHighlightManager.ForgetHighlightableObject(keyGrabbedID);
             NetworkManager.Singleton.SpawnManager.SpawnedObjects[keyGrabbedID].Despawn();
