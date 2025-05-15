@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Prefabs.Blackbox.Contents;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -31,7 +32,7 @@ namespace Prefabs.Puzzles.Airflow
         }
 
         private Flap[] _flaps;
-        private bool _isVisible = false;
+        public bool IsVisible { get; private set; } = false;
 
         private bool[] _windowsClosed;
         private readonly Dictionary<Window, ushort> _windowIds = new Dictionary<Window, ushort>();
@@ -83,15 +84,20 @@ namespace Prefabs.Puzzles.Airflow
         /// </summary>
         public void CheckWin()
         {
-            if (!_isVisible && windows.All(w => w.IsClosed))
+            if (!IsVisible && windows.All(w => w.IsClosed))
             {
-                _isVisible = true;
+                IsVisible = true;
+                
+                if (AirflowInstructions.Singleton?.Grabbed ?? false)
+                    Hints.HintSystem.DisableHints("BlueCode");
+                    
                 foreach (Flap flap in _flaps)
                     flap.ChangeRotation(true);
             }
-            else if (_isVisible && windows.Any(w => !w.IsClosed))
+            else if (IsVisible && windows.Any(w => !w.IsClosed))
             {
-                _isVisible = false;
+                IsVisible = false;
+                Hints.HintSystem.EnableHints("BlueCode");
                 foreach (Flap flap in _flaps)
                     flap.ChangeRotation(false);
             }

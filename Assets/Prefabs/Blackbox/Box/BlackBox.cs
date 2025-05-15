@@ -72,7 +72,12 @@ namespace Prefabs.Blackbox.Box
         /// Requests clients to pull out the black box.
         /// </summary>
         [Rpc(SendTo.ClientsAndHost, RequireOwnership = false)]
-        private void PullOutClientRpc() => StartCoroutine(RunOpenSequence());
+        private void PullOutClientRpc()
+        {
+            Hints.HintSystem.DisableHints("BlackboxLocation");
+            Hints.HintSystem.EnableHints("SeatPuzzle");
+            StartCoroutine(RunOpenSequence());
+        }
 
         /// <summary>
         /// Plays the opening sequence and changes states accordingly. 
@@ -103,7 +108,13 @@ namespace Prefabs.Blackbox.Box
         /// <summary>
         /// Opens the box's lid as soon as it gets pulled out, and spawn its contents.
         /// </summary>
-        public void Open() => StartCoroutine(OpenBoxWhenAble());
+        public void Open()
+        {
+            
+            Hints.HintSystem.EnableHints("BlueCode");
+            Hints.HintSystem.DisableHints("SeatPuzzle");
+            StartCoroutine(OpenBoxWhenAble());
+        }
 
         /// <summary>
         /// Waits for the box to get pulled out before opening the lid

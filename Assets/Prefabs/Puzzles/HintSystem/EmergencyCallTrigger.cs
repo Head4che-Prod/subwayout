@@ -1,6 +1,6 @@
 using System.Collections;
+using Hints;
 using Objects;
-using Prefabs.Player;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -27,6 +27,7 @@ namespace Prefabs.Puzzles.HintSystem
                 _triggerAnimator.SetTrigger(InsertTrigger);
                 _source = GetComponent<AudioSource>();
                 VoiceLine.LoadVoiceLines();
+                Hints.HintSystem.EnableHints("BlackboxLocation");
             }
         }
         
@@ -46,17 +47,17 @@ namespace Prefabs.Puzzles.HintSystem
         [Rpc(SendTo.Server, RequireOwnership = false)]
         private void PlayVoiceLinesServerRpc()
         {
-            string line = PuzzleHint.GetRandomVoiceLine();
+            string line = Hints.HintSystem.GetRandomVoiceLine();
             PlayVoiceLinesClientRpc(line);
             _cooldownFinished.Value = false;
-            StartCoroutine(TriggerCooldown(PuzzleHint.HintIndex[line].Duration));
+            StartCoroutine(TriggerCooldown(Hints.HintSystem.HintIndex[line].Duration));
         }
 
         [Rpc(SendTo.ClientsAndHost)]
         private void PlayVoiceLinesClientRpc(string line)
         {
             _triggerAnimator.SetTrigger(PullTrigger);
-            _source.clip = PuzzleHint.HintIndex[line].VoiceLine;
+            _source.clip = Hints.HintSystem.HintIndex[line].VoiceLine;
             _source.Play();
         }
 

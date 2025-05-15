@@ -1,18 +1,17 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using Random = System.Random;
 
-namespace Prefabs.Puzzles.HintSystem
+namespace Hints
 {
-    public class PuzzleHint
+    public class HintSystem
     {
-        private static Random _r = new Random(69);
+        private static readonly Random andom = new Random(69);
         private static bool _firstInteractionPlayed;
         
         private static readonly List<string> Hints = new List<string>();
-        public static Dictionary<string, PuzzleHint> HintIndex { get; } = new Dictionary<string, PuzzleHint>();
+        public static Dictionary<string, HintSystem> HintIndex { get; } = new Dictionary<string, HintSystem>();
 
         private readonly AudioClip _voiceLineEn;
         private readonly AudioClip _voiceLineFr;
@@ -59,7 +58,7 @@ namespace Prefabs.Puzzles.HintSystem
             }
         }
         
-        public PuzzleHint(AudioClip voiceLineEn, AudioClip voiceLineFr, AudioClip voiceLineEs)
+        public HintSystem(AudioClip voiceLineEn, AudioClip voiceLineFr, AudioClip voiceLineEs)
         {
             _voiceLineEn = voiceLineEn;
             _voiceLineFr = voiceLineFr;
@@ -78,20 +77,20 @@ namespace Prefabs.Puzzles.HintSystem
             }
             if (Hints.Count == 0)
                 return "NoHints";
-            return Hints[_r.Next(Hints.Count)];
+            return Hints[andom.Next(Hints.Count)];
         }
 
-        public void EnableHints(params string[] hints)
+        public static void EnableHints(params string[] hints)
         {
             foreach (string hint in hints)
-                if (!hints.Contains(hint))
+                if (!Hints.Contains(hint))
                     Hints.Add(hint);
         }
 
-        public void DisableHints(params string[] hints)
+        public static void DisableHints(params string[] hints)
         {
             foreach (string hint in hints)
-                if (hints.Contains(hint))
+                if (Hints.Contains(hint))
                     Hints.Remove(hint);
         }
 

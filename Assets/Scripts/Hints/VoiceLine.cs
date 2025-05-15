@@ -1,8 +1,8 @@
-using UnityEngine;
 using System.IO;
 using Newtonsoft.Json;
+using UnityEngine;
 
-namespace Prefabs.Puzzles.HintSystem
+namespace Hints
 {
     public class VoiceLine
     {
@@ -19,8 +19,8 @@ namespace Prefabs.Puzzles.HintSystem
                 File.ReadAllText(Path.Combine(Application.streamingAssetsPath, "hints.json")));
             foreach (VoiceLine voiceLine in voiceLines)
             {
-                PuzzleHint.HintIndex.Add(voiceLine.ID,
-                    new PuzzleHint(
+                Hints.HintSystem.HintIndex.Add(voiceLine.ID,
+                    new Hints.HintSystem(
                         Resources.Load<AudioClip>("Audio/Hints/"+voiceLine.PathEn) ?? fallback,
                         Resources.Load<AudioClip>("Audio/Hints/"+voiceLine.PathFr) ?? fallback,
                         Resources.Load<AudioClip>("Audio/Hints/"+voiceLine.PathEs) ?? fallback
