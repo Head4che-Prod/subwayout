@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using Random = System.Random;
@@ -10,7 +11,7 @@ namespace Prefabs.Puzzles.HintSystem
         private static Random _r = new Random(69);
         private static bool _firstInteractionPlayed;
         
-        public static List<string> Hints { get; } = new List<string>();
+        private static readonly List<string> Hints = new List<string>();
         public static Dictionary<string, PuzzleHint> HintIndex { get; } = new Dictionary<string, PuzzleHint>();
 
         private readonly AudioClip _voiceLineEn;
@@ -78,6 +79,20 @@ namespace Prefabs.Puzzles.HintSystem
             if (Hints.Count == 0)
                 return "NoHints";
             return Hints[_r.Next(Hints.Count)];
+        }
+
+        public void EnableHints(params string[] hints)
+        {
+            foreach (string hint in hints)
+                if (!hints.Contains(hint))
+                    Hints.Add(hint);
+        }
+
+        public void DisableHints(params string[] hints)
+        {
+            foreach (string hint in hints)
+                if (hints.Contains(hint))
+                    Hints.Remove(hint);
         }
 
     }
