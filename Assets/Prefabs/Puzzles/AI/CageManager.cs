@@ -50,7 +50,7 @@ namespace Prefabs.Puzzles.AI
         }
         
         [Rpc(SendTo.Server, RequireOwnership = false)]
-        private void ChangeCageDoorServerRpc(bool isOpenValChanged)
+        public void ChangeCageDoorServerRpc(bool isOpenValChanged)
         {
             _isOpen.Value = isOpenValChanged;
         }
