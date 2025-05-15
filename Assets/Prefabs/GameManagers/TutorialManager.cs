@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Objects;
 using Unity.Netcode;
 using Unity.VisualScripting;
@@ -89,9 +90,12 @@ namespace Prefabs.GameManagers
             switch (newState)
             {
                 case TutorialState.TrainStopped:
+                    tunnelAnimator.ResetTrigger(Animator.StringToHash("Move"));
+                    tunnelAnimator.SetTrigger(Animator.StringToHash("Stop"));
                     break;
 
                 case TutorialState.TrainMoving:
+                    tunnelAnimator.ResetTrigger(Animator.StringToHash("Stop"));
                     tunnelAnimator.SetTrigger(Animator.StringToHash("Move"));
                     triggerOutline.enabled = true;
                     break;
@@ -114,6 +118,17 @@ namespace Prefabs.GameManagers
         {
             if (_instance == this) _instance = null;
             base.OnDestroy();
+        }
+
+        private void Start()
+        {
+            StartCoroutine(Starter());
+        }
+
+        private IEnumerator Starter()
+        {
+            yield return new WaitForSeconds(15);
+            State = TutorialState.TrainStopped;
         }
     }
     
