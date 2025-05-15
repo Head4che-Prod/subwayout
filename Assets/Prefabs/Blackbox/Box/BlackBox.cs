@@ -1,4 +1,5 @@
 using System.Collections;
+using Hints;
 using Objects;
 using Prefabs.Blackbox.Sticker;
 using Prefabs.GameManagers;
@@ -74,8 +75,8 @@ namespace Prefabs.Blackbox.Box
         [Rpc(SendTo.ClientsAndHost, RequireOwnership = false)]
         private void PullOutClientRpc()
         {
-            Hints.HintSystem.DisableHints("BlackboxLocation");
-            Hints.HintSystem.EnableHints("SeatPuzzle");
+            HintSystem.DisableHints("BlackboxLocation");
+            HintSystem.EnableHints("SeatPuzzle", "CombineSticker");
             StartCoroutine(RunOpenSequence());
         }
 
@@ -103,6 +104,9 @@ namespace Prefabs.Blackbox.Box
             ObjectHighlightManager.ForgetHighlightableObject(GrabbableSticker.NetworkObjectId);
             GrabbableSticker.Drop();
             GrabbableSticker.gameObject.SetActive(false);
+            HintSystem.DisableHints("CombineSticker");
+            if (!lid.IsOpen)
+                HintSystem.EnableHints("SeatsSticker");
         }
 
         /// <summary>
@@ -111,8 +115,8 @@ namespace Prefabs.Blackbox.Box
         public void Open()
         {
             
-            Hints.HintSystem.EnableHints("BlueCode");
-            Hints.HintSystem.DisableHints("SeatPuzzle");
+            HintSystem.EnableHints("BlueCode");
+            HintSystem.DisableHints("SeatPuzzle", "SeatsSticker");
             StartCoroutine(OpenBoxWhenAble());
         }
 
