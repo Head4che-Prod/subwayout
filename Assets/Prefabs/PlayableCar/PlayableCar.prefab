@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 247968795552128596}
   - component: {fileID: 4173857232687373461}
   - component: {fileID: 953780971934953517}
+  - component: {fileID: 6622643935255794532}
   m_Layer: 0
   m_Name: DoorClosedLeft 2
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 16845890947575717}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 5.3530564, y: 4.254288, z: 13.817022}
   m_LocalScale: {x: 2.1067126, y: 2.1067126, z: 2.1067126}
   m_ConstrainProportionsScale: 0
@@ -114,6 +115,28 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6638116569909191935, guid: d971b60a2b2c2524bbd5f140f0c0729b, type: 3}
+--- !u!95 &6622643935255794532
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16845890947575717}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 85d98473dcbb8e146a4335c8faa77e55, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &101011716314011280
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,6 +379,7 @@ GameObject:
   - component: {fileID: 5052616931083855794}
   - component: {fileID: 8489036121509672828}
   - component: {fileID: 523481331857951714}
+  - component: {fileID: 4202367480696097470}
   m_Layer: 0
   m_Name: DoorClosedMid .003
   m_TagString: Untagged
@@ -457,6 +481,28 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7206032818334343501, guid: d971b60a2b2c2524bbd5f140f0c0729b, type: 3}
+--- !u!95 &4202367480696097470
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208573767198960217}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5328def505fe72b4b9ea5fd65cb5a842, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &306550121183352535
 GameObject:
   m_ObjectHideFlags: 0
@@ -2881,6 +2927,7 @@ GameObject:
   - component: {fileID: 5897704151163544737}
   - component: {fileID: 3440786346333122079}
   - component: {fileID: 6912067611889085727}
+  - component: {fileID: 1754414228805473755}
   m_Layer: 0
   m_Name: DoorClosedMid .004
   m_TagString: Untagged
@@ -2982,6 +3029,28 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3740289618319513561, guid: d971b60a2b2c2524bbd5f140f0c0729b, type: 3}
+--- !u!95 &1754414228805473755
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429394965845173898}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1221a1ced1b36434085eeca69b19d53e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1606031219393717588
 GameObject:
   m_ObjectHideFlags: 0
@@ -3103,6 +3172,7 @@ GameObject:
   - component: {fileID: 8715988993976007379}
   - component: {fileID: 7960598053491796520}
   - component: {fileID: 6367592616318058802}
+  - component: {fileID: 3861970785517669669}
   m_Layer: 0
   m_Name: DoorClosedRight.003
   m_TagString: Untagged
@@ -3204,6 +3274,28 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6163405225992852487, guid: d971b60a2b2c2524bbd5f140f0c0729b, type: 3}
+--- !u!95 &3861970785517669669
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774757625134018724}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e09dce74adeb7f542b4711e84393bc4e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1865714354548250491
 GameObject:
   m_ObjectHideFlags: 0
@@ -3216,6 +3308,7 @@ GameObject:
   - component: {fileID: 126904805686496088}
   - component: {fileID: 4393782200709226848}
   - component: {fileID: 7118343565146402570}
+  - component: {fileID: 6943365325396168007}
   m_Layer: 0
   m_Name: DoorClosedLeft 1
   m_TagString: Untagged
@@ -3231,8 +3324,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865714354548250491}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.3555956, y: 4.2542877, z: 13.820829}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5.3555956, y: 4.254288, z: 13.82083}
   m_LocalScale: {x: 0.11135833, y: 4.2829885, z: 2.1414943}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3318,6 +3411,28 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5394688932661965060, guid: d971b60a2b2c2524bbd5f140f0c0729b, type: 3}
+--- !u!95 &6943365325396168007
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865714354548250491}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d515409d22dd84944ad4a5cceef762dd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2075563777218239475
 GameObject:
   m_ObjectHideFlags: 0
@@ -10527,6 +10642,7 @@ GameObject:
   - component: {fileID: 124153470009429103}
   - component: {fileID: 3745496583328261694}
   - component: {fileID: 7591728594883833404}
+  - component: {fileID: 1081086011475687736}
   m_Layer: 0
   m_Name: DoorClosedRight.004
   m_TagString: Untagged
@@ -10628,6 +10744,28 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 7302222990947404070, guid: d971b60a2b2c2524bbd5f140f0c0729b, type: 3}
+--- !u!95 &1081086011475687736
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7504308556489008568}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5d6a03924a9cb1d479185568d525beb1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7509496202939223616
 GameObject:
   m_ObjectHideFlags: 0
