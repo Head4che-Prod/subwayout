@@ -17,15 +17,24 @@ namespace Prefabs.Backpack
         public void Action()
         {
             Debug.Log("Action played");
+            ObjectHighlightManager.ForgetHighlightableObject(NetworkObjectId);
+            OpenBagClientRpc();
+        }
+
+        [Rpc(SendTo.ClientsAndHost)]
+        private void OpenBagClientRpc()
+        {
             bagOpen.SetActive(true);
             bagClose.SetActive(false);
-            ImpulsionObjetsRpc();
-        }
-    
-        [Rpc(SendTo.Server, RequireOwnership = false)]
-        private void ImpulsionObjetsRpc()
-        {
             HintSystem.DisableHints(Hint.BackPack);
+            canBeHighlighted = true;
+            
+            if (IsServer)
+                ApplyObjectImpulses();
+        }
+        
+        private void ApplyObjectImpulses()
+        {
             foreach (GameObject obj in objectsInBag)
             {
                 NetworkObject spawnedObj = Instantiate(obj, bagOpen.transform.position + new Vector3(0, 1, 0),
@@ -35,7 +44,5 @@ namespace Prefabs.Backpack
                 spawnedObj.GetComponent<Rigidbody>().AddForce(new Vector3(-1.5f, 2f, 0f), ForceMode.VelocityChange);
             }
         }
-    
-    
     }
 }
