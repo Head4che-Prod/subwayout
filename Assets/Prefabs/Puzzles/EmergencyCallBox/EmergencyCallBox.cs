@@ -1,4 +1,5 @@
 using Objects;
+using Prefabs.GameManagers;
 using Prefabs.Player;
 using Unity.Netcode;
 using UnityEngine;
@@ -23,6 +24,7 @@ namespace Prefabs.Puzzles.EmergencyCallBox
                 callTrigger.Activate();
                 insertableTrigger.Deactivate();
                 _isAwaitingTrigger.Value = true;
+                TutorialManager.Instance.State = TutorialState.HintSystemUnlocked;
             }
         }
     }

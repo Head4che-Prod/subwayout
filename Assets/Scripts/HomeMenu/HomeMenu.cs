@@ -20,6 +20,7 @@ namespace HomeMenu
         SessionManager _sessionManager;
         private GameObject _disableOnSpawn;
         private bool _isCursorActive = true;
+        public static float? Time { get; set; } = null;
 
         private GameObject _traveling;
         private GameObject _error;
@@ -65,6 +66,9 @@ namespace HomeMenu
                 Cursor.lockState = _isCursorActive ? CursorLockMode.None : CursorLockMode.Locked;
                 Cursor.visible = _isCursorActive;
             };
+            
+            if (Time != null)
+                OpenWinningMenu();
         }
 
         void Update()
@@ -82,6 +86,42 @@ namespace HomeMenu
             Process.GetCurrentProcess().Kill();
         }
 
+        public void OpenWinningMenu()
+        {
+            transform.Find("MainMenu").gameObject.SetActive(false);
+            transform.Find("WinningMenu").gameObject.SetActive(true);
+            SetInteractibleStartButtons(0);
+            foreach (Selectable selectable in Selectable.allSelectablesArray)
+                if (selectable.name == "BackButton")
+                    selectable.Select();
+
+            transform.Find("WinningMenu/TimeText").GetComponent<TextMeshProUGUI>().text = TimeToString((int)(Time ?? 0));
+            
+            Time = null;
+        }
+
+        private static string TimeToString(int time)
+        {
+            string res = $"{time % 60:00}s";
+            if (time < 60)
+                return res;
+            time /= 60;
+            res = $"{time % 60:00}min " + res;
+            if (time < 60)
+                return res;
+            time /= 60;
+            return $"{time}h " + res;
+        }
+        
+        public void CloseWinningMenu()
+        {
+            transform.Find("WinningMenu").gameObject.SetActive(false);
+            transform.Find("MainMenu").gameObject.SetActive(true);
+            foreach (Selectable selectable in Selectable.allSelectablesArray)
+                if (selectable.name == "StartButton")
+                    selectable.Select();
+        }
+        
         public void OpenStart()
         {
             transform.Find("MainMenu").gameObject.SetActive(false);
@@ -310,6 +350,15 @@ namespace HomeMenu
         public void SetSensi(Single n)
         {
             PlayerCam.Sensi = n;
+        }
+        
+        /// <summary>
+        /// Set the value of the gamma, on non-linear scale. 
+        /// </summary>
+        /// <param name="val">Value of gamma</param>
+        public void SetGamma(float val)
+        {
+            RenderSettings.ambientIntensity = val / float.MaxValue;
         }
         
         public void SetVol(Single n)

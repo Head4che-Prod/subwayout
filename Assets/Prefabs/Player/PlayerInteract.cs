@@ -113,7 +113,7 @@ namespace Prefabs.Player
                 
                 float distance = hits
                     .OrderBy(hit => hit.distance > 0 ? hit.distance : float.MaxValue)
-                    .TakeWhile(hit => hit.collider.transform != null && hit.collider.transform.TryGetComponent<IRaycastResponsive>(out _))
+                    .TakeWhile(hit => hit.collider.transform != null && hit.collider.transform.TryGetComponent<IObjectGrabbable>(out _))
                     .First(hit => hit.collider.transform.TryGetComponent<IObjectGrabbable>(out grabbable)).distance;
                 
                 Debug.DrawRay(

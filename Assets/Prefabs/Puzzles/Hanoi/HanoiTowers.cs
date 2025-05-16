@@ -93,6 +93,7 @@ namespace Prefabs.Puzzles.Hanoi
             ball.GetComponent<HanoiPiece>().Drop();
             Debug.Log("Game won!");
             SetUsageState(true);
+            EndGameManager.Instance.State = EndGameState.HanoiResolved;
             foreach (HanoiHitbox box in ColliderGrid)
                     ObjectPositionManager.ForgetResettableObjectClientRpc(box.containedBall?.GetComponent<HanoiPiece>());
             HintSystem.EnableHints(Hint.GameWon);
