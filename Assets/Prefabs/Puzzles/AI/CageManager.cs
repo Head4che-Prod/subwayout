@@ -71,7 +71,9 @@ namespace Prefabs.Puzzles.AI
         {
             _grabbedObject!.Drop();
             DisableCheeseRpc(_grabbedObject.NetworkObjectId);
-            ActivateCheeseInCageRpc(_grabbedObject.NetworkObjectId);
+            ActivateCheeseInCageRpc();
+            ObjectHighlightManager.ForgetHighlightableObject(_grabbedObject.NetworkObjectId);
+            ObjectHighlightManager.ForgetHighlightableObject(NetworkObjectId);
         }
         
         /// <summary>
@@ -87,14 +89,11 @@ namespace Prefabs.Puzzles.AI
         /// <summary>
         /// Activates the cheese in the cage and disables highlight for both it and the cage.
         /// </summary>
-        /// <param name="cheeseId">The cheese's NetworkObjectId</param>
         [Rpc(SendTo.ClientsAndHost)]
-        private void ActivateCheeseInCageRpc(ulong cheeseId)
+        private void ActivateCheeseInCageRpc()
         {
             cheeseInCage.SetActive(true);
             canBeHighlighted = false;
-            ObjectHighlightManager.ForgetHighlightableObject(cheeseId);
-            ObjectHighlightManager.ForgetHighlightableObject(NetworkObjectId);
         }
         
         
