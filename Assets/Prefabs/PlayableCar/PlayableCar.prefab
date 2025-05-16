@@ -1010,7 +1010,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 525237453848626089}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ef8dff7b54047a1aeb3d216ea13ddcd, type: 3}
   m_Name: 
@@ -2738,7 +2738,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1112796089256795915}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ef8dff7b54047a1aeb3d216ea13ddcd, type: 3}
   m_Name: 
@@ -5547,7 +5547,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4112764480844835149}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ef8dff7b54047a1aeb3d216ea13ddcd, type: 3}
   m_Name: 
@@ -8462,7 +8462,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5880003351213474721}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ef8dff7b54047a1aeb3d216ea13ddcd, type: 3}
   m_Name: 
@@ -11567,7 +11567,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8271594988920957860}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ef8dff7b54047a1aeb3d216ea13ddcd, type: 3}
   m_Name: 
@@ -12235,7 +12235,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8468753290990784943}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ef8dff7b54047a1aeb3d216ea13ddcd, type: 3}
   m_Name: 
@@ -13687,12 +13687,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8193990561851569261, guid: 013f98cece8286d4ba975e531c944581, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3904953990
+      value: 555100649
       objectReference: {fileID: 0}
     - target: {fileID: 8863579749600340387, guid: 013f98cece8286d4ba975e531c944581, type: 3}
-    - target: {fileID: 8193990561851569261, guid: 013f98cece8286d4ba975e531c944581, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 555100649
+      propertyPath: 
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8863579749600340387, guid: 013f98cece8286d4ba975e531c944581, type: 3}
       propertyPath: m_LocalPosition.x
