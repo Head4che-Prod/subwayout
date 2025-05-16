@@ -3,7 +3,7 @@ using Prefabs.Player;
 using Unity.Netcode;
 using UnityEngine;
 
-namespace Prefabs.Puzzles.HintSystem
+namespace Prefabs.Puzzles.EmergencyCallBox
 {
     public class EmergencyCallBox : MonoBehaviour, IObjectActionable
     {
