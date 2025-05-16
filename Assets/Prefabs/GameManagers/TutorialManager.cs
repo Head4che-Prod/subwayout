@@ -108,6 +108,7 @@ namespace Prefabs.GameManagers
                     break;
 
                 case TutorialState.HintSystemUnlocked:
+                    StopAllCoroutines();
                     tunnelAnimator.ResetTrigger(Animator.StringToHash("Stop"));
                     tunnelAnimator.SetTrigger(Animator.StringToHash("Move"));
                     Destroy(this);
