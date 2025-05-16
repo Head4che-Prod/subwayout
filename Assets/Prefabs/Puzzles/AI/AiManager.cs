@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using Hints;
 using Prefabs.GameManagers;
 using Unity.Netcode;
@@ -13,12 +13,12 @@ namespace Prefabs.Puzzles.AI
     {
         [SerializeField] private GameObject cheeseInCage;
         [SerializeField] private GameObject keyModelInMouthRat;
-        [SerializeField] private GameObject keyGrabbable;
+        [SerializeField] private NetworkObject keyGrabbable;
         [SerializeField] private GameObject clonedRat;
         [SerializeField] private CageManager cageManager;
         
         private NavMeshAgent _agent;
-        private GameObject[] _playersArray;
+        private GameObject[] _players;
         
         private static readonly int WhichAnim = Animator.StringToHash("whichAnim");
         private Animator _animator;
@@ -52,7 +52,7 @@ namespace Prefabs.Puzzles.AI
             }
 
             _agent = GetComponent<NavMeshAgent>();
-            _playersArray = GameObject.FindGameObjectsWithTag("Player");
+            _players = FindPlayers();
             _state = State.Idle;
             
             StartCoroutine(IdleCoroutine());
@@ -68,7 +68,7 @@ namespace Prefabs.Puzzles.AI
             {
                 NetworkObject spawnedObj = Instantiate(keyGrabbable,
                     cheeseInCage.transform.position + new Vector3(2, 0.25f, 0),
-                    transform.rotation).GetComponent<NetworkObject>();
+                    transform.rotation);
                 spawnedObj.Spawn();
                 spawnedObj.gameObject.SetActive(true);
                 ObjectHighlightManager.RegisterHighlightableObject(spawnedObj.NetworkObjectId);
@@ -200,6 +200,9 @@ namespace Prefabs.Puzzles.AI
                 yield return null;
             _animator.SetInteger(WhichAnim, (int)_state);
         }
+
+        private GameObject[] FindPlayers() =>
+            NetworkManager.ConnectedClientsList.Select(client => client.PlayerObject.gameObject).ToArray();
         
         /// <summary>
         /// Finds the nearest player and returns its gameObject
@@ -207,14 +210,14 @@ namespace Prefabs.Puzzles.AI
         /// <returns>The nearest player's <see cref="GameObject"/>.</returns>
         private GameObject FindNearestPlayer()
         {
-            if (_playersArray.Length != NetworkManager.Singleton.ConnectedClients.Count)
+            if (_players.Length != NetworkManager.Singleton.ConnectedClients.Count)
             {
-                _playersArray = GameObject.FindGameObjectsWithTag("Player");
+                _players = FindPlayers();
             }
 
             float closestDist = Mathf.Infinity;
             GameObject closestPlayer = null;
-            foreach (GameObject player in _playersArray)
+            foreach (GameObject player in _players)
             {
                 float distance = Vector3.Distance(transform.position, player.transform.position);
                 if (distance < closestDist)
