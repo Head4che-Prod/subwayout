@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  _keyInAd: {fileID: 582102767278710106}
+  keyInAd: {fileID: 582102767278710106}
 --- !u!1 &781275055344618640
 GameObject:
   m_ObjectHideFlags: 0

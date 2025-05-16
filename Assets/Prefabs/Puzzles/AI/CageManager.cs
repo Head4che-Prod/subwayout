@@ -39,8 +39,8 @@ namespace Prefabs.Puzzles.AI
                 return;
             }
 
-            _grabbedObject = PlayerInteract.LocalPlayerInteract.GrabbedObject.GrabbedObject;
-            if (_grabbedObject is CheeseGrabbable)
+            _grabbedObject = PlayerInteract.LocalPlayerInteract.GrabbedObject?.GrabbedObject;
+            if (_isOpen.Value && _grabbedObject is CheeseGrabbable)
             {
                 DeactivateCheese();
             }
@@ -69,24 +69,31 @@ namespace Prefabs.Puzzles.AI
         /// </summary>
         private void DeactivateCheese()
         {
+            ObjectHighlightManager.ForgetHighlightableObject(_grabbedObject.NetworkObjectId);
             _grabbedObject!.Drop();
             DisableCheeseRpc(_grabbedObject.NetworkObjectId);
             ActivateCheeseInCageRpc();
+            ObjectHighlightManager.ForgetHighlightableObject(NetworkObjectId);
         }
+        
         /// <summary>
-        /// Removes the grabbableCheese.
+        /// Despawns the grabbableCheese.
         /// </summary>
+        /// <param name="cheeseId">The cheese's NetworkObjectId.</param>
         [Rpc(SendTo.Server, RequireOwnership = false)]
         private void DisableCheeseRpc(ulong cheeseId)
         {
-            ObjectHighlightManager.ForgetHighlightableObject(cheeseId);
             NetworkManager.SpawnManager.SpawnedObjects[cheeseId].Despawn();
         }
 
-        [Rpc(SendTo.Everyone)]
+        /// <summary>
+        /// Activates the cheese in the cage and disables highlight for both it and the cage.
+        /// </summary>
+        [Rpc(SendTo.ClientsAndHost)]
         private void ActivateCheeseInCageRpc()
         {
             cheeseInCage.SetActive(true);
+            canBeHighlighted = false;
         }
         
         
