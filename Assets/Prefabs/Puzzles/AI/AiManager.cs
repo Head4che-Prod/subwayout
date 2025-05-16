@@ -112,8 +112,8 @@ namespace Prefabs.Puzzles.AI
 
             clonedRat.SetActive(true);
             _clonedRatAnimator.Play("Idle");
-            _cageAnimator.SetBool("animCageDoor", !_cageAnimator.GetBool("animCageDoor"));
-            
+            cageManager.ChangeCageDoorServerRpc(!_cageAnimator.GetBool("animCageDoor"));
+                        
             HintSystem.EnableHints(Hint.RatKey);
             HintSystem.DisableHints(Hint.RatTrap);
         }
