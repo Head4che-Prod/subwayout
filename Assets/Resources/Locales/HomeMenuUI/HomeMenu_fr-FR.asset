@@ -107,6 +107,18 @@ MonoBehaviour:
     m_Localized: "Luminosit\xE9"
     m_Metadata:
       m_Items: []
+  - m_Id: 27388840442068992
+    m_Localized: "F\xE9licitations !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27389544737013760
+    m_Localized: "Vous vous \xEAtes \xE9chapp\xE9 en :"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27390592839057408
+    m_Localized: Retour au menu principal
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

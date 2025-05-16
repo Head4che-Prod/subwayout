@@ -113,6 +113,15 @@ namespace HomeMenu
             return $"{time}h " + res;
         }
         
+        public void CloseWinningMenu()
+        {
+            transform.Find("WinningMenu").gameObject.SetActive(false);
+            transform.Find("MainMenu").gameObject.SetActive(true);
+            foreach (Selectable selectable in Selectable.allSelectablesArray)
+                if (selectable.name == "StartButton")
+                    selectable.Select();
+        }
+        
         public void OpenStart()
         {
             transform.Find("MainMenu").gameObject.SetActive(false);
