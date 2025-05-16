@@ -1,10 +1,10 @@
 using System.Collections;
+using Hints;
 using Objects;
-using Prefabs.Player;
 using Unity.Netcode;
 using UnityEngine;
 
-namespace Prefabs.Puzzles.HintSystem
+namespace Prefabs.Puzzles.EmergencyCallBox
 {
     public class EmergencyCallTrigger : OffstageNetworkBehaviour, IObjectActionable
     {
@@ -46,17 +46,17 @@ namespace Prefabs.Puzzles.HintSystem
         [Rpc(SendTo.Server, RequireOwnership = false)]
         private void PlayVoiceLinesServerRpc()
         {
-            string line = PuzzleHint.GetRandomVoiceLine();
+            Hint line = HintSystem.GetRandomVoiceLine();
             PlayVoiceLinesClientRpc(line);
             _cooldownFinished.Value = false;
-            StartCoroutine(TriggerCooldown(PuzzleHint.HintIndex[line].Duration));
+            StartCoroutine(TriggerCooldown(HintSystem.HintIndex[line].Duration));
         }
 
         [Rpc(SendTo.ClientsAndHost)]
-        private void PlayVoiceLinesClientRpc(string line)
+        private void PlayVoiceLinesClientRpc(Hint line)
         {
             _triggerAnimator.SetTrigger(PullTrigger);
-            _source.clip = PuzzleHint.HintIndex[line].VoiceLine;
+            _source.clip = HintSystem.HintIndex[line].VoiceLine;
             _source.Play();
         }
 

@@ -1,17 +1,40 @@
 using System.Collections.Generic;
+using Prefabs.Player.PlayerUI.DebugConsole;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using Random = System.Random;
 
-namespace Prefabs.Puzzles.HintSystem
+namespace Hints
 {
-    public class PuzzleHint
+    public enum Hint
     {
-        private static Random _r = new Random(69);
+        HintTutorial,
+        NoHints,
+        BlackboxLocation,
+        SeatPuzzle,
+        BlueCode,
+        CombineSticker,
+        SeatsSticker,
+        RedCode,
+        BackPack,
+        RatTrap,
+        RatKey,
+        Numbers,
+        Code,
+        CodeUnlocks,
+        Hanoi,
+        GameWon
+    }
+
+    public class HintSystem
+    {
+        private static readonly Random Random = new Random(69);
         private static bool _firstInteractionPlayed;
-        
-        public static List<string> Hints { get; } = new List<string>();
-        public static Dictionary<string, PuzzleHint> HintIndex { get; } = new Dictionary<string, PuzzleHint>();
+
+        private static readonly List<Hint> Hints = new List<Hint>()
+            { Hint.BlackboxLocation, Hint.BackPack, Hint.RatTrap };
+
+        public static Dictionary<Hint, HintSystem> HintIndex { get; } = new Dictionary<Hint, HintSystem>();
 
         private readonly AudioClip _voiceLineEn;
         private readonly AudioClip _voiceLineFr;
@@ -57,8 +80,8 @@ namespace Prefabs.Puzzles.HintSystem
                 }
             }
         }
-        
-        public PuzzleHint(AudioClip voiceLineEn, AudioClip voiceLineFr, AudioClip voiceLineEs)
+
+        public HintSystem(AudioClip voiceLineEn, AudioClip voiceLineFr, AudioClip voiceLineEs)
         {
             _voiceLineEn = voiceLineEn;
             _voiceLineFr = voiceLineFr;
@@ -68,17 +91,50 @@ namespace Prefabs.Puzzles.HintSystem
             _durationEs = _voiceLineEs.length;
         }
 
-        public static string GetRandomVoiceLine()
+        public static Hint GetRandomVoiceLine()
         {
             if (!_firstInteractionPlayed)
             {
                 _firstInteractionPlayed = true;
-                return "HintTuto";
+                return Hint.HintTutorial;
             }
+
             if (Hints.Count == 0)
-                return "NoHints";
-            return Hints[_r.Next(Hints.Count)];
+                return Hint.NoHints;
+            return Hints[Random.Next(Hints.Count)];
         }
 
+        /// <summary>
+        /// Adds the specified hints to the list of currently available hints.
+        /// </summary>
+        /// <param name="hints"><see cref="Hint"/>s to add.</param>
+        public static void EnableHints(params Hint[] hints)
+        {
+            foreach (Hint hint in hints)
+                if (!Hints.Contains(hint))
+                    Hints.Add(hint);
+        }
+
+        /// <summary>
+        /// Removes the specified hints to the list of currently available hints.
+        /// </summary>
+        /// <param name="hints"><see cref="Hint"/>s to remove.</param>
+        public static void DisableHints(params Hint[] hints)
+        {
+            foreach (Hint hint in hints)
+                if (Hints.Contains(hint))
+                    Hints.Remove(hint);
+        }
+
+        /// <summary>
+        /// Lists available hints.
+        /// </summary>
+        public static void ListHints()
+        {
+            string output = "Available hints:\n";
+            foreach (Hint hint in Hints)
+                output += $"- {hint.ToString()}\n";
+            DebugConsole.Singleton.Log(output);
+        }
     }
 }
