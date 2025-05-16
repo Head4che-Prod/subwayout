@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using HomeMenu;
+using Prefabs.Player;
 using Prefabs.Player.PlayerUI.DebugConsole;
+using Prefabs.Player.PlayerUI.PauseMenu;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -71,6 +73,7 @@ namespace Prefabs.GameManagers
                 case EndGameState.WaitingHanoi:
                     break;
                 case EndGameState.HanoiResolved:
+                    StartCoroutine(OpenDoorAfterStop());
                     break;
                 case EndGameState.UnlockDoors:
                     break;
@@ -101,7 +104,6 @@ namespace Prefabs.GameManagers
                 case EndGameState.HanoiResolved:
                     tunnelAnimator.ResetTrigger(Animator.StringToHash("Move"));
                     tunnelAnimator.SetTrigger(Animator.StringToHash("Stop"));
-                    StartCoroutine(OpenDoorAfterStop());
                     break;
                 
                 case EndGameState.UnlockDoors:
@@ -110,8 +112,7 @@ namespace Prefabs.GameManagers
                     
                 case EndGameState.FinishGame:
                     HomeMenu.HomeMenu.Time = Time.time - _startTime;
-                    // call PauseMenu.QuitGame
-                    Destroy(this);
+                    PlayerObject.LocalPlayer.transform.Find("UI/PauseMenu").GetComponent<PauseMenu>().QuitGame();
                     break;
                     
                 default:

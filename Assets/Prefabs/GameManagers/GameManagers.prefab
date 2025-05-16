@@ -142,3 +142,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   tunnelAnimator: {fileID: 0}
+  allDoorsAnimator: {fileID: 0}
