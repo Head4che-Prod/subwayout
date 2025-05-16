@@ -44,13 +44,6 @@ namespace Prefabs.Puzzles.AI
             AnimeRatRpc(0);
             _clonedRatAnimator = clonedRat.GetComponent<Animator>();
             _cageAnimator = cageManager.gameObject.GetComponentInChildren<Animator>();
-            
-            if (!IsServer)
-            {
-                enabled = false;
-                return;
-            }
-
             _agent = GetComponent<NavMeshAgent>();
             _players = FindPlayers();
             _state = State.Idle;
@@ -60,6 +53,11 @@ namespace Prefabs.Puzzles.AI
 
         private void Update()
         {
+            if (!IsServer)
+            {
+                return;
+            }
+            
             GameObject nearestPlayer = FindNearestPlayer();
 
             // Rat enters cage
