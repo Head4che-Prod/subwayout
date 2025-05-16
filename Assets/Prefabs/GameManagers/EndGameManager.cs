@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using HomeMenu;
 using Prefabs.Player;
 using Prefabs.Player.PlayerUI.DebugConsole;
 using Prefabs.Player.PlayerUI.PauseMenu;
@@ -9,7 +8,29 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Prefabs.GameManagers
-{
+{    
+    public enum EndGameState
+    {
+        /// <summary>
+        /// This initial state wait Hanoi puzzle for being resolved.
+        /// </summary>
+        WaitingHanoi,
+        
+        /// <summary>
+        /// This state must be active when the player have resolved Hanoi puzzle
+        /// </summary>
+        HanoiResolved,
+        
+        /// <summary>
+        /// This state allow players to open metro's doors.
+        /// </summary>
+        UnlockDoors,
+        
+        /// <summary>
+        /// This state must be active when the player have open the doors, and execute the endgame cinematic and destroy this.
+        /// </summary>
+        FinishGame
+    }
     public sealed class EndGameManager : NetworkBehaviour
     {
         /// <summary>
@@ -24,7 +45,7 @@ namespace Prefabs.GameManagers
                     Debug.LogWarning("EndGameManager has not been initialized.");
                 return _instance;
             }
-            set
+            private set
             {
                 if (_instance == null)
                     _instance = value;
@@ -67,7 +88,7 @@ namespace Prefabs.GameManagers
         [Rpc(SendTo.Server, RequireOwnership = false)]
         private void UpdateStateServerRpc(EndGameState newState)
         {
-            Debug.Log($"EndGameManager/Server: {newState}");
+            // Debug.Log($"EndGameManager/Server: {newState}");
             switch (newState)
             {
                 case EndGameState.WaitingHanoi:
@@ -95,7 +116,7 @@ namespace Prefabs.GameManagers
         [Rpc(SendTo.Everyone, RequireOwnership = false)]
         private void UpdateStateClientRpc(EndGameState newState)
         {
-            Debug.Log($"EndGameManager/Client: {newState}");
+            // Debug.Log($"EndGameManager/Client: {newState}");
             switch (newState)
             {
                 case EndGameState.WaitingHanoi:
@@ -139,27 +160,5 @@ namespace Prefabs.GameManagers
             base.OnDestroy();
         }
     }
-    
-    public enum EndGameState
-    {
-        /// <summary>
-        /// This initial state wait Hanoi puzzle for being resolved.
-        /// </summary>
-        WaitingHanoi,
-        
-        /// <summary>
-        /// This state must be active when the player have resolved Hanoi puzzle
-        /// </summary>
-        HanoiResolved,
-        
-        /// <summary>
-        /// This state allow players to open metro's doors.
-        /// </summary>
-        UnlockDoors,
-        
-        /// <summary>
-        /// This state must be active when the player have open the doors, and execute the endgame cinematic and destroy this.
-        /// </summary>
-        FinishGame
-    }
+
 }

@@ -2,11 +2,28 @@
 using System.Collections;
 using Objects;
 using Unity.Netcode;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Prefabs.GameManagers
 {
+    public enum TutorialState
+    {
+        /// <summary>
+        /// Initial state.
+        /// </summary>
+        TrainStopped,
+        
+        /// <summary>
+        /// Optional. This state can be activated when the player tries to open the doors and reboot the trains motor.
+        /// </summary>
+        TrainMoving,
+        
+        /// <summary>
+        /// Active when the player have activated the hint system.
+        /// </summary>
+        HintSystemUnlocked
+    }
+    
     public sealed class TutorialManager : NetworkBehaviour
     {
         /// <summary>
@@ -21,7 +38,7 @@ namespace Prefabs.GameManagers
                     Debug.LogWarning("TutorialManager has not been initialized.");
                 return _instance;
             }
-            set
+            private set
             {
                 if (_instance == null)
                     _instance = value;
@@ -43,45 +60,32 @@ namespace Prefabs.GameManagers
             get => _state.Value;
             set
             {
-                Debug.Log($"TutorialManager/Local: {value}");
+                // Debug.Log($"TutorialManager/Local: {value}");
                 UpdateStateServerRpc(value);
                 UpdateStateClientRpc(value);
             }
         }
         
-        public static bool Exists => _instance != null;
+        public static bool Exists => _instance;
+        
+        /// <summary>
+        /// Whether the state can safely be changed, that is if there is no animation running.
+        /// </summary>
         public static bool CanBeChanged => Exists &&
                                            ((Instance.State == TutorialState.TrainStopped && 
                                              Instance.tunnelAnimator.GetCurrentAnimatorStateInfo(0).IsName("TunnelOnBoarding")) 
-                                         || (Instance.State == TutorialState.TrainMoving && 
-                                             Instance.tunnelAnimator.GetCurrentAnimatorStateInfo(0).IsName("TunnelMove")));
+                                            || (Instance.State == TutorialState.TrainMoving && 
+                                                Instance.tunnelAnimator.GetCurrentAnimatorStateInfo(0).IsName("TunnelMove")));
         
         /// <summary>
         /// This method ask the server to update the state of the puzzle.
         /// Used to perform network-authority based actions.
         /// </summary>
         /// <param name="newState">New state that must be applied.</param>
-        /// <exception cref="ArgumentOutOfRangeException">The given state doesn't exist.</exception>
         [Rpc(SendTo.Server, RequireOwnership = false)]
         private void UpdateStateServerRpc(TutorialState newState)
         {
-            Debug.Log($"TutorialManager/Server: {newState}");
-            switch (newState)
-            {
-                case TutorialState.TrainStopped:
-                    break;
-
-                case TutorialState.TrainMoving:
-                    break;
-
-                case TutorialState.HintSystemUnlocked:
-                    break;
-
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
-            }
-            
-            if (!this.IsDestroyed()) _state.Value = newState;
+            _state.Value = newState;
         }
         
         /// <summary>
@@ -93,7 +97,7 @@ namespace Prefabs.GameManagers
         [Rpc(SendTo.Everyone, RequireOwnership = false)]
         private void UpdateStateClientRpc(TutorialState newState)
         {
-            Debug.Log($"TutorialManager/Client: {newState}");
+            // Debug.Log($"TutorialManager/Client: {newState}");
             switch (newState)
             {
                 case TutorialState.TrainStopped:
@@ -111,7 +115,6 @@ namespace Prefabs.GameManagers
                     StopAllCoroutines();
                     tunnelAnimator.ResetTrigger(Animator.StringToHash("Stop"));
                     tunnelAnimator.SetTrigger(Animator.StringToHash("Move"));
-                    // Destroy(this);
                     break;
 
                 default:
@@ -126,7 +129,8 @@ namespace Prefabs.GameManagers
         
         public override void OnDestroy()
         {
-            if (_instance == this) _instance = null;
+            if (_instance == this) 
+                _instance = null;
             base.OnDestroy();
         }
 
@@ -141,22 +145,5 @@ namespace Prefabs.GameManagers
             State = TutorialState.TrainStopped;
         }
     }
-    
-    public enum TutorialState
-    {
-        /// <summary>
-        /// This state is the initial one.
-        /// </summary>
-        TrainStopped,
-        
-        /// <summary>
-        /// Facultative. This state can be activated when the player tries to open the doors and reboot the trains motor.
-        /// </summary>
-        TrainMoving,
-        
-        /// <summary>
-        /// This state must be active when the player have activated the hint system, and destroy this.
-        /// </summary>
-        HintSystemUnlocked
-    }
+ 
 }
