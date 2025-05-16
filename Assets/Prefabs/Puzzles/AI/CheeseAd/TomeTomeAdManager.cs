@@ -1,3 +1,4 @@
+using Hints;
 using Objects;
 using Prefabs.GameManagers;
 using Prefabs.Player;
@@ -81,10 +82,11 @@ namespace Prefabs.Puzzles.AI.CheeseAd
         /// <summary>
         /// Activate the key in the cheese ad.
         /// </summary>
-        [Rpc(SendTo.Everyone)]
+        [Rpc(SendTo.ClientsAndHost)]
         private void ActivateKeyInAdRpc()
         {
             keyInAd.SetActive(true);
+            HintSystem.DisableHints(Hint.RatKey);
         }
 
     }
