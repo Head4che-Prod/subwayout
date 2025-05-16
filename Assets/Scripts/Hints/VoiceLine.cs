@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using Newtonsoft.Json;
+using Prefabs.Player.PlayerUI.DebugConsole;
 using UnityEngine;
 
 namespace Hints
@@ -14,6 +15,8 @@ namespace Hints
 
         public static void LoadVoiceLines()
         {
+            DebugConsole.AddCommand("listHints", HintSystem.ListHints);
+            
             AudioClip fallback = Resources.Load<AudioClip>("Audio/Hints/Placeholders/neige_fixed");
                 
             VoiceLine[] voiceLines = JsonConvert.DeserializeObject<VoiceLine[]>(

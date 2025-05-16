@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Prefabs.Player.PlayerUI.DebugConsole;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using Random = System.Random;
@@ -123,6 +124,17 @@ namespace Hints
             foreach (Hint hint in hints)
                 if (Hints.Contains(hint))
                     Hints.Remove(hint);
+        }
+
+        /// <summary>
+        /// Lists available hints.
+        /// </summary>
+        public static void ListHints()
+        {
+            string output = "Available hints:\n";
+            foreach (Hint hint in Hints)
+                output += $"- {hint.ToString()}\n";
+            DebugConsole.Singleton.Log(output);
         }
     }
 }
