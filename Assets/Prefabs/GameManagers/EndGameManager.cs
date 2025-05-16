@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using HomeMenu;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -95,6 +97,7 @@ namespace Prefabs.GameManagers
                 case EndGameState.HanoiResolved:
                     tunnelAnimator.ResetTrigger(Animator.StringToHash("Move"));
                     tunnelAnimator.SetTrigger(Animator.StringToHash("Stop"));
+                    StartCoroutine(OpenDoorAfterStop());
                     break;
                 
                 case EndGameState.UnlockDoors:
@@ -102,12 +105,20 @@ namespace Prefabs.GameManagers
                     break;
                     
                 case EndGameState.FinishGame:
+                    // Set time in Homemenu
+                    // call PauseMenu.QuitGame
                     Destroy(this);
                     break;
                     
                 default:
                     throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
             }
+        }
+
+        private IEnumerator OpenDoorAfterStop()
+        {
+            yield return new WaitForSeconds(5);
+            State = EndGameState.UnlockDoors;
         }
         
         private void Awake()
