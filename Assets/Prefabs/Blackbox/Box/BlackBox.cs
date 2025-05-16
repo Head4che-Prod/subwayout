@@ -1,4 +1,5 @@
 using System.Collections;
+using Hints;
 using Objects;
 using Prefabs.Blackbox.Sticker;
 using Prefabs.GameManagers;
@@ -10,7 +11,7 @@ using UnityEngine.Serialization;
 
 namespace Prefabs.Blackbox.Box
 {
-    public class BlackBox : NetworkBehaviour
+    public class BlackBox : NetworkBehaviour, IObjectActionable
     {
         private enum State
         {
@@ -72,7 +73,12 @@ namespace Prefabs.Blackbox.Box
         /// Requests clients to pull out the black box.
         /// </summary>
         [Rpc(SendTo.ClientsAndHost, RequireOwnership = false)]
-        private void PullOutClientRpc() => StartCoroutine(RunOpenSequence());
+        private void PullOutClientRpc()
+        {
+            HintSystem.DisableHints(Hint.BlackboxLocation);
+            HintSystem.EnableHints(Hint.SeatPuzzle, Hint.CombineSticker);
+            StartCoroutine(RunOpenSequence());
+        }
 
         /// <summary>
         /// Plays the opening sequence and changes states accordingly. 
@@ -98,13 +104,21 @@ namespace Prefabs.Blackbox.Box
             ObjectHighlightManager.ForgetHighlightableObject(GrabbableSticker.NetworkObjectId);
             GrabbableSticker.Drop();
             GrabbableSticker.gameObject.SetActive(false);
+            HintSystem.DisableHints(Hint.CombineSticker);
+            if (!lid.IsOpen)
+                HintSystem.EnableHints(Hint.SeatsSticker);
         }
 
         /// <summary>
         /// Opens the box's lid as soon as it gets pulled out, and spawn its contents.
         /// </summary>
-        public void Open() => StartCoroutine(OpenBoxWhenAble());
-
+        public void Open()
+        {
+            HintSystem.EnableHints(Hint.BlueCode, Hint.RedCode);
+            HintSystem.DisableHints(Hint.SeatPuzzle, Hint.SeatsSticker);
+            StartCoroutine(OpenBoxWhenAble());
+        }
+  
         /// <summary>
         /// Waits for the box to get pulled out before opening the lid
         /// </summary>
@@ -113,7 +127,10 @@ namespace Prefabs.Blackbox.Box
             while (_state != State.PulledOut)
                 yield return null;
             if (IsServer)
+            {
                 Instantiate(contents, contentsLocation).Spawn();
+                Debug.Log("Server spawned airflow instructions");
+            }
             lid.RaiseLid();
         }
     }
