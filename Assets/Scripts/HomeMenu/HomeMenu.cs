@@ -24,6 +24,7 @@ namespace HomeMenu
         private GameObject _traveling;
         private GameObject _error;
         private GameObject _waiting;
+        private GameObject _tick = null;
 
         void Start()
         {
@@ -284,17 +285,19 @@ namespace HomeMenu
             LocalizationSettings.SelectedLocale = Locale.CreateLocale("en-US");
         }
 
+        /*
         public void SetLangEs()
         {
             LocalizationSettings.SelectedLocale = Locale.CreateLocale("es-ES");
         }
+        */
 
         private void SetLang()
         {
             if (LocalizationSettings.SelectedLocale.Identifier.Code.Contains("fr"))
                 SetLangFr();
-            else if (LocalizationSettings.SelectedLocale.Identifier.Code.Contains("es"))
-                SetLangEs();
+            // else if (LocalizationSettings.SelectedLocale.Identifier.Code.Contains("es"))
+            //     SetLangEs();
             else
                 SetLangEn();
         }
@@ -308,10 +311,18 @@ namespace HomeMenu
         {
             PlayerCam.Sensi = n;
         }
+        
+        public void SetVol(Single n)
+        {
+            // Todo
+        }
 
         public void ChangeDisplayHints(bool activate)
         {
             PlayerObject.DisplayHints = activate;
+            if (_tick is null)
+                _tick = GameObject.Find("ShowHintsSettings/Toggle/Background/Checkmark");
+            _tick.SetActive(activate);
         }
     }
 }

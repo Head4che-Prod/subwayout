@@ -40,7 +40,7 @@ namespace Prefabs.Player
 			_colliderHeight = PlayerCollider.bounds.size.y;
 		}
     
-		void Update()
+		void LateUpdate()
 		{
 			_grounded = Physics.Raycast(PlayerCollider.transform.position, Vector3.down, _colliderHeight * 0.5f + 0.2f, whatIsGround);
 			Debug.DrawRay(PlayerCollider.transform.position, Vector3.down, Color.blue,_colliderHeight * 0.5f + 0.2f);
@@ -48,16 +48,12 @@ namespace Prefabs.Player
 			ProcessInputs();
 			SpeedCtrl();
 			StateHandler();
+			MovePlayer();
 	    
 			if (_grounded)
 				_player.Rigidbody.linearDamping = groundDrag;
 			else
 				_player.Rigidbody.linearDamping = 0;
-		}
-
-		void FixedUpdate()
-		{
-			MovePlayer();
 		}
 
 		private void ProcessInputs()

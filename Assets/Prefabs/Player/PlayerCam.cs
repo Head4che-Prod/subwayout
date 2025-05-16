@@ -65,9 +65,11 @@ namespace Prefabs.Player
                 _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
 
                 _player.transform.rotation = Quaternion.Euler(0, _yRotation, 0);
-                RotateServerRpc(Quaternion.Euler(_xRotation, _yRotation, 0));
+                transform.rotation = Quaternion.Euler(_xRotation, _yRotation, 0);
+                RotateServerRpc(transform.rotation);
             }
-            transform.rotation = _rotation.Value;
+            else
+                transform.rotation = _rotation.Value;
         }
 
         [Rpc(SendTo.Server, RequireOwnership = false)]
