@@ -65,7 +65,7 @@ namespace Prefabs.Puzzles.AI
                 cheeseInCage.gameObject.activeInHierarchy)
             {
                 NetworkObject spawnedObj = Instantiate(keyGrabbable,
-                    cheeseInCage.transform.position + new Vector3(2, 0.25f, 0),
+                    transform.position,
                     transform.rotation);
                 spawnedObj.Spawn();
                 spawnedObj.gameObject.SetActive(true);
