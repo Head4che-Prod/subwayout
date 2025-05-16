@@ -28,7 +28,7 @@ namespace Objects
         [SerializeField] private bool affectedByGravity = true;
         
         [Header("Visuals")]
-        [SerializeField] private bool canBeHighlighted = true;
+        [SerializeField] protected bool canBeHighlighted = true;
         
         public Rigidbody Rb { get; private set; }
 

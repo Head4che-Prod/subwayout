@@ -71,22 +71,30 @@ namespace Prefabs.Puzzles.AI
         {
             _grabbedObject!.Drop();
             DisableCheeseRpc(_grabbedObject.NetworkObjectId);
-            ActivateCheeseInCageRpc();
+            ActivateCheeseInCageRpc(_grabbedObject.NetworkObjectId);
         }
+        
         /// <summary>
-        /// Removes the grabbableCheese.
+        /// Despawns the grabbableCheese.
         /// </summary>
+        /// <param name="cheeseId">The cheese's NetworkObjectId.</param>
         [Rpc(SendTo.Server, RequireOwnership = false)]
         private void DisableCheeseRpc(ulong cheeseId)
         {
-            ObjectHighlightManager.ForgetHighlightableObject(cheeseId);
             NetworkManager.SpawnManager.SpawnedObjects[cheeseId].Despawn();
         }
 
-        [Rpc(SendTo.Everyone)]
-        private void ActivateCheeseInCageRpc()
+        /// <summary>
+        /// Activates the cheese in the cage and disables highlight for both it and the cage.
+        /// </summary>
+        /// <param name="cheeseId">The cheese's NetworkObjectId</param>
+        [Rpc(SendTo.ClientsAndHost)]
+        private void ActivateCheeseInCageRpc(ulong cheeseId)
         {
             cheeseInCage.SetActive(true);
+            canBeHighlighted = false;
+            ObjectHighlightManager.ForgetHighlightableObject(cheeseId);
+            ObjectHighlightManager.ForgetHighlightableObject(NetworkObjectId);
         }
         
         
