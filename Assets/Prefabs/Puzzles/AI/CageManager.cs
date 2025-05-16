@@ -69,10 +69,10 @@ namespace Prefabs.Puzzles.AI
         /// </summary>
         private void DeactivateCheese()
         {
+            ObjectHighlightManager.ForgetHighlightableObject(_grabbedObject.NetworkObjectId);
             _grabbedObject!.Drop();
             DisableCheeseRpc(_grabbedObject.NetworkObjectId);
             ActivateCheeseInCageRpc();
-            ObjectHighlightManager.ForgetHighlightableObject(_grabbedObject.NetworkObjectId);
             ObjectHighlightManager.ForgetHighlightableObject(NetworkObjectId);
         }
         
