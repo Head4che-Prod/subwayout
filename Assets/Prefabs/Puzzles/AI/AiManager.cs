@@ -41,7 +41,7 @@ namespace Prefabs.Puzzles.AI
         private void Start()
         {
             _animator = GetComponent<Animator>();
-            _animator.SetInteger(WhichAnim, 0);
+            AnimeRatRpc(0);
             _clonedRatAnimator = clonedRat.GetComponent<Animator>();
             _cageAnimator = cageManager.gameObject.GetComponentInChildren<Animator>();
             
@@ -135,7 +135,7 @@ namespace Prefabs.Puzzles.AI
             {
                 if (Vector3.Distance(_agent.destination, hit.position) > 0.5f)
                 {
-                    _animator.SetInteger(WhichAnim, 1);
+                    AnimeRatRpc(1);
                     _agent.speed = 5f;
                     _agent.SetDestination(hit.position);
                 }
@@ -152,11 +152,11 @@ namespace Prefabs.Puzzles.AI
                 Mathf.Approximately(_agent.transform.position.z,
                     cheeseInCage.transform.position.z)) // approximately calculate if they're equal
             {
-                _animator.SetInteger(WhichAnim, 0);
+                AnimeRatRpc(0);
             }
             else
             {
-                _animator.SetInteger(WhichAnim, -1);
+                AnimeRatRpc(-1);
                 _agent.speed = 3f;
                 _agent.SetDestination(cheeseInCage.transform.position);
             }
@@ -182,13 +182,26 @@ namespace Prefabs.Puzzles.AI
                         yield return null; // wait 1 frame
                     } //check if it's on the navmesh and if not will wait 1 frame before valid pos
 
-                    _animator.SetInteger(WhichAnim, -1);
+                    AnimeRatRpc(-1);
                     _agent.speed = 1.5f;
                     _agent.SetDestination(hit.position);
                     yield return new WaitUntil(() => transform.position - hit.position == Vector3.zero);
                 }
             }
         }
+        
+        
+        /// <summary>
+        /// Will play the corresponding animation of the rat thanks to the int parameter.
+        /// </summary>
+        /// <param name="intofAnimation"> int corresponding to a specific animation. 0 : idle  1 : fleeing -1 : baited </param>
+        [Rpc(SendTo.ClientsAndHost)]
+        private void AnimeRatRpc(int intofAnimation)
+        {
+            _animator.SetInteger(WhichAnim, intofAnimation);
+        }
+        
+        
 
         /// <summary>
         /// Keep animating until the target destination changes or is reached.
@@ -198,7 +211,7 @@ namespace Prefabs.Puzzles.AI
             Vector3 target = _agent.destination;
             while (_agent.destination == target && transform.position != target)
                 yield return null;
-            _animator.SetInteger(WhichAnim, (int)_state);
+            AnimeRatRpc((int)_state);
         }
 
         private GameObject[] FindPlayers() =>
