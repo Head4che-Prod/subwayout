@@ -6964,6 +6964,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 11276017085719348, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
   m_PrefabInstance: {fileID: 775381947}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &775381951 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3121078105459957532, guid: eae0bba1cbd50584dbfbd28c7cd385f1, type: 3}
+  m_PrefabInstance: {fileID: 775381947}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &781701311
 GameObject:
   m_ObjectHideFlags: 0
@@ -21187,6 +21192,10 @@ PrefabInstance:
       propertyPath: tunnelAnimator
       value: 
       objectReference: {fileID: 1394362738}
+    - target: {fileID: 8294252900829056459, guid: ef50728f52ab4bc4294f4081cce31c6d, type: 3}
+      propertyPath: allDoorsAnimator
+      value: 
+      objectReference: {fileID: 775381951}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

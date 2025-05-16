@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using HomeMenu;
+using Prefabs.Player.PlayerUI.DebugConsole;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -32,6 +33,8 @@ namespace Prefabs.GameManagers
         
         [Header("Train")]
         [SerializeField] private Animator tunnelAnimator;
+
+        [SerializeField] private Animator allDoorsAnimator;
         
         private NetworkVariable<EndGameState> _state = new ();
         
@@ -101,7 +104,7 @@ namespace Prefabs.GameManagers
                     break;
                 
                 case EndGameState.UnlockDoors:
-                    // Add animation
+                    allDoorsAnimator.SetTrigger("openAllDoors");
                     break;
                     
                 case EndGameState.FinishGame:
@@ -124,6 +127,7 @@ namespace Prefabs.GameManagers
         private void Awake()
         {
             Instance = this;
+            DebugConsole.AddCommand("OpenDoors", () => allDoorsAnimator.SetTrigger("openAllDoors"));
         }
 
         public override void OnDestroy()
