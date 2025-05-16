@@ -95,7 +95,7 @@ namespace HomeMenu
                 if (selectable.name == "BackButton")
                     selectable.Select();
 
-            transform.Find("WinningMenu/TimeText").GetComponent<TextMeshPro>().text = TimeToString((int)(Time ?? 0));
+            transform.Find("WinningMenu/TimeText").GetComponent<TextMeshProUGUI>().text = TimeToString((int)(Time ?? 0));
             
             Time = null;
         }
