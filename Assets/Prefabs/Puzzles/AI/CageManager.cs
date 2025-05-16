@@ -39,8 +39,8 @@ namespace Prefabs.Puzzles.AI
                 return;
             }
 
-            _grabbedObject = PlayerInteract.LocalPlayerInteract.GrabbedObject.GrabbedObject;
-            if (_grabbedObject is CheeseGrabbable)
+            _grabbedObject = PlayerInteract.LocalPlayerInteract.GrabbedObject?.GrabbedObject;
+            if (_isOpen.Value && _grabbedObject is CheeseGrabbable)
             {
                 DeactivateCheese();
             }

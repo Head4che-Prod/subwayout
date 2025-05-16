@@ -679,7 +679,7 @@ MonoBehaviour:
   sprintSpeed: 10
   groundDrag: 5
   airMultiplier: 0.4
-  PlayerCollider: {fileID: 3936763041024648637}
+  playerCollider: {fileID: 3936763041024648637}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64

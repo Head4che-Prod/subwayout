@@ -14214,7 +14214,7 @@ PrefabInstance:
     - target: {fileID: 204402163000553466, guid: 009d64ad1a573c84a8540adee9c16a39, type: 3}
       propertyPath: keyGrabbable
       value: 
-      objectReference: {fileID: 8449505802533570474, guid: 9fb327af612a7174980b8bc0d155f1b1, type: 3}
+      objectReference: {fileID: 1971732302951869035, guid: 9fb327af612a7174980b8bc0d155f1b1, type: 3}
     - target: {fileID: 446389551699317175, guid: 009d64ad1a573c84a8540adee9c16a39, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
