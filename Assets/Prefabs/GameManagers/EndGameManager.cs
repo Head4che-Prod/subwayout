@@ -48,6 +48,7 @@ namespace Prefabs.GameManagers
             }
         }
         
+        private float _startTime;
         public static bool Exists => _instance != null;
         public static bool CanBeChanged => Exists &&
                                            ((Instance.State is EndGameState.WaitingHanoi && 
@@ -108,7 +109,7 @@ namespace Prefabs.GameManagers
                     break;
                     
                 case EndGameState.FinishGame:
-                    // Set time in Homemenu
+                    HomeMenu.HomeMenu.Time = Time.time - _startTime;
                     // call PauseMenu.QuitGame
                     Destroy(this);
                     break;
@@ -128,6 +129,7 @@ namespace Prefabs.GameManagers
         {
             Instance = this;
             DebugConsole.AddCommand("OpenDoors", () => allDoorsAnimator.SetTrigger("openAllDoors"));
+            _startTime = Time.time;
         }
 
         public override void OnDestroy()
