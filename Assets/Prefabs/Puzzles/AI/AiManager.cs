@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Hints;
+using Prefabs.GameManagers;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.AI;
@@ -38,21 +40,21 @@ namespace Prefabs.Puzzles.AI
 
         private void Start()
         {
+            _animator = GetComponent<Animator>();
+            _animator.SetInteger(WhichAnim, 0);
+            _clonedRatAnimator = clonedRat.GetComponent<Animator>();
+            _cageAnimator = cageManager.gameObject.GetComponentInChildren<Animator>();
+            
             if (!IsServer)
             {
                 enabled = false;
                 return;
             }
-            
+
             _agent = GetComponent<NavMeshAgent>();
             _playersArray = GameObject.FindGameObjectsWithTag("Player");
-            _animator = GetComponent<Animator>();
-
-            _animator.SetInteger(WhichAnim, 0);
-            _clonedRatAnimator = clonedRat.GetComponent<Animator>();
-            _cageAnimator = cageManager.gameObject.GetComponentInChildren<Animator>();
             _state = State.Idle;
-
+            
             StartCoroutine(IdleCoroutine());
         }
 
@@ -64,12 +66,13 @@ namespace Prefabs.Puzzles.AI
             if (Vector3.Distance(_agent.transform.position, cheeseInCage.gameObject.transform.position) < 0.5f &&
                 cheeseInCage.gameObject.activeInHierarchy)
             {
-                GameObject spawnedObj = Instantiate(keyGrabbable,
+                NetworkObject spawnedObj = Instantiate(keyGrabbable,
                     cheeseInCage.transform.position + new Vector3(2, 0.25f, 0),
-                    transform.rotation);
-                // ReSharper disable once Unity.PerformanceCriticalCodeInvocation - only done once so okay for expensive method invocation
-                spawnedObj.GetComponent<NetworkObject>().Spawn();
-                spawnedObj.SetActive(true);
+                    transform.rotation).GetComponent<NetworkObject>();
+                spawnedObj.Spawn();
+                spawnedObj.gameObject.SetActive(true);
+                ObjectHighlightManager.RegisterHighlightableObject(spawnedObj.NetworkObjectId);
+                
                 DisableRatRpc();
                 return;
             }
@@ -101,15 +104,18 @@ namespace Prefabs.Puzzles.AI
             }
         }
 
-        [Rpc(SendTo.Everyone)]
+        [Rpc(SendTo.ClientsAndHost)]
         private void DisableRatRpc()
         {
             keyModelInMouthRat.SetActive(false);
-            this.gameObject.SetActive(false);
+            gameObject.SetActive(false);
 
             clonedRat.SetActive(true);
             _clonedRatAnimator.Play("Idle");
-            _cageAnimator.SetBool("animCageDoor", !_cageAnimator.GetBool("animCageDoor"));
+            cageManager.ChangeCageDoorServerRpc(!_cageAnimator.GetBool("animCageDoor"));
+                        
+            HintSystem.EnableHints(Hint.RatKey);
+            HintSystem.DisableHints(Hint.RatTrap);
         }
 
 
