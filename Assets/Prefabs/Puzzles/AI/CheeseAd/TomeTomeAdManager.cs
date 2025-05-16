@@ -1,8 +1,8 @@
-using System;
-using JetBrains.Annotations;
+
 using Objects;
 using Prefabs.GameManagers;
 using Prefabs.Player;
+using Prefabs.Puzzles.AI.Key;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ namespace Prefabs.Puzzles.AI.CheeseAd
 {
     public class TomeTomeAdManager : NetworkBehaviour,IObjectActionable
     {
-        [CanBeNull] private ObjectGrabbable _keyGrabbable;
+        private ObjectGrabbable _grabbedObject;
         [SerializeField] private GameObject _keyInAd;
         private Animator animator;
         private static readonly int openCheeseAdAnim = Animator.StringToHash("openCheeseAd");
@@ -29,15 +29,11 @@ namespace Prefabs.Puzzles.AI.CheeseAd
             _isOpen.OnValueChanged += UpdatePosition;
         }
         
-        
-        void Update()
-        {
-            _keyGrabbable = (ObjectGrabbable)PlayerInteract.LocalPlayerInteract.GrabbedObject;
-        }
 
         public void Action()
         {
-            if (_keyGrabbable is not null && _keyGrabbable.name == "keyGrabbable(Clone)")
+            _grabbedObject = PlayerInteract.LocalPlayerInteract.GrabbedObject?.GrabbedObject;
+            if (_grabbedObject is KeyGrabbable)
             {
                 DeactivateGrabbedKey();
             }
@@ -66,8 +62,8 @@ namespace Prefabs.Puzzles.AI.CheeseAd
         /// </summary>
         public void DeactivateGrabbedKey()
         {
-            _keyGrabbable!.Drop();
-            DisablekeyGrabbableRpc(_keyGrabbable.NetworkObjectId);
+            _grabbedObject!.Drop();
+            DisablekeyGrabbableRpc(_grabbedObject.NetworkObjectId);
             ActivateKeyInAdRpc();
         }
         /// <summary>
