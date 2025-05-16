@@ -1,7 +1,7 @@
 using System;
-using Hints;
 using Objects;
 using Unity.Netcode;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Prefabs.Puzzles.DoorCode
@@ -12,17 +12,15 @@ namespace Prefabs.Puzzles.DoorCode
         /// Requests server to update the code's internal value.
         /// </summary>
         [Rpc(SendTo.Server)]
-        private void UpdateValueRpc(byte newValue)
+        private void UpdateValueRpc()
         {
-            value.Value = newValue;
-            if (Digicode.CanDoorOpen)
-                HintSystem.EnableHints(Hint.CodeUnlocks);
+            value.Value = (byte)((value.Value + 1) % 10);
         }
 
         public void Action()
         {
             if (Digicode.Active)
-                UpdateValueRpc((byte)((value.Value + 1) % 10));
+                UpdateValueRpc();
         }
 
         private Text _textField;

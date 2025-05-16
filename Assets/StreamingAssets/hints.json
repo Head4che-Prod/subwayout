@@ -6,93 +6,15 @@
     "PathEs": "NoHints/NoHintsES"
   },
   {
-    "ID": "HintTutorial",
+    "ID": "HintTuto",
     "PathEn": "HintTuto/HintTutoEN",
     "PathFr": "HintTuto/HintTutoFR",
     "PathEs": "HintTuto/HintTutoES"
   },
   {
-    "ID": "BlackboxLocation",
-    "PathEn": "BlackboxLocation/BlackboxLocationEN",
-    "PathFr": "BlackboxLocation/BlackboxLocationFR",
-    "PathEs": ""
-  },
-  {
-    "ID": "SeatPuzzle",
-    "PathEn": "SeatPuzzle/SeatPuzzleEN",
-    "PathFr": "SeatPuzzle/SeatPuzzleFR",
-    "PathEs": ""
-  },
-  {
-    "ID": "BlueCode",
-    "PathEn": "BlueCode/BlueCodeEN",
-    "PathFr": "BlueCode/BlueCodeFR",
-    "PathEs": ""
-  },
-  {
-    "ID": "CombineSticker",
-    "PathEn": "CombineSticker/CombineStickerEN",
-    "PathFr": "CombineSticker/CombineStickerFR",
-    "PathEs": ""
-  },
-  {
-    "ID": "SeatsSticker",
-    "PathEn": "SeatsSticker/SeatsStickerEN",
-    "PathFr": "SeatsSticker/SeatsStickerFR",
-    "PathEs": ""
-  },
-  {
-    "ID": "RedCode",
-    "PathEn": "RedCode/RedCodeEN",
-    "PathFr": "RedCode/RedCodeFR",
-    "PathEs": ""
-  },
-  {
-    "ID": "BackPack",
-    "PathEn": "BackPack/BackPackEN",
-    "PathFr": "BackPack/BackPackFR",
-    "PathEs": ""
-  },
-  {
-    "ID": "RatTrap",
-    "PathEn": "RatTrap/RatTrapEN",
-    "PathFr": "RatTrap/RatTrapFR",
-    "PathEs": ""
-  },
-  {
-    "ID": "RatKey",
-    "PathEn": "RatKey/RatKeyEN",
-    "PathFr": "RatKey/RatKeyFR",
-    "PathEs": ""
-  },
-  {
-    "ID": "Numbers",
-    "PathEn": "Numbers/NumbersEN",
-    "PathFr": "Numbers/NumbersFR",
-    "PathEs": ""
-  },
-  {
-    "ID": "Code",
-    "PathEn": "Code/CodeEN",
-    "PathFr": "Code/CodeFR",
-    "PathEs": ""
-  },
-  {
-    "ID": "CodeUnlocks",
-    "PathEn": "CodeUnlocks/CodeUnlocksEN",
-    "PathFr": "CodeUnlocks/CodeUnlocksFR",
-    "PathEs": ""
-  },
-  {
-    "ID": "Hanoi",
-    "PathEn": "Hanoi/HanoiEN",
-    "PathFr": "Hanoi/HanoiFR",
-    "PathEs": ""
-  },
-  {
-    "ID": "GameWon",
-    "PathEn": "GameWon/GameWonEN",
-    "PathFr": "GameWon/GameWonFR",
-    "PathEs": ""
+    "ID": "Map",
+    "PathEn": "Map/MapEN",
+    "PathFr": "Map/MapFR",
+    "PathEs": "Map/MapES"
   }
 ]

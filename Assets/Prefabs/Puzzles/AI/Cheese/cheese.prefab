@@ -16,8 +16,8 @@ GameObject:
   - component: {fileID: 3121323064304024549}
   - component: {fileID: 6700778377144907496}
   - component: {fileID: 5824907494938627345}
+  - component: {fileID: 8707203030938401627}
   - component: {fileID: 1338290601281978327}
-  - component: {fileID: 6959469407647845728}
   m_Layer: 0
   m_Name: cheese
   m_TagString: Untagged
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2863203826
+  GlobalObjectIdHash: 998716573
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -216,6 +216,24 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &8707203030938401627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2347563816384903752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 746ef9201ad087547835363d04dd8bc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  canBeOffStage: 0
+  startOnStage: 0
+  moveSpeed: 2
+  affectedByGravity: 1
+  canBeHighlighted: 1
 --- !u!64 &1338290601281978327
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -238,21 +256,3 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -2719439086681959747, guid: 0d1670ee91f7a0845aeaf00ed83d38e0, type: 3}
---- !u!114 &6959469407647845728
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2347563816384903752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21161481337d4100b111d2ae03a89366, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  canBeOffStage: 0
-  startOnStage: 0
-  moveSpeed: 2
-  affectedByGravity: 1
-  canBeHighlighted: 1

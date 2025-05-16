@@ -2,7 +2,6 @@ using JetBrains.Annotations;
 using Objects;
 using Prefabs.GameManagers;
 using Prefabs.Player;
-using Prefabs.Puzzles.AI.Cheese;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -11,11 +10,11 @@ namespace Prefabs.Puzzles.AI
     public class CageManager : ObjectGrabbable, IObjectActionable
     {
         
+        [CanBeNull] private ObjectGrabbable cheeseGrabbable;
         [SerializeField] private GameObject cheeseInCage; 
+        private Animator animator;
+        private static readonly int animCageDoor = Animator.StringToHash("animCageDoor");
         [SerializeField] private GameObject clonedRat;
-        private Animator _animator;
-        private ObjectGrabbable _grabbedObject;
-        private static readonly int AnimCageDoor = Animator.StringToHash("animCageDoor");
         private readonly NetworkVariable<bool> _isOpen = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone);
 
         
@@ -23,7 +22,7 @@ namespace Prefabs.Puzzles.AI
         {
             base.Start();
             cheeseInCage.SetActive(false);
-            _animator = transform.GetChild(0).GetComponent<Animator>();
+            animator = transform.GetChild(0).GetComponent<Animator>();
         }
         
         public override void OnNetworkSpawn()
@@ -38,20 +37,20 @@ namespace Prefabs.Puzzles.AI
             {
                 return;
             }
-
-            _grabbedObject = PlayerInteract.LocalPlayerInteract.GrabbedObject.GrabbedObject;
-            if (_grabbedObject is CheeseGrabbable)
+            
+            cheeseGrabbable = (ObjectGrabbable)PlayerInteract.LocalPlayerInteract.GrabbedObject;
+            if (cheeseGrabbable !=null && cheeseGrabbable.name == "cheese(Clone)" && animator.GetBool(animCageDoor))
             {
                 DeactivateCheese();
             }
             else
             {
-                ChangeCageDoorServerRpc(!_animator.GetBool(AnimCageDoor));
+                ChangeCageDoorServerRpc(!animator.GetBool(animCageDoor));
             }
         }
         
         [Rpc(SendTo.Server, RequireOwnership = false)]
-        public void ChangeCageDoorServerRpc(bool isOpenValChanged)
+        private void ChangeCageDoorServerRpc(bool isOpenValChanged)
         {
             _isOpen.Value = isOpenValChanged;
         }
@@ -60,17 +59,17 @@ namespace Prefabs.Puzzles.AI
         /// </summary>
         private void UpdatePosition(bool _, bool newValue)
         {
-            _animator.SetBool(AnimCageDoor, newValue);
+            animator.SetBool(animCageDoor, newValue);
         }
         
         
         /// <summary>
         /// Drops the cheese and call DisableCheeseRpc.
         /// </summary>
-        private void DeactivateCheese()
+        public void DeactivateCheese()
         {
-            _grabbedObject!.Drop();
-            DisableCheeseRpc(_grabbedObject.NetworkObjectId);
+            cheeseGrabbable!.Drop();
+            DisableCheeseRpc(cheeseGrabbable.NetworkObjectId);
             ActivateCheeseInCageRpc();
         }
         /// <summary>

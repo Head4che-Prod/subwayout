@@ -186,8 +186,8 @@ GameObject:
   - component: {fileID: 6233335602732554156}
   - component: {fileID: 1249922929888119808}
   - component: {fileID: 5670775756082250122}
+  - component: {fileID: 6549491525225704960}
   - component: {fileID: 7638585617604085984}
-  - component: {fileID: 9133402093212392557}
   m_Layer: 0
   m_Name: blackbox
   m_TagString: Untagged
@@ -263,6 +263,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6549491525225704960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2595657238556209436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43f95d5732ff498e9af713c97c98c28c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blackBox: {fileID: 4034001567787519343}
 --- !u!64 &7638585617604085984
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -285,19 +298,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2399846452429438458, guid: 6024e72e96a498347b4849e5747debe8, type: 3}
---- !u!114 &9133402093212392557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2595657238556209436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14dbd14d24fede54f81fb008e71cee04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parent: {fileID: 266334513777384540}
 --- !u!1 &2961001680535129285
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,7 +451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee28282b3fbb8ac4b94aa976cf0ea899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 266334513777384540}
+  blackBox: {fileID: 4034001567787519343}
   lidOpenAnimator: {fileID: 7271617555039028164}
 --- !u!1 &6626994019888276315
 GameObject:
@@ -524,7 +524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 397397802
+  GlobalObjectIdHash: 1833373794
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1

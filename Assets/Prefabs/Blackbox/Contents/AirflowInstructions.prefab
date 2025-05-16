@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 2170220340980347198}
   - component: {fileID: 5200043546128833833}
   - component: {fileID: 3475683963093378846}
-  - component: {fileID: -1448448660488330121}
+  - component: {fileID: 6423198811414707281}
   m_Layer: 0
   m_Name: AirflowInstructions
   m_TagString: Untagged
@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1202698166
+  GlobalObjectIdHash: 3209235057
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -270,7 +270,7 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &-1448448660488330121
+--- !u!114 &6423198811414707281
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -279,7 +279,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5227454622780049330}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd4f6296230c45d6a14f77247f2e33b8, type: 3}
+  m_Script: {fileID: 11500000, guid: 746ef9201ad087547835363d04dd8bc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1

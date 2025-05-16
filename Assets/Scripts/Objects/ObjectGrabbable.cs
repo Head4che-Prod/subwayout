@@ -40,7 +40,7 @@ namespace Objects
             set => IsGrabbable.Value = value;
         }
 
-        public ObjectGrabbable GrabbedObject => this;
+        public IObjectGrabbable GrabbedObject => this;
 
         private ObjectOutline _outline;
         

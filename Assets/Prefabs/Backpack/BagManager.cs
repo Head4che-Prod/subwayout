@@ -1,37 +1,32 @@
 using System.Collections.Generic;
-using Hints;
 using Objects;
-using Prefabs.GameManagers;
 using Unity.Netcode;
 using UnityEngine;
 
 namespace Prefabs.Backpack
 {
-    public class BagManager: ObjectGrabbable, IObjectActionable
+    public class BagManager: NetworkBehaviour, IObjectActionable
     {
-        [Header("Bag")]
-        [SerializeField] private GameObject bagOpen;
-        [SerializeField] private GameObject bagClose;
+        [SerializeField] private GameObject _bagOpen;
+        [SerializeField] private GameObject _bagClose;
         [SerializeField] private List<GameObject> objectsInBag;
 
         public void Action()
         {
             Debug.Log("Action played");
-            bagOpen.SetActive(true);
-            bagClose.SetActive(false);
+            _bagOpen.SetActive(true);
+            _bagClose.SetActive(false);
             ImpulsionObjetsRpc();
         }
     
         [Rpc(SendTo.Server, RequireOwnership = false)]
-        private void ImpulsionObjetsRpc()
+        protected void ImpulsionObjetsRpc()
         {
-            HintSystem.DisableHints(Hint.BackPack);
             foreach (GameObject obj in objectsInBag)
             {
-                NetworkObject spawnedObj = Instantiate(obj, bagOpen.transform.position + new Vector3(0, 1, 0),
-                    Quaternion.identity).GetComponent<NetworkObject>();
-                spawnedObj.Spawn();
-                ObjectHighlightManager.RegisterHighlightableObject(spawnedObj.NetworkObjectId);
+                GameObject spawnedObj = Instantiate(obj, _bagOpen.transform.position + new Vector3(0, 1, 0),
+                    Quaternion.identity);
+                spawnedObj.GetComponent<NetworkObject>().Spawn();
                 spawnedObj.GetComponent<Rigidbody>().AddForce(new Vector3(-1.5f, 2f, 0f), ForceMode.VelocityChange);
             }
         }

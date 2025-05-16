@@ -7,7 +7,7 @@ namespace Objects
         /// <summary>
         /// The object that will be tracked by the <see cref="PlayerInteract"/>.
         /// </summary>
-        public ObjectGrabbable GrabbedObject { get; }
+        public IObjectGrabbable GrabbedObject { get; }
         
         /// <summary>
         /// Whether the object is currently able to be grabbed.
