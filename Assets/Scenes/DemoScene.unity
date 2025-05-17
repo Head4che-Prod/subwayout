@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 18910370}
   - component: {fileID: 18910372}
   - component: {fileID: 18910371}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rightBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 26316426}
   - component: {fileID: 26316429}
   - component: {fileID: 26316427}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bottomBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2296,7 +2296,7 @@ GameObject:
   - component: {fileID: 193309326}
   - component: {fileID: 193309328}
   - component: {fileID: 193309327}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: frontBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4959,7 +4959,7 @@ GameObject:
   - component: {fileID: 532788324}
   - component: {fileID: 532788326}
   - component: {fileID: 532788325}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: topBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5185,7 +5185,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 557690963}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: killZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13767,7 +13767,7 @@ GameObject:
   - component: {fileID: 1395026458}
   - component: {fileID: 1395026460}
   - component: {fileID: 1395026459}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: backBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16574,7 +16574,7 @@ GameObject:
   - component: {fileID: 1755020453}
   - component: {fileID: 1755020455}
   - component: {fileID: 1755020454}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: leftBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
