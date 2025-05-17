@@ -58,7 +58,7 @@ namespace Prefabs.Player
 
         private void HandleAction(InputAction.CallbackContext context)
         {
-            IObjectActionable actionable = null;
+            IObjectInteractable interactable = null;
             try
             {
                 RaycastHit[] hits = new RaycastHit[AllocationSize];
@@ -72,7 +72,7 @@ namespace Prefabs.Player
                 float distance = hits
                     .OrderBy(hit => hit.distance > 0 ? hit.distance : float.MaxValue)
                     .TakeWhile(hit => hit.collider.transform != null && hit.collider.transform.TryGetComponent<IRaycastResponsive>(out _))
-                    .First(hit => hit.collider.transform.TryGetComponent<IObjectActionable>(out actionable)).distance;
+                    .First(hit => hit.collider.transform.TryGetComponent<IObjectInteractable>(out interactable)).distance;
                 
                 Debug.DrawRay(
                     player.playerCamera.transform.position, 
@@ -86,9 +86,9 @@ namespace Prefabs.Player
                 throw;
             }
 
-            if (actionable != null)
+            if (interactable != null)
             {
-                actionable.Action();
+                interactable.Action();
             }
         }
         

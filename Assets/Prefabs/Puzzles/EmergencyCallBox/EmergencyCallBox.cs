@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Prefabs.Puzzles.EmergencyCallBox
 {
-    public class EmergencyCallBox : MonoBehaviour, IObjectActionable
+    public class EmergencyCallBox : MonoBehaviour, IObjectInteractable
     {
         [SerializeField] private InsertableTrigger insertableTrigger;
         [SerializeField] private EmergencyCallTrigger callTrigger;

@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Prefabs.PlayableCar
 {
-    public class DoorsActionable : MonoBehaviour, IObjectActionable
+    public class DoorsInteractable : MonoBehaviour, IObjectInteractable
     {
         public void Action()
         {
-            Debug.Log($"DoorsActionable: {TutorialManager.Instance.State} state");
+            Debug.Log($"DoorsInteractable: {TutorialManager.Instance.State} state");
             if (TutorialManager.CanBeChanged && TutorialManager.Instance.State == TutorialState.TrainStopped)
                 TutorialManager.Instance.State = TutorialState.TrainMoving;
         }

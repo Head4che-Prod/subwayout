@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Prefabs.Backpack
 {
-    public class BagManager: ObjectGrabbable, IObjectActionable
+    public class BagManager: ObjectGrabbable, IObjectInteractable
     {
         [Header("Bag")]
         [SerializeField] private GameObject bagOpen;

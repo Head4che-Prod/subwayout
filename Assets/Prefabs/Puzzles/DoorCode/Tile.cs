@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Prefabs.Puzzles.DoorCode
 {
-    public class Tile : NetworkBehaviour, IObjectActionable
+    public class Tile : NetworkBehaviour, IObjectInteractable
     {
         /// <summary>
         /// Requests server to update the code's internal value.

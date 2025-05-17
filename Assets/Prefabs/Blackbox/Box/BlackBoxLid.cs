@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Prefabs.Blackbox.Box
 {
-    public class BlackBoxLid : ParentActionable
+    public class BlackBoxLid : ParentInteractable
     {
         [SerializeField] private Animator lidOpenAnimator;
 

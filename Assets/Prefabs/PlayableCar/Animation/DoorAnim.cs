@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Prefabs.PlayableCar.Animation
 {
-    public class DoorAnim : NetworkBehaviour, IObjectActionable
+    public class DoorAnim : NetworkBehaviour, IObjectInteractable
     {
         private static readonly int OpenCabinDoor = Animator.StringToHash("OpenCabinDoor");
         [SerializeField] private Animator animDoor;
