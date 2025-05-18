@@ -77,6 +77,25 @@ namespace HomeMenu
             Cursor.visible = _isCursorActive;
         }
 
+        public void OpenCreditsMenu()
+        {
+            
+            transform.Find("MainMenu").gameObject.SetActive(false);
+            transform.Find("CreditsMenu").gameObject.SetActive(true);
+            foreach (Selectable selectable in Selectable.allSelectablesArray)
+                if (selectable.name == "BackButton")
+                    selectable.Select();
+        }
+
+        public void CloseCreditsMenu()
+        {
+            transform.Find("CreditsMenu").gameObject.SetActive(false);
+            transform.Find("MainMenu").gameObject.SetActive(true);
+            foreach (Selectable selectable in Selectable.allSelectablesArray)
+                if (selectable.name == "CreditsButton")
+                    selectable.Select();
+        }
+
         public void Quit()
         {
             #if UNITY_EDITOR
@@ -90,7 +109,6 @@ namespace HomeMenu
         {
             transform.Find("MainMenu").gameObject.SetActive(false);
             transform.Find("WinningMenu").gameObject.SetActive(true);
-            SetInteractibleStartButtons(0);
             foreach (Selectable selectable in Selectable.allSelectablesArray)
                 if (selectable.name == "BackButton")
                     selectable.Select();
