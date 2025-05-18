@@ -124,13 +124,16 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 28098408885256192
-    m_Localized: "Tunnel 3D model:\r\n\"Low Poly Style Subway Tunnel Section\" by
-      TreD\xE8\r\nhttps://sketchfab.com/3d-models/low-poly-style-subway-tunnel-section-26668039209f41a1a793e0e28ed8589c\r\n\r\nRat
-      3D model and animations:\r\n\"Rat\" by Artise1\r\nhttps://sketchfab.com/3d-models/rat-5deb007a05a946d28ce6403616f9629b\r\n\r\nImages
-      used to create advertisements:\r\n\"Illustration de fond de th\xE9 de dessin
-      anim\xE9\" by pikisuperstar\r\nhttps://fr.freepik.com/vecteurs-libre/illustration-fond-the-dessin-anime_16692042.htm#fromView=search&page=5&position=34&uuid=e65d097b-4dbc-4061-a5bc-89054539a001&query=tea+ad\r\n\r\n\"La
-      meilleure affiche du fromage\" by Freepik\r\nhttps://fr.freepik.com/vecteurs-libre/meilleure-affiche-du-fromage_899247.htm#fromView=search&page=2&position=36&uuid=dfd4081a-2cd8-4823-8622-3d0a0eacdd23&query=cheese+ad\r\n\r\n\"Daddy\"
-      advertisement for sugar"
+    m_Localized: "<align=\"center\">\n<size=100%>\n<b>Created by</b>\n<sprite=\"head4che_red\">
+      Head4che Production Company\n\n<b>Development lead</b>\nJeanne Durand\n\n<b>Developers</b>\nArthur
+      Fiolet\nAdam Graziani\nTidiane Bathily\nValentin Kiep\n\n\n<b>External content
+      used</b>\n\n<size=70%>\nTunnel 3D model:\r\n\"Low Poly Style Subway Tunnel
+      Section\" \u2013 TreD\xE8\r\nhttps://sketchfab.com/3d-models/low-poly-style-subway-tunnel-section-26668039209f41a1a793e0e28ed8589c\r\n\r\nRat
+      3D model and animations:\r\n\"Rat\" \u2013 Artise1\r\nhttps://sketchfab.com/3d-models/rat-5deb007a05a946d28ce6403616f9629b\r\n\r\nImages
+      used for the ads:\r\n\"Illustration de fond de th\xE9 de dessin anim\xE9\"
+      \u2013 pikisuperstar\r\nhttps://fr.freepik.com/vecteurs-libre/illustration-fond-the-dessin-anime_16692042.htm#fromView=search&page=5&position=34&uuid=e65d097b-4dbc-4061-a5bc-89054539a001&query=tea+ad\r\n\r\n\"La
+      meilleure affiche du fromage\" de Freepik\r\nhttps://fr.freepik.com/vecteurs-libre/meilleure-affiche-du-fromage_899247.htm#fromView=search&page=2&position=36&uuid=dfd4081a-2cd8-4823-8622-3d0a0eacdd23&query=cheese+ad\r\n\r\n\"Daddy\"
+      suger adversiment:\nhttps://www.pour-nourrir-demain.fr/le-sucre-daddy-devient-le-sucre-papa"
     m_Metadata:
       m_Items: []
   references:
