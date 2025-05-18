@@ -6007,17 +6007,17 @@ MonoBehaviour:
   m_FillRect: {fileID: 2118238232}
   m_HandleRect: {fileID: 281578096}
   m_Direction: 0
-  m_MinValue: 0.01
-  m_MaxValue: 1
+  m_MinValue: 0.1
+  m_MaxValue: 2
   m_WholeNumbers: 0
-  m_Value: 0.5
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 479253968}
         m_TargetAssemblyTypeName: HomeMenu.HomeMenu, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
+        m_MethodName: SetGamma
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

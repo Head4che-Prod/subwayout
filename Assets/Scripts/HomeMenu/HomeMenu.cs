@@ -290,6 +290,10 @@ namespace HomeMenu
             foreach (Selectable button in Selectable.allSelectablesArray)
                 if (button.name == "BackButton")
                     button.Select();
+            
+            transform.Find("SettingsMenu/ShowHintsSettings/Toggle").GetComponent<Toggle>().isOn = PlayerObject.DisplayHints;
+            transform.Find("SettingsMenu/SensiSettings/Slider").GetComponent<Slider>().value = PlayerCam.Sensi;
+            transform.Find("SettingsMenu/LightSettings/Slider").GetComponent<Slider>().value = RenderSettings.ambientIntensity;
         }
 
         public void CloseSettings()
@@ -376,7 +380,7 @@ namespace HomeMenu
         /// <param name="val">Value of gamma</param>
         public void SetGamma(float val)
         {
-            RenderSettings.ambientIntensity = val / float.MaxValue;
+            RenderSettings.ambientIntensity = val;
         }
         
         public void SetVol(Single n)
@@ -388,7 +392,7 @@ namespace HomeMenu
         {
             PlayerObject.DisplayHints = activate;
             if (_tick is null)
-                _tick = GameObject.Find("ShowHintsSettings/Toggle/Background/Checkmark");
+                _tick = transform.Find("SettingsMenu/ShowHintsSettings/Toggle/Background/Checkmark").gameObject;
             _tick.SetActive(activate);
         }
     }
