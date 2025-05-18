@@ -119,6 +119,20 @@ MonoBehaviour:
     m_Localized: Retour au menu principal
     m_Metadata:
       m_Items: []
+  - m_Id: 28077803825790976
+    m_Localized: "Cr\xE9dits"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28098408885256192
+    m_Localized: "Mod\xE8le 3D du tunnel:\r\n\"Low Poly Style Subway Tunnel Section\"
+      de TreD\xE8\r\nhttps://sketchfab.com/3d-models/low-poly-style-subway-tunnel-section-26668039209f41a1a793e0e28ed8589c\r\n\r\nMod\xE8le
+      3D et animations du rat:\r\n\"Rat\" de Artise1\r\nhttps://sketchfab.com/3d-models/rat-5deb007a05a946d28ce6403616f9629b\r\n\r\nImages
+      utilis\xE9es pour la cr\xE9ation de publicit\xE9s :\r\n\"Illustration de fond
+      de th\xE9 de dessin anim\xE9\" de pikisuperstar\r\nhttps://fr.freepik.com/vecteurs-libre/illustration-fond-the-dessin-anime_16692042.htm#fromView=search&page=5&position=34&uuid=e65d097b-4dbc-4061-a5bc-89054539a001&query=tea+ad\r\n\r\n\"La
+      meilleure affiche du fromage\" de Freepik\r\nhttps://fr.freepik.com/vecteurs-libre/meilleure-affiche-du-fromage_899247.htm#fromView=search&page=2&position=36&uuid=dfd4081a-2cd8-4823-8622-3d0a0eacdd23&query=cheese+ad\r\n\r\nPublicit\xE9
+      \"Daddy\" sucre"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

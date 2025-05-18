@@ -24,7 +24,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2546067656704
-    m_Key: HomeMenu.button.settings
+    m_Key: HomeMenu.button.Credits
     m_Metadata:
       m_Items: []
   - m_Id: 3070947053568
@@ -117,6 +117,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 27390592839057408
     m_Key: BTTHM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28077803825790976
+    m_Key: Credits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28098408885256192
+    m_Key: credtscontent
     m_Metadata:
       m_Items: []
   m_Metadata:
