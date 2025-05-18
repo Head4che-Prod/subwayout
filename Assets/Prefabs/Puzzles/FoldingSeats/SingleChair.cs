@@ -5,7 +5,7 @@ using Unity.Netcode;
 
 namespace Prefabs.Puzzles.FoldingSeats
 {
-    public class SingleChair : NetworkBehaviour, IObjectActionable
+    public class SingleChair : NetworkBehaviour, IObjectInteractable
     {
         private static readonly int ChairUp = Animator.StringToHash("activateUp");
         [Header("Chair Settings")]

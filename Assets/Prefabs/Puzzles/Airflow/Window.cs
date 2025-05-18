@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Prefabs.Puzzles.Airflow
 {
-    public class Window : MonoBehaviour, IObjectActionable
+    public class Window : MonoBehaviour, IObjectInteractable
     {
         private static readonly int ClosedAnimationBoolean = Animator.StringToHash("IsClosed");
 

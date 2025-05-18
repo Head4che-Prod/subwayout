@@ -53,7 +53,9 @@ namespace Objects
         
         public virtual void Start()
         {
-            ((IResettablePosition)this).RegisterInitialState(transform.position, transform.rotation);
+            InitialPosition = transform.position;
+            InitialRotation = transform.rotation;
+            ObjectPositionManager.Singleton.ResettableObjects.Add(this);
             // Warning: All rigidbody settings in this section must be copied / adapted for HanoiGrabbable
             Rb = GetComponent<NetworkRigidbody>().Rigidbody;
             Rb.interpolation = RigidbodyInterpolation.Extrapolate;

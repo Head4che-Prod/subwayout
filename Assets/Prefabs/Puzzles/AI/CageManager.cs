@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Prefabs.Puzzles.AI
 { 
-    public class CageManager : ObjectGrabbable, IObjectActionable
+    public class CageManager : ObjectGrabbable, IObjectInteractable
     {
         
         [SerializeField] private GameObject cheeseInCage; 

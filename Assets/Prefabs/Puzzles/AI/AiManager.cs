@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Linq;
 using Hints;
+using Objects;
 using Prefabs.GameManagers;
 using Unity.Netcode;
 using UnityEngine;
@@ -9,13 +10,16 @@ using Random = UnityEngine.Random;
 
 namespace Prefabs.Puzzles.AI
 {
-    public class AiManager : NetworkBehaviour
+    public class AiManager : NetworkBehaviour, IResettablePosition
     {
         [SerializeField] private GameObject cheeseInCage;
         [SerializeField] private GameObject keyModelInMouthRat;
         [SerializeField] private NetworkObject keyGrabbable;
         [SerializeField] private GameObject clonedRat;
         [SerializeField] private CageManager cageManager;
+        
+        public Vector3 InitialPosition { get; set; }
+        public Quaternion InitialRotation { get; set; }
         
         private NavMeshAgent _agent;
         private GameObject[] _players;
@@ -47,6 +51,9 @@ namespace Prefabs.Puzzles.AI
             _agent = GetComponent<NavMeshAgent>();
             _players = FindPlayers();
             _state = State.Idle;
+            InitialPosition = transform.position;
+            InitialRotation = transform.rotation;
+            ObjectPositionManager.Singleton.ResettableObjects.Add(this);
             
             StartCoroutine(IdleCoroutine());
         }
@@ -227,6 +234,7 @@ namespace Prefabs.Puzzles.AI
             }
 
             float closestDist = Mathf.Infinity;
+
             GameObject closestPlayer = null;
             foreach (GameObject player in _players)
             {
@@ -239,6 +247,23 @@ namespace Prefabs.Puzzles.AI
             }
 
             return closestPlayer;
+        }
+
+        public void ResetPosition() => ResetPositionClientRpc();
+
+        [Rpc(SendTo.ClientsAndHost)]
+        private void ResetPositionClientRpc()
+        {
+            transform.position = InitialPosition;
+            transform.rotation = InitialRotation;
+            if (IsServer)
+            {
+                StopAllCoroutines();
+                _agent.SetDestination(InitialPosition);
+                _state = State.Idle;
+                _animator.SetInteger(WhichAnim, 0);
+                StartCoroutine(IdleCoroutine());
+            }
         }
     }
 }

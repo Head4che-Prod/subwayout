@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Prefabs.Puzzles.AI.CheeseAd
 {
-    public class TomeTomeAdManager : NetworkBehaviour,IObjectActionable
+    public class TomeTomeAdManager : NetworkBehaviour,IObjectInteractable
     {
         [SerializeField] private GameObject keyInAd;
         private Animator _animator;
