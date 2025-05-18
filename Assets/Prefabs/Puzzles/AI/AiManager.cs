@@ -257,7 +257,13 @@ namespace Prefabs.Puzzles.AI
             transform.position = InitialPosition;
             transform.rotation = InitialRotation;
             if (IsServer)
+            {
+                StopAllCoroutines();
                 _agent.SetDestination(InitialPosition);
+                _state = State.Idle;
+                _animator.SetInteger(WhichAnim, 0);
+                StartCoroutine(IdleCoroutine());
+            }
         }
     }
 }
