@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Prefabs.Puzzles.EmergencyCallBox
 {
-    public class EmergencyCallTrigger : OffstageNetworkBehaviour, IObjectActionable
+    public class EmergencyCallTrigger : OffstageNetworkBehaviour, IObjectInteractable
     {
         private Animator _triggerAnimator;
         private static readonly int PullTrigger = Animator.StringToHash("TriggerDown");
