@@ -6,6 +6,7 @@ using Prefabs.Player.PlayerUI.PauseMenu;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Prefabs.GameManagers
 {    
@@ -58,12 +59,12 @@ namespace Prefabs.GameManagers
         [SerializeField] private Animator tunnelAnimator;
 
         [SerializeField] private Animator allDoorsAnimator;
-        
-        private NetworkVariable<EndGameState> _state = new ();
-        
+
+        public NetworkVariable<EndGameState> EndGameState { get; } = new NetworkVariable<EndGameState>(GameManagers.EndGameState.WaitingHanoi);
+
         public EndGameState State
         {
-            get => _state.Value;
+            get => EndGameState.Value;
             set
             {
                 UpdateStateServerRpc(value);
@@ -74,9 +75,9 @@ namespace Prefabs.GameManagers
         private float _startTime;
         public static bool Exists => _instance != null;
         public static bool CanBeChanged => Exists &&
-                                           ((Instance.State is EndGameState.WaitingHanoi && 
+                                           ((Instance.State is GameManagers.EndGameState.WaitingHanoi && 
                                              Instance.tunnelAnimator.GetCurrentAnimatorStateInfo(0).IsName("TunnelMove")) 
-                                         || (Instance.State is EndGameState.HanoiResolved or EndGameState.UnlockDoors or EndGameState.FinishGame && 
+                                         || (Instance.State is GameManagers.EndGameState.HanoiResolved or GameManagers.EndGameState.UnlockDoors or GameManagers.EndGameState.FinishGame && 
                                              Instance.tunnelAnimator.GetCurrentAnimatorStateInfo(0).IsName("TunnelOnBoarding")));
         
         /// <summary>
@@ -91,20 +92,20 @@ namespace Prefabs.GameManagers
             // Debug.Log($"EndGameManager/Server: {newState}");
             switch (newState)
             {
-                case EndGameState.WaitingHanoi:
+                case GameManagers.EndGameState.WaitingHanoi:
                     break;
-                case EndGameState.HanoiResolved:
+                case GameManagers.EndGameState.HanoiResolved:
                     StartCoroutine(OpenDoorAfterStop());
                     break;
-                case EndGameState.UnlockDoors:
+                case GameManagers.EndGameState.UnlockDoors:
                     break;
-                case EndGameState.FinishGame:
+                case GameManagers.EndGameState.FinishGame:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
             }
             
-            if (!this.IsDestroyed()) _state.Value = newState;
+            if (!this.IsDestroyed()) EndGameState.Value = newState;
         }
         
         /// <summary>
@@ -119,19 +120,19 @@ namespace Prefabs.GameManagers
             // Debug.Log($"EndGameManager/Client: {newState}");
             switch (newState)
             {
-                case EndGameState.WaitingHanoi:
+                case GameManagers.EndGameState.WaitingHanoi:
                     break;
                     
-                case EndGameState.HanoiResolved:
+                case GameManagers.EndGameState.HanoiResolved:
                     tunnelAnimator.ResetTrigger(Animator.StringToHash("Move"));
                     tunnelAnimator.SetTrigger(Animator.StringToHash("Stop"));
                     break;
                 
-                case EndGameState.UnlockDoors:
+                case GameManagers.EndGameState.UnlockDoors:
                     allDoorsAnimator.SetTrigger("openAllDoors");
                     break;
                     
-                case EndGameState.FinishGame:
+                case GameManagers.EndGameState.FinishGame:
                     HomeMenu.HomeMenu.Time = Time.time - _startTime;
                     PlayerObject.LocalPlayer.transform.Find("UI/PauseMenu").GetComponent<PauseMenu>().QuitGame();
                     break;
@@ -144,7 +145,7 @@ namespace Prefabs.GameManagers
         private IEnumerator OpenDoorAfterStop()
         {
             yield return new WaitForSeconds(5);
-            State = EndGameState.UnlockDoors;
+            State = GameManagers.EndGameState.UnlockDoors;
         }
         
         private void Awake()
