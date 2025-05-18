@@ -72,6 +72,8 @@ namespace Prefabs.Player
                     Rigidbody.rotation = new Quaternion(0, 1, 0, 0);
                 }
             }
+            InitialPosition = Rigidbody.position;
+            InitialRotation = Rigidbody.rotation;
         }
         
         public void ResetPosition() => ResetPositionClientRpc();
