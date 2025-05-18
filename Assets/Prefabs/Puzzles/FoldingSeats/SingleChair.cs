@@ -29,6 +29,9 @@ namespace Prefabs.Puzzles.FoldingSeats
             chairAnimator.SetBool(ChairUp, newValue);
             ChairsManager.Singleton.CheckChairs(); // we call CheckChairs here so that when only one value changes we check, no need to check at every frame
         }
+
+        public string soundEffectName => "FoldingChair2";
+
         public void Action()
             => ChangedServerRpc(!chairAnimator.GetBool(ChairUp));
         

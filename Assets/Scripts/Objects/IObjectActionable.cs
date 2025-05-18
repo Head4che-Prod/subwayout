@@ -11,7 +11,7 @@ namespace Objects
     public interface IObjectActionable : IRaycastResponsive
     {
         [CanBeNull] public string soundEffectName => null;
-        
+
         /// <summary>
         /// Allows specific actions to be performed depending on the object actioned.
         /// <see cref="IObjectActionable"/>'s subclasses define the behavior of a specific (type of) object.
