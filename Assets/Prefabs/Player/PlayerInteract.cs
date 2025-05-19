@@ -37,12 +37,14 @@ namespace Prefabs.Player
         
         [Header("Player")]
         [SerializeField] private PlayerObject player;
-        [SerializeField] private float reach;
+
 
         [NonSerialized] public IObjectGrabbable GrabbedObject;
         private InputAction _actionInput;
         private InputAction _grabInput;
         
+        
+        private const float Reach = 5f;
         private const int AllocationSize = 6;
 
         private void Start()
@@ -66,7 +68,7 @@ namespace Prefabs.Player
                     player.playerCamera.transform.position, 
                     player.playerCamera.transform.forward,
                     hits, 
-                    reach
+                    Reach
                 );
                 
                 float distance = hits
@@ -108,7 +110,7 @@ namespace Prefabs.Player
                     player.playerCamera.transform.position,
                     player.playerCamera.transform.forward,
                     hits,
-                    reach
+                    Reach
                 );
                 
                 float distance = hits
