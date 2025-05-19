@@ -94,5 +94,12 @@
     "PathEn": "GameWon/GameWonEN",
     "PathFr": "GameWon/GameWonFR",
     "PathEs": ""
+  },
+  {
+    "ID": "LightVersionNoHints",
+    "PathEn": "LightVersionNoHints/LightVersionNoHintsEN",
+    "PathFr": "LightVersionNoHints/LightVersionNoHintsFR",
+    "PathEs": ""
   }
+  
 ]
