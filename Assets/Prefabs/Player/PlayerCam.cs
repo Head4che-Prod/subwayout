@@ -85,6 +85,7 @@ namespace Prefabs.Player
 
         public override void OnDestroy()
         {
+            base.OnDestroy();
             _player.Input.actions["Zoom"].started -= ZoomIn;
             _player.Input.actions["Zoom"].canceled -= ZoomOut;
         }

@@ -67,6 +67,7 @@ namespace Prefabs.Player
 
         public override void OnDestroy()
         {
+            base.OnDestroy();
             if (GrabbedObjectManager.Exists) GrabbedObjectManager.ForgetPlayer(this);
             base.OnDestroy();
         }
