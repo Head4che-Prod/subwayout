@@ -26,7 +26,7 @@ namespace Prefabs.PlayableCar.Animation
             animDoor.SetBool(OpenCabinDoor, true);
             Digicode.Active = false;
             HintSystem.EnableHints(Hint.Hanoi);
-            HintSystem.DisableHints(Hint.CodeUnlocks);
+            HintSystem.DisableHints(Hint.CodeUnlocks, Hint.Code);
         }
     }
 }

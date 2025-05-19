@@ -113,6 +113,7 @@ namespace Prefabs.GameManagers
 
         public override void OnDestroy()
         {
+            base.OnDestroy();
             _actionHighlightHold.started -= _handleHighlightHoldStart;
             _actionHighlightHold.canceled -= _handleHighlightHoldEnd;
             _actionHighlightToggle.performed -= _handleHighlightToggle;

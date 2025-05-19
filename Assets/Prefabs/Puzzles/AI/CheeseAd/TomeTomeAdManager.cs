@@ -87,6 +87,7 @@ namespace Prefabs.Puzzles.AI.CheeseAd
         {
             keyInAd.SetActive(true);
             HintSystem.DisableHints(Hint.RatKey);
+            CodesFoundManager.Singleton.GreenCodeFound.Value = true;
         }
 
     }

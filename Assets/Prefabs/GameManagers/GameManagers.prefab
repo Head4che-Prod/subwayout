@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5126801739180486292}
   - component: {fileID: 3173108435034441743}
   - component: {fileID: 8294252900829056459}
+  - component: {fileID: 847297732581582938}
   m_Layer: 0
   m_Name: GameManagers
   m_TagString: Untagged
@@ -62,7 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1789454035
+  GlobalObjectIdHash: 2111048271
   InScenePlacedSourceGlobalObjectIdHash: 2481168953
   DeferredDespawnTick: 0
   Ownership: 1
@@ -143,3 +144,16 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   tunnelAnimator: {fileID: 0}
   allDoorsAnimator: {fileID: 0}
+--- !u!114 &847297732581582938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4659821117883930749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9841814b53ad9c64eabb3ad9bd0a90ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
