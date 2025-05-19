@@ -18,7 +18,7 @@ public class PlayBackgroundNoise : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(5f);
-            SoundManager.Singleton.PlaySoundRpc("BackgroundNoise", transform.position, 0.5f);
+            SoundManager.Singleton.PlaySoundRpc("BackgroundNoise", transform.position);
         }
     }
     private void OnDestroy()

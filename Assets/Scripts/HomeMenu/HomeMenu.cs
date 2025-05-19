@@ -294,6 +294,8 @@ namespace HomeMenu
             transform.Find("SettingsMenu/ShowHintsSettings/Toggle").GetComponent<Toggle>().isOn = PlayerObject.DisplayHints;
             transform.Find("SettingsMenu/SensiSettings/Slider").GetComponent<Slider>().value = PlayerCam.Sensi;
             transform.Find("SettingsMenu/LightSettings/Slider").GetComponent<Slider>().value = RenderSettings.ambientIntensity;
+            transform.Find("SettingsMenu/VolumeSettings/Slider").GetComponent<Slider>().value = SoundManager.Volume;
+
         }
 
         public void CloseSettings()
@@ -385,7 +387,7 @@ namespace HomeMenu
         
         public void SetVol(Single n)
         {
-            // Todo
+            SoundManager.Volume = n;
         }
 
         public void ChangeDisplayHints(bool activate)

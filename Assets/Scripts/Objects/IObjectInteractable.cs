@@ -22,7 +22,7 @@ namespace Objects
             Action();
             
             if (soundEffectName is not null and not "")
-                SoundManager.Singleton.PlaySoundRpc(soundEffectName, this is MonoBehaviour mb? mb.transform.position: new Vector3(0, 0, 0), 1f); // Modified to be an RPC
+                SoundManager.Singleton.PlaySoundRpc(soundEffectName, this is MonoBehaviour mb? mb.transform.position: new Vector3(0, 0, 0)); // Modified to be an RPC
         }
     }
 }

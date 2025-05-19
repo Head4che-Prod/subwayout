@@ -21,6 +21,7 @@ namespace Prefabs.GameManagers
         public static SoundManager Singleton;
         [SerializeField] private AudioSource soundFXObject;
         private Dictionary<string, AudioClip> _sounds;
+        public static float Volume { get; set; } = 0.5f;
 
         private void Awake()
         {
@@ -35,16 +36,17 @@ namespace Prefabs.GameManagers
         }
 
         [Rpc(SendTo.ClientsAndHost, RequireOwnership = false)]
-        public void PlaySoundRpc(string clipName, Vector3 position, float volume)
+        public void PlaySoundRpc(string clipName, Vector3 position)
         {
-            DebugConsole.Singleton.Log("Here");
+            
             AudioSource audioSource = Instantiate(soundFXObject, position, Quaternion.identity);
 
 
             audioSource.clip = _sounds[clipName];
 
-            audioSource.volume = volume;
-
+            audioSource.volume = Volume;
+            DebugConsole.Singleton.Log($"actual volume:{audioSource.volume} | set volume: {Volume}");
+            
             audioSource.Play();
 
             float clipLength = audioSource.clip.length;

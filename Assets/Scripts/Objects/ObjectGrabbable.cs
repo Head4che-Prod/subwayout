@@ -94,7 +94,7 @@ namespace Objects
             GrabServerRpc(NetworkManager.Singleton.LocalClientId, NetworkObjectId);
             
             if(soundEffectName is not null and not "")
-                SoundManager.Singleton.PlaySoundRpc(soundEffectName, transform.position, 1f); // Play a sound on grab
+                SoundManager.Singleton.PlaySoundRpc(soundEffectName, transform.position); // Play a sound on grab
             
             if (canBeHighlighted)
             {
