@@ -3,6 +3,7 @@ using Prefabs.GameManagers;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace Prefabs.Player
 {
@@ -49,6 +50,7 @@ namespace Prefabs.Player
             }
             else
             {
+                SceneManager.activeSceneChanged += SetSpawnPos;
                 transform.Find("Canvas").GetChild(1).gameObject.SetActive(DisplayHints);
                 LocalPlayer = this;
                 Instantiate(debugConsolePrefab, transform.Find("UI"));
@@ -56,6 +58,24 @@ namespace Prefabs.Player
             }
         }
 
+        private void SetSpawnPos(Scene prev, Scene next) 
+        {
+            if (next.name == "DemoScene") {
+                if (IsHost)
+                {
+                    Rigidbody.position = new Vector3(2, .465f, -3.3f);
+                    Rigidbody.rotation = new Quaternion(0, 0, 0, 1);
+                }
+                else
+                {
+                    Rigidbody.position = new Vector3(2, .465f, -.95f);
+                    Rigidbody.rotation = new Quaternion(0, 1, 0, 0);
+                }
+            }
+            InitialPosition = Rigidbody.position;
+            InitialRotation = Rigidbody.rotation;
+        }
+        
         public void ResetPosition() => ResetPositionClientRpc();
 
         [Rpc(SendTo.ClientsAndHost)]
@@ -67,7 +87,7 @@ namespace Prefabs.Player
 
         public override void OnDestroy()
         {
-            base.OnDestroy();
+            SceneManager.activeSceneChanged -= SetSpawnPos;
             if (GrabbedObjectManager.Exists) GrabbedObjectManager.ForgetPlayer(this);
             base.OnDestroy();
         }
