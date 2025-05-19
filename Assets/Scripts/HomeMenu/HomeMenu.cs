@@ -378,10 +378,7 @@ namespace HomeMenu
         /// Set the value of the gamma, on non-linear scale. 
         /// </summary>
         /// <param name="val">Value of gamma</param>
-        public void SetGamma(float val)
-        {
-            RenderSettings.ambientIntensity = val;
-        }
+        public void SetGamma(float val) => BrightnessController.Instance.Value = val - 0.25f; // 0.25f is for slider correction
         
         public void SetVol(Single n)
         {
