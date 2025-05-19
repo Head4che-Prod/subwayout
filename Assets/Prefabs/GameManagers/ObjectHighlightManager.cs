@@ -12,14 +12,15 @@ namespace Prefabs.GameManagers
     {
         private static ObjectHighlightManager _singleton;
 
-        public static ObjectHighlightManager Singleton
+        private static ObjectHighlightManager Singleton
         {
             get
             {
-                if (_singleton == null)
+                if (!_singleton)
                 {
                     Debug.LogWarning("Object highlight manager singleton has not been initialized.");
                 }
+
                 return _singleton;
             }
             set
@@ -38,9 +39,9 @@ namespace Prefabs.GameManagers
 
         private static bool _highlightHeld = false;
         private static bool _highlightToggled = false;
-        private static System.Action<InputAction.CallbackContext> _handleHighlightHoldEnd;
-        private static System.Action<InputAction.CallbackContext> _handleHighlightHoldStart;
-        private static System.Action<InputAction.CallbackContext> _handleHighlightToggle;
+        private static Action<InputAction.CallbackContext> _handleHighlightHoldEnd;
+        private static Action<InputAction.CallbackContext> _handleHighlightHoldStart;
+        private static Action<InputAction.CallbackContext> _handleHighlightToggle;
 
         private static bool HighlightHeld
         {
@@ -62,11 +63,11 @@ namespace Prefabs.GameManagers
         private static InputAction _actionHighlightHold;
         private static InputAction _actionHighlightToggle;
 
-        private static readonly HashSet<ObjectOutline> _foundObjects = new HashSet<ObjectOutline>();
+        private static readonly HashSet<ObjectOutline> FoundObjects = new HashSet<ObjectOutline>();
 
         private ObjectOutline GetOutline(ulong objectId) => NetworkManager.Singleton.SpawnManager
             .SpawnedObjects[objectId].GetComponent<ObjectOutline>();
-        
+
         public void Awake()
         {
             Singleton = this;
@@ -88,28 +89,31 @@ namespace Prefabs.GameManagers
         private static void UpdateHighlight()
         {
             bool highlight = HighlightEnabled;
-            foreach (ObjectOutline outline in _foundObjects)
+            foreach (ObjectOutline outline in FoundObjects)
                 outline.enabled = highlight;
         }
 
-        public static void RegisterHighlightableObject(ulong objectId) => Singleton.RegisterHighlightableObjectClientRpc(objectId);
+        public static void RegisterHighlightableObject(ulong objectId) =>
+            Singleton.RegisterHighlightableObjectClientRpc(objectId);
 
         [Rpc(SendTo.ClientsAndHost)]
         private void RegisterHighlightableObjectClientRpc(ulong objectId)
         {
-            _foundObjects.Add(GetOutline(objectId));
+            FoundObjects.Add(GetOutline(objectId));
         }
 
-        public static void ForgetHighlightableObject(ulong objectId) => Singleton.ForgetHighlightableObjectClientRpc(objectId);
-        
+        public static void ForgetHighlightableObject(ulong objectId) =>
+            Singleton.ForgetHighlightableObjectClientRpc(objectId);
+
         [Rpc(SendTo.ClientsAndHost)]
         private void ForgetHighlightableObjectClientRpc(ulong objectId)
         {
-            _foundObjects.Remove(GetOutline(objectId));
+            FoundObjects.Remove(GetOutline(objectId));
         }
 
         public override void OnDestroy()
         {
+            base.OnDestroy();
             _actionHighlightHold.started -= _handleHighlightHoldStart;
             _actionHighlightHold.canceled -= _handleHighlightHoldEnd;
             _actionHighlightToggle.performed -= _handleHighlightToggle;

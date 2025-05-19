@@ -20,10 +20,12 @@ namespace HomeMenu
         SessionManager _sessionManager;
         private GameObject _disableOnSpawn;
         private bool _isCursorActive = true;
+        public static float? Time { get; set; } = null;
 
         private GameObject _traveling;
         private GameObject _error;
         private GameObject _waiting;
+        private GameObject _tick = null;
 
         void Start()
         {
@@ -64,12 +66,34 @@ namespace HomeMenu
                 Cursor.lockState = _isCursorActive ? CursorLockMode.None : CursorLockMode.Locked;
                 Cursor.visible = _isCursorActive;
             };
+            
+            if (Time != null)
+                OpenWinningMenu();
         }
 
         void Update()
         {
             Cursor.lockState = _isCursorActive ? CursorLockMode.None : CursorLockMode.Locked;
             Cursor.visible = _isCursorActive;
+        }
+
+        public void OpenCreditsMenu()
+        {
+            
+            transform.Find("MainMenu").gameObject.SetActive(false);
+            transform.Find("CreditsMenu").gameObject.SetActive(true);
+            foreach (Selectable selectable in Selectable.allSelectablesArray)
+                if (selectable.name == "BackButton")
+                    selectable.Select();
+        }
+
+        public void CloseCreditsMenu()
+        {
+            transform.Find("CreditsMenu").gameObject.SetActive(false);
+            transform.Find("MainMenu").gameObject.SetActive(true);
+            foreach (Selectable selectable in Selectable.allSelectablesArray)
+                if (selectable.name == "CreditsButton")
+                    selectable.Select();
         }
 
         public void Quit()
@@ -81,6 +105,41 @@ namespace HomeMenu
             Process.GetCurrentProcess().Kill();
         }
 
+        public void OpenWinningMenu()
+        {
+            transform.Find("MainMenu").gameObject.SetActive(false);
+            transform.Find("WinningMenu").gameObject.SetActive(true);
+            foreach (Selectable selectable in Selectable.allSelectablesArray)
+                if (selectable.name == "BackButton")
+                    selectable.Select();
+
+            transform.Find("WinningMenu/TimeText").GetComponent<TextMeshProUGUI>().text = TimeToString((int)(Time ?? 0));
+            
+            Time = null;
+        }
+
+        private static string TimeToString(int time)
+        {
+            string res = $"{time % 60:00}s";
+            if (time < 60)
+                return res;
+            time /= 60;
+            res = $"{time % 60:00}min " + res;
+            if (time < 60)
+                return res;
+            time /= 60;
+            return $"{time}h " + res;
+        }
+        
+        public void CloseWinningMenu()
+        {
+            transform.Find("WinningMenu").gameObject.SetActive(false);
+            transform.Find("MainMenu").gameObject.SetActive(true);
+            foreach (Selectable selectable in Selectable.allSelectablesArray)
+                if (selectable.name == "StartButton")
+                    selectable.Select();
+        }
+        
         public void OpenStart()
         {
             transform.Find("MainMenu").gameObject.SetActive(false);
@@ -231,6 +290,10 @@ namespace HomeMenu
             foreach (Selectable button in Selectable.allSelectablesArray)
                 if (button.name == "BackButton")
                     button.Select();
+            
+            transform.Find("SettingsMenu/ShowHintsSettings/Toggle").GetComponent<Toggle>().isOn = PlayerObject.DisplayHints;
+            transform.Find("SettingsMenu/SensiSettings/Slider").GetComponent<Slider>().value = PlayerCam.Sensi;
+            transform.Find("SettingsMenu/LightSettings/Slider").GetComponent<Slider>().value = RenderSettings.ambientIntensity;
         }
 
         public void CloseSettings()
@@ -284,17 +347,19 @@ namespace HomeMenu
             LocalizationSettings.SelectedLocale = Locale.CreateLocale("en-US");
         }
 
+        /*
         public void SetLangEs()
         {
             LocalizationSettings.SelectedLocale = Locale.CreateLocale("es-ES");
         }
+        */
 
         private void SetLang()
         {
             if (LocalizationSettings.SelectedLocale.Identifier.Code.Contains("fr"))
                 SetLangFr();
-            else if (LocalizationSettings.SelectedLocale.Identifier.Code.Contains("es"))
-                SetLangEs();
+            // else if (LocalizationSettings.SelectedLocale.Identifier.Code.Contains("es"))
+            //     SetLangEs();
             else
                 SetLangEn();
         }
@@ -308,10 +373,27 @@ namespace HomeMenu
         {
             PlayerCam.Sensi = n;
         }
+        
+        /// <summary>
+        /// Set the value of the gamma, on non-linear scale. 
+        /// </summary>
+        /// <param name="val">Value of gamma</param>
+        public void SetGamma(float val)
+        {
+            RenderSettings.ambientIntensity = val;
+        }
+        
+        public void SetVol(Single n)
+        {
+            // Todo
+        }
 
         public void ChangeDisplayHints(bool activate)
         {
             PlayerObject.DisplayHints = activate;
+            if (_tick is null)
+                _tick = transform.Find("SettingsMenu/ShowHintsSettings/Toggle/Background/Checkmark").gameObject;
+            _tick.SetActive(activate);
         }
     }
 }

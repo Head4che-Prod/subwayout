@@ -1,11 +1,13 @@
+using Objects;
 using Prefabs.GameManagers;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace Prefabs.Player
 {
-    public class PlayerObject : NetworkBehaviour
+    public class PlayerObject : NetworkBehaviour, IResettablePosition
     {
         public PlayerInputManager InputManager { get; private set; }
         public PlayerMovement Movement { get; private set; }
@@ -17,6 +19,11 @@ namespace Prefabs.Player
         public GameObject playerCharacter;
         public static bool DisplayHints = true;
         public GameObject debugConsolePrefab;
+        
+        
+        public Vector3 InitialPosition { get; set; }
+        public Quaternion InitialRotation { get; set; }
+        
         public static PlayerObject LocalPlayer { get; private set; }
         
         public void Awake()
@@ -26,6 +33,8 @@ namespace Prefabs.Player
             Interaction = GetComponent<PlayerInteract>();
             Rigidbody = GetComponent<Rigidbody>();
             Input = GetComponent<PlayerInput>();
+            InitialPosition = Rigidbody.position;
+            InitialRotation = Rigidbody.rotation;
         }
 
         public void Start()
@@ -41,6 +50,7 @@ namespace Prefabs.Player
             }
             else
             {
+                SceneManager.activeSceneChanged += SetSpawnPos;
                 transform.Find("Canvas").GetChild(1).gameObject.SetActive(DisplayHints);
                 LocalPlayer = this;
                 Instantiate(debugConsolePrefab, transform.Find("UI"));
@@ -48,10 +58,39 @@ namespace Prefabs.Player
             }
         }
 
+        private void SetSpawnPos(Scene prev, Scene next) 
+        {
+            if (next.name == "DemoScene") {
+                if (IsHost)
+                {
+                    Rigidbody.position = new Vector3(2, .465f, -3.3f);
+                    Rigidbody.rotation = new Quaternion(0, 0, 0, 1);
+                }
+                else
+                {
+                    Rigidbody.position = new Vector3(2, .465f, -.95f);
+                    Rigidbody.rotation = new Quaternion(0, 1, 0, 0);
+                }
+            }
+            InitialPosition = Rigidbody.position;
+            InitialRotation = Rigidbody.rotation;
+        }
+        
+        public void ResetPosition() => ResetPositionClientRpc();
+
+        [Rpc(SendTo.ClientsAndHost)]
+        private void ResetPositionClientRpc()
+        {
+            Rigidbody.position = InitialPosition;
+            Rigidbody.rotation = InitialRotation;
+        }
+
         public override void OnDestroy()
         {
+            SceneManager.activeSceneChanged -= SetSpawnPos;
             if (GrabbedObjectManager.Exists) GrabbedObjectManager.ForgetPlayer(this);
             base.OnDestroy();
         }
+        
     }
 }

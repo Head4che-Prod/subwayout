@@ -1,3 +1,4 @@
+using Hints;
 using Prefabs.GameManagers;
 using Prefabs.Player.PlayerUI.DebugConsole;
 using Unity.Netcode;
@@ -92,8 +93,11 @@ namespace Prefabs.Puzzles.Hanoi
             ball.GetComponent<HanoiPiece>().Drop();
             Debug.Log("Game won!");
             SetUsageState(true);
+            EndGameManager.Instance.State = EndGameState.HanoiResolved;
             foreach (HanoiHitbox box in ColliderGrid)
                     ObjectPositionManager.ForgetResettableObjectClientRpc(box.containedBall?.GetComponent<HanoiPiece>());
+            HintSystem.EnableHints(Hint.GameWon);
+            HintSystem.DisableHints(Hint.Hanoi);
         }
         
         /// <summary>

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Localization-Locales
   m_EditorClassIdentifier: 
   m_GroupName: Localization-Locales
-  m_GUID: 7e402c465f1167440b30b1ce7c9fa3aa
+  m_GUID: d9ec292eed29c2e438b104cc9df9f753
   m_SerializeEntries:
   - m_GUID: 4297456d1ae4d4e47beb59218ca4930c
     m_Address: French (France) (fr-FR)

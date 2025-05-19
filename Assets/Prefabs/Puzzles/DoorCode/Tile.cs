@@ -1,20 +1,22 @@
 using System;
+using Hints;
 using Objects;
 using Unity.Netcode;
-using UnityEngine;
 using UnityEngine.UI;
 
 namespace Prefabs.Puzzles.DoorCode
 {
-    public class Tile : NetworkBehaviour, IObjectActionable
+    public class Tile : NetworkBehaviour, IObjectInteractable
     {
         /// <summary>
         /// Requests server to update the code's internal value.
         /// </summary>
         [Rpc(SendTo.Server)]
-        private void UpdateValueRpc()
+        private void UpdateValueRpc(byte newValue)
         {
-            value.Value = (byte)((value.Value + 1) % 10);
+            value.Value = newValue;
+            if (Digicode.CanDoorOpen)
+                HintSystem.EnableHints(Hint.CodeUnlocks);
         }
 
         public string soundEffectName => "NumLock";
@@ -22,7 +24,7 @@ namespace Prefabs.Puzzles.DoorCode
         public void Action()
         {
             if (Digicode.Active)
-                UpdateValueRpc();
+                UpdateValueRpc((byte)((value.Value + 1) % 10));
         }
 
         private Text _textField;

@@ -13,13 +13,8 @@ MonoBehaviour:
   m_Name: Default Local Group
   m_EditorClassIdentifier: 
   m_GroupName: Default Local Group
-  m_GUID: 4de0b546c81d2cd448cd56b9e28b2239
-  m_SerializeEntries:
-  - m_GUID: 052faaac586de48259a63d0c4782560b
-    m_Address: Assets/InputSystem_Actions.inputactions
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_GUID: e1f31b8d9c277dc48815767bd5a9f430
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 8d862e40054381d4595ad350715c3cc5, type: 2}
   m_SchemaSet:

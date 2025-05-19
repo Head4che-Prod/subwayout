@@ -19,19 +19,11 @@ namespace Prefabs.Player
         private PlayerObject _player;
         
         private bool _isActive;
-        private bool _isZooming;
 
         private NetworkVariable<Quaternion> _rotation = new NetworkVariable<Quaternion>();
-
-        private void SwitchZoomMode(InputAction.CallbackContext _)
-        {
-            _isZooming = !_isZooming;
-            _cameraObject.fieldOfView = _isZooming ? 30 : 60;
-        }
         
         public override void OnNetworkSpawn()
         {
-            _isZooming = false;
             _isActive = IsLocalPlayer;
             playerCamera.gameObject.SetActive(_isActive);
             if (_isActive)
@@ -46,11 +38,15 @@ namespace Prefabs.Player
                 _player.playerCharacter.layer = 7;
                 SetLayerAllChildren(_player.playerCharacter.transform, 7);
 
-                _isZooming = false;
                 _cameraObject = playerCamera.GetComponent<Camera>();
-                _player.Input.actions["Zoom"].performed += SwitchZoomMode;
+                _cameraObject.fieldOfView = 60;
+                _player.Input.actions["Zoom"].started += ZoomIn;
+                _player.Input.actions["Zoom"].canceled += ZoomOut;
             }
         }
+
+        private void ZoomIn(InputAction.CallbackContext _) => _cameraObject.fieldOfView = 30;
+        private void ZoomOut(InputAction.CallbackContext _) => _cameraObject.fieldOfView = 60;
     
         void Update()
         {
@@ -65,9 +61,11 @@ namespace Prefabs.Player
                 _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
 
                 _player.transform.rotation = Quaternion.Euler(0, _yRotation, 0);
-                RotateServerRpc(Quaternion.Euler(_xRotation, _yRotation, 0));
+                transform.rotation = Quaternion.Euler(_xRotation, _yRotation, 0);
+                RotateServerRpc(transform.rotation);
             }
-            transform.rotation = _rotation.Value;
+            else
+                transform.rotation = _rotation.Value;
         }
 
         [Rpc(SendTo.Server, RequireOwnership = false)]
@@ -83,6 +81,13 @@ namespace Prefabs.Player
             {
                 child.gameObject.layer = layer;
             }
+        }
+
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+            _player.Input.actions["Zoom"].started -= ZoomIn;
+            _player.Input.actions["Zoom"].canceled -= ZoomOut;
         }
     }
 }

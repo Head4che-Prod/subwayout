@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Debugger
 {
-    public class DummyActionnable : MonoBehaviour, IObjectActionable
+    public class DummyActionnable : MonoBehaviour, IObjectInteractable
     {
         public string soundEffectName => "test";
         public void Action()

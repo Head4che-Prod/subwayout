@@ -16,7 +16,7 @@ namespace Objects
     [RequireComponent(typeof(NetworkRigidbody))]
     [RequireComponent(typeof(NetworkObject))]
     [RequireComponent(typeof(ObjectOutline))]
-    public class ObjectGrabbable : OffstageNetworkBehaviour, IResettablePosition, IRaycastResponsive
+    public class ObjectGrabbable : OffstageNetworkBehaviour, IResettablePosition, IObjectGrabbable
     {
         [Header("Physics")] [FormerlySerializedAs("lerpSpeed")]
         public float moveSpeed = 2.0f;
@@ -29,7 +29,7 @@ namespace Objects
         [SerializeField] private bool affectedByGravity = true;
         
         [Header("Visuals")]
-        [SerializeField] private bool canBeHighlighted = true;
+        [SerializeField] protected bool canBeHighlighted = true;
         
         public Rigidbody Rb { get; private set; }
 
@@ -43,8 +43,10 @@ namespace Objects
             get => IsGrabbable.Value;
             set => IsGrabbable.Value = value;
         }
-        
-        protected ObjectOutline Outline;
+
+        public ObjectGrabbable GrabbedObject => this;
+
+        private ObjectOutline _outline;
         
 
         public override void Awake()
@@ -55,14 +57,16 @@ namespace Objects
         
         public virtual void Start()
         {
-            ((IResettablePosition)this).RegisterInitialState(transform.position, transform.rotation);
+            InitialPosition = transform.position;
+            InitialRotation = transform.rotation;
+            ObjectPositionManager.Singleton.ResettableObjects.Add(this);
             // Warning: All rigidbody settings in this section must be copied / adapted for HanoiGrabbable
             Rb = GetComponent<NetworkRigidbody>().Rigidbody;
             Rb.interpolation = RigidbodyInterpolation.Extrapolate;
             Rb.collisionDetectionMode = CollisionDetectionMode;
             
-            Outline = GetComponent<ObjectOutline>();
-            Outline.enabled = false;
+            _outline = GetComponent<ObjectOutline>();
+            _outline.enabled = false;
 
             Rb.isKinematic = !IsHost;
             IsGrabbable.OnValueChanged += HandleGravity;
@@ -84,18 +88,6 @@ namespace Objects
                 playerGrabbing.grabPointTransform.position.z - transform.position.z);
         }
         
-
-        /// <summary>
-        /// Sets the local position of an object.
-        /// </summary>
-        /// <param name="pos">Vector3 New local position of the object.</param>
-        [Rpc(SendTo.Server, RequireOwnership = false)]
-        protected void SetLocalPositionServerRpc(Vector3 pos) => transform.localPosition = pos;
-        
-        /// <summary>
-        /// Make players grab the targeted object.
-        /// </summary>
-        /// <param name="player"><see cref="PlayerObject"/> holding the item".</param>
         public virtual void Grab()
         {
             // Debug.Log($"Owner {OwnerClientId} attempted grabbing {name}");
@@ -114,7 +106,7 @@ namespace Objects
         [Rpc(SendTo.ClientsAndHost, RequireOwnership = false)]
         private void EnableHighlightRpc(bool isActivated)
         {
-            Outline.enabled = isActivated;
+            _outline.enabled = isActivated;
         }
         
         /// <summary>
@@ -129,26 +121,28 @@ namespace Objects
             Grabbable = false;
         }
 
-        /// <summary>
-        /// Make players drop the grabbed object.
-        /// </summary>
         public virtual void Drop()
         {
             PlayerInteract.LocalPlayerInteract.GrabbedObject = null;
             DropServerRpc(NetworkManager.Singleton.LocalClientId);
         }
-        
+
         /// <summary>
         /// Asks the host to register an object as dropped.
         /// </summary>
         /// <param name="clientId">Player that grabbed the object.</param>
         [Rpc(SendTo.Server, RequireOwnership = false)]
-        public void DropServerRpc(ulong clientId)
+        private void DropServerRpc(ulong clientId) => DropServerLogic(clientId);
+
+        /// <summary>
+        /// Handles the logic used by the host to register an object as dropped.
+        /// </summary>
+        /// <param name="clientId">Player that grabbed the object.</param>
+        protected virtual void DropServerLogic(ulong clientId)
         {
             GrabbedObjectManager.PlayerDrop(clientId);
             Grabbable = true;
         }
-        
         public override void OnDestroy()
         {
             base.OnDestroy();

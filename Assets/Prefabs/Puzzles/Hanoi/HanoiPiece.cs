@@ -11,14 +11,37 @@ namespace Prefabs.Puzzles.Hanoi
     {
         protected override CollisionDetectionMode CollisionDetectionMode => CollisionDetectionMode.Discrete;
 
-        public override bool Grabbable => !HanoiTowers.Instance.GetUsageState() && IsGrabbable.Value;  // Checks whether the hanoi towers are already in use.
+        public override bool Grabbable =>
+            !HanoiTowers.Instance.GetUsageState() && IsGrabbable.Value
+            && CheckNoPieceOnTop();
 
         /// <summary>
         /// Weight of the ball. Balls can not be placed on heavier ones.
         /// </summary>
-        [Header("Hanoi")]
-        [SerializeField, Range(0, 2)] public int weight;
-        
+        [Header("Hanoi")] [SerializeField, Range(0, 2)]
+        public int weight;
+
+        /// <summary>
+        /// Checks whether the piece is the highest on its bar.
+        /// </summary>
+        /// <returns>Whether there is no piece above.</returns>
+        private bool CheckNoPieceOnTop()
+        {
+            for (int bar = 0; bar < 3; bar++)
+            for (int level = 2; level  >= 0; level--)
+            {
+                HanoiPiece ball = HanoiTowers.Instance.ColliderGrid[bar, level].containedBall;
+                if (ball)
+                {
+                    if (ball == this)
+                        return true;
+                    break;
+                }
+            }
+
+            return false;
+        }
+
         public override void Start()
         {
             base.Start();
@@ -34,65 +57,67 @@ namespace Prefabs.Puzzles.Hanoi
             yield return new WaitUntil(() => HanoiTowers.Instance.ColliderGrid[0, 2 - weight] is not null);
             HanoiTowers.Instance.ColliderGrid[0, 2 - weight].containedBall = this;
         }
-        
+
         public override void Grab()
         {
-            base.Grab();
             HanoiTowers.Instance.SetUsageState(true);
-        }
-        public override void Drop()
-        {
-            base.Drop();
-            
-            // Debug.Log($"Let go of {name} at ({Rb.position.x}, {Rb.position.y}, {Rb.position.z})");
-            ResetBallPosition();
-            HanoiTowers.Instance.SetUsageState(false);
+            base.Grab();
         }
 
-                
-        /// <summary>
-        /// Reset the ball object's position to its internal position.
-        /// </summary>
-        private void ResetBallPosition()
+        public override void Drop()
         {
+            HanoiTowers.Instance.SetUsageState(false);
+            base.Drop();
+        }
+
+        protected override void DropServerLogic(ulong clientId)
+        {
+            base.DropServerLogic(clientId);
+
+            StartCoroutine(ResetPositionCoroutine());
+        }
+
+        private IEnumerator ResetPositionCoroutine()
+        {
+            Vector3 position = transform.localPosition;
             foreach (HanoiHitbox hitbox in HanoiTowers.Instance.ColliderGrid)
                 if (hitbox.containedBall?.weight == weight)
                 {
-                    StartCoroutine(SendBallToHitbox(hitbox));
+                    position = new Vector3(
+                        hitbox.gameObject.transform.localPosition.x,
+                        0.0135f,
+                        hitbox.gameObject.transform.localPosition.z
+                    );
                     break;
                 }
+
+            // transform.localPosition = position;
+            yield return new WaitForFixedUpdate();
+            transform.localPosition = position;
         }
 
-        /// <summary>
-        /// Send ball to specified hitbox after a buffer time enabling other movement orders to be completed.
-        /// </summary>
-        /// <param name="hitbox">The hitbox to go to.</param>
-        private IEnumerator SendBallToHitbox(HanoiHitbox hitbox)
-        {
-            yield return new WaitForSeconds(0.3f);
-            SetLocalPositionServerRpc(new Vector3(
-                hitbox.gameObject.transform.localPosition.x,
-                0.0135f,
-                hitbox.gameObject.transform.localPosition.z
-            ));
-        }
-        
         public override Vector3 CalculateMovementForce(PlayerObject playerGrabbing)
         {
-            if (Physics.Raycast(playerGrabbing.playerCamera.transform.position, playerGrabbing.playerCamera.transform.forward,
-                    out RaycastHit hit, 12f, 1 << 3))  // Only let layer 3 pass
+            if (IsGrabbable.Value)
+                return Vector3.zero;
+
+            if (Physics.Raycast(playerGrabbing.playerCamera.transform.position,
+                    playerGrabbing.playerCamera.transform.forward,
+                    out RaycastHit hit, 12f, 1 << 3)) // Only let layer 3 pass
             {
                 // Put vector in local space (to access data relative to the gamed plane)
-                Vector3 direction = HanoiTowers.Instance.transform.InverseTransformVector(hit.point - transform.position);
-                
+                Vector3 direction =
+                    HanoiTowers.Instance.transform.InverseTransformVector(hit.point - transform.position);
+
                 if (HanoiTowers.Instance.IsInDebugMode)
                 {
                     TargetPosition.Instance.SetPosition(0, hit.point);
                     TargetPosition.Instance.SetPosition(1, transform.position);
                 }
+
                 direction.y = 0;
 
-                
+
                 if (direction.magnitude > 0.01f) // Only move if movement will actually make a difference
                 {
                     ushort movementMode = 0;
@@ -110,10 +135,10 @@ namespace Prefabs.Puzzles.Hanoi
                         movementMode = 2;
                         direction.x = 0;
                     }
-                    
+
                     // Put vector back into global space
                     direction = HanoiTowers.Instance.transform.TransformVector(direction.normalized) * 0.25f;
-                
+
                     if (HanoiTowers.Instance.IsInDebugMode)
                     {
                         MovementVector.Instance.startColor = movementMode switch
@@ -126,7 +151,7 @@ namespace Prefabs.Puzzles.Hanoi
                         MovementVector.Instance.SetPosition(0, transform.position);
                         MovementVector.Instance.SetPosition(1, transform.position + direction);
                     }
-                
+
                     return direction;
                 }
                 else

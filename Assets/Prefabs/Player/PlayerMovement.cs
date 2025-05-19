@@ -20,7 +20,7 @@ namespace Prefabs.Player
 		private InputAction _sprintInput;
 
 		[Header("Ground Check")]
-		public Collider PlayerCollider;
+		public Collider playerCollider;
 		private float _colliderHeight;
 		public LayerMask whatIsGround;
 		private bool _grounded;
@@ -37,27 +37,23 @@ namespace Prefabs.Player
 			_movementInput = _player.Input.actions["Move"];
 			_sprintInput = _player.Input.actions["Sprint"];
 
-			_colliderHeight = PlayerCollider.bounds.size.y;
+			_colliderHeight = playerCollider.bounds.size.y;
 		}
     
-		void Update()
+		private void LateUpdate()
 		{
-			_grounded = Physics.Raycast(PlayerCollider.transform.position, Vector3.down, _colliderHeight * 0.5f + 0.2f, whatIsGround);
-			Debug.DrawRay(PlayerCollider.transform.position, Vector3.down, Color.blue,_colliderHeight * 0.5f + 0.2f);
+			_grounded = Physics.Raycast(playerCollider.transform.position, Vector3.down, _colliderHeight * 0.5f + 0.2f, whatIsGround);
+			Debug.DrawRay(playerCollider.transform.position, Vector3.down, Color.blue,_colliderHeight * 0.5f + 0.2f);
 	    
 			ProcessInputs();
 			SpeedCtrl();
 			StateHandler();
+			MovePlayer();
 	    
 			if (_grounded)
 				_player.Rigidbody.linearDamping = groundDrag;
 			else
 				_player.Rigidbody.linearDamping = 0;
-		}
-
-		void FixedUpdate()
-		{
-			MovePlayer();
 		}
 
 		private void ProcessInputs()
@@ -73,10 +69,10 @@ namespace Prefabs.Player
 	    
 			// Ground
 			if (_grounded)
-				_player.Rigidbody.AddForce(_moveDirection.normalized * (_moveSpeed * 10f), ForceMode.Force);
+				_player.Rigidbody.AddForce(_moveDirection.normalized * (_moveSpeed * 10f * Time.deltaTime / Time.fixedDeltaTime), ForceMode.Force);
 			// Air
 			else if (!_grounded)
-				_player.Rigidbody.AddForce(_moveDirection.normalized * (_moveSpeed * 10f * airMultiplier), ForceMode.Force);
+				_player.Rigidbody.AddForce(_moveDirection.normalized * (_moveSpeed * 10f * airMultiplier * Time.deltaTime / Time.fixedDeltaTime), ForceMode.Force);
 		}
 
 		private void SpeedCtrl()

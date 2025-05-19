@@ -1,10 +1,11 @@
 using Objects;
+using Prefabs.Blackbox.Box;
 using UnityEngine;
 using Unity.Netcode;
 
 namespace Prefabs.Puzzles.FoldingSeats
 {
-    public class SingleChair : NetworkBehaviour, IObjectActionable
+    public class SingleChair : NetworkBehaviour, IObjectInteractable
     {
         private static readonly int ChairUp = Animator.StringToHash("activateUp");
         [Header("Chair Settings")]
@@ -27,7 +28,8 @@ namespace Prefabs.Puzzles.FoldingSeats
         private void UpdatePosition(bool _, bool newValue)
         {
             chairAnimator.SetBool(ChairUp, newValue);
-            ChairsManager.Singleton.CheckChairs(); // we call CheckChairs here so that when only one value changes we check, no need to check at every frame
+            if (ChairsManager.Singleton.CheckChairs())
+                BlackBox.Singleton.Open();
         }
 
         public string soundEffectName => "FoldingChair2";
