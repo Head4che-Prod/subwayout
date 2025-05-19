@@ -34,11 +34,5 @@ namespace Prefabs.Platform
             yield return new WaitForSeconds(1);
             EndGameManager.Instance.State = EndGameState.FinishGame;
         }
-        
-        /*
-        private void OnDestroy()
-        {
-            EndGameManager.Instance.EndGameState.OnValueChanged -= EnableCollision;
-        }*/
     }
 }
