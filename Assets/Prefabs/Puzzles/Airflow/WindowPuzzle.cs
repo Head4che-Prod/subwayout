@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Hints;
 using Prefabs.Blackbox.Contents;
+using Prefabs.GameManagers;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -89,6 +90,7 @@ namespace Prefabs.Puzzles.Airflow
             {
                 IsVisible = true;
                 HintSystem.DisableHints(Hint.RedCode);
+                CodesFoundManager.Singleton.RedCodeFound.Value = true;
                 foreach (Flap flap in _flaps)
                     flap.ChangeRotation(true);
             }
