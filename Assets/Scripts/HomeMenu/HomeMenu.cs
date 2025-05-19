@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Prefabs.GameManagers;
@@ -56,7 +57,7 @@ namespace HomeMenu
             }
 
 
-            SetLang();
+            StartCoroutine(SetLangWhenLocalizationEnabled());
             _sessionManager = SessionManager.Singleton;
             _disableOnSpawn = GameObject.Find("DisableOnSpawn");
             _isCursorActive = true;
@@ -354,8 +355,9 @@ namespace HomeMenu
         }
         */
 
-        private void SetLang()
+        private IEnumerator SetLangWhenLocalizationEnabled()
         {
+            yield return LocalizationSettings.InitializationOperation;
             if (LocalizationSettings.SelectedLocale.Identifier.Code.Contains("fr"))
                 SetLangFr();
             // else if (LocalizationSettings.SelectedLocale.Identifier.Code.Contains("es"))
@@ -363,7 +365,8 @@ namespace HomeMenu
             else
                 SetLangEn();
         }
-
+        
+        
         public void OpenSkinSelector()
         {
             SceneManager.LoadScene("Scenes/PlayerSelection", LoadSceneMode.Single);
