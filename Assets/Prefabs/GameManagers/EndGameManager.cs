@@ -157,7 +157,6 @@ namespace Prefabs.GameManagers
 
         public override void OnDestroy()
         {
-            base.OnDestroy();
             if (_instance == this) _instance = null;
             base.OnDestroy();
         }
