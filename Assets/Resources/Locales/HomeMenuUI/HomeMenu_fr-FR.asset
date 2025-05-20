@@ -124,8 +124,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 28098408885256192
-    m_Localized: "<align=\"center\">\n<size=100%>\n<b>Cr\xE9\xE9 par</b>\n<sprite=\"head4che_red\">
-      Head4che Production Company\n\n<b>Chef d'\xE9quipe</b>\nJeanne Durand\n\n<b>D\xE9veloppeurs</b>\nArthur
+    m_Localized: "<align=\"center\">\n<size=100%>\n<b>Cr\xE9\xE9 par</b>\n<sprite=\"head4che_red\"
+      index=0>Head4che Production Company\n\n<b>Chef d'\xE9quipe</b>\nJeanne Durand\n\n<b>D\xE9veloppeurs</b>\nArthur
       Fiolet\nAdam Graziani\nTidiane Bathily\nValentin Kiep\n\n\n<b>Contenu externe
       utilis\xE9</b>\n\n<size=70%>\nMod\xE8le 3D du tunnel:\r\n\"Low Poly Style Subway
       Tunnel Section\" \u2013 TreD\xE8\r\nhttps://sketchfab.com/3d-models/low-poly-style-subway-tunnel-section-26668039209f41a1a793e0e28ed8589c\r\n\r\nMod\xE8le

@@ -13,13 +13,15 @@ namespace Prefabs.Player
         public PlayerMovement Movement { get; private set; }
         public PlayerInteract Interaction { get; private set; }
         public Rigidbody Rigidbody { get; private set; }
+        public WalkAnimSync WalkAnimation { get; private set; }
+        
         public PlayerInput Input { get; private set; }
         public Camera playerCamera;
         public Transform grabPointTransform;
         public GameObject playerCharacter;
         public static bool DisplayHints = true;
         public GameObject debugConsolePrefab;
-        
+
         
         public Vector3 InitialPosition { get; set; }
         public Quaternion InitialRotation { get; set; }
@@ -33,6 +35,7 @@ namespace Prefabs.Player
             Interaction = GetComponent<PlayerInteract>();
             Rigidbody = GetComponent<Rigidbody>();
             Input = GetComponent<PlayerInput>();
+            WalkAnimation = GetComponent<WalkAnimSync>();
             InitialPosition = Rigidbody.position;
             InitialRotation = Rigidbody.rotation;
         }
@@ -55,6 +58,7 @@ namespace Prefabs.Player
                 LocalPlayer = this;
                 Instantiate(debugConsolePrefab, transform.Find("UI"));
                 ObjectHighlightManager.Init();
+                Movement.Init();
             }
         }
 

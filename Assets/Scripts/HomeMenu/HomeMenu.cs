@@ -294,9 +294,8 @@ namespace HomeMenu
             
             transform.Find("SettingsMenu/ShowHintsSettings/Toggle").GetComponent<Toggle>().isOn = PlayerObject.DisplayHints;
             transform.Find("SettingsMenu/SensiSettings/Slider").GetComponent<Slider>().value = PlayerCam.Sensi;
-            transform.Find("SettingsMenu/LightSettings/Slider").GetComponent<Slider>().value = RenderSettings.ambientIntensity;
+            transform.Find("SettingsMenu/LightSettings/Slider").GetComponent<Slider>().value = BrightnessController.Instance.Value;
             transform.Find("SettingsMenu/VolumeSettings/Slider").GetComponent<Slider>().value = SoundManager.Volume;
-
         }
 
         public void CloseSettings()
@@ -385,7 +384,7 @@ namespace HomeMenu
         /// <param name="val">Value of gamma</param>
         public void SetGamma(float val)
         {
-            RenderSettings.ambientIntensity = val;
+            BrightnessController.Instance.Value = val;
         }
         
         public void SetVol(Single n)
