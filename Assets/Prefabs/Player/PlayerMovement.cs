@@ -30,7 +30,7 @@ namespace Prefabs.Player
 		private float _verticalInput;
 
 		private PlayerObject _player;
-		private Animator _playerAnimator;
+		private WalkAnimSync walkScript;
 		
 		void Start()
 		{
@@ -40,10 +40,7 @@ namespace Prefabs.Player
 			_sprintInput = _player.Input.actions["Sprint"];
 
 			_colliderHeight = playerCollider.bounds.size.y;
-			
-			int i = 1;
-			while (!transform.GetChild(0).GetChild(i).gameObject.activeInHierarchy) i++;
-			_playerAnimator = transform.GetChild(0).GetChild(i).GetComponent<Animator>();
+			walkScript = GetComponent<WalkAnimSync>();
 		}
     
 		private void LateUpdate()
@@ -67,14 +64,9 @@ namespace Prefabs.Player
 			Vector2 moveDirection = _movementInput.ReadValue<Vector2>();
 			_horizontalInput = moveDirection.x;
 			_verticalInput = moveDirection.y;
-			SendAnimRpc( _horizontalInput != 0 || _verticalInput != 0);
+			walkScript.SendAnimRpc( _horizontalInput != 0 || _verticalInput != 0);
 		}
-
-		[Rpc(SendTo.Everyone)]
-		private void SendAnimRpc(bool setAnimation)
-		{
-			_playerAnimator.SetBool("isWalking", setAnimation);
-		}
+		
 
 		private void MovePlayer()
 		{
