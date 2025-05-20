@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace Prefabs.Player
 {
-	public class WalkAnimSync : MonoBehaviour
+	public class WalkAnimSync : NetworkBehaviour
 	{
 		private Animator _playerAnimator;
 		void Start()
