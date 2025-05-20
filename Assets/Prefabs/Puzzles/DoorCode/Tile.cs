@@ -19,6 +19,8 @@ namespace Prefabs.Puzzles.DoorCode
                 HintSystem.EnableHints(Hint.CodeUnlocks);
         }
 
+        public string soundEffectName => "NumLock";
+
         public void Action()
         {
             if (Digicode.Active)
@@ -26,10 +28,13 @@ namespace Prefabs.Puzzles.DoorCode
         }
 
         private Text _textField;
+
         /// <summary>
         /// The current value of the tile.
         /// </summary>
-        public NetworkVariable<byte> value = new NetworkVariable<byte>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<byte> value = new NetworkVariable<byte>(0, NetworkVariableReadPermission.Everyone,
+            NetworkVariableWritePermission.Owner);
+
         /// <summary>
         /// Order of magnitude of the tile's value relative to the code.
         /// </summary>
@@ -39,10 +44,7 @@ namespace Prefabs.Puzzles.DoorCode
         {
             _textField = transform.GetChild(0).GetChild(0).GetComponent<Text>();
             _textField.text = $"{value.Value}";
-            value.OnValueChanged += (prev, newVal) =>
-            {
-                _textField.text = $"{newVal}";
-            };
+            value.OnValueChanged += (prev, newVal) => { _textField.text = $"{newVal}"; };
         }
     }
 }

@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using Prefabs.GameManagers;
 using Prefabs.Player;
 using Unity.Netcode;
@@ -33,6 +34,9 @@ namespace Objects
         public Rigidbody Rb { get; private set; }
 
         protected NetworkVariable<bool> IsGrabbable = new NetworkVariable<bool>(true);
+        
+        [SerializeField] [CanBeNull] string soundEffectName = null;
+
         
         public virtual bool Grabbable // This can be overridden
         {
@@ -88,6 +92,9 @@ namespace Objects
         {
             // Debug.Log($"Owner {OwnerClientId} attempted grabbing {name}");
             GrabServerRpc(NetworkManager.Singleton.LocalClientId, NetworkObjectId);
+            
+            if(soundEffectName is not null and not "")
+                SoundManager.Singleton.PlaySoundRpc(soundEffectName, transform.position); // Play a sound on grab
             
             if (canBeHighlighted)
             {

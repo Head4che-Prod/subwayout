@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3173108435034441743}
   - component: {fileID: 8294252900829056459}
   - component: {fileID: 847297732581582938}
+  - component: {fileID: 1881580131569969004}
   m_Layer: 0
   m_Name: GameManagers
   m_TagString: Untagged
@@ -157,3 +158,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+--- !u!114 &1881580131569969004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4659821117883930749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 481db155d435267428fd90d72f83e46b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundFXObject: {fileID: 5765392344587224176, guid: 5d1f71e7cddd6b74bb3889f50f808bea,
+    type: 3}

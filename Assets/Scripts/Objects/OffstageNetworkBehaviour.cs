@@ -1,4 +1,5 @@
-﻿using Unity.Netcode;
+﻿using System;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Objects
@@ -8,6 +9,8 @@ namespace Objects
     /// </summary>
     public abstract class OffstageNetworkBehaviour : NetworkBehaviour
     {
+        //[SerializeField] AudioClip soundEffect;
+        
         [Header("Offstage system")]
         [SerializeField] protected bool canBeOffStage;
         [SerializeField] protected bool startOnStage;
@@ -24,6 +27,7 @@ namespace Objects
                 Collider = GetComponent<Collider>();
             }
         }
+        
 
         protected virtual void ChangeActivationState(bool oldValue, bool newValue)
         {

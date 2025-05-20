@@ -31,6 +31,9 @@ namespace Prefabs.Puzzles.FoldingSeats
             if (ChairsManager.Singleton.CheckChairs())
                 BlackBox.Singleton.Open();
         }
+
+        public string soundEffectName => "FoldingChair2";
+
         public void Action()
             => ChangedServerRpc(!chairAnimator.GetBool(ChairUp));
         

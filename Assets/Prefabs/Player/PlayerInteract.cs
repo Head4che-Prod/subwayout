@@ -90,7 +90,7 @@ namespace Prefabs.Player
 
             if (interactable != null)
             {
-                interactable.Action();
+                interactable.HandleAction();
             }
         }
         

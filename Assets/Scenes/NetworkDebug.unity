@@ -1405,6 +1405,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   canBeOffStage: 0
   startOnStage: 0
+  soundEffect: {fileID: 8300000, guid: bc6ce5f5cc9c2d64aadcafcabeac3abf, type: 3}
 --- !u!1 &1258918181
 GameObject:
   m_ObjectHideFlags: 0
@@ -2523,6 +2524,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   canBeOffStage: 0
   startOnStage: 0
+  soundEffect: {fileID: 8300000, guid: bc6ce5f5cc9c2d64aadcafcabeac3abf, type: 3}
 --- !u!135 &1932370782
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2849,6 +2851,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   canBeOffStage: 0
   startOnStage: 0
+  soundEffect: {fileID: 0}
 --- !u!114 &1959571363
 MonoBehaviour:
   m_ObjectHideFlags: 0

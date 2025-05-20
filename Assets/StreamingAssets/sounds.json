@@ -1,0 +1,30 @@
+[
+  {
+    "ID": "test",
+    "path": "MiscSoundEffects/switch_001"
+  },
+  {
+    "ID": "FoldingChair1",
+    "path": "MiscSoundEffects/FoldingChair1"
+  },
+  {
+    "ID": "FoldingChair2",
+    "path": "MiscSoundEffects/FoldingChair2"
+  },
+  {
+    "ID": "NumLock",
+    "path": "MiscSoundEffects/switch_006"
+  },
+  {
+    "ID": "JammedDoor",
+    "path": "MiscSoundEffects/DoorJammed"
+  },
+  {
+    "ID": "BackgroundNoise",
+    "path": "MiscSoundEffects/SubwayBackgroundNoise"
+  },
+  {
+    "ID": "DoorHandle",
+    "path": "MiscSoundEffects/Doorhandle"
+  }
+]
