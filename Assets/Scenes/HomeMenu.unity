@@ -9530,16 +9530,16 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1102370881}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 50
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 479253968}
         m_TargetAssemblyTypeName: HomeMenu.HomeMenu, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
+        m_MethodName: SetVol
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -12912,7 +12912,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 62.5, y: -25}
-  m_SizeDelta: {x: 89, y: 0}
+  m_SizeDelta: {x: 122.95, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1838382648
 MonoBehaviour:
