@@ -1466,7 +1466,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8060224372023900925}
   m_Layer: 0
-  m_Name: pivotLefR
+  m_Name: pivotLegR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
