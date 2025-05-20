@@ -585,6 +585,7 @@ GameObject:
   - component: {fileID: 7177244133462510066}
   - component: {fileID: 6032291746409231155}
   - component: {fileID: 2493820065999058025}
+  - component: {fileID: 4582942670564295451}
   m_Layer: 0
   m_Name: NetworkPlayer
   m_TagString: Player
@@ -756,7 +757,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   player: {fileID: 6371891161549056370}
-  reach: 3
 --- !u!114 &7177244133462510066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -823,6 +823,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+--- !u!114 &4582942670564295451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4957522455835016799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2bea5c335244a7fafef2bd9c83a27ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7305760799034490760
 GameObject:
   m_ObjectHideFlags: 0
