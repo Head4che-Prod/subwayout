@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -29,8 +30,9 @@ namespace Prefabs.Player
 		private float _verticalInput;
 
 		private PlayerObject _player;
+		private WalkAnimSync _walkAnim;
 		
-		void Start()
+		public void Init()
 		{
 			_player = GetComponent<PlayerObject>();
 			_player.Rigidbody.freezeRotation = true;
@@ -38,6 +40,7 @@ namespace Prefabs.Player
 			_sprintInput = _player.Input.actions["Sprint"];
 
 			_colliderHeight = playerCollider.bounds.size.y;
+			_walkAnim = _player.WalkAnimation;
 		}
     
 		private void LateUpdate()
@@ -61,7 +64,9 @@ namespace Prefabs.Player
 			Vector2 moveDirection = _movementInput.ReadValue<Vector2>();
 			_horizontalInput = moveDirection.x;
 			_verticalInput = moveDirection.y;
+			_walkAnim.CallWalkAnimationRpc( _horizontalInput != 0 || _verticalInput != 0);
 		}
+		
 
 		private void MovePlayer()
 		{
