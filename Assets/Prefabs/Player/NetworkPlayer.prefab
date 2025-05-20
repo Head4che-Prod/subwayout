@@ -756,7 +756,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   player: {fileID: 6371891161549056370}
-  reach: 3
 --- !u!114 &7177244133462510066
 MonoBehaviour:
   m_ObjectHideFlags: 0
