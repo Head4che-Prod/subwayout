@@ -45,7 +45,7 @@ namespace Prefabs.Player
         
         
         private const float Reach = 5f;
-        private const int AllocationSize = 6;
+        private const int AllocationSize = 10;
 
         private void Start()
         {
