@@ -23,8 +23,8 @@ namespace Prefabs.Player
 		[Rpc(SendTo.ClientsAndHost, RequireOwnership = false)]
 		private void SendAnimRpc(bool setAnimation)
 		{
-			Debug.Log($"Moving: isWalking{_playerAnimator.gameObject.name}");
-			_playerAnimator.SetBool(_isWalking, setAnimation);
+			Debug.Log($"Moving: isWalking{_playerAnimator?.gameObject.name ?? "PlayerAnimator not set yet"}");
+			_playerAnimator?.SetBool(_isWalking, setAnimation);
 		}
 		
 		
