@@ -17,7 +17,7 @@ namespace Prefabs.Player
 
 		public void CallRpc(bool setAnimation) => SendAnimRpc(setAnimation);
 		
-		[Rpc(SendTo.Everyone)]
+		[Rpc(SendTo.ClientsAndHost, RequireOwnership = false)]
 		private void SendAnimRpc(bool setAnimation)
 		{
 			_playerAnimator.SetBool("isWalking", setAnimation);

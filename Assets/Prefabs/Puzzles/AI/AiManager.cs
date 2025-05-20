@@ -200,7 +200,7 @@ namespace Prefabs.Puzzles.AI
         /// Will play the corresponding animation of the rat thanks to the int parameter.
         /// </summary>
         /// <param name="intofAnimation"> int corresponding to a specific animation. 0 : idle  1 : fleeing -1 : baited </param>
-        [Rpc(SendTo.ClientsAndHost)]
+        [Rpc(SendTo.ClientsAndHost, RequireOwnership = false)]
         private void AnimeRatRpc(int intofAnimation)
         {
             _animator.SetInteger(WhichAnim, intofAnimation);
