@@ -42,6 +42,7 @@ namespace Prefabs.Player
 
         public void Start()
         {
+            WalkAnimation.Init();
             if (!IsLocalPlayer)
             {
                 transform.Find("UI").gameObject.SetActive(false);
@@ -58,9 +59,8 @@ namespace Prefabs.Player
                 LocalPlayer = this;
                 Instantiate(debugConsolePrefab, transform.Find("UI"));
                 ObjectHighlightManager.Init();
+                Movement.Init();
             }
-
-            WalkAnimation.Init();
         }
 
         private void SetSpawnPos(Scene prev, Scene next) 

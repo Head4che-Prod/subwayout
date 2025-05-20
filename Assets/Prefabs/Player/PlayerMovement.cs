@@ -30,9 +30,9 @@ namespace Prefabs.Player
 		private float _verticalInput;
 
 		private PlayerObject _player;
-		private WalkAnimSync walkScript;
+		private WalkAnimSync _walkAnim;
 		
-		void Start()
+		public void Init()
 		{
 			_player = GetComponent<PlayerObject>();
 			_player.Rigidbody.freezeRotation = true;
@@ -40,7 +40,7 @@ namespace Prefabs.Player
 			_sprintInput = _player.Input.actions["Sprint"];
 
 			_colliderHeight = playerCollider.bounds.size.y;
-			walkScript = GetComponent<WalkAnimSync>();
+			_walkAnim = _player.WalkAnimation;
 		}
     
 		private void LateUpdate()
@@ -64,7 +64,7 @@ namespace Prefabs.Player
 			Vector2 moveDirection = _movementInput.ReadValue<Vector2>();
 			_horizontalInput = moveDirection.x;
 			_verticalInput = moveDirection.y;
-			walkScript.CallWalkAnimationRpc( _horizontalInput != 0 || _verticalInput != 0);
+			_walkAnim.CallWalkAnimationRpc( _horizontalInput != 0 || _verticalInput != 0);
 		}
 		
 
