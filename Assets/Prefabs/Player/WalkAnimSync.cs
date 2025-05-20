@@ -1,6 +1,7 @@
+using System;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.InputSystem;
+
 
 namespace Prefabs.Player
 {
@@ -8,23 +9,33 @@ namespace Prefabs.Player
 	{
 		private int _isWalking;
 		private Animator _playerAnimator;
+		
+		/// <summary>
+		/// The method to call when the animation should be synced. Is the null action until the system is initialized.
+		/// </summary>
+		private Action<bool> _walkAnimationDelegate = _ => { };
+		
+		/// <summary>
+		/// Initializes the walk animation script. Called once a player's skin is registered.
+		/// </summary>
 		public void Init()
 		{
 			int i = 1;
-			while (!transform.GetChild(0).GetChild(i).gameObject.activeInHierarchy) i++;
+			Transform character = transform.GetChild(0);
+			while (!character.GetChild(i).gameObject.activeInHierarchy) i++;
 			
 			_playerAnimator = transform.GetChild(0).GetChild(i).GetComponent<Animator>();
 			Debug.Log($"isWalking{_playerAnimator.gameObject.name}");
 			_isWalking = Animator.StringToHash($"isWalking{_playerAnimator.gameObject.name}");
+			_walkAnimationDelegate = SendAnimRpc;
 		}
 
-		public void CallWalkAnimationRpc(bool setAnimation) => SendAnimRpc(setAnimation);
+		public void CallWalkAnimationRpc(bool setAnimation) => _walkAnimationDelegate(setAnimation);
 		
 		[Rpc(SendTo.ClientsAndHost, RequireOwnership = false)]
 		private void SendAnimRpc(bool setAnimation)
 		{
-			Debug.Log($"Moving: isWalking{_playerAnimator?.gameObject.name ?? "PlayerAnimator not set yet"}");
-			_playerAnimator?.SetBool(_isWalking, setAnimation);
+			_playerAnimator.SetBool(_isWalking, setAnimation);
 		}
 		
 		

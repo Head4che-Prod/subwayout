@@ -21,7 +21,7 @@ namespace Prefabs.Player
         public GameObject playerCharacter;
         public static bool DisplayHints = true;
         public GameObject debugConsolePrefab;
-        
+
         
         public Vector3 InitialPosition { get; set; }
         public Quaternion InitialRotation { get; set; }
@@ -42,7 +42,6 @@ namespace Prefabs.Player
 
         public void Start()
         {
-            WalkAnimation.Init();
             if (!IsLocalPlayer)
             {
                 transform.Find("UI").gameObject.SetActive(false);

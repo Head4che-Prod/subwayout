@@ -23,6 +23,7 @@ namespace Prefabs.Player
             Transform models = transform.Find("Character");
             for (int i = 0; i < models.childCount - 1; i++) // First child in unused
                 models.GetChild(i + 1).gameObject.SetActive(skinIndex == i);
+            GetComponent<WalkAnimSync>().Init();
         }
     }
 }
