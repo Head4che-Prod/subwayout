@@ -14,9 +14,11 @@ namespace Prefabs.Player
 			
 			_playerAnimator = transform.GetChild(0).GetChild(i).GetComponent<Animator>();
 		}
+
+		public void CallRpc(bool setAnimation) => SendAnimRpc(setAnimation);
 		
 		[Rpc(SendTo.Everyone)]
-		public void SendAnimRpc(bool setAnimation)
+		private void SendAnimRpc(bool setAnimation)
 		{
 			_playerAnimator.SetBool("isWalking", setAnimation);
 		}
