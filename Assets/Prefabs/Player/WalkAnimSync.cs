@@ -6,7 +6,7 @@ namespace Prefabs.Player
 {
 	public class WalkAnimSync : NetworkBehaviour
 	{
-		private static readonly int IsWalking = Animator.StringToHash("isWalking");
+		private readonly int _isWalking = Animator.StringToHash("isWalking");
 		private Animator _playerAnimator;
 		public void Init()
 		{
@@ -21,7 +21,7 @@ namespace Prefabs.Player
 		[Rpc(SendTo.ClientsAndHost, RequireOwnership = false)]
 		private void SendAnimRpc(bool setAnimation)
 		{
-			_playerAnimator.SetBool(IsWalking, setAnimation);
+			_playerAnimator.SetBool(_isWalking, setAnimation);
 		}
 		
 		
