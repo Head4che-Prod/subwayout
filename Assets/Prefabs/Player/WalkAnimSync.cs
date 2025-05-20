@@ -6,8 +6,9 @@ namespace Prefabs.Player
 {
 	public class WalkAnimSync : NetworkBehaviour
 	{
+		private static readonly int IsWalking = Animator.StringToHash("isWalking");
 		private Animator _playerAnimator;
-		void Start()
+		public void Init()
 		{
 			int i = 1;
 			while (!transform.GetChild(0).GetChild(i).gameObject.activeInHierarchy) i++;
@@ -15,12 +16,12 @@ namespace Prefabs.Player
 			_playerAnimator = transform.GetChild(0).GetChild(i).GetComponent<Animator>();
 		}
 
-		public void CallRpc(bool setAnimation) => SendAnimRpc(setAnimation);
+		public void CallWalkAnimationRpc(bool setAnimation) => SendAnimRpc(setAnimation);
 		
 		[Rpc(SendTo.ClientsAndHost, RequireOwnership = false)]
 		private void SendAnimRpc(bool setAnimation)
 		{
-			_playerAnimator.SetBool("isWalking", setAnimation);
+			_playerAnimator.SetBool(IsWalking, setAnimation);
 		}
 		
 		

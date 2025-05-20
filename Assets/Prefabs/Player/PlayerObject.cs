@@ -13,6 +13,8 @@ namespace Prefabs.Player
         public PlayerMovement Movement { get; private set; }
         public PlayerInteract Interaction { get; private set; }
         public Rigidbody Rigidbody { get; private set; }
+        public WalkAnimSync WalkAnimation { get; private set; }
+        
         public PlayerInput Input { get; private set; }
         public Camera playerCamera;
         public Transform grabPointTransform;
@@ -33,6 +35,7 @@ namespace Prefabs.Player
             Interaction = GetComponent<PlayerInteract>();
             Rigidbody = GetComponent<Rigidbody>();
             Input = GetComponent<PlayerInput>();
+            WalkAnimation = GetComponent<WalkAnimSync>();
             InitialPosition = Rigidbody.position;
             InitialRotation = Rigidbody.rotation;
         }
@@ -56,6 +59,8 @@ namespace Prefabs.Player
                 Instantiate(debugConsolePrefab, transform.Find("UI"));
                 ObjectHighlightManager.Init();
             }
+
+            WalkAnimation.Init();
         }
 
         private void SetSpawnPos(Scene prev, Scene next) 

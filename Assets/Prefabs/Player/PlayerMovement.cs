@@ -64,7 +64,7 @@ namespace Prefabs.Player
 			Vector2 moveDirection = _movementInput.ReadValue<Vector2>();
 			_horizontalInput = moveDirection.x;
 			_verticalInput = moveDirection.y;
-			walkScript.CallRpc( _horizontalInput != 0 || _verticalInput != 0);
+			walkScript.CallWalkAnimationRpc( _horizontalInput != 0 || _verticalInput != 0);
 		}
 		
 
