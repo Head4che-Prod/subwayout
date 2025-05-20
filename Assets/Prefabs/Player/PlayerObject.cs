@@ -1,9 +1,12 @@
 using Objects;
+using Prefabs.FreeCam;
 using Prefabs.GameManagers;
+using Prefabs.Player.PlayerUI.DebugConsole;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 namespace Prefabs.Player
 {
@@ -12,16 +15,18 @@ namespace Prefabs.Player
         public PlayerInputManager InputManager { get; private set; }
         public PlayerMovement Movement { get; private set; }
         public PlayerInteract Interaction { get; private set; }
+        
         public Rigidbody Rigidbody { get; private set; }
         public WalkAnimSync WalkAnimation { get; private set; }
-        
         public PlayerInput Input { get; private set; }
         public Camera playerCamera;
         public Transform grabPointTransform;
         public GameObject playerCharacter;
-        public static bool DisplayHints = true;
         public GameObject debugConsolePrefab;
+        public PlayerCam cameraController;
+        public ToggleableFreeCam freeCam;
 
+        public static bool DisplayHints = true;
         
         public Vector3 InitialPosition { get; set; }
         public Quaternion InitialRotation { get; set; }
@@ -59,6 +64,8 @@ namespace Prefabs.Player
                 Instantiate(debugConsolePrefab, transform.Find("UI"));
                 ObjectHighlightManager.Init();
                 Movement.Init();
+                
+                DebugConsole.AddCommand("freeCam", EnableFreeCam);
             }
         }
 
@@ -89,6 +96,11 @@ namespace Prefabs.Player
             Rigidbody.rotation = InitialRotation;
         }
 
+        private static void EnableFreeCam()
+        {
+            Instantiate(LocalPlayer.freeCam).enabled = true;
+        }
+        
         public override void OnDestroy()
         {
             SceneManager.activeSceneChanged -= SetSpawnPos;

@@ -624,7 +624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1725313950
+  GlobalObjectIdHash: 795297937
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -701,6 +701,8 @@ MonoBehaviour:
   grabPointTransform: {fileID: 5411741163773892280}
   playerCharacter: {fileID: 2486201601411644443}
   debugConsolePrefab: {fileID: 6005886500767136779, guid: acd9ba6658d33f444bf48e578ee4fce7, type: 3}
+  cameraController: {fileID: 8285126569542251960}
+  freeCam: {fileID: 5316126070166428036, guid: 8e7fc48987f677f418a50711adbd5b66, type: 3}
 --- !u!114 &773850728464104108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -835,6 +837,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2bea5c335244a7fafef2bd9c83a27ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
 --- !u!1 &7305760799034490760
 GameObject:
   m_ObjectHideFlags: 0
@@ -909,7 +912,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1220603937757124082, guid: 3bd70216eccab474cb606d6b57fc4eac, type: 3}
       propertyPath: m_text
-      value: Interagir
+      value: Interact
       objectReference: {fileID: 0}
     - target: {fileID: 6783230644658323068, guid: 3bd70216eccab474cb606d6b57fc4eac, type: 3}
       propertyPath: m_Name
@@ -917,7 +920,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7576140956914140474, guid: 3bd70216eccab474cb606d6b57fc4eac, type: 3}
       propertyPath: m_text
-      value: Attraper
+      value: Grab
       objectReference: {fileID: 0}
     - target: {fileID: 7736965681022959006, guid: 3bd70216eccab474cb606d6b57fc4eac, type: 3}
       propertyPath: m_Pivot.x
@@ -1200,6 +1203,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8173176246989190710}
     m_Modifications:
+    - target: {fileID: 1220603937757124082, guid: 17b29181e19e86c4a9e14ea9a5f2597b, type: 3}
+      propertyPath: m_text
+      value: Highlight objects
+      objectReference: {fileID: 0}
     - target: {fileID: 6783230644658323068, guid: 17b29181e19e86c4a9e14ea9a5f2597b, type: 3}
       propertyPath: m_Name
       value: IndicatorsRight
