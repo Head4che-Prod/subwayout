@@ -17,9 +17,9 @@ public class PlayBackgroundNoise : MonoBehaviour
     { 
         while(true)
         {
-            yield return new WaitForSeconds(11);
             if ((TutorialManager.Instance.State != TutorialState.TrainStopped) && EndGameManager.Instance.State == EndGameState.WaitingHanoi)
                 SoundManager.Singleton.PlaySoundRpc("BackgroundNoise", transform.position);
+            yield return new WaitForSeconds(10);
         }
     }
     private void OnDestroy()
