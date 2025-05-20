@@ -5,7 +5,7 @@ namespace Prefabs.Player
 {
     public class PlayerInputManager : MonoBehaviour
     {
-        private static HashSet<string> _validInputModes = new HashSet<string>()
+        private static readonly HashSet<string> ValidInputModes = new HashSet<string>()
         {
             "Gameplay",
             "UI",
@@ -17,14 +17,14 @@ namespace Prefabs.Player
         public void Start()
         {
             _player = GetComponent<PlayerObject>();
-            foreach (string map in _validInputModes)
+            foreach (string map in ValidInputModes)
                 _player.Input.actions.FindActionMap(map).Disable();
             SetPlayerInputMap("Gameplay");
         }
 
         public void SetPlayerInputMap(string inputMap)
         {
-            if (_validInputModes.Contains(inputMap))
+            if (ValidInputModes.Contains(inputMap))
             {
                 _player.Input.currentActionMap.Disable();
                 _player.Input.SwitchCurrentActionMap(inputMap);
