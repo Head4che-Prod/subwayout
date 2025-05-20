@@ -82,7 +82,7 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
             _currentText = "";
         }
 
-        private void ToggleConsole(InputAction.CallbackContext ctx)
+        public void ToggleConsole(InputAction.CallbackContext ctx)
         {
             _isActivated = !_isActivated;
             gameObject.transform.GetChild(0).gameObject.SetActive(_isActivated);
