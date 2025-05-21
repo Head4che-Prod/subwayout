@@ -141,6 +141,12 @@ namespace Prefabs.Puzzles.AI
             base.OnNetworkDespawn();
             _isOpen.OnValueChanged -= UpdatePosition;
         }
-        
+
+
+        public override void OnDestroy()
+        {
+            _singleton = null;
+            base.OnDestroy();
+        }
     }
 }
