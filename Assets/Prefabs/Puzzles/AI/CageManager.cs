@@ -17,7 +17,7 @@ namespace Prefabs.Puzzles.AI
         private ObjectGrabbable _grabbedObject;
         private static readonly int AnimCageDoor = Animator.StringToHash("animCageDoor");
         private readonly NetworkVariable<bool> _isOpen = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone);
-
+        [SerializeField] private Collider _colliderCage;
         
         new void Start()
         {
@@ -47,6 +47,29 @@ namespace Prefabs.Puzzles.AI
             else
             {
                 ChangeCageDoorServerRpc(!_animator.GetBool(AnimCageDoor));
+            }
+        }
+
+        void OnTriggerStay(Collider other)
+        {
+            _grabbedObject = PlayerInteract.LocalPlayerInteract.GrabbedObject?.GrabbedObject;
+            if ( _grabbedObject is CheeseGrabbable cheeseGrabbable)
+            {
+                _colliderCage.providesContacts = false;
+                Collider coll =cheeseGrabbable.gameObject.GetComponent<Collider>();
+                Debug.Log("cheese in contact with collider of the cage");
+                if (_colliderCage.bounds.Contains(coll.bounds.max) && _colliderCage.bounds.Contains(coll.bounds.min))
+                {
+                    
+                    DeactivateCheese();
+                }
+            }
+            else
+            {
+                _colliderCage.providesContacts = true;
+                Debug.Log("not detected as cheese");
+                if(_grabbedObject is not null)
+                    Debug.Log($"{_grabbedObject.name}");
             }
         }
         
