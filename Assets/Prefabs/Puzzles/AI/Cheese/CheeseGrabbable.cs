@@ -8,7 +8,7 @@ namespace Prefabs.Puzzles.AI.Cheese
     {
         private Collider cageCollider;
 
-        void Start()
+        public override void Start()
         {
             cageCollider = GameObject.Find("PlayableCar/catCage/collider").GetComponent<Collider>();
             base.Start();
