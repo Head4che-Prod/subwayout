@@ -24,7 +24,7 @@ namespace Prefabs.FreeCam
             _player.Interaction.enabled = false;
             _player.cameraController.enabled = false;
             DebugConsole.Singleton.ToggleConsole(new InputAction.CallbackContext());
-            _player.transform.Find("Canvas").GetChild(1).gameObject.SetActive(false);
+            _player.transform.Find("Canvas").gameObject.SetActive(false);
             
             _player.playerCamera.enabled = false;
             Debug.Log(_player.Input.currentActionMap.name);
@@ -45,7 +45,7 @@ namespace Prefabs.FreeCam
             _player.Interaction.enabled = true;
             _player.cameraController.enabled = true;
             DebugConsole.Singleton.ToggleConsole(new InputAction.CallbackContext());
-            _player.transform.Find("Canvas").GetChild(1).gameObject.SetActive(PlayerObject.DisplayHints);
+            _player.transform.Find("Canvas").gameObject.SetActive(true);
             
             _player.playerCamera.enabled = true;
         }
