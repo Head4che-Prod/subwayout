@@ -12,19 +12,43 @@ namespace Prefabs.Puzzles.AI
     public class CageManager : ObjectGrabbable, IObjectInteractable
     {
         
+        private static CageManager _singleton;
+
+        public static CageManager Singleton
+        {
+            get
+            {
+                if (_singleton != null)
+                    return _singleton;
+                Debug.LogError("Cage singleton no set");
+                return null;
+            }
+            private set
+            {
+                if (_singleton == null)
+                    _singleton = value;
+                else
+                    Debug.LogError("Cage singleton already set!");
+            }
+        }
+        
+        
+        
+        
         [SerializeField] private GameObject cheeseInCage; 
         [SerializeField] private GameObject clonedRat;
         private Animator _animator;
         private ObjectGrabbable _grabbedObject;
         private static readonly int AnimCageDoor = Animator.StringToHash("animCageDoor");
         private readonly NetworkVariable<bool> _isOpen = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone);
-        [SerializeField] private Collider _triggerCollider;
+        [SerializeField] public Collider _triggerCollider;
         
         new void Start()
         {
             base.Start();
             cheeseInCage.SetActive(false);
             _animator = transform.GetChild(0).GetComponent<Animator>();
+            Singleton = this;
         }
         
         public override void OnNetworkSpawn()
