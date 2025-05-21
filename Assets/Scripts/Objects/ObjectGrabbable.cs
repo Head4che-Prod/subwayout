@@ -103,8 +103,8 @@ namespace Objects
                 EnableHighlightRpc(ObjectHighlightManager.HighlightEnabled);
             }
             
-            PlayerIndicatorsControl.Singleton.interactText.SetEntry("controlHints.combine");
-            PlayerIndicatorsControl.Singleton.grabText.SetEntry("controlHints.drop");
+            PlayerIndicatorsControl.SetInteractText("controlHints.combine");
+            PlayerIndicatorsControl.SetGrabText("controlHints.drop");
         }
 
         [Rpc(SendTo.ClientsAndHost, RequireOwnership = false)]
@@ -130,8 +130,8 @@ namespace Objects
             PlayerInteract.LocalPlayerInteract.GrabbedObject = null;
             DropServerRpc(NetworkManager.Singleton.LocalClientId);
             
-            PlayerIndicatorsControl.Singleton.interactText.SetEntry("controlHints.interact");
-            PlayerIndicatorsControl.Singleton.grabText.SetEntry("controlHints.grab");
+            PlayerIndicatorsControl.SetInteractText("controlHints.interact");
+            PlayerIndicatorsControl.SetGrabText("controlHints.grab");
         }
 
         /// <summary>

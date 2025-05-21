@@ -12,9 +12,8 @@ namespace Prefabs.Player.PlayerUI.Indicators
         {
             get
             {
-                if (_singleton != null)
+                if (_singleton)
                     return _singleton;
-                Debug.LogError("PlayerIndicatorsControl singleton no set");
                 return null;
             }
             private set
@@ -26,8 +25,8 @@ namespace Prefabs.Player.PlayerUI.Indicators
             }
         }
 
-        public LocalizeStringEvent interactText;
-        public LocalizeStringEvent grabText;
+        [SerializeField] private LocalizeStringEvent interactText;
+        [SerializeField] private LocalizeStringEvent grabText;
         
         private void Start()
         {
@@ -35,6 +34,10 @@ namespace Prefabs.Player.PlayerUI.Indicators
             interactText.SetEntry("controlHints.interact");
             grabText.SetEntry("controlHints.grab");
         }
+
+        public static void SetGrabText(string entry) => Singleton?.grabText.SetEntry(entry);
+        public static void SetInteractText(string entry) => Singleton?.interactText.SetEntry(entry);
+        
         
         private void OnDestroy()
         {
