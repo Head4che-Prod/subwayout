@@ -69,7 +69,7 @@ namespace Prefabs.Puzzles.AI
 
             // Rat enters cage
             if (Vector3.Distance(_agent.transform.position, cheeseInCage.gameObject.transform.position) < 0.5f &&
-                cheeseInCage.gameObject.activeInHierarchy)
+                cheeseInCage.gameObject.activeInHierarchy && _cageAnimator.GetBool(WhichAnim))
             {
                 NetworkObject spawnedObj = Instantiate(keyGrabbable,
                     transform.position,
