@@ -68,7 +68,7 @@ namespace Prefabs.Puzzles.AI
             GameObject nearestPlayer = FindNearestPlayer();
 
             // Rat enters cage
-            if (Vector3.Distance(_agent.transform.position, cheeseInCage.gameObject.transform.position) < 0.5f &&
+            if (Vector3.Distance(_agent.transform.position, cheeseInCage.gameObject.transform.position) < 1.5f &&
                 cheeseInCage.gameObject.activeInHierarchy && _cageAnimator.GetBool("animCageDoor"))
             {
                 NetworkObject spawnedObj = Instantiate(keyGrabbable,
@@ -89,6 +89,7 @@ namespace Prefabs.Puzzles.AI
             {
                 _state = State.Baited;
                 MoveTowardsCheeseInCage();
+                
             }
             else // Rat will flee or wait
             {
@@ -152,19 +153,29 @@ namespace Prefabs.Puzzles.AI
         /// </summary>
         private void MoveTowardsCheeseInCage()
         {
-            //If just under the cage but can't reach it
-            if (Mathf.Approximately(_agent.transform.position.x, cheeseInCage.transform.position.x) &&
-                Mathf.Approximately(_agent.transform.position.z,
-                    cheeseInCage.transform.position.z)) // approximately calculate if they're equal
+            if (Vector3.Distance(_agent.transform.position, cheeseInCage.gameObject.transform.position) <= 1f)
             {
+                Debug.Log("rat stopped because cage not opened");
                 AnimeRatRpc(0);
+                _agent.SetDestination(transform.position);
             }
             else
             {
-                AnimeRatRpc(-1);
-                _agent.speed = 3f;
-                _agent.SetDestination(cheeseInCage.transform.position);
+                //If just under the cage but can't reach it
+                if (Mathf.Approximately(_agent.transform.position.x, cheeseInCage.transform.position.x) &&
+                    Mathf.Approximately(_agent.transform.position.z,
+                        cheeseInCage.transform.position.z)) // approximately calculate if they're equal
+                {
+                    AnimeRatRpc(0);
+                }
+                else
+                {
+                    AnimeRatRpc(-1);
+                    _agent.speed = 3f;
+                    _agent.SetDestination(cheeseInCage.transform.position);
+                }
             }
+            
         }
 
         /// <summary>
