@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using Prefabs.GameManagers;
 using Prefabs.Player;
+using Prefabs.Player.PlayerUI.Indicators;
 using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEngine;
@@ -101,6 +102,9 @@ namespace Objects
                 ObjectHighlightManager.RegisterHighlightableObject(NetworkObjectId);
                 EnableHighlightRpc(ObjectHighlightManager.HighlightEnabled);
             }
+            
+            PlayerIndicatorsControl.Singleton.interactText.SetEntry("controlHints.combine");
+            PlayerIndicatorsControl.Singleton.grabText.SetEntry("controlHints.drop");
         }
 
         [Rpc(SendTo.ClientsAndHost, RequireOwnership = false)]
@@ -125,6 +129,9 @@ namespace Objects
         {
             PlayerInteract.LocalPlayerInteract.GrabbedObject = null;
             DropServerRpc(NetworkManager.Singleton.LocalClientId);
+            
+            PlayerIndicatorsControl.Singleton.interactText.SetEntry("controlHints.interact");
+            PlayerIndicatorsControl.Singleton.grabText.SetEntry("controlHints.grab");
         }
 
         /// <summary>
