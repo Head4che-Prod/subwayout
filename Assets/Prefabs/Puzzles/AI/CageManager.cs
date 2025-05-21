@@ -5,11 +5,35 @@ using Prefabs.Player;
 using Prefabs.Puzzles.AI.Cheese;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Prefabs.Puzzles.AI
 { 
     public class CageManager : ObjectGrabbable, IObjectInteractable
     {
+        
+        private static CageManager _singleton;
+
+        public static CageManager Singleton
+        {
+            get
+            {
+                if (_singleton != null)
+                    return _singleton;
+                Debug.LogError("Cage singleton no set");
+                return null;
+            }
+            private set
+            {
+                if (_singleton == null)
+                    _singleton = value;
+                else
+                    Debug.LogError("Cage singleton already set!");
+            }
+        }
+        
+        
+        
         
         [SerializeField] private GameObject cheeseInCage; 
         [SerializeField] private GameObject clonedRat;
@@ -17,13 +41,14 @@ namespace Prefabs.Puzzles.AI
         private ObjectGrabbable _grabbedObject;
         private static readonly int AnimCageDoor = Animator.StringToHash("animCageDoor");
         private readonly NetworkVariable<bool> _isOpen = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone);
-
+        [SerializeField] public Collider _triggerCollider;
         
         new void Start()
         {
             base.Start();
             cheeseInCage.SetActive(false);
             _animator = transform.GetChild(0).GetComponent<Animator>();
+            Singleton = this;
         }
         
         public override void OnNetworkSpawn()
@@ -47,6 +72,20 @@ namespace Prefabs.Puzzles.AI
             else
             {
                 ChangeCageDoorServerRpc(!_animator.GetBool(AnimCageDoor));
+            }
+        }
+
+        void OnTriggerStay(Collider other)
+        {
+            _grabbedObject = PlayerInteract.LocalPlayerInteract.GrabbedObject?.GrabbedObject;
+            if ( _grabbedObject is CheeseGrabbable cheeseGrabbable)
+            {
+                Collider coll =cheeseGrabbable.gameObject.GetComponent<Collider>();
+                Debug.Log("cheese in contact with collider of the cage");
+                if (_triggerCollider.bounds.Contains(coll.bounds.max) && _triggerCollider.bounds.Contains(coll.bounds.min))
+                {
+                    DeactivateCheese();
+                }
             }
         }
         
@@ -102,6 +141,12 @@ namespace Prefabs.Puzzles.AI
             base.OnNetworkDespawn();
             _isOpen.OnValueChanged -= UpdatePosition;
         }
-        
+
+
+        public override void OnDestroy()
+        {
+            _singleton = null;
+            base.OnDestroy();
+        }
     }
 }
