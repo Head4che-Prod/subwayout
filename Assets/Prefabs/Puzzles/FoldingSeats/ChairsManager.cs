@@ -8,6 +8,8 @@ namespace Prefabs.Puzzles.FoldingSeats
         private readonly SingleChair[] _chairsBool = new SingleChair[24];
         private static ChairsManager _singleton;
 
+        private bool _gameWon = false;
+        
         public static ChairsManager Singleton
         {
             get
@@ -38,6 +40,14 @@ namespace Prefabs.Puzzles.FoldingSeats
         /// <summary>
         /// Returns whether the chairs are in the correct position.
         /// </summary>
-        public bool CheckChairs() => _chairsBool.All(chair => chair.IsInRightPosition);
+        public bool CheckChairs()
+        {
+            if (!_gameWon && _chairsBool.All(chair => chair.IsInRightPosition))
+            {
+                _gameWon = true;
+                return true;
+            }
+            return false;
+        }
     }
 }
