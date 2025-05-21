@@ -155,7 +155,6 @@ namespace Prefabs.Puzzles.AI
         {
             if (Vector3.Distance(_agent.transform.position, cheeseInCage.gameObject.transform.position) <= 1f)
             {
-                Debug.Log("rat stopped because cage not opened");
                 AnimeRatRpc(0);
                 _agent.SetDestination(transform.position);
             }
