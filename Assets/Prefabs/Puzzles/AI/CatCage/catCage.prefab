@@ -1203,7 +1203,7 @@ MonoBehaviour:
   soundEffectName: 
   cheeseInCage: {fileID: 2815837500957667007}
   clonedRat: {fileID: 8674347391814092438}
-  _colliderCage: {fileID: 8740317535114785793}
+  _triggerCollider: {fileID: 8740317535114785793}
 --- !u!1 &4062722274380123244
 GameObject:
   m_ObjectHideFlags: 0
@@ -1664,8 +1664,8 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.9347501, y: 1.0015266, z: 1.494423}
@@ -1926,8 +1926,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.022823494, y: 0.018750004, z: 0.0005783298}
-  m_Center: {x: 0, y: 0.0006250004, z: -0.009710871}
+  m_Size: {x: 0.022823494, y: 0.018750004, z: 0.0012776471}
+  m_Center: {x: 0, y: 0.00062500034, z: -0.010060527}
 --- !u!65 &8483113474589888767
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1947,8 +1947,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.022823494, y: 0.018750004, z: 0.00041684892}
-  m_Center: {x: 0, y: 0.0006250004, z: 0.009791617}
+  m_Size: {x: 0.022823494, y: 0.018750004, z: 0.0006702958}
+  m_Center: {x: 0, y: 0.0006250004, z: 0.0099183405}
 --- !u!65 &6074199018966718261
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1989,8 +1989,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.003311626, y: 0.018750004, z: 0.020000003}
-  m_Center: {x: 0.009755933, y: 0.0006250004, z: -1.0177066e-17}
+  m_Size: {x: 0.003311626, y: 0.018538648, z: 0.020000003}
+  m_Center: {x: 0.009755933, y: 0.00051931373, z: -1.3354463e-17}
 --- !u!65 &6051352872747918308
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2010,8 +2010,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.022823494, y: 0.018750004, z: 0.020000001}
-  m_Center: {x: 0, y: 0.00062500004, z: 8.881782e-18}
+  m_Size: {x: 0.0032792746, y: 0.018750004, z: 0.020000003}
+  m_Center: {x: -0.009772111, y: 0.0006250004, z: -1.0177066e-17}
 --- !u!1 &6101765691920816536
 GameObject:
   m_ObjectHideFlags: 0

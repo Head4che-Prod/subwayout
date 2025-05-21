@@ -5,6 +5,7 @@ using Prefabs.Player;
 using Prefabs.Puzzles.AI.Cheese;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Prefabs.Puzzles.AI
 { 
@@ -17,7 +18,7 @@ namespace Prefabs.Puzzles.AI
         private ObjectGrabbable _grabbedObject;
         private static readonly int AnimCageDoor = Animator.StringToHash("animCageDoor");
         private readonly NetworkVariable<bool> _isOpen = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone);
-        [SerializeField] private Collider _colliderCage;
+        [SerializeField] private Collider _triggerCollider;
         
         new void Start()
         {
@@ -55,21 +56,12 @@ namespace Prefabs.Puzzles.AI
             _grabbedObject = PlayerInteract.LocalPlayerInteract.GrabbedObject?.GrabbedObject;
             if ( _grabbedObject is CheeseGrabbable cheeseGrabbable)
             {
-                _colliderCage.providesContacts = false;
                 Collider coll =cheeseGrabbable.gameObject.GetComponent<Collider>();
                 Debug.Log("cheese in contact with collider of the cage");
-                if (_colliderCage.bounds.Contains(coll.bounds.max) && _colliderCage.bounds.Contains(coll.bounds.min))
+                if (_triggerCollider.bounds.Contains(coll.bounds.max) && _triggerCollider.bounds.Contains(coll.bounds.min))
                 {
-                    
                     DeactivateCheese();
                 }
-            }
-            else
-            {
-                _colliderCage.providesContacts = true;
-                Debug.Log("not detected as cheese");
-                if(_grabbedObject is not null)
-                    Debug.Log($"{_grabbedObject.name}");
             }
         }
         
