@@ -14,8 +14,6 @@ namespace Prefabs.Blackbox.Contents
             if (!_pickedUp)
             {
                 BlueCodeFoundRpc();
-                CodesFoundManager.Singleton.BlueCodeFound.Value = true;
-                
             }
             base.Grab();
         }
@@ -25,6 +23,8 @@ namespace Prefabs.Blackbox.Contents
         {
             HintSystem.DisableHints(Hint.BlueCode);
             _pickedUp = true;
+            if(IsServer)
+                CodesFoundManager.Singleton.BlueCodeFound.Value = true;
         }
     }
 }
