@@ -107,8 +107,7 @@ namespace Prefabs.Blackbox.Box
             HintSystem.DisableHints(Hint.CombineSticker);
             if (!lid.IsOpen)
             {
-                HintSystem.EnableHints(Hint.SeatsSticker);
-                HintSystem.EnableHints(Hint.StickerMeaning);
+                HintSystem.EnableHints(Hint.SeatsSticker, Hint.StickerMeaning);
             }
         }
 
