@@ -12,7 +12,11 @@ namespace Prefabs.Blackbox.Contents
         public override void Grab()
         {
             if (!_pickedUp)
+            {
                 BlueCodeFoundRpc();
+                CodesFoundManager.Singleton.BlueCodeFound.Value = true;
+                
+            }
             base.Grab();
         }
 
@@ -20,7 +24,6 @@ namespace Prefabs.Blackbox.Contents
         private void BlueCodeFoundRpc()
         {
             HintSystem.DisableHints(Hint.BlueCode);
-            CodesFoundManager.Singleton.BlueCodeFound.Value = true;
             _pickedUp = true;
         }
     }
