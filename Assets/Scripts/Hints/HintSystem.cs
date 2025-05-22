@@ -15,6 +15,7 @@ namespace Hints
         BlueCode,
         CombineSticker,
         SeatsSticker,
+        StickerMeaning,
         RedCode,
         BackPack,
         RatTrap,

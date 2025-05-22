@@ -100,6 +100,11 @@
     "PathEn": "LightVersionNoHints/LightVersionNoHintsEN",
     "PathFr": "LightVersionNoHints/LightVersionNoHintsFR",
     "PathEs": ""
+  },
+  {
+    "ID": "StickerMeaning",
+    "PathEn": "StickerMeaning/StickerMeaningEN",
+    "PathFr": "StickerMeaning/StickerMeaningFR",
+    "PathEs": ""
   }
-  
 ]
