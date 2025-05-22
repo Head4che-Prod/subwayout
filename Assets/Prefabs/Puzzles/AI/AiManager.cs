@@ -203,7 +203,7 @@ namespace Prefabs.Puzzles.AI
         [Rpc(SendTo.ClientsAndHost, RequireOwnership = false)]
         private void AnimeRatRpc(int intofAnimation)
         {
-            _animator.SetInteger(WhichAnim, intofAnimation);
+            _animator?.SetInteger(WhichAnim, intofAnimation);
         }
         
         
