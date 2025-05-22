@@ -106,7 +106,9 @@ namespace Prefabs.Blackbox.Box
             GrabbableSticker.gameObject.SetActive(false);
             HintSystem.DisableHints(Hint.CombineSticker);
             if (!lid.IsOpen)
-                HintSystem.EnableHints(Hint.SeatsSticker);
+            {
+                HintSystem.EnableHints(Hint.SeatsSticker, Hint.StickerMeaning);
+            }
         }
 
         /// <summary>
@@ -115,7 +117,7 @@ namespace Prefabs.Blackbox.Box
         public void Open()
         {
             HintSystem.EnableHints(Hint.BlueCode, Hint.RedCode);
-            HintSystem.DisableHints(Hint.SeatPuzzle, Hint.SeatsSticker);
+            HintSystem.DisableHints(Hint.SeatPuzzle, Hint.SeatsSticker,Hint.StickerMeaning);
             StartCoroutine(OpenBoxWhenAble());
         }
   
