@@ -30,6 +30,14 @@ MonoBehaviour:
     m_Localized: Highlight objects
     m_Metadata:
       m_Items: []
+  - m_Id: 6944851672518656
+    m_Localized: Drop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6945101170692096
+    m_Localized: Combine
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

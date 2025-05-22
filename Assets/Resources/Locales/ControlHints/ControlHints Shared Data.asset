@@ -27,6 +27,14 @@ MonoBehaviour:
     m_Key: controlHints.highlight
     m_Metadata:
       m_Items: []
+  - m_Id: 6944851672518656
+    m_Key: controlHints.drop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6945101170692096
+    m_Key: controlHints.combine
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

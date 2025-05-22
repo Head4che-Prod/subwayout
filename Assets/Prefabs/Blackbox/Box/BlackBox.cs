@@ -88,7 +88,7 @@ namespace Prefabs.Blackbox.Box
             // Only ever called once, no need to hash.
             _state = State.PullingOut;
             _slideAnimator.SetTrigger("slideBox");
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1.7f);
             _state = State.PulledOut;
         }
 

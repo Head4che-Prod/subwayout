@@ -35,7 +35,7 @@ namespace Prefabs.Player
 		[Rpc(SendTo.ClientsAndHost, RequireOwnership = false)]
 		private void SendAnimRpc(bool setAnimation)
 		{
-			_playerAnimator.SetBool(_isWalking, setAnimation);
+			_playerAnimator?.SetBool(_isWalking, setAnimation);
 		}
 		
 		
