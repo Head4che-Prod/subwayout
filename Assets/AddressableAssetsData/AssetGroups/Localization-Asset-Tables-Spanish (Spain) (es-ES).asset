@@ -21,6 +21,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-es-ES
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 887cd17e8b71a204cb73377c7eae1f1c
+    m_Address: Lola Textures_es-ES
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es-ES
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b906e4e7ef9bca747afcf58807e0de15
     m_Address: Code Instruction_es-ES
     m_ReadOnly: 1

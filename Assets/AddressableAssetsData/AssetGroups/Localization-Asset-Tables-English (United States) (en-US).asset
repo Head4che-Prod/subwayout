@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: Localization-Asset-Tables-English (United States) (en-US)
   m_GUID: c71911ffa52db6443a53b0313a82a22d
   m_SerializeEntries:
+  - m_GUID: 152740fa9ae29c54e9b3187debb5314e
+    m_Address: Lola Textures_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e5bf90d370890474db57b5499e6cbd6a
     m_Address: Code Instruction_en-US
     m_ReadOnly: 1

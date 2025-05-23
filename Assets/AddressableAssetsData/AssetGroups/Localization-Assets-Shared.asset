@@ -41,6 +41,11 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aa0e505f68b7ec94e87b04d277e32a07
+    m_Address: Assets/Resources/Locales/Lola Textures/Lola textures Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e456b493c680df94d82c4ac43d270a1b
     m_Address: Assets/Resources/Locales/Hanoi rules Textures/Hanoi rules textures
       Shared Data.asset
