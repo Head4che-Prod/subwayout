@@ -41,6 +41,12 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e456b493c680df94d82c4ac43d270a1b
+    m_Address: Assets/Resources/Locales/Hanoi rules Textures/Hanoi rules textures
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fa6a9e7efdc1bea42b2552b42de43138
     m_Address: Assets/Prefabs/Player/PlayerUI/PlayerSelectionMenu/PlayerSelectionMenu
       Shared Data.asset

@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: Localization-Asset-Tables-Spanish (Spain) (es-ES)
   m_GUID: 75303459a0596cf43b1b0f4085fa6d78
   m_SerializeEntries:
+  - m_GUID: 33abede655bd1ec43a8e97585c7b7037
+    m_Address: Hanoi rules textures_es-ES
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es-ES
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b906e4e7ef9bca747afcf58807e0de15
     m_Address: Code Instruction_es-ES
     m_ReadOnly: 1

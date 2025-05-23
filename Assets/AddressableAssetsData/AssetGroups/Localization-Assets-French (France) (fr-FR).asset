@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: Localization-Assets-French (France) (fr-FR)
   m_GUID: 0711fcb6931ab8c408b490695e0754b1
   m_SerializeEntries:
+  - m_GUID: 3a07c371f0f84f148a244eb94a11da15
+    m_Address: textureFR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr-FR
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5721c54f1a2898b41823d677f5ba94cd
     m_Address: codeInstructionsFR
     m_ReadOnly: 1
