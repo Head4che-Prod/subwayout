@@ -15,8 +15,20 @@ MonoBehaviour:
   m_GroupName: Localization-Assets-English (United States) (en-US)
   m_GUID: 176e45a1e03c4d74a9665f229bbc1e22
   m_SerializeEntries:
+  - m_GUID: 78352e7b2d1e3ec4fa479d6e560c3aa0
+    m_Address: Attention_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 79d6edc1a5c067d4395e9155a8d514b3
     m_Address: codeInstructionsEN
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 89665aa64f91df84c9812e483220abf4
+    m_Address: textureEN
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en-US

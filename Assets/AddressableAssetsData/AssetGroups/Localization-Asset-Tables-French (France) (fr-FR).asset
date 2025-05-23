@@ -15,6 +15,18 @@ MonoBehaviour:
   m_GroupName: Localization-Asset-Tables-French (France) (fr-FR)
   m_GUID: 450afb0eba6c05c4dbbe08d8ed575bf5
   m_SerializeEntries:
+  - m_GUID: b30b065a8702b044794cd4f964b5bf9f
+    m_Address: Lola Textures_fr-FR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr-FR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f8655b12ecff8e945b1a12e9c0ed813c
+    m_Address: Hanoi rules textures_fr-FR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr-FR
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fd1e66a6a5bedda438b992cb3784689d
     m_Address: Code Instruction_fr-FR
     m_ReadOnly: 1

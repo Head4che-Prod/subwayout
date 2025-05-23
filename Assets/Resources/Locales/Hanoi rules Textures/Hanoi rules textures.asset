@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4db626ad063b13545924a9839ac5fa83, type: 3}
+  m_Name: Hanoi rules textures
+  m_EditorClassIdentifier: 
+  m_SharedTableData: {fileID: 11400000, guid: e456b493c680df94d82c4ac43d270a1b, type: 2}
+  m_Tables:
+  - {fileID: 11400000, guid: f1176c3cbdda2de4598731cc3999fccf, type: 2}
+  - {fileID: 11400000, guid: f8655b12ecff8e945b1a12e9c0ed813c, type: 2}
+  - {fileID: 11400000, guid: 33abede655bd1ec43a8e97585c7b7037, type: 2}
+  m_Extensions: []
+  m_Group: Asset Table
+  references:
+    version: 2
+    RefIds: []
