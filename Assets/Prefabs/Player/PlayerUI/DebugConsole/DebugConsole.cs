@@ -43,7 +43,7 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
                 Singleton = this;
 
                 Commands["sayHello"] = () => Log("Hello, world!");
-                Commands["inputMode"] = () => Log(_previousInputMap);
+                Commands["inputMode"] = () => Log($"Input map: {_player.Input.currentActionMap.name}; previous: {_previousInputMap}");
                 Commands["loadDemoScene"] = () => NetworkManager.Singleton.SceneManager.LoadScene("Scenes/DemoScene", LoadSceneMode.Single);
                 Commands["help"] = () => Log("Available commands:\n - " + String.Join("\n - ", Commands.Keys));
                 Commands["exit"] = () => NetworkManager.Singleton.SceneManager.LoadScene("Scenes/HomeMenu", LoadSceneMode.Single);
@@ -85,6 +85,8 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
         public void ToggleConsole(InputAction.CallbackContext ctx)
         {
             _isActivated = !_isActivated;
+            if (!_isActivated)
+                FocusOffConsole();
             gameObject.transform.GetChild(0).gameObject.SetActive(_isActivated);
         }
 
@@ -107,7 +109,7 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
             _player.InputManager.SetPlayerInputMap(_previousInputMap);
             inputField.text = "";
             _currentText = "";
-            inputField.DeactivateInputField();
+            inputField.enabled = false;
             Keyboard.current.onTextInput -= HandleCommandInput;
         }
 
