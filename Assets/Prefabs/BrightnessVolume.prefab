@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2551115168035415250}
   - component: {fileID: 6955373397993200782}
+  - component: {fileID: 8381682980853344761}
   m_Layer: 0
   m_Name: BrightnessVolume
   m_TagString: Untagged
@@ -49,3 +50,16 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 3cd6f3793c7b2d24a9d74309987b7f09, type: 2}
+--- !u!114 &8381682980853344761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3983870435428769863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 837e1693df86cfc4e80958c453a1b2bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volume: {fileID: 6955373397993200782}
