@@ -2360,6 +2360,7 @@ GameObject:
   - component: {fileID: 1941551128387198924}
   - component: {fileID: 7741344157706624248}
   - component: {fileID: 8142015168532715829}
+  - component: {fileID: 5970033171782807927}
   m_Layer: 0
   m_Name: glassDerriere.001
   m_TagString: Untagged
@@ -2435,6 +2436,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5970033171782807927
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047744100785244840}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6556919578006559574, guid: d971b60a2b2c2524bbd5f140f0c0729b, type: 3}
 --- !u!1 &1059694958607025128
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,7 +13,9 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
     {
         public static DebugConsole Singleton;
         [SerializeField] TMP_Text displayText;
+
         [SerializeField] TMP_InputField inputField;
+
         // Needs to be initialized here in order to avoid NullReferenceExceptions when adding commands in other files
         private static readonly Dictionary<string, Action> Commands = new Dictionary<string, Action>();
         private List<string> _commandHistory;
@@ -37,19 +39,23 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
         void Awake()
         {
             if (Singleton != null)
-                DestroyImmediate(gameObject);
+                Destroy(this);
             else
             {
                 Singleton = this;
 
                 Commands["sayHello"] = () => Log("Hello, world!");
-                Commands["inputMode"] = () => Log($"Input map: {_player.Input.currentActionMap.name}; previous: {_previousInputMap}");
-                Commands["loadDemoScene"] = () => NetworkManager.Singleton.SceneManager.LoadScene("Scenes/DemoScene", LoadSceneMode.Single);
+                Commands["inputMode"] = () =>
+                    Log($"Input map: {_player.Input.currentActionMap.name}; previous: {_previousInputMap}");
+                Commands["loadDemoScene"] = () =>
+                    NetworkManager.Singleton.SceneManager.LoadScene("Scenes/DemoScene", LoadSceneMode.Single);
                 Commands["help"] = () => Log("Available commands:\n - " + String.Join("\n - ", Commands.Keys));
-                Commands["exit"] = () => NetworkManager.Singleton.SceneManager.LoadScene("Scenes/HomeMenu", LoadSceneMode.Single);
+                Commands["exit"] = () =>
+                    NetworkManager.Singleton.SceneManager.LoadScene("Scenes/HomeMenu", LoadSceneMode.Single);
             }
 
-            if (this != null && gameObject != null && gameObject.transform != null && gameObject.transform.GetChild(0) != null && gameObject.transform.GetChild(0).gameObject != null)
+            if (this != null && gameObject != null && gameObject.transform != null &&
+                gameObject.transform.GetChild(0) != null && gameObject.transform.GetChild(0).gameObject != null)
                 gameObject.transform.GetChild(0).gameObject.SetActive(_isActivated);
         }
 
@@ -60,20 +66,21 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
 
             _showConsoleAction = _player.Input.actions["ShowConsole"];
             _focusConsoleAction = _player.Input.actions["ConsoleFocus"];
-            _cancelAction = _player.Input.actions["DebugConsoleCancel"];    // Names are distinct as to not interfere with other maps
+            _cancelAction =
+                _player.Input.actions["DebugConsoleCancel"]; // Names are distinct as to not interfere with other maps
             _submitAction = _player.Input.actions["DebugConsoleSubmit"];
             _backspaceAction = _player.Input.actions["DebugConsoleBackspace"];
             _upAction = _player.Input.actions["DebugConsoleUpArrow"];
             _downAction = _player.Input.actions["DebugConsoleDownArrow"];
             _showConsoleAction.performed += ToggleConsole;
             _focusConsoleAction.performed += FocusOnConsole;
-            _submitAction.performed += _ => ExecCommand();
-            _cancelAction.performed += _ => FocusOffConsole();
-            _backspaceAction.performed += _ => Backspace();
-            _upAction.performed += _ => NavigateUpHistory();
-            _downAction.performed += _ => NavigateDownHistory();
-            
-            
+            _submitAction.performed += ExecCommand;
+            _cancelAction.performed += FocusOffConsole;
+            _backspaceAction.performed += Backspace;
+            _upAction.performed += NavigateUpHistory;
+            _downAction.performed += NavigateDownHistory;
+
+
             _previousInputMap = _player.Input.currentActionMap.name;
             _commandHistory = new List<string>();
             _commandHistoryIndex = -1;
@@ -94,13 +101,13 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
         {
             if (_isActivated)
             {
+                _ignoreNextInput = true;
                 _previousInputMap = _player.Input.currentActionMap.name;
                 _player.InputManager.SetPlayerInputMap("DebugConsole");
                 Keyboard.current.onTextInput += HandleCommandInput;
                 _commandHistoryIndex = -1;
                 _tempCommand = "";
                 inputField.Select();
-                _ignoreNextInput = true;
             }
         }
 
@@ -115,10 +122,10 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
 
         private void HandleCommandInput(char c)
         {
-            if ((Char.IsLetter(c) || c == ' ') && !_ignoreNextInput)
+            if ((char.IsLetter(c) || c == ' ') && !_ignoreNextInput)
             {
                 if (!Keyboard.current.shiftKey.isPressed)
-                    c = Char.ToLower(c);
+                    c = char.ToLower(c);
                 _currentText += c;
                 inputField.text = _currentText;
             }
@@ -163,6 +170,7 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
                     inputField.text = _currentText;
                     _tempCommand = "";
                 }
+
                 _commandHistoryIndex = -1;
             }
         }
@@ -198,25 +206,15 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
             Log($"<color=red>{msg}</color>");
         }
 
-        private void ExecCommand(InputAction.CallbackContext _) {
-            ExecCommand();
-        }
+        private void ExecCommand(InputAction.CallbackContext _) => ExecCommand();
 
-        private void FocusOffConsole(InputAction.CallbackContext _) {
-            FocusOffConsole();
-        }
+        private void FocusOffConsole(InputAction.CallbackContext _) => FocusOffConsole();
 
-        private void Backspace(InputAction.CallbackContext _) {
-            Backspace();
-        }
+        private void Backspace(InputAction.CallbackContext _) => Backspace();
 
-        private void NavigateUpHistory(InputAction.CallbackContext _) {
-            NavigateUpHistory();
-        }
+        private void NavigateUpHistory(InputAction.CallbackContext _) => NavigateUpHistory();
 
-        private void NavigateDownHistory(InputAction.CallbackContext _) {
-            NavigateDownHistory();
-        }
+        private void NavigateDownHistory(InputAction.CallbackContext _) => NavigateDownHistory();
 
         public void OnDestroy()
         {
@@ -234,6 +232,7 @@ namespace Prefabs.Player.PlayerUI.DebugConsole
                 _upAction.performed -= NavigateUpHistory;
             if (_downAction != null)
                 _downAction.performed -= NavigateDownHistory;
+            Keyboard.current.onTextInput -= HandleCommandInput;
             if (Singleton == this)
                 Singleton = null;
         }
